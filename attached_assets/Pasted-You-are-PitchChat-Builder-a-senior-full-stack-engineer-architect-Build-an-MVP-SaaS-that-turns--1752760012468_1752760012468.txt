@@ -1,0 +1,80 @@
+You are “PitchChat‑Builder,” a senior full‑stack engineer & architect. Build an MVP SaaS that turns a startup’s raw documentation into an AI‑powered conversational pitch room.
+
+===================
+🏗️  PRODUCT SPECS
+===================
+
+1. Core User Stories
+   - Founder uploads files (PDF, PPT, DOCX, XLSX), pastes text, or authorizes GitHub / Asana / Jira / ClickUp / Notion / Google Drive.
+   - System ingests, chunks, embeds, and stores data.
+   - Founder chats with the “Company AI” to sanity‑check answers.
+   - Founder clicks “Share link,” pays via Stripe if no credits, then receives a unique URL.
+   - Investor opens link, authenticates via magic email code, and chats. Model answers using only ingested data + public web (RAG with internet search fallback).
+   - All Q&A plus cost metrics surface in founder dashboard.
+
+2. Functional Requirements
+   - File ingestion: 500 MB per upload, 50 k‑token max per doc (split & summarize if larger).
+   - Connectors: OAuth 2.0 flows; incremental sync every 6 h via webhooks or polling.
+   - Embeddings: OpenAI text‑embedding‑3‑large, stored in pgvector (PostgreSQL 16).
+   - LLM: OpenAI GPT‑4o (8k context) with tools:
+       * `search(query)` – real‑time web search via SerpAPI
+       * `db.query(sql)` – Postgres read‑only access for metadata lookup
+   - Retrieval: cosine similarity top‑k (k=12) + re‑rank; insert citations.
+   - Paywall: Stripe Checkout for one‑off, Stripe Billing for subscriptions; webhook → `credits` table.
+   - Rate‑limit investor: 20 QPM, 1000 QPD per link.
+   - Security: JWT (Auth0) + row‑level security; encryption at rest (AES‑256); object storage (S3‑compatible) with presigned URLs.
+
+3. Non‑Functional Requirements
+   - SLA 99.5 % uptime; horizontally scalable (FastAPI + Uvicorn + ASGI pods behind Kubernetes HPA).
+   - GDPR compliant; data residency option (US/EU).
+   - Observability: Prometheus metrics, OpenTelemetry traces, Sentry error tracking.
+   - CI/CD: GitHub Actions → Docker → Fly.io (or AWS ECS Fargate).
+
+4. Tech Stack
+   - **Backend:** Python 3.12, FastAPI, SQLModel, PostgreSQL + pgvector, Redis (cache + rate limit).
+   - **Frontend:** Next.js 14 (React Server Components), shadcn/ui, tRPC, Tailwind.
+   - **Infrastructure:** Terraform (modular), Kubernetes (optional for scale), AWS S3/GCS for storage, Cloudflare for edge caching & WAF.
+   - **Payments:** Stripe.
+   - **LLM Services:** OpenAI.
+
+5. API/DB Schema (high level)
+   - `users` (id, email, role, credits, stripe_customer_id, ...).
+   - `projects` (id, user_id, name, default_model, ...).
+   - `documents` (id, project_id, path, tokens, status, ...).
+   - `chunks` (id, document_id, vector, content, metadata).
+   - `links` (id, project_id, slug, status, expires_at, limit_tokens, ...).
+   - `conversations` (id, link_id, started_at, total_tokens, cost_usd, ...).
+   - `messages` (id, conversation_id, role, content, token_count, ts).
+   - `sync_jobs` (id, connector, status, last_run, delta_cursor, ...).
+
+6. Milestones & Deliverables
+   - **Sprint 1 (2 weeks):** Skeleton FastAPI app, auth, project CRUD, file upload to S3, chunk & embed; simple founder chat.
+   - **Sprint 2 (2 weeks):** pgvector retrieval, citations, Next.js dashboard, Stripe credits.
+   - **Sprint 3 (2 weeks):** Shareable link service, investor chat UI, rate limiting, paywall gates.
+   - **Sprint 4 (2 weeks):** Connectors (GitHub + Notion as exemplars), analytics charts.
+   - **Sprint 5 (harden):** Monitoring, security audit, unit + integration tests > 80 % coverage; “Launch on Product Hunt” checklist.
+
+7. Token Accounting & Pricing Logic
+   - Fetch `usage` response headers from OpenAI; store cost by API key.
+   - Deduct founder credits on link creation and again per investor question (founder can cap spend per link).
+   - Default prices (adjustable in `pricing` table):
+       * 1 link = 25 k tokens = $9
+       * 500 k tokens/month = $49
+       * Overages $0.30 / 10 k tokens
+
+8. Glossary
+   - **Context Dumpster:** ingestion pipeline storing raw files + chunk embeddings.
+   - **RAG:** retrieval‑augmented generation (semantic search + LLM).
+   - **Link Paywall:** the monetization checkpoint at link generation.
+
+===================
+🛠️  STARTER TASK LIST
+===================
+1. Scaffold repo with TurboRepo: `apps/backend` (FastAPI), `apps/web` (Next.js), `packages/ui`.
+2. Implement Auth0 sign‑up/login (roles: founder, investor, admin).
+3. Build file upload endpoint; store in S3; enqueue chunk‑&‑embed Celery task.
+4. Build founder chat endpoint: passes user question + retrieved context to GPT‑4o, returns answer + citations.
+5. Integrate Stripe credits & link generator; update UI.
+6. Deploy to Fly.io staging; set up GitHub Action for push → deploy.
+
+Deliver code, Dockerfiles, and a `docs/` folder with setup instructions and OpenAPI spec.
