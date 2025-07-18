@@ -98,6 +98,7 @@ export default function IntegrationConfigModal({
         description: `${integration.name} connected successfully. ${data.documentsImported || 0} documents imported.`,
       });
       queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
+      queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/integrations`] });
       onClose();
     },
     onError: (error) => {

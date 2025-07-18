@@ -554,6 +554,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get project integrations
+  app.get("/api/projects/:projectId/integrations", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const integrations = await storage.getProjectIntegrations(req.params.projectId);
+      res.json(integrations);
+    } catch (error) {
+      console.error("Error fetching integrations:", error);
+      res.status(500).json({ message: "Failed to fetch integrations" });
+    }
+  });
+
   app.post("/api/projects/:projectId/integrations/dropbox", isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
@@ -566,6 +584,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const project = await storage.getProject(req.params.projectId);
       if (!project || project.userId !== userId) {
         return res.status(404).json({ message: "Project not found" });
+      }
+
+      // Check if integration already exists
+      const existingIntegration = await storage.getIntegration(req.params.projectId, 'dropbox');
+      
+      // Create or update integration record
+      if (existingIntegration) {
+        await storage.updateIntegration(existingIntegration.id, {
+          status: 'connected',
+          credentials: { accessToken },
+          lastSyncedAt: new Date()
+        });
+      } else {
+        await storage.createIntegration({
+          projectId: req.params.projectId,
+          platform: 'dropbox',
+          status: 'connected',
+          credentials: { accessToken },
+          lastSyncedAt: new Date()
+        });
       }
 
       console.log(`Starting Dropbox import for project ${req.params.projectId}`);

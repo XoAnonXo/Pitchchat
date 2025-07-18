@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -191,6 +191,15 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
   const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
   const [showConfigModal, setShowConfigModal] = useState(false);
 
+  // Fetch connected integrations for this project
+  const { data: connectedIntegrations = [] } = useQuery({
+    queryKey: [`/api/projects/${projectId}/integrations`],
+    enabled: !!projectId,
+  });
+
+  // Debug: Log the connected integrations
+  console.log('Connected integrations:', connectedIntegrations);
+
   const handleConnect = async (integrationId: string) => {
     const integration = integrations.find(i => i.id === integrationId);
     if (!integration) return;
@@ -210,10 +219,30 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
     }
   };
 
+  // Merge integration status with connected integrations
+  const integrationsWithStatus = integrations.map(integration => {
+    const connected = connectedIntegrations.find((ci: any) => ci.platform === integration.id);
+    const newStatus = connected && connected.status === 'connected' ? 'connected' : integration.status;
+    
+    // Debug: Log the status mapping
+    if (integration.id === 'dropbox') {
+      console.log('Dropbox integration:', { 
+        originalStatus: integration.status, 
+        connected: connected, 
+        newStatus: newStatus 
+      });
+    }
+    
+    return {
+      ...integration,
+      status: newStatus as 'available' | 'connected' | 'coming_soon'
+    };
+  });
+
   const categories = Object.keys(categoryNames) as Array<keyof typeof categoryNames>;
   const filteredIntegrations = selectedCategory === "all" 
-    ? integrations 
-    : integrations.filter(i => i.category === selectedCategory);
+    ? integrationsWithStatus 
+    : integrationsWithStatus.filter(i => i.category === selectedCategory);
 
   return (
     <div className="space-y-6">
