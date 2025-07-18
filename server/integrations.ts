@@ -253,6 +253,13 @@ export class IntegrationManager {
     });
 
     const documents: ImportedDocument[] = [];
+    const syncInfo = {
+      totalFiles: 0,
+      importedFiles: 0,
+      skippedFiles: [] as string[],
+      paperFiles: [] as string[],
+      unsupportedFiles: [] as string[]
+    };
 
     try {
       // First, test the connection by getting current user info
@@ -260,43 +267,88 @@ export class IntegrationManager {
       const userInfo = await dbx.usersGetCurrentAccount();
       console.log('Dropbox connection successful for user:', userInfo.result.name.display_name);
 
-      // List files in the root folder
-      console.log('Listing files in Dropbox root folder...');
-      const response = await dbx.filesListFolder({ path: '' });
+      // List files in the root folder and subdirectories
+      console.log('Listing files in Dropbox...');
+      const response = await dbx.filesListFolder({ path: '', recursive: true, limit: 100 });
       console.log(`Found ${response.result.entries.length} items in Dropbox`);
       
-      for (const entry of response.result.entries.slice(0, 20)) {
+      for (const entry of response.result.entries) {
         if (entry['.tag'] === 'file') {
+          syncInfo.totalFiles++;
           const fileName = entry.name;
+          const fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+          
           console.log(`Processing file: ${fileName}`);
           
-          // Support text file types (excluding .paper files which are Dropbox Paper documents)
-          if (fileName.endsWith('.txt') || fileName.endsWith('.md') || fileName.endsWith('.doc') || fileName.endsWith('.docx')) {
+          // Support more file types
+          const supportedTypes = ['.txt', '.md', '.doc', '.docx', '.pdf', '.csv', '.json', '.xml'];
+          const isPaperFile = fileName.endsWith('.paper');
+          const isSupported = supportedTypes.some(ext => fileName.toLowerCase().endsWith(ext));
+          
+          if (isSupported) {
             try {
               const fileResponse = await dbx.filesDownload({ path: entry.path_lower! });
-              const content = (fileResponse.result as any).fileBinary.toString('utf8');
+              let content = '';
               
-              documents.push({
-                title: fileName,
-                content: content,
-                source: `Dropbox: ${fileName}`,
-                url: `https://dropbox.com/home${entry.path_lower}`,
-                type: 'text',
-                metadata: {
-                  path: entry.path_lower,
-                  size: entry.size,
-                  modifiedTime: entry.server_modified
-                }
-              });
+              // Handle different file types
+              if (fileName.endsWith('.txt') || fileName.endsWith('.md') || fileName.endsWith('.json') || fileName.endsWith('.xml') || fileName.endsWith('.csv')) {
+                content = (fileResponse.result as any).fileBinary.toString('utf8');
+              } else if (fileName.endsWith('.pdf')) {
+                // For PDFs, we'll store a placeholder and handle processing separately
+                content = `[PDF Document: ${fileName}]\n\nThis PDF document needs to be processed separately.`;
+              } else {
+                // For .doc/.docx, store placeholder
+                content = `[Document: ${fileName}]\n\nThis document needs to be processed separately.`;
+              }
               
-              console.log(`Successfully imported: ${fileName}`);
+              if (content) {
+                documents.push({
+                  title: fileName,
+                  content: content,
+                  source: `Dropbox: ${fileName}`,
+                  url: `https://dropbox.com/home${entry.path_lower}`,
+                  type: fileExtension,
+                  metadata: {
+                    path: entry.path_lower,
+                    size: entry.size,
+                    modifiedTime: entry.server_modified
+                  }
+                });
+                
+                syncInfo.importedFiles++;
+                console.log(`Successfully imported: ${fileName}`);
+              }
             } catch (error) {
               console.error(`Failed to download file ${fileName}:`, error);
+              syncInfo.skippedFiles.push(fileName);
             }
-          } else if (fileName.endsWith('.paper')) {
-            console.log(`Skipping Dropbox Paper file: ${fileName} (Paper documents require special API access)`);
+          } else if (isPaperFile) {
+            console.log(`Found Dropbox Paper file: ${fileName}`);
+            syncInfo.paperFiles.push(fileName);
+          } else {
+            console.log(`Skipping unsupported file type: ${fileName}`);
+            syncInfo.unsupportedFiles.push(fileName);
           }
         }
+      }
+      
+      // Log detailed summary
+      console.log('Dropbox sync summary:', {
+        totalFiles: syncInfo.totalFiles,
+        importedFiles: syncInfo.importedFiles,
+        paperFiles: syncInfo.paperFiles.length,
+        unsupportedFiles: syncInfo.unsupportedFiles.length,
+        skippedFiles: syncInfo.skippedFiles.length
+      });
+      
+      if (syncInfo.paperFiles.length > 0) {
+        console.log('Paper files found:', syncInfo.paperFiles);
+        console.log('Note: Dropbox Paper files require special API access and cannot be imported with standard Dropbox API.');
+      }
+      
+      // If no documents were imported but Paper files were found, return special message
+      if (documents.length === 0 && syncInfo.paperFiles.length > 0) {
+        throw new Error(`Found ${syncInfo.paperFiles.length} Dropbox Paper file(s), but they require special API access. Paper files: ${syncInfo.paperFiles.join(', ')}. Please export your Paper documents to regular file formats (PDF, DOCX) for import.`);
       }
       
       console.log(`Dropbox import completed. Found ${documents.length} documents.`);
