@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
 import { MessageSquare, Send, ExternalLink } from "lucide-react";
+import { StartupLoadingSkeleton } from "./StartupLoadingSkeleton";
 
 interface Message {
   id: string;
@@ -185,10 +186,7 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
             </div>
             <div className="flex-1">
               <div className="bg-slate-100 rounded-lg p-4">
-                <div className="flex items-center space-x-2">
-                  <div className="animate-spin w-4 h-4 border-2 border-slate-400 border-t-transparent rounded-full" />
-                  <span className="text-slate-600">Thinking...</span>
-                </div>
+                <StartupLoadingSkeleton type="chat" className="scale-50 origin-left" />
               </div>
             </div>
           </div>

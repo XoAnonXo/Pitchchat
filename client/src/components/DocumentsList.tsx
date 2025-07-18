@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
 import { FileText, Trash2, Clock, CheckCircle, XCircle } from "lucide-react";
+import { StartupLoadingSkeleton } from "./StartupLoadingSkeleton";
 
 interface Document {
   id: string;
@@ -113,18 +114,7 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
     return (
       <Card>
         <CardContent className="p-6">
-          <h3 className="text-lg font-semibold text-slate-900 mb-4">Documents</h3>
-          <div className="space-y-3">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex items-center space-x-3 p-3 border border-slate-200 rounded-lg animate-pulse">
-                <div className="w-10 h-10 bg-slate-200 rounded-lg"></div>
-                <div className="flex-1">
-                  <div className="h-4 bg-slate-200 rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-slate-200 rounded w-1/2"></div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <StartupLoadingSkeleton type="documents" />
         </CardContent>
       </Card>
     );

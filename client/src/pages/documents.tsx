@@ -48,6 +48,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
 import { formatDistanceToNow } from "date-fns";
+import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 
 interface Document {
   id: string;
@@ -155,12 +156,8 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto p-6">
-        <div className="animate-pulse space-y-4">
-          <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-          <div className="h-32 bg-gray-200 rounded"></div>
-          <div className="h-64 bg-gray-200 rounded"></div>
-        </div>
+      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+        <StartupLoadingSkeleton type="documents" />
       </div>
     );
   }

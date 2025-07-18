@@ -7,6 +7,7 @@ import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
 import { Upload, X } from "lucide-react";
 import IntegrationDialog from "./IntegrationDialog";
+import { StartupLoadingSkeleton } from "./StartupLoadingSkeleton";
 
 interface FileUploadProps {
   projectId: string;
@@ -160,7 +161,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
               {selectedFiles.map(({ file, id }) => (
                 <div key={id} className="flex items-center justify-between p-2 bg-accent rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <FileText className="w-4 h-4 text-muted-foreground" />
+                    <Upload className="w-4 h-4 text-muted-foreground" />
                     <span className="text-sm font-medium text-foreground">{file.name}</span>
                     <span className="text-xs text-muted-foreground">({formatFileSize(file.size)})</span>
                   </div>
@@ -179,9 +180,18 @@ export default function FileUpload({ projectId }: FileUploadProps) {
               className="w-full mt-3 gradient-primary shadow-soft"
             >
               {uploadMutation.isPending ? (
-                <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
-              ) : null}
-              Upload {selectedFiles.length} File{selectedFiles.length > 1 ? 's' : ''}
+                <div className="flex items-center space-x-2">
+                  <div className="scale-50">
+                    <StartupLoadingSkeleton type="upload" className="w-4 h-4" />
+                  </div>
+                  <span>Uploading...</span>
+                </div>
+              ) : (
+                <>
+                  <Upload className="w-4 h-4 mr-2" />
+                  Upload {selectedFiles.length} File{selectedFiles.length > 1 ? 's' : ''}
+                </>
+              )}
             </Button>
           </div>
         )}

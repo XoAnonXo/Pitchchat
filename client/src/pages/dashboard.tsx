@@ -29,6 +29,7 @@ import DocumentsList from "@/components/DocumentsList";
 import ShareLinkModal from "@/components/ShareLinkModal";
 import IntegrationDialog from "@/components/IntegrationDialog";
 import { AIModelSelector } from "@/components/ui/ai-model-selector";
+import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 
 export default function Dashboard() {
   const { user, isLoading: authLoading } = useAuth();
@@ -121,15 +122,15 @@ export default function Dashboard() {
   if (authLoading || !user) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+        <StartupLoadingSkeleton type="dashboard" />
       </div>
     );
   }
 
   if (projectsLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+        <StartupLoadingSkeleton type="dashboard" />
       </div>
     );
   }
