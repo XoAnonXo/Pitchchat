@@ -19,7 +19,9 @@ import {
   FileText,
   Database,
   Brain,
-  Zap
+  Zap,
+  Menu,
+  X
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
@@ -34,6 +36,8 @@ export default function Dashboard() {
   const queryClient = useQueryClient();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const [selectedModel, setSelectedModel] = useState<string>('gpt-4o');
 
@@ -134,14 +138,24 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="bg-background border-b border-border sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
+              {/* Mobile menu button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+              
               <div className="flex items-center space-x-3">
                 <div className="w-8 h-8 bg-gradient-to-r from-primary to-[#5C8AF7] rounded-lg flex items-center justify-center">
                   <span className="text-primary-foreground font-semibold text-sm">PC</span>
                 </div>
-                <h1 className="text-xl font-semibold text-foreground">PitchChat Builder</h1>
+                <h1 className="text-lg sm:text-xl font-semibold text-foreground hidden sm:block">PitchChat Builder</h1>
               </div>
             </div>
             
@@ -156,37 +170,110 @@ export default function Dashboard() {
               <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
             </nav>
 
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="hidden sm:flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
                 <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                 <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
               </div>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                onClick={() => window.location.href = "/api/logout"}
-                className="text-muted-foreground hover:text-foreground"
+              
+              {/* Mobile menu button */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
-                Logout
+                <Menu className="h-5 w-5" />
               </Button>
-              {user.profileImageUrl ? (
-                <img 
-                  src={user.profileImageUrl} 
-                  alt="Profile" 
-                  className="w-8 h-8 rounded-full object-cover"
-                />
-              ) : (
-                <div className="w-8 h-8 bg-muted rounded-full" />
-              )}
+              
+              <div className="hidden md:flex items-center space-x-4">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = "/api/logout"}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Logout
+                </Button>
+                {user.profileImageUrl ? (
+                  <img 
+                    src={user.profileImageUrl} 
+                    alt="Profile" 
+                    className="w-8 h-8 rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="w-8 h-8 bg-muted rounded-full" />
+                )}
+              </div>
             </div>
           </div>
         </div>
+        
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border">
+            <nav className="px-4 py-3 space-y-1">
+              <Link href="/" className="block px-3 py-2 text-primary font-medium">
+                Dashboard
+              </Link>
+              <Link 
+                href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} 
+                className="block px-3 py-2 text-muted-foreground hover:text-primary font-medium"
+              >
+                Documents
+              </Link>
+              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Analytics
+              </button>
+              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Settings
+              </button>
+              <div className="flex items-center justify-between px-3 py-2 border-t border-border mt-2 pt-2">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = "/api/logout"}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Logout
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
-      <div className="flex min-h-screen">
+      <div className="flex relative">
+        {/* Mobile Sidebar Overlay */}
+        {mobileSidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setMobileSidebarOpen(false)}
+          />
+        )}
+        
         {/* Sidebar */}
-        <aside className="w-64 bg-card border-r border-border flex-shrink-0">
-          <div className="p-6">
+        <aside className={`
+          fixed md:relative top-0 left-0 h-full w-64 bg-card border-r border-border flex-shrink-0 z-50
+          transform transition-transform duration-200 ease-in-out
+          ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        `}>
+          <div className="flex items-center justify-between p-4 md:hidden border-b border-border">
+            <h2 className="font-semibold">Menu</h2>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMobileSidebarOpen(false)}
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </div>
+          
+          <div className="p-4 md:p-6">
             <Button 
               className="w-full gradient-primary text-primary-foreground hover:opacity-90 rounded-lg font-medium shadow-soft"
               onClick={handleCreateProject}
@@ -197,7 +284,7 @@ export default function Dashboard() {
             </Button>
           </div>
           
-          <nav className="px-6">
+          <nav className="px-4 md:px-6">
             <div className="space-y-1">
               <Link href="/" className="flex items-center space-x-3 text-primary bg-secondary px-3 py-2 rounded-lg transition-colors">
                 <Database className="w-4 h-4" />
@@ -230,7 +317,7 @@ export default function Dashboard() {
           </nav>
 
           {projects.length > 0 && (
-            <div className="px-6 mt-8">
+            <div className="px-4 md:px-6 mt-8">
               <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
                 Recent Projects
               </h3>
@@ -238,7 +325,10 @@ export default function Dashboard() {
                 {projects.slice(0, 3).map((project: any) => (
                   <button
                     key={project.id}
-                    onClick={() => setSelectedProjectId(project.id)}
+                    onClick={() => {
+                      setSelectedProjectId(project.id);
+                      setMobileSidebarOpen(false);
+                    }}
                     className={`block w-full text-left p-3 rounded-lg border transition-colors ${
                       selectedProjectId === project.id 
                         ? 'bg-primary text-primary-foreground border-primary' 
@@ -257,49 +347,49 @@ export default function Dashboard() {
         </aside>
 
         {/* Main Content */}
-        <main className="flex-1 bg-background">
+        <main className="flex-1 bg-background min-w-0">
           {selectedProject ? (
             <>
               {/* Project Header */}
-              <div className="bg-card border-b border-border px-8 py-6">
-                <div className="flex items-center justify-between">
+              <div className="bg-card border-b border-border px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div>
-                    <h2 className="text-2xl font-semibold text-foreground">{selectedProject.name}</h2>
-                    <p className="text-muted-foreground mt-1">
+                    <h2 className="text-xl sm:text-2xl font-semibold text-foreground">{selectedProject.name}</h2>
+                    <p className="text-sm text-muted-foreground mt-1">
                       Last updated {new Date(selectedProject.updatedAt).toLocaleDateString()}
                     </p>
                   </div>
-                  <div className="flex space-x-3">
+                  <div className="flex flex-wrap gap-2 sm:gap-3">
                     <IntegrationDialog projectId={selectedProject.id} />
-                    <Button variant="outline" className="rounded-lg">
+                    <Button variant="outline" className="rounded-lg text-sm sm:text-base">
                       Export Data
                     </Button>
-                    <Button onClick={() => setShowShareModal(true)} className="rounded-lg">
-                      Generate Share Link
+                    <Button onClick={() => setShowShareModal(true)} className="rounded-lg text-sm sm:text-base">
+                      Share Link
                     </Button>
                   </div>
                 </div>
               </div>
 
-              <div className="p-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="p-4 sm:p-6 lg:p-8">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                   {/* Left Column: File Upload & Documents */}
-                  <div className="lg:col-span-1 space-y-6">
+                  <div className="lg:col-span-1 space-y-4 sm:space-y-6">
                     <FileUpload projectId={selectedProject.id} />
                     <DocumentsList projectId={selectedProject.id} />
                   </div>
 
                   {/* Right Column: Chat Interface */}
                   <div className="lg:col-span-2">
-                    <div className="bg-card rounded-xl shadow-subtle border border-border p-6 mb-6">
-                      <div className="flex items-center justify-between mb-4">
+                    <div className="bg-card rounded-xl shadow-subtle border border-border p-4 sm:p-6 mb-4 sm:mb-6">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
                         <h3 className="text-lg font-semibold text-foreground">AI Assistant</h3>
                         <div className="flex items-center space-x-2">
-                          <Zap className="w-4 h-4 text-muted-foreground" />
+                          <Zap className="w-4 h-4 text-muted-foreground hidden sm:block" />
                           <AIModelSelector 
                             value={selectedModel} 
                             onChange={setSelectedModel}
-                            className="w-48"
+                            className="w-full sm:w-48"
                           />
                         </div>
                       </div>

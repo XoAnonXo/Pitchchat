@@ -131,35 +131,35 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
   }
 
   return (
-    <Card>
-      <CardContent className="p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Documents</h3>
+    <Card className="rounded-xl border-border shadow-subtle">
+      <CardContent className="p-4 sm:p-6">
+        <h3 className="text-lg font-semibold text-foreground mb-4">Documents</h3>
         
         {documents.length === 0 ? (
           <div className="text-center py-8">
-            <FileText className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-            <p className="text-slate-500">No documents uploaded yet</p>
-            <p className="text-sm text-slate-400">Upload documents to start building your AI assistant</p>
+            <FileText className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <p className="text-muted-foreground">No documents uploaded yet</p>
+            <p className="text-sm text-placeholder">Upload documents to start building your AI assistant</p>
           </div>
         ) : (
           <div className="space-y-3">
             {documents.map((doc: Document) => (
-              <div key={doc.id} className="flex items-center justify-between p-3 border border-slate-200 rounded-lg">
-                <div className="flex items-center space-x-3 flex-1 min-w-0">
-                  <div className="text-2xl">{getFileIcon(doc.mimeType)}</div>
+              <div key={doc.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border border-border rounded-lg">
+                <div className="flex items-start sm:items-center space-x-3 flex-1 min-w-0 mb-2 sm:mb-0">
+                  <div className="text-2xl flex-shrink-0">{getFileIcon(doc.mimeType)}</div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-slate-900 truncate">{doc.originalName}</p>
-                    <div className="flex items-center space-x-2 text-sm text-slate-500">
+                    <p className="font-medium text-foreground truncate text-sm sm:text-base">{doc.originalName}</p>
+                    <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
                       <span>{formatFileSize(doc.fileSize)}</span>
                       {doc.pageCount && (
                         <>
-                          <span>•</span>
+                          <span className="hidden sm:inline">•</span>
                           <span>{doc.pageCount} pages</span>
                         </>
                       )}
                       {doc.tokens > 0 && (
                         <>
-                          <span>•</span>
+                          <span className="hidden sm:inline">•</span>
                           <span>{doc.tokens} tokens</span>
                         </>
                       )}
@@ -167,7 +167,7 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-2 flex-shrink-0">
+                <div className="flex items-center justify-between sm:justify-end space-x-2 flex-shrink-0">
                   {getStatusBadge(doc.status)}
                   {doc.status === "completed" && (
                     <Button

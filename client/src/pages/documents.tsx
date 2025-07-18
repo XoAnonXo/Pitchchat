@@ -36,7 +36,9 @@ import {
   Home,
   BarChart3,
   LinkIcon,
-  MessageSquare
+  MessageSquare,
+  Menu,
+  X
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -77,6 +79,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [sourceFilter, setSourceFilter] = useState<string>("all");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { data: documents, isLoading } = useQuery<Document[]>({
     queryKey: [`/api/projects/${projectId}/documents`],
@@ -166,14 +169,14 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
     <div className="min-h-screen bg-background">
       {/* Navigation Header */}
       <header className="bg-background border-b border-border sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
                 <div className="w-8 h-8 bg-gradient-to-r from-primary to-[#5C8AF7] rounded-lg flex items-center justify-center">
                   <span className="text-primary-foreground font-semibold text-sm">PC</span>
                 </div>
-                <h1 className="text-xl font-semibold text-foreground">PitchChat Builder</h1>
+                <h1 className="text-lg sm:text-xl font-semibold text-foreground hidden sm:block">PitchChat Builder</h1>
               </Link>
             </div>
             
@@ -188,49 +191,99 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
               <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
             </nav>
 
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               {user && (
                 <>
-                  <div className="flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
+                  <div className="hidden sm:flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
                     <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                     <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
                   </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    onClick={() => window.location.href = "/api/logout"}
-                    className="text-muted-foreground hover:text-foreground"
+                  
+                  {/* Mobile menu button */}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                   >
-                    Logout
+                    <Menu className="h-5 w-5" />
                   </Button>
-                  {user.profileImageUrl ? (
-                    <img 
-                      src={user.profileImageUrl} 
-                      alt="Profile" 
-                      className="w-8 h-8 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 bg-muted rounded-full" />
-                  )}
+                  
+                  <div className="hidden md:flex items-center space-x-4">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => window.location.href = "/api/logout"}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      Logout
+                    </Button>
+                    {user.profileImageUrl ? (
+                      <img 
+                        src={user.profileImageUrl} 
+                        alt="Profile" 
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 bg-muted rounded-full" />
+                    )}
+                  </div>
                 </>
               )}
             </div>
           </div>
         </div>
+        
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border">
+            <nav className="px-4 py-3 space-y-1">
+              <Link href="/" className="block px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Dashboard
+              </Link>
+              <Link 
+                href={`/documents/${projectId}`} 
+                className="block px-3 py-2 text-primary font-medium"
+              >
+                Documents
+              </Link>
+              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Analytics
+              </button>
+              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Settings
+              </button>
+              <div className="flex items-center justify-between px-3 py-2 border-t border-border mt-2 pt-2">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  <span className="text-sm font-medium text-muted-foreground">{user?.credits || 0} credits</span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = "/api/logout"}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Logout
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
       </header>
 
-      <div className="container mx-auto p-6 space-y-6">
+      <div className="container mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
         {/* Page Header with Back Button */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
             <Link href="/" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors">
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-medium">Back to Dashboard</span>
             </Link>
-            <div className="h-6 w-px bg-border" />
+            <div className="hidden sm:block h-6 w-px bg-border" />
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Document Management</h1>
-              <p className="text-muted-foreground mt-1">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Document Management</h1>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1">
                 Manage your uploaded documents and AI knowledge base
               </p>
             </div>
@@ -299,19 +352,19 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap gap-4">
-            <div className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <div className="flex items-center space-x-2 flex-1 sm:flex-initial">
               <Search className="w-4 h-4 text-gray-500" />
               <Input
                 placeholder="Search documents..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-64"
+                className="w-full sm:w-64"
               />
             </div>
 
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-40">
+              <SelectTrigger className="w-full sm:w-40">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
@@ -323,7 +376,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
             </Select>
 
             <Select value={sourceFilter} onValueChange={setSourceFilter}>
-              <SelectTrigger className="w-40">
+              <SelectTrigger className="w-full sm:w-40">
                 <SelectValue placeholder="Source" />
               </SelectTrigger>
               <SelectContent>
@@ -345,32 +398,134 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
           <CardTitle>Documents ({filteredDocuments.length})</CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Document</TableHead>
-                <TableHead>Source</TableHead>
-                <TableHead>Size</TableHead>
-                <TableHead>Tokens</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Uploaded</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredDocuments.map((doc) => (
-                <TableRow key={doc.id}>
-                  <TableCell>
-                    <div className="flex items-center space-x-3">
-                      {getSourceIcon(doc.source)}
-                      <div>
-                        <p className="font-medium">{doc.originalName}</p>
-                        <p className="text-sm text-gray-500">{doc.mimeType}</p>
+          {/* Desktop Table View */}
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Document</TableHead>
+                  <TableHead>Source</TableHead>
+                  <TableHead>Size</TableHead>
+                  <TableHead>Tokens</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Uploaded</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredDocuments.map((doc) => (
+                  <TableRow key={doc.id}>
+                    <TableCell>
+                      <div className="flex items-center space-x-3">
+                        {getSourceIcon(doc.source)}
+                        <div>
+                          <p className="font-medium">{doc.originalName}</p>
+                          <p className="text-sm text-gray-500">{doc.mimeType}</p>
+                        </div>
                       </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center space-x-2">
+                        {doc.source ? (
+                          <Badge variant="secondary" className="text-xs">
+                            {doc.source}
+                          </Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-xs">
+                            Direct Upload
+                          </Badge>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell>{formatFileSize(doc.fileSize)}</TableCell>
+                    <TableCell>
+                      <span className="font-mono text-sm">
+                        {doc.tokens?.toLocaleString() || '0'}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
+                        {doc.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-sm">
+                        <p>{formatDistanceToNow(new Date(doc.createdAt))} ago</p>
+                        <p className="text-xs text-gray-500">
+                          {new Date(doc.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            <MoreHorizontal className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem 
+                            onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            Download
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => handleDelete(doc.id)}
+                            className="text-red-600"
+                          >
+                            <Trash2 className="w-4 h-4 mr-2" />
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-4">
+            {filteredDocuments.map((doc) => (
+              <Card key={doc.id} className="p-4">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-start space-x-3">
+                    {getSourceIcon(doc.source)}
+                    <div className="flex-1">
+                      <p className="font-medium text-sm">{doc.originalName}</p>
+                      <p className="text-xs text-muted-foreground">{doc.mimeType}</p>
                     </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center space-x-2">
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        <MoreHorizontal className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem 
+                        onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={() => handleDelete(doc.id)}
+                        className="text-red-600"
+                      >
+                        <Trash2 className="w-4 h-4 mr-2" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="text-muted-foreground">Source:</span>
+                    <div className="mt-1">
                       {doc.source ? (
                         <Badge variant="secondary" className="text-xs">
                           {doc.source}
@@ -381,54 +536,31 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                         </Badge>
                       )}
                     </div>
-                  </TableCell>
-                  <TableCell>{formatFileSize(doc.fileSize)}</TableCell>
-                  <TableCell>
-                    <span className="font-mono text-sm">
-                      {doc.tokens?.toLocaleString() || '0'}
-                    </span>
-                  </TableCell>
-                  <TableCell>
-                    <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
-                      {doc.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="text-sm">
-                      <p>{formatDistanceToNow(new Date(doc.createdAt))} ago</p>
-                      <p className="text-xs text-gray-500">
-                        {new Date(doc.createdAt).toLocaleDateString()}
-                      </p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Status:</span>
+                    <div className="mt-1">
+                      <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
+                        {doc.status}
+                      </Badge>
                     </div>
-                  </TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" size="sm">
-                          <MoreHorizontal className="w-4 h-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuItem 
-                          onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
-                        >
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </DropdownMenuItem>
-                        <DropdownMenuItem 
-                          onClick={() => handleDelete(doc.id)}
-                          className="text-red-600"
-                        >
-                          <Trash2 className="w-4 h-4 mr-2" />
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Size:</span>
+                    <p className="font-medium">{formatFileSize(doc.fileSize)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Tokens:</span>
+                    <p className="font-mono font-medium">{doc.tokens?.toLocaleString() || '0'}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-3 pt-3 border-t border-border text-xs text-muted-foreground">
+                  Uploaded {formatDistanceToNow(new Date(doc.createdAt))} ago
+                </div>
+              </Card>
+            ))}
+          </div>
 
           {filteredDocuments.length === 0 && (
             <div className="text-center py-8">
