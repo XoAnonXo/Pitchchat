@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
-import { Upload, Github, FileText, Database, X } from "lucide-react";
+import { Upload, X } from "lucide-react";
+import IntegrationDialog from "./IntegrationDialog";
 
 interface FileUploadProps {
   projectId: string;
@@ -186,34 +187,19 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         )}
 
         {/* Integration Options */}
-        <div className="mt-6 space-y-2">
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start text-left h-12 rounded-lg"
-            disabled
-          >
-            <Github className="w-4 h-4 mr-3 text-muted-foreground" />
-            <span className="text-foreground">Connect GitHub Repository</span>
-            <span className="ml-auto text-xs text-muted-foreground">Coming Soon</span>
-          </Button>
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start text-left h-12 rounded-lg"
-            disabled
-          >
-            <FileText className="w-4 h-4 mr-3 text-muted-foreground" />
-            <span className="text-foreground">Connect Notion Workspace</span>
-            <span className="ml-auto text-xs text-muted-foreground">Coming Soon</span>
-          </Button>
-          <Button 
-            variant="ghost" 
-            className="w-full justify-start text-left h-12 rounded-lg"
-            disabled
-          >
-            <Database className="w-4 h-4 mr-3 text-muted-foreground" />
-            <span className="text-foreground">Connect Google Drive</span>
-            <span className="ml-auto text-xs text-muted-foreground">Coming Soon</span>
-          </Button>
+        <div className="mt-6">
+          <IntegrationDialog 
+            projectId={projectId}
+            trigger={
+              <Button 
+                variant="outline" 
+                className="w-full h-12 rounded-lg border-dashed border-2 text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                Import from Platforms
+              </Button>
+            }
+          />
         </div>
       </CardContent>
     </Card>

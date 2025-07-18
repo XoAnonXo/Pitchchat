@@ -1,0 +1,286 @@
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import { 
+  SiGithub,
+  SiNotion,
+  SiGoogledrive,
+  SiDropbox,
+  SiAsana,
+  SiJira,
+  SiSlack,
+  SiTrello,
+  SiConfluence,
+  SiLinear,
+  SiDiscord,
+  SiAirtable,
+  SiFigma,
+  SiIntercom
+} from "react-icons/si";
+import { MessageSquare } from "lucide-react";
+
+interface Integration {
+  id: string;
+  name: string;
+  description: string;
+  icon: React.ReactNode;
+  status: "available" | "connected" | "coming_soon";
+  category: "development" | "docs" | "storage" | "project_management" | "communication" | "productivity";
+  color: string;
+}
+
+const integrations: Integration[] = [
+  {
+    id: "github",
+    name: "GitHub",
+    description: "Import repositories, issues, and documentation",
+    icon: <SiGithub className="w-5 h-5" />,
+    status: "available",
+    category: "development",
+    color: "text-gray-900"
+  },
+  {
+    id: "notion",
+    name: "Notion",
+    description: "Sync pages, databases, and documentation",
+    icon: <SiNotion className="w-5 h-5" />,
+    status: "available",
+    category: "docs",
+    color: "text-gray-900"
+  },
+  {
+    id: "google-drive",
+    name: "Google Drive",
+    description: "Access documents, sheets, and presentations",
+    icon: <SiGoogledrive className="w-5 h-5" />,
+    status: "available",
+    category: "storage",
+    color: "text-blue-600"
+  },
+  {
+    id: "dropbox",
+    name: "Dropbox",
+    description: "Import files and folders from your workspace",
+    icon: <SiDropbox className="w-5 h-5" />,
+    status: "available",
+    category: "storage",
+    color: "text-blue-500"
+  },
+  {
+    id: "asana",
+    name: "Asana",
+    description: "Sync tasks, projects, and team updates",
+    icon: <SiAsana className="w-5 h-5" />,
+    status: "available",
+    category: "project_management",
+    color: "text-red-500"
+  },
+  {
+    id: "jira",
+    name: "Jira",
+    description: "Import issues, epics, and project data",
+    icon: <SiJira className="w-5 h-5" />,
+    status: "available",
+    category: "project_management",
+    color: "text-blue-700"
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    description: "Access conversations and shared files",
+    icon: <SiSlack className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "communication",
+    color: "text-purple-600"
+  },
+  {
+    id: "trello",
+    name: "Trello",
+    description: "Import boards, cards, and project data",
+    icon: <SiTrello className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "project_management",
+    color: "text-blue-600"
+  },
+  {
+    id: "confluence",
+    name: "Confluence",
+    description: "Sync documentation and knowledge base",
+    icon: <SiConfluence className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "docs",
+    color: "text-blue-800"
+  },
+  {
+    id: "linear",
+    name: "Linear",
+    description: "Import issues and project roadmaps",
+    icon: <SiLinear className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "project_management",
+    color: "text-gray-700"
+  },
+  {
+    id: "discord",
+    name: "Discord",
+    description: "Access server messages and shared content",
+    icon: <SiDiscord className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "communication",
+    color: "text-indigo-600"
+  },
+  {
+    id: "airtable",
+    name: "Airtable",
+    description: "Sync databases and structured data",
+    icon: <SiAirtable className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "productivity",
+    color: "text-orange-600"
+  },
+  {
+    id: "microsoft-teams",
+    name: "Microsoft Teams",
+    description: "Access team conversations and shared files",
+    icon: <MessageSquare className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "communication",
+    color: "text-blue-600"
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    description: "Import design files and project documentation",
+    icon: <SiFigma className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "productivity",
+    color: "text-purple-500"
+  },
+  {
+    id: "intercom",
+    name: "Intercom",
+    description: "Access customer conversations and support data",
+    icon: <SiIntercom className="w-5 h-5" />,
+    status: "coming_soon",
+    category: "communication",
+    color: "text-blue-500"
+  }
+];
+
+const categoryNames = {
+  development: "Development",
+  docs: "Documentation",
+  storage: "File Storage",
+  project_management: "Project Management",
+  communication: "Communication",
+  productivity: "Productivity"
+};
+
+interface IntegrationGridProps {
+  projectId: string;
+}
+
+export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  const connectMutation = useMutation({
+    mutationFn: async (integrationId: string) => {
+      return apiRequest("POST", `/api/projects/${projectId}/integrations/${integrationId}/connect`, {});
+    },
+    onSuccess: (data, integrationId) => {
+      const integration = integrations.find(i => i.id === integrationId);
+      toast({
+        title: "Integration Started",
+        description: `${integration?.name} connection initiated successfully`,
+      });
+      queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Connection Failed",
+        description: error.message || "Failed to connect to platform",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const categories = Object.keys(categoryNames) as Array<keyof typeof categoryNames>;
+  const filteredIntegrations = selectedCategory === "all" 
+    ? integrations 
+    : integrations.filter(i => i.category === selectedCategory);
+
+  return (
+    <div className="space-y-6">
+      {/* Category Filter */}
+      <div className="flex flex-wrap gap-2">
+        <Button
+          variant={selectedCategory === "all" ? "default" : "outline"}
+          onClick={() => setSelectedCategory("all")}
+          className="rounded-full"
+        >
+          All Platforms
+        </Button>
+        {categories.map(category => (
+          <Button
+            key={category}
+            variant={selectedCategory === category ? "default" : "outline"}
+            onClick={() => setSelectedCategory(category)}
+            className="rounded-full"
+          >
+            {categoryNames[category]}
+          </Button>
+        ))}
+      </div>
+
+      {/* Integration Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {filteredIntegrations.map((integration) => (
+          <Card key={integration.id} className="rounded-xl border-border shadow-subtle hover:shadow-soft transition-shadow">
+            <CardContent className="p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`p-2 rounded-lg bg-accent ${integration.color}`}>
+                    {integration.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">{integration.name}</h3>
+                    <Badge 
+                      variant={integration.status === "connected" ? "default" : "secondary"}
+                      className="mt-1"
+                    >
+                      {integration.status === "connected" ? "Connected" : 
+                       integration.status === "available" ? "Available" : "Coming Soon"}
+                    </Badge>
+                  </div>
+                </div>
+              </div>
+              
+              <p className="text-sm text-muted-foreground mb-4">
+                {integration.description}
+              </p>
+              
+              <Button
+                onClick={() => connectMutation.mutate(integration.id)}
+                disabled={integration.status !== "available" || connectMutation.isPending}
+                className="w-full"
+                variant={integration.status === "available" ? "default" : "secondary"}
+              >
+                {connectMutation.isPending ? (
+                  <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full mr-2" />
+                ) : null}
+                {integration.status === "connected" ? "Reconnect" :
+                 integration.status === "available" ? "Connect" : "Coming Soon"}
+              </Button>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}

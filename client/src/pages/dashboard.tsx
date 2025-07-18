@@ -24,7 +24,7 @@ import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
 import DocumentsList from "@/components/DocumentsList";
 import ShareLinkModal from "@/components/ShareLinkModal";
-import { IntegrationPanel } from "@/components/ui/integration-panel";
+import IntegrationDialog from "@/components/IntegrationDialog";
 import { AIModelSelector } from "@/components/ui/ai-model-selector";
 
 export default function Dashboard() {
@@ -33,7 +33,7 @@ export default function Dashboard() {
   const queryClient = useQueryClient();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
-  const [showIntegrationPanel, setShowIntegrationPanel] = useState(false);
+
   const [selectedModel, setSelectedModel] = useState<string>('gpt-4o');
 
   // Redirect to login if not authenticated
@@ -254,14 +254,7 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex space-x-3">
-                    <Button 
-                      variant="outline" 
-                      onClick={() => setShowIntegrationPanel(true)}
-                      className="rounded-lg"
-                    >
-                      <Brain className="w-4 h-4 mr-2" />
-                      Import from Platforms
-                    </Button>
+                    <IntegrationDialog projectId={selectedProject.id} />
                     <Button variant="outline" className="rounded-lg">
                       Export Data
                     </Button>
@@ -382,13 +375,7 @@ export default function Dashboard() {
         />
       )}
       
-      {/* Integration Panel */}
-      {showIntegrationPanel && selectedProject && (
-        <IntegrationPanel
-          projectId={selectedProject.id}
-          onClose={() => setShowIntegrationPanel(false)}
-        />
-      )}
+
     </div>
   );
 }
