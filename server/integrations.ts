@@ -243,6 +243,11 @@ export class IntegrationManager {
 
   // Dropbox Integration
   async importFromDropbox(config: IntegrationConfig): Promise<ImportedDocument[]> {
+    console.log('Starting Dropbox import with config:', { 
+      hasAccessToken: !!config.credentials.accessToken,
+      tokenLength: config.credentials.accessToken?.length || 0
+    });
+
     const dbx = new Dropbox({
       accessToken: config.credentials.accessToken
     });
@@ -250,12 +255,23 @@ export class IntegrationManager {
     const documents: ImportedDocument[] = [];
 
     try {
+      // First, test the connection by getting current user info
+      console.log('Testing Dropbox connection...');
+      const userInfo = await dbx.usersGetCurrentAccount();
+      console.log('Dropbox connection successful for user:', userInfo.result.name.display_name);
+
+      // List files in the root folder
+      console.log('Listing files in Dropbox root folder...');
       const response = await dbx.filesListFolder({ path: '' });
+      console.log(`Found ${response.result.entries.length} items in Dropbox`);
       
       for (const entry of response.result.entries.slice(0, 20)) {
         if (entry['.tag'] === 'file') {
           const fileName = entry.name;
-          if (fileName.endsWith('.txt') || fileName.endsWith('.md')) {
+          console.log(`Processing file: ${fileName}`);
+          
+          // Support more file types
+          if (fileName.endsWith('.txt') || fileName.endsWith('.md') || fileName.endsWith('.doc') || fileName.endsWith('.docx')) {
             try {
               const fileResponse = await dbx.filesDownload({ path: entry.path_lower! });
               const content = (fileResponse.result as any).fileBinary.toString('utf8');
@@ -272,15 +288,27 @@ export class IntegrationManager {
                   modifiedTime: entry.server_modified
                 }
               });
+              
+              console.log(`Successfully imported: ${fileName}`);
             } catch (error) {
               console.error(`Failed to download file ${fileName}:`, error);
             }
           }
         }
       }
+      
+      console.log(`Dropbox import completed. Found ${documents.length} documents.`);
     } catch (error) {
       console.error('Dropbox import error:', error);
-      throw new Error('Failed to import from Dropbox');
+      
+      // Provide more specific error messages
+      if (error.error && error.error.error_summary) {
+        throw new Error(`Dropbox API Error: ${error.error.error_summary}`);
+      } else if (error.status === 401) {
+        throw new Error('Invalid Dropbox access token. Please check your token and try again.');
+      } else {
+        throw new Error(`Failed to import from Dropbox: ${error.message || error}`);
+      }
     }
 
     return documents;
