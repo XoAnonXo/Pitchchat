@@ -52,10 +52,9 @@ const platformConfigs = {
   },
   dropbox: {
     fields: [
-      { key: 'app_key', label: 'App Key', type: 'text' as const, required: true },
-      { key: 'app_secret', label: 'App Secret', type: 'password' as const, required: true }
+      { key: 'accessToken', label: 'Access Token', type: 'password' as const, required: true, placeholder: 'Enter your Dropbox access token' }
     ],
-    instructions: 'Create an app at https://www.dropbox.com/developers/apps',
+    instructions: 'Go to https://www.dropbox.com/developers/apps → Select your app → Generate access token. For testing, you can use "App Key: m1zv3m6lvh3087y" to create a test token.',
     docsUrl: 'https://www.dropbox.com/developers/documentation/http/documentation'
   },
   asana: {
