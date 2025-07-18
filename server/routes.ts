@@ -248,8 +248,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const slug = nanoid(12);
       
+      // Parse the incoming data and convert expiresAt string to Date if present
+      const requestBody = { ...req.body };
+      if (requestBody.expiresAt && typeof requestBody.expiresAt === 'string') {
+        requestBody.expiresAt = new Date(requestBody.expiresAt);
+      }
+      
       const linkData = insertLinkSchema.parse({
-        ...req.body,
+        ...requestBody,
         projectId: req.params.projectId,
         slug,
       });
