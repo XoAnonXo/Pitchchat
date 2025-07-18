@@ -183,7 +183,7 @@ export default function Dashboard() {
         <aside className="w-64 bg-card border-r border-border flex-shrink-0">
           <div className="p-6">
             <Button 
-              className="w-full bg-gradient-to-r from-primary to-[#5C8AF7] text-primary-foreground hover:opacity-90 rounded-lg font-medium"
+              className="w-full gradient-primary text-primary-foreground hover:opacity-90 rounded-lg font-medium shadow-soft"
               onClick={handleCreateProject}
               disabled={createProjectMutation.isPending}
             >
@@ -282,7 +282,7 @@ export default function Dashboard() {
 
                   {/* Right Column: Chat Interface */}
                   <div className="lg:col-span-2">
-                    <div className="bg-card rounded-xl shadow-sm border border-border p-6 mb-6">
+                    <div className="bg-card rounded-xl shadow-subtle border border-border p-6 mb-6">
                       <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-semibold text-foreground">AI Assistant</h3>
                         <div className="flex items-center space-x-2">
@@ -302,7 +302,7 @@ export default function Dashboard() {
                 {/* Analytics Section */}
                 {analytics && (
                   <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card className="rounded-xl border-border">
+                    <Card className="rounded-xl border-border shadow-subtle">
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                           <div>
@@ -318,33 +318,33 @@ export default function Dashboard() {
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="rounded-xl border-border shadow-subtle">
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-slate-500 text-sm font-medium">Active Links</p>
-                            <p className="text-2xl font-bold text-slate-900 mt-1">
+                            <p className="text-muted-foreground text-sm font-medium">Active Links</p>
+                            <p className="text-2xl font-semibold text-foreground mt-1">
                               {analytics.activeLinks}
                             </p>
                           </div>
-                          <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                            <LinkIcon className="w-6 h-6 text-green-600" />
+                          <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
+                            <LinkIcon className="w-6 h-6 text-success" />
                           </div>
                         </div>
                       </CardContent>
                     </Card>
 
-                    <Card>
+                    <Card className="rounded-xl border-border shadow-subtle">
                       <CardContent className="p-6">
                         <div className="flex items-center justify-between">
                           <div>
-                            <p className="text-slate-500 text-sm font-medium">Cost This Month</p>
-                            <p className="text-2xl font-bold text-slate-900 mt-1">
+                            <p className="text-muted-foreground text-sm font-medium">Cost This Month</p>
+                            <p className="text-2xl font-semibold text-foreground mt-1">
                               ${analytics.monthlyCost.toFixed(2)}
                             </p>
                           </div>
-                          <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                            <DollarSign className="w-6 h-6 text-yellow-600" />
+                          <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
+                            <DollarSign className="w-6 h-6 text-alert" />
                           </div>
                         </div>
                       </CardContent>
@@ -356,12 +356,13 @@ export default function Dashboard() {
           ) : (
             <div className="flex items-center justify-center h-full">
               <div className="text-center">
-                <Database className="w-16 h-16 text-slate-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-slate-900 mb-2">No Projects Yet</h3>
-                <p className="text-slate-600 mb-4">Create your first project to get started</p>
+                <Database className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-medium text-foreground mb-2">No Projects Yet</h3>
+                <p className="text-muted-foreground mb-4">Create your first project to get started</p>
                 <Button 
                   onClick={handleCreateProject}
                   disabled={createProjectMutation.isPending}
+                  className="gradient-primary shadow-soft"
                 >
                   <Plus className="w-4 h-4 mr-2" />
                   Create Project
