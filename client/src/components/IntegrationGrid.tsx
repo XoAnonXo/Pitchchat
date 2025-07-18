@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import IntegrationConfigModal from "./IntegrationConfigModal";
 import { 
   SiGithub,
   SiNotion,
@@ -188,27 +188,27 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedIntegration, setSelectedIntegration] = useState<Integration | null>(null);
+  const [showConfigModal, setShowConfigModal] = useState(false);
 
-  const connectMutation = useMutation({
-    mutationFn: async (integrationId: string) => {
-      return apiRequest("POST", `/api/projects/${projectId}/integrations/${integrationId}/connect`, {});
-    },
-    onSuccess: (data, integrationId) => {
-      const integration = integrations.find(i => i.id === integrationId);
+  const handleConnect = async (integrationId: string) => {
+    const integration = integrations.find(i => i.id === integrationId);
+    if (!integration) return;
+
+    // Supported platforms with configuration modal
+    const supportedPlatforms = ['github', 'notion', 'google-drive', 'dropbox', 'asana', 'jira'];
+    
+    if (supportedPlatforms.includes(integrationId)) {
+      setSelectedIntegration(integration);
+      setShowConfigModal(true);
+    } else {
       toast({
-        title: "Integration Started",
-        description: `${integration?.name} connection initiated successfully`,
+        title: "Coming Soon",
+        description: `${integration.name} integration will be available soon.`,
+        variant: "secondary"
       });
-      queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
-    },
-    onError: (error) => {
-      toast({
-        title: "Connection Failed",
-        description: error.message || "Failed to connect to platform",
-        variant: "destructive",
-      });
-    },
-  });
+    }
+  };
 
   const categories = Object.keys(categoryNames) as Array<keyof typeof categoryNames>;
   const filteredIntegrations = selectedCategory === "all" 
@@ -266,14 +266,11 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
               </p>
               
               <Button
-                onClick={() => connectMutation.mutate(integration.id)}
-                disabled={integration.status !== "available" || connectMutation.isPending}
+                onClick={() => handleConnect(integration.id)}
+                disabled={integration.status !== "available"}
                 className="w-full"
                 variant={integration.status === "available" ? "default" : "secondary"}
               >
-                {connectMutation.isPending ? (
-                  <div className="animate-spin w-4 h-4 border-2 border-current border-t-transparent rounded-full mr-2" />
-                ) : null}
                 {integration.status === "connected" ? "Reconnect" :
                  integration.status === "available" ? "Connect" : "Coming Soon"}
               </Button>
@@ -281,6 +278,19 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
           </Card>
         ))}
       </div>
+
+      {/* Configuration Modal */}
+      {selectedIntegration && (
+        <IntegrationConfigModal
+          isOpen={showConfigModal}
+          onClose={() => {
+            setShowConfigModal(false);
+            setSelectedIntegration(null);
+          }}
+          integration={selectedIntegration}
+          projectId={projectId}
+        />
+      )}
     </div>
   );
 }
