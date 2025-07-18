@@ -157,7 +157,7 @@ const integrations: Integration[] = [
     name: "Figma",
     description: "Import design files and project documentation",
     icon: <SiFigma className="w-5 h-5" />,
-    status: "coming_soon",
+    status: "available",
     category: "productivity",
     color: "text-purple-500"
   },
@@ -228,7 +228,7 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
     if (!integration) return;
 
     // Supported platforms with configuration modal
-    const supportedPlatforms = ['github', 'notion', 'google-drive', 'dropbox', 'asana', 'jira'];
+    const supportedPlatforms = ['github', 'notion', 'google-drive', 'dropbox', 'asana', 'jira', 'figma'];
     
     if (supportedPlatforms.includes(integrationId)) {
       setSelectedIntegration(integration);

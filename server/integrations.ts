@@ -474,6 +474,130 @@ export class IntegrationManager {
     return documents;
   }
 
+  // Figma Integration
+  async importFromFigma(config: IntegrationConfig): Promise<ImportedDocument[]> {
+    console.log('Starting Figma import with access token');
+    
+    const documents: ImportedDocument[] = [];
+    const figmaToken = config.credentials.accessToken;
+    const headers = {
+      'X-Figma-Token': figmaToken
+    };
+
+    try {
+      // Get user's files (recent files)
+      const filesResponse = await fetch('https://api.figma.com/v1/me/files?page_size=20', {
+        headers
+      });
+      
+      if (!filesResponse.ok) {
+        throw new Error(`Figma API error: ${filesResponse.status} ${filesResponse.statusText}`);
+      }
+      
+      const filesData = await filesResponse.json();
+      console.log(`Found ${filesData.files?.length || 0} Figma files`);
+      
+      // Process each file
+      for (const file of filesData.files || []) {
+        try {
+          // Get file details
+          const fileResponse = await fetch(`https://api.figma.com/v1/files/${file.key}`, {
+            headers
+          });
+          
+          if (!fileResponse.ok) {
+            console.error(`Failed to fetch file ${file.name}: ${fileResponse.status}`);
+            continue;
+          }
+          
+          const fileData = await fileResponse.json();
+          
+          // Extract content from the file
+          let content = `Figma File: ${fileData.name}\n\n`;
+          content += `Last Modified: ${fileData.lastModified}\n`;
+          content += `Version: ${fileData.version}\n\n`;
+          
+          // Extract text from all pages
+          if (fileData.document && fileData.document.children) {
+            for (const page of fileData.document.children) {
+              if (page.type === 'PAGE') {
+                content += `\nPage: ${page.name}\n`;
+                content += '---\n';
+                
+                // Extract text from the page
+                const pageText = this.extractFigmaText(page);
+                if (pageText) {
+                  content += pageText + '\n';
+                }
+              }
+            }
+          }
+          
+          // Get comments for additional context
+          const commentsResponse = await fetch(`https://api.figma.com/v1/files/${file.key}/comments`, {
+            headers
+          });
+          
+          if (commentsResponse.ok) {
+            const commentsData = await commentsResponse.json();
+            if (commentsData.comments && commentsData.comments.length > 0) {
+              content += '\n\nComments:\n';
+              for (const comment of commentsData.comments) {
+                content += `- ${comment.user.handle}: ${comment.message}\n`;
+              }
+            }
+          }
+          
+          documents.push({
+            title: file.name,
+            content: content,
+            source: `Figma: ${file.name}`,
+            url: `https://www.figma.com/file/${file.key}`,
+            type: 'figma',
+            metadata: {
+              fileKey: file.key,
+              lastModified: fileData.lastModified,
+              version: fileData.version
+            }
+          });
+          
+          console.log(`Successfully imported Figma file: ${file.name}`);
+        } catch (error) {
+          console.error(`Failed to process Figma file ${file.name}:`, error);
+        }
+      }
+    } catch (error) {
+      console.error('Figma import error:', error);
+      throw new Error(`Failed to import from Figma: ${error.message}`);
+    }
+    
+    return documents;
+  }
+
+  // Helper method to extract text from Figma nodes
+  private extractFigmaText(node: any, depth: number = 0): string {
+    let text = '';
+    
+    // Extract text from text nodes
+    if (node.type === 'TEXT' && node.characters) {
+      text += node.characters + '\n';
+    }
+    
+    // Extract frame/component names and descriptions
+    if ((node.type === 'FRAME' || node.type === 'COMPONENT' || node.type === 'INSTANCE') && node.name) {
+      text += `${'  '.repeat(depth)}${node.type}: ${node.name}\n`;
+    }
+    
+    // Recursively process children
+    if (node.children && Array.isArray(node.children)) {
+      for (const child of node.children) {
+        text += this.extractFigmaText(child, depth + 1);
+      }
+    }
+    
+    return text;
+  }
+
   // Process and store imported documents
   async processImportedDocuments(documents: ImportedDocument[], projectId: string): Promise<void> {
     for (const doc of documents) {

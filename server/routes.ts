@@ -643,6 +643,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
               projectId
             });
             break;
+          case 'figma':
+            documents = await integrationManager.importFromFigma({
+              type: 'figma',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
           default:
             return res.status(400).json({ message: `Sync not supported for ${integrationId}` });
         }
@@ -797,6 +805,66 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Jira integration error:", error);
       res.status(500).json({ message: "Failed to import from Jira" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/figma", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { accessToken } = req.body;
+      
+      if (!accessToken) {
+        return res.status(400).json({ message: "Figma access token is required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      // Check if integration already exists
+      const existingIntegration = await storage.getIntegration(req.params.projectId, 'figma');
+      
+      // Create or update integration record
+      if (existingIntegration) {
+        await storage.updateIntegration(existingIntegration.id, {
+          status: 'connected',
+          credentials: { accessToken },
+          lastSyncedAt: new Date()
+        });
+      } else {
+        await storage.createIntegration({
+          projectId: req.params.projectId,
+          platform: 'figma',
+          status: 'connected',
+          credentials: { accessToken },
+          lastSyncedAt: new Date()
+        });
+      }
+
+      console.log(`Starting Figma import for project ${req.params.projectId}`);
+      const documents = await integrationManager.importFromFigma({
+        type: 'figma',
+        credentials: { accessToken },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      console.log(`Processing ${documents.length} documents from Figma`);
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      console.log(`Figma import completed successfully. ${documents.length} documents processed.`);
+      res.json({ 
+        message: "Figma import completed", 
+        documentsImported: documents.length,
+        success: true
+      });
+    } catch (error) {
+      console.error("Figma integration error:", error);
+      res.status(500).json({ 
+        message: error.message || "Failed to import from Figma",
+        success: false
+      });
     }
   });
 

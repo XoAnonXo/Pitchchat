@@ -72,6 +72,13 @@ const platformConfigs = {
     ],
     instructions: 'Create an API token at https://id.atlassian.com/manage-profile/security/api-tokens',
     docsUrl: 'https://developer.atlassian.com/cloud/jira/platform/basic-auth-for-rest-apis/'
+  },
+  figma: {
+    fields: [
+      { key: 'accessToken', label: 'Personal Access Token', type: 'password' as const, required: true, placeholder: 'Enter your Figma access token' }
+    ],
+    instructions: 'Create a Personal Access Token in your Figma account settings. The token needs read access to your files.',
+    docsUrl: 'https://www.figma.com/developers/api#access-tokens'
   }
 };
 
