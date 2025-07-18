@@ -270,7 +270,7 @@ export class IntegrationManager {
           const fileName = entry.name;
           console.log(`Processing file: ${fileName}`);
           
-          // Support more file types
+          // Support text file types (excluding .paper files which are Dropbox Paper documents)
           if (fileName.endsWith('.txt') || fileName.endsWith('.md') || fileName.endsWith('.doc') || fileName.endsWith('.docx')) {
             try {
               const fileResponse = await dbx.filesDownload({ path: entry.path_lower! });
@@ -293,6 +293,8 @@ export class IntegrationManager {
             } catch (error) {
               console.error(`Failed to download file ${fileName}:`, error);
             }
+          } else if (fileName.endsWith('.paper')) {
+            console.log(`Skipping Dropbox Paper file: ${fileName} (Paper documents require special API access)`);
           }
         }
       }

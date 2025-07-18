@@ -54,7 +54,7 @@ const platformConfigs = {
     fields: [
       { key: 'accessToken', label: 'Access Token', type: 'password' as const, required: true, placeholder: 'Enter your Dropbox access token' }
     ],
-    instructions: 'SETUP REQUIRED: 1) Go to https://www.dropbox.com/developers/apps → Select your app → "Permissions" tab → Enable "files.metadata.read" and "files.content.read" → Click "Submit" 2) Go to "Settings" tab → Generate NEW access token (old tokens are invalid after permission changes) 3) Create .txt or .md files in your Dropbox root folder to test import.',
+    instructions: 'Ready to use! Upload .txt, .md, .doc, or .docx files to your Dropbox root folder to import them. Note: Dropbox Paper files (.paper) are not supported as they require special API access.',
     docsUrl: 'https://www.dropbox.com/developers/documentation/http/documentation'
   },
   asana: {
