@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -145,10 +146,14 @@ export default function Dashboard() {
             </div>
             
             <nav className="hidden md:flex space-x-8">
-              <a href="#dashboard" className="text-primary font-medium">Dashboard</a>
-              <a href="#projects" className="text-muted-foreground hover:text-primary font-medium transition-colors">Projects</a>
-              <a href="#analytics" className="text-muted-foreground hover:text-primary font-medium transition-colors">Analytics</a>
-              <a href="#settings" className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</a>
+              <Link href="/" className="text-primary font-medium">
+                Dashboard
+              </Link>
+              <Link href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} className="text-muted-foreground hover:text-primary font-medium transition-colors">
+                Documents
+              </Link>
+              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Analytics</button>
+              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
             </nav>
 
             <div className="flex items-center space-x-4">
@@ -194,26 +199,33 @@ export default function Dashboard() {
           
           <nav className="px-6">
             <div className="space-y-1">
-              <a href="#" className="flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
+              <Link href="/" className="flex items-center space-x-3 text-primary bg-secondary px-3 py-2 rounded-lg transition-colors">
                 <Database className="w-4 h-4" />
                 <span className="text-sm font-medium">All Projects</span>
-              </a>
-              <a href="#" className="flex items-center space-x-3 text-primary bg-secondary px-3 py-2 rounded-lg">
+              </Link>
+              <button className="w-full text-left flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
                 <MessageSquare className="w-4 h-4" />
                 <span className="text-sm font-medium">Active Chats</span>
-              </a>
-              <a href={`/documents/${selectedProjectId}`} className="flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
+              </button>
+              <Link 
+                href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} 
+                className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                  selectedProjectId 
+                    ? "text-muted-foreground hover:bg-accent hover:text-accent-foreground" 
+                    : "text-muted-foreground/50 cursor-not-allowed"
+                }`}
+              >
                 <FileText className="w-4 h-4" />
                 <span className="text-sm font-medium">Manage Documents</span>
-              </a>
-              <a href="#" className="flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
+              </Link>
+              <button className="w-full text-left flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
                 <LinkIcon className="w-4 h-4" />
                 <span className="text-sm font-medium">Shared Links</span>
-              </a>
-              <a href="#" className="flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
+              </button>
+              <button className="w-full text-left flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
                 <BarChart3 className="w-4 h-4" />
                 <span className="text-sm font-medium">Analytics</span>
-              </a>
+              </button>
             </div>
           </nav>
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "wouter";
+import { useParams, Link } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -31,7 +31,12 @@ import {
   Download,
   Filter,
   MoreHorizontal,
-  ExternalLink
+  ExternalLink,
+  ArrowLeft,
+  Home,
+  BarChart3,
+  LinkIcon,
+  MessageSquare
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -39,6 +44,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/hooks/useAuth";
 import { formatDistanceToNow } from "date-fns";
 
 interface Document {
@@ -67,6 +73,7 @@ interface DocumentsPageProps {
 export default function DocumentsPage({ projectId }: DocumentsPageProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [sourceFilter, setSourceFilter] = useState<string>("all");
@@ -156,16 +163,79 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Document Management</h1>
-          <p className="text-gray-600 mt-1">
-            Manage your uploaded documents and AI knowledge base
-          </p>
+    <div className="min-h-screen bg-background">
+      {/* Navigation Header */}
+      <header className="bg-background border-b border-border sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <div className="w-8 h-8 bg-gradient-to-r from-primary to-[#5C8AF7] rounded-lg flex items-center justify-center">
+                  <span className="text-primary-foreground font-semibold text-sm">PC</span>
+                </div>
+                <h1 className="text-xl font-semibold text-foreground">PitchChat Builder</h1>
+              </Link>
+            </div>
+            
+            <nav className="hidden md:flex space-x-8">
+              <Link href="/" className="text-muted-foreground hover:text-primary font-medium transition-colors">
+                Dashboard
+              </Link>
+              <Link href={`/documents/${projectId}`} className="text-primary font-medium">
+                Documents
+              </Link>
+              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Analytics</button>
+              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
+            </nav>
+
+            <div className="flex items-center space-x-4">
+              {user && (
+                <>
+                  <div className="flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
+                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    onClick={() => window.location.href = "/api/logout"}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    Logout
+                  </Button>
+                  {user.profileImageUrl ? (
+                    <img 
+                      src={user.profileImageUrl} 
+                      alt="Profile" 
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 bg-muted rounded-full" />
+                  )}
+                </>
+              )}
+            </div>
+          </div>
         </div>
-      </div>
+      </header>
+
+      <div className="container mx-auto p-6 space-y-6">
+        {/* Page Header with Back Button */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            <Link href="/" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm font-medium">Back to Dashboard</span>
+            </Link>
+            <div className="h-6 w-px bg-border" />
+            <div>
+              <h1 className="text-3xl font-bold text-foreground">Document Management</h1>
+              <p className="text-muted-foreground mt-1">
+                Manage your uploaded documents and AI knowledge base
+              </p>
+            </div>
+          </div>
+        </div>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -374,6 +444,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
           )}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
