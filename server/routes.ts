@@ -5,7 +5,8 @@ import { nanoid } from "nanoid";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./replitAuth";
 import { saveUploadedFile, processDocument, deleteUploadedFile } from "./fileProcessor";
-import { chatWithAI, generateEmbedding } from "./openai";
+import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
+import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 
 // Configure multer for file uploads
@@ -181,7 +182,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/projects/:projectId/chat", isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
-      const { message } = req.body;
+      const { message, model = 'gpt-4o' } = req.body;
       
       if (!message || typeof message !== "string") {
         return res.status(400).json({ message: "Message is required" });
@@ -203,7 +204,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const response = await chatWithAI([
         { role: "user", content: message }
-      ], context);
+      ], context, model as AIModel);
 
       res.json(response);
     } catch (error) {
@@ -347,10 +348,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         page: (chunk.metadata as any)?.page,
       }));
 
-      // Get AI response
+      // Get AI response  
       const aiResponse = await chatWithAI([
         { role: "user", content: message }
-      ], context);
+      ], context, 'gpt-4o');
 
       // Save AI message
       const assistantMessage = await storage.createMessage({
@@ -408,6 +409,228 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.error("Error fetching analytics:", error);
       res.status(500).json({ message: "Failed to fetch analytics" });
     }
+  });
+
+  // Integration routes
+  app.post("/api/projects/:projectId/integrations/github", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { token } = req.body;
+      
+      if (!token) {
+        return res.status(400).json({ message: "GitHub token is required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const documents = await integrationManager.importFromGitHub({
+        type: 'github',
+        credentials: { token },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "GitHub import completed", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("GitHub integration error:", error);
+      res.status(500).json({ message: "Failed to import from GitHub" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/notion", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { token } = req.body;
+      
+      if (!token) {
+        return res.status(400).json({ message: "Notion token is required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const documents = await integrationManager.importFromNotion({
+        type: 'notion',
+        credentials: { token },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "Notion import completed", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("Notion integration error:", error);
+      res.status(500).json({ message: "Failed to import from Notion" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/google-drive", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { accessToken, refreshToken, clientId, clientSecret } = req.body;
+      
+      if (!accessToken) {
+        return res.status(400).json({ message: "Google Drive access token is required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const documents = await integrationManager.importFromGoogleDrive({
+        type: 'google-drive',
+        credentials: { 
+          accessToken, 
+          refreshToken, 
+          clientId: clientId || process.env.GOOGLE_DRIVE_CLIENT_ID, 
+          clientSecret: clientSecret || process.env.GOOGLE_DRIVE_CLIENT_SECRET,
+          redirectUri: 'urn:ietf:wg:oauth:2.0:oob'
+        },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "Google Drive import completed", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("Google Drive integration error:", error);
+      res.status(500).json({ message: "Failed to import from Google Drive" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/dropbox", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { accessToken } = req.body;
+      
+      if (!accessToken) {
+        return res.status(400).json({ message: "Dropbox access token is required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const documents = await integrationManager.importFromDropbox({
+        type: 'dropbox',
+        credentials: { accessToken },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "Dropbox import completed", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("Dropbox integration error:", error);
+      res.status(500).json({ message: "Failed to import from Dropbox" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/asana", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { accessToken } = req.body;
+      
+      if (!accessToken) {
+        return res.status(400).json({ message: "Asana access token is required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const documents = await integrationManager.importFromAsana({
+        type: 'asana',
+        credentials: { accessToken },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "Asana import completed", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("Asana integration error:", error);
+      res.status(500).json({ message: "Failed to import from Asana" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/jira", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { domain, email, apiToken } = req.body;
+      
+      if (!domain || !email || !apiToken) {
+        return res.status(400).json({ message: "Jira domain, email, and API token are required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const documents = await integrationManager.importFromJira({
+        type: 'jira',
+        credentials: { domain, email, apiToken },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "Jira import completed", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("Jira integration error:", error);
+      res.status(500).json({ message: "Failed to import from Jira" });
+    }
+  });
+
+  // Get available AI models
+  app.get("/api/ai-models", async (req, res) => {
+    const models = [
+      { id: 'gpt-4o', name: 'GPT-4 Omni', provider: 'OpenAI' },
+      { id: 'gpt-4', name: 'GPT-4', provider: 'OpenAI' },
+      { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI' },
+      { id: 'o3-mini', name: 'O3 Mini', provider: 'OpenAI' },
+      { id: 'claude-sonnet-4', name: 'Claude Sonnet 4', provider: 'Anthropic' },
+      { id: 'claude-3-sonnet', name: 'Claude 3 Sonnet', provider: 'Anthropic' },
+      { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic' },
+      { id: 'claude-3-opus', name: 'Claude 3 Opus', provider: 'Anthropic' },
+      { id: 'gemini-pro', name: 'Gemini Pro', provider: 'Google' },
+      { id: 'gemini-flash', name: 'Gemini Flash', provider: 'Google' },
+    ];
+    res.json(models);
   });
 
   const httpServer = createServer(app);

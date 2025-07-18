@@ -16,12 +16,16 @@ import {
   DollarSign,
   Github,
   FileText,
-  Database
+  Database,
+  Brain,
+  Zap
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
 import DocumentsList from "@/components/DocumentsList";
 import ShareLinkModal from "@/components/ShareLinkModal";
+import { IntegrationPanel } from "@/components/ui/integration-panel";
+import { AIModelSelector } from "@/components/ui/ai-model-selector";
 
 export default function Dashboard() {
   const { user, isLoading: authLoading } = useAuth();
@@ -29,6 +33,8 @@ export default function Dashboard() {
   const queryClient = useQueryClient();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
+  const [showIntegrationPanel, setShowIntegrationPanel] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<string>('gpt-4o');
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -247,6 +253,13 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex space-x-3">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setShowIntegrationPanel(true)}
+                    >
+                      <Brain className="w-4 h-4 mr-2" />
+                      Import from Platforms
+                    </Button>
                     <Button variant="outline">
                       Export Data
                     </Button>
@@ -267,7 +280,20 @@ export default function Dashboard() {
 
                   {/* Right Column: Chat Interface */}
                   <div className="lg:col-span-2">
-                    <ChatInterface projectId={selectedProject.id} />
+                    <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 mb-6">
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="text-lg font-semibold text-slate-900">AI Assistant</h3>
+                        <div className="flex items-center space-x-2">
+                          <Zap className="w-4 h-4 text-slate-500" />
+                          <AIModelSelector 
+                            value={selectedModel} 
+                            onChange={setSelectedModel}
+                            className="w-48"
+                          />
+                        </div>
+                      </div>
+                      <ChatInterface projectId={selectedProject.id} model={selectedModel} />
+                    </div>
                   </div>
                 </div>
 
@@ -350,6 +376,14 @@ export default function Dashboard() {
           projectId={selectedProject.id}
           isOpen={showShareModal}
           onClose={() => setShowShareModal(false)}
+        />
+      )}
+      
+      {/* Integration Panel */}
+      {showIntegrationPanel && selectedProject && (
+        <IntegrationPanel
+          projectId={selectedProject.id}
+          onClose={() => setShowIntegrationPanel(false)}
         />
       )}
     </div>

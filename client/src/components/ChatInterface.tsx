@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
@@ -25,9 +24,10 @@ interface Message {
 
 interface ChatInterfaceProps {
   projectId: string;
+  model?: string;
 }
 
-export default function ChatInterface({ projectId }: ChatInterfaceProps) {
+export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInterfaceProps) {
   const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -38,7 +38,6 @@ export default function ChatInterface({ projectId }: ChatInterfaceProps) {
     }
   ]);
   const [inputMessage, setInputMessage] = useState("");
-  const [selectedModel, setSelectedModel] = useState("gpt-4o");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
@@ -48,7 +47,7 @@ export default function ChatInterface({ projectId }: ChatInterfaceProps) {
 
   const chatMutation = useMutation({
     mutationFn: async (message: string) => {
-      const res = await apiRequest("POST", `/api/projects/${projectId}/chat`, { message });
+      const res = await apiRequest("POST", `/api/projects/${projectId}/chat`, { message, model });
       return res.json();
     },
     onSuccess: (response) => {
@@ -111,17 +110,9 @@ export default function ChatInterface({ projectId }: ChatInterfaceProps) {
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-semibold text-slate-900">Test Your AI Assistant</h3>
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-slate-500">Model:</span>
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
-              <SelectTrigger className="w-32">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="gpt-4o">GPT-4o</SelectItem>
-                <SelectItem value="gpt-4">GPT-4</SelectItem>
-                <SelectItem value="gpt-3.5-turbo">GPT-3.5-turbo</SelectItem>
-              </SelectContent>
-            </Select>
+            <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
+              {model}
+            </Badge>
           </div>
         </div>
         <p className="text-slate-600 text-sm mt-1">

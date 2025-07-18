@@ -130,3 +130,15 @@ Preferred communication style: Simple, everyday language.
 - **Rate Limiting**: Token-based usage tracking for API cost management
 
 The application is designed as a monorepo with clear separation between frontend, backend, and shared code, enabling efficient development and deployment workflows.
+
+## Recent Changes: Latest modifications with dates
+
+### July 18, 2025 - Multi-Model AI & Platform Integrations
+- Added support for multiple AI models including OpenAI GPT-4o, Anthropic Claude, Google Gemini, and xAI Grok
+- Created AIModelSelector component for dynamic model selection in chat interface
+- Built comprehensive IntegrationPanel component for connecting to external platforms
+- Added integration routes for GitHub, Notion, Google Drive, Dropbox, Asana, and Jira
+- Enhanced dashboard with "Import from Platforms" button and AI model selector
+- Updated chat interface to accept and pass model parameter to backend
+- Created dialog component for modal interfaces
+- Installed required dependencies: asana, jira.js packages
