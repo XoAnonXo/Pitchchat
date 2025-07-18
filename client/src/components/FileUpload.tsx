@@ -121,16 +121,16 @@ export default function FileUpload({ projectId }: FileUploadProps) {
   };
 
   return (
-    <Card>
+    <Card className="rounded-xl border-border shadow-subtle">
       <CardContent className="p-6">
-        <h3 className="text-lg font-semibold text-slate-900 mb-4">Upload Documents</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4">Upload Documents</h3>
         
         {/* File Upload Dropzone */}
         <div
           className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
             dragActive 
-              ? 'border-primary bg-blue-50' 
-              : 'border-slate-300 hover:border-primary'
+              ? 'border-primary bg-secondary' 
+              : 'border-border hover:border-primary'
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -138,9 +138,9 @@ export default function FileUpload({ projectId }: FileUploadProps) {
           onDrop={handleDrop}
           onClick={() => document.getElementById('file-input')?.click()}
         >
-          <Upload className="mx-auto h-12 w-12 text-slate-400 mb-4" />
-          <p className="text-slate-600 font-medium">Drop files here or click to browse</p>
-          <p className="text-sm text-slate-500 mt-1">PDF, DOCX, PPTX, TXT up to 500MB</p>
+          <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+          <p className="text-foreground font-medium mb-1">Drop files here or click to browse</p>
+          <p className="text-sm text-muted-foreground">PDF, DOCX, PPTX, TXT up to 500MB</p>
           <input
             id="file-input"
             type="file"
@@ -154,18 +154,18 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         {/* Selected Files */}
         {selectedFiles.length > 0 && (
           <div className="mt-4">
-            <h4 className="text-sm font-medium text-slate-900 mb-2">Selected Files</h4>
+            <h4 className="text-sm font-medium text-foreground mb-2">Selected Files</h4>
             <div className="space-y-2">
               {selectedFiles.map(({ file, id }) => (
-                <div key={id} className="flex items-center justify-between p-2 bg-slate-50 rounded-lg">
+                <div key={id} className="flex items-center justify-between p-2 bg-accent rounded-lg">
                   <div className="flex items-center space-x-2">
-                    <FileText className="w-4 h-4 text-slate-500" />
-                    <span className="text-sm font-medium text-slate-900">{file.name}</span>
-                    <span className="text-xs text-slate-500">({formatFileSize(file.size)})</span>
+                    <FileText className="w-4 h-4 text-muted-foreground" />
+                    <span className="text-sm font-medium text-foreground">{file.name}</span>
+                    <span className="text-xs text-muted-foreground">({formatFileSize(file.size)})</span>
                   </div>
                   <button
                     onClick={() => removeFile(id)}
-                    className="text-slate-400 hover:text-red-500"
+                    className="text-muted-foreground hover:text-destructive"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -175,7 +175,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             <Button 
               onClick={uploadFiles}
               disabled={uploadMutation.isPending}
-              className="w-full mt-3"
+              className="w-full mt-3 gradient-primary shadow-soft"
             >
               {uploadMutation.isPending ? (
                 <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
@@ -186,33 +186,33 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         )}
 
         {/* Integration Options */}
-        <div className="mt-4 space-y-2">
+        <div className="mt-6 space-y-2">
           <Button 
             variant="ghost" 
-            className="w-full justify-start text-left"
+            className="w-full justify-start text-left h-12 rounded-lg"
             disabled
           >
-            <Github className="w-4 h-4 mr-2" />
-            <span>Connect GitHub Repository</span>
-            <span className="ml-auto text-xs text-slate-500">Coming Soon</span>
+            <Github className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span className="text-foreground">Connect GitHub Repository</span>
+            <span className="ml-auto text-xs text-muted-foreground">Coming Soon</span>
           </Button>
           <Button 
             variant="ghost" 
-            className="w-full justify-start text-left"
+            className="w-full justify-start text-left h-12 rounded-lg"
             disabled
           >
-            <FileText className="w-4 h-4 mr-2" />
-            <span>Connect Notion Workspace</span>
-            <span className="ml-auto text-xs text-slate-500">Coming Soon</span>
+            <FileText className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span className="text-foreground">Connect Notion Workspace</span>
+            <span className="ml-auto text-xs text-muted-foreground">Coming Soon</span>
           </Button>
           <Button 
             variant="ghost" 
-            className="w-full justify-start text-left"
+            className="w-full justify-start text-left h-12 rounded-lg"
             disabled
           >
-            <Database className="w-4 h-4 mr-2" />
-            <span>Connect Google Drive</span>
-            <span className="ml-auto text-xs text-slate-500">Coming Soon</span>
+            <Database className="w-4 h-4 mr-3 text-muted-foreground" />
+            <span className="text-foreground">Connect Google Drive</span>
+            <span className="ml-auto text-xs text-muted-foreground">Coming Soon</span>
           </Button>
         </div>
       </CardContent>
