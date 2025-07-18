@@ -4,11 +4,12 @@ import { google } from "googleapis";
 import { Dropbox } from "dropbox";
 import * as asana from "asana";
 import { Version3Client } from "jira.js";
+import { WebClient } from "@slack/web-api";
 import { storage } from "./storage";
 import { generateEmbedding } from "./aiModels";
 
 export interface IntegrationConfig {
-  type: 'github' | 'notion' | 'google-drive' | 'dropbox' | 'asana' | 'jira';
+  type: 'github' | 'notion' | 'google-drive' | 'dropbox' | 'asana' | 'jira' | 'slack' | 'figma';
   credentials: Record<string, string>;
   userId: string;
   projectId: string;
@@ -569,6 +570,121 @@ export class IntegrationManager {
     } catch (error) {
       console.error('Figma import error:', error);
       throw new Error(`Failed to import from Figma: ${error.message}`);
+    }
+    
+    return documents;
+  }
+
+  // Slack Integration
+  async importFromSlack(config: IntegrationConfig): Promise<ImportedDocument[]> {
+    if (!config.credentials.botToken || !config.credentials.channelId) {
+      throw new Error('Slack Bot Token and Channel ID are required');
+    }
+
+    const slack = new WebClient(config.credentials.botToken);
+    const documents: ImportedDocument[] = [];
+
+    try {
+      console.log('Testing Slack connection...');
+      
+      // Test the connection by getting channel info
+      const channelInfo = await slack.conversations.info({
+        channel: config.credentials.channelId
+      });
+      
+      if (!channelInfo.ok || !channelInfo.channel) {
+        throw new Error('Failed to access Slack channel. Please check your Channel ID.');
+      }
+      
+      console.log(`Successfully connected to Slack channel: ${channelInfo.channel.name}`);
+      
+      // Get channel history
+      console.log('Fetching channel messages...');
+      const history = await slack.conversations.history({
+        channel: config.credentials.channelId,
+        limit: 200 // Get last 200 messages
+      });
+      
+      if (!history.ok || !history.messages) {
+        throw new Error('Failed to fetch channel history');
+      }
+      
+      // Process messages into a document
+      let content = `Slack Channel: ${channelInfo.channel.name}\n\n`;
+      content += `Channel Description: ${channelInfo.channel.purpose?.value || 'No description'}\n\n`;
+      content += `Messages (${history.messages.length} messages):\n\n`;
+      
+      // Get user info for better message attribution
+      const userCache = new Map();
+      
+      for (const message of history.messages.reverse()) { // Reverse to get chronological order
+        if (message.type === 'message' && message.text) {
+          let userName = 'Unknown User';
+          
+          if (message.user) {
+            if (!userCache.has(message.user)) {
+              try {
+                const userInfo = await slack.users.info({ user: message.user });
+                if (userInfo.ok && userInfo.user) {
+                  userCache.set(message.user, userInfo.user.real_name || userInfo.user.name || 'Unknown User');
+                }
+              } catch (error) {
+                console.warn(`Failed to get user info for ${message.user}`);
+              }
+            }
+            userName = userCache.get(message.user) || 'Unknown User';
+          }
+          
+          const timestamp = new Date(parseFloat(message.ts) * 1000).toLocaleString();
+          content += `[${timestamp}] ${userName}: ${message.text}\n`;
+          
+          // Include thread replies if any
+          if (message.thread_ts && message.reply_count) {
+            try {
+              const replies = await slack.conversations.replies({
+                channel: config.credentials.channelId,
+                ts: message.thread_ts,
+                limit: 100
+              });
+              
+              if (replies.ok && replies.messages && replies.messages.length > 1) {
+                content += '  Thread replies:\n';
+                for (const reply of replies.messages.slice(1)) { // Skip the parent message
+                  if (reply.text && reply.user) {
+                    const replyUserName = userCache.get(reply.user) || 'Unknown User';
+                    const replyTimestamp = new Date(parseFloat(reply.ts) * 1000).toLocaleString();
+                    content += `    [${replyTimestamp}] ${replyUserName}: ${reply.text}\n`;
+                  }
+                }
+              }
+            } catch (error) {
+              console.warn('Failed to fetch thread replies:', error);
+            }
+          }
+          
+          content += '\n';
+        }
+      }
+      
+      // Add channel document
+      documents.push({
+        title: `Slack - ${channelInfo.channel.name}`,
+        content: content,
+        source: 'Slack',
+        url: `https://slack.com/app_redirect?channel=${config.credentials.channelId}`,
+        type: 'slack',
+        metadata: {
+          channelId: config.credentials.channelId,
+          channelName: channelInfo.channel.name,
+          messageCount: history.messages.length
+        }
+      });
+      
+      console.log(`Successfully imported ${history.messages.length} messages from Slack channel: ${channelInfo.channel.name}`);
+      
+    } catch (error) {
+      console.error('Slack import error:', error);
+      throw new Error(`Failed to import from Slack: ${error.message}`);
     }
     
     return documents;

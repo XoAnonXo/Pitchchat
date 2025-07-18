@@ -79,6 +79,14 @@ const platformConfigs = {
     ],
     instructions: 'Create a Personal Access Token in your Figma account settings. The token needs read access to your files.',
     docsUrl: 'https://www.figma.com/developers/api#access-tokens'
+  },
+  slack: {
+    fields: [
+      { key: 'botToken', label: 'Bot User OAuth Token', type: 'password' as const, required: true, placeholder: 'xoxb-your-token' },
+      { key: 'channelId', label: 'Channel ID', type: 'text' as const, required: true, placeholder: 'C1234567890' }
+    ],
+    instructions: 'Create a Slack app at api.slack.com/apps and add the Bot User OAuth Token. To find the Channel ID, right-click on the channel name and select "View channel details".',
+    docsUrl: 'https://api.slack.com/authentication/basics'
   }
 };
 

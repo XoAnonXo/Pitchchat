@@ -94,7 +94,7 @@ const integrations: Integration[] = [
     name: "Slack",
     description: "Access conversations and shared files",
     icon: <SiSlack className="w-5 h-5" />,
-    status: "coming_soon",
+    status: "available",
     category: "communication",
     color: "text-purple-600"
   },

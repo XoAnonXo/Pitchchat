@@ -651,6 +651,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
               projectId
             });
             break;
+          case 'slack':
+            documents = await integrationManager.importFromSlack({
+              type: 'slack',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
           default:
             return res.status(400).json({ message: `Sync not supported for ${integrationId}` });
         }
@@ -805,6 +813,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Jira integration error:", error);
       res.status(500).json({ message: "Failed to import from Jira" });
+    }
+  });
+
+  app.post("/api/projects/:projectId/integrations/slack", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { botToken, channelId } = req.body;
+      
+      if (!botToken || !channelId) {
+        return res.status(400).json({ message: "Bot Token and Channel ID are required" });
+      }
+
+      const project = await storage.getProject(req.params.projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      // Check if integration already exists
+      const existingIntegration = await storage.getIntegration(req.params.projectId, 'slack');
+      
+      // Create or update integration record
+      if (existingIntegration) {
+        await storage.updateIntegration(existingIntegration.id, {
+          status: 'connected',
+          credentials: { botToken, channelId },
+          lastSyncedAt: new Date()
+        });
+      } else {
+        await storage.createIntegration({
+          projectId: req.params.projectId,
+          platform: 'slack',
+          status: 'connected',
+          credentials: { botToken, channelId },
+          lastSyncedAt: new Date()
+        });
+      }
+
+      // Import documents from Slack
+      const documents = await integrationManager.importFromSlack({
+        type: 'slack',
+        credentials: { botToken, channelId },
+        userId,
+        projectId: req.params.projectId
+      });
+
+      await integrationManager.processImportedDocuments(documents, req.params.projectId);
+
+      res.json({ 
+        message: "Slack integration connected successfully", 
+        documentsImported: documents.length 
+      });
+    } catch (error) {
+      console.error("Slack integration error:", error);
+      res.status(500).json({ message: error.message || "Failed to connect to Slack" });
     }
   });
 
