@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import IntegrationConfigModal from "./IntegrationConfigModal";
+import { apiRequest } from "@/lib/queryClient";
 import { 
   SiGithub,
   SiNotion,
@@ -21,7 +22,7 @@ import {
   SiFigma,
   SiIntercom
 } from "react-icons/si";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, RefreshCw } from "lucide-react";
 
 interface Integration {
   id: string;
@@ -197,8 +198,30 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
     enabled: !!projectId,
   });
 
-  // Debug: Log the connected integrations
-  console.log('Connected integrations:', connectedIntegrations);
+  // Mutation for syncing integrations
+  const syncMutation = useMutation({
+    mutationFn: async ({ integrationId }: { integrationId: string }) => {
+      const response = await apiRequest("POST", `/api/projects/${projectId}/integrations/${integrationId}/sync`, {});
+      return response.json();
+    },
+    onSuccess: (data, variables) => {
+      const integration = integrations.find(i => i.id === variables.integrationId);
+      toast({
+        title: "Sync Complete",
+        description: `${integration?.name} synced successfully. ${data.documentsImported || 0} documents imported.`,
+      });
+      queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Sync Failed",
+        description: error.message || "Failed to sync integration",
+        variant: "destructive",
+      });
+    }
+  });
+
+
 
   const handleConnect = async (integrationId: string) => {
     const integration = integrations.find(i => i.id === integrationId);
@@ -224,14 +247,7 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
     const connected = connectedIntegrations.find((ci: any) => ci.platform === integration.id);
     const newStatus = connected && connected.status === 'connected' ? 'connected' : integration.status;
     
-    // Debug: Log the status mapping
-    if (integration.id === 'dropbox') {
-      console.log('Dropbox integration:', { 
-        originalStatus: integration.status, 
-        connected: connected, 
-        newStatus: newStatus 
-      });
-    }
+
     
     return {
       ...integration,
@@ -294,15 +310,26 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
                 {integration.description}
               </p>
               
-              <Button
-                onClick={() => handleConnect(integration.id)}
-                disabled={integration.status !== "available"}
-                className="w-full"
-                variant={integration.status === "available" ? "default" : "secondary"}
-              >
-                {integration.status === "connected" ? "Reconnect" :
-                 integration.status === "available" ? "Connect" : "Coming Soon"}
-              </Button>
+              {integration.status === "connected" ? (
+                <Button
+                  onClick={() => syncMutation.mutate({ integrationId: integration.id })}
+                  disabled={syncMutation.isPending}
+                  className="w-full"
+                  variant="outline"
+                >
+                  <RefreshCw className={`w-4 h-4 mr-2 ${syncMutation.isPending ? 'animate-spin' : ''}`} />
+                  {syncMutation.isPending ? "Syncing..." : "Sync Documents"}
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => handleConnect(integration.id)}
+                  disabled={integration.status !== "available"}
+                  className="w-full"
+                  variant={integration.status === "available" ? "default" : "secondary"}
+                >
+                  {integration.status === "available" ? "Connect" : "Coming Soon"}
+                </Button>
+              )}
             </CardContent>
           </Card>
         ))}

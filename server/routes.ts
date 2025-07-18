@@ -572,6 +572,108 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Sync integration
+  app.post("/api/projects/:projectId/integrations/:integrationId/sync", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { projectId, integrationId } = req.params;
+      
+      const project = await storage.getProject(projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      // Get the existing integration
+      const integration = await storage.getIntegration(projectId, integrationId);
+      if (!integration || integration.status !== 'connected') {
+        return res.status(400).json({ message: "Integration not connected" });
+      }
+
+      console.log(`Starting sync for ${integrationId} integration on project ${projectId}`);
+
+      let documents = [];
+      try {
+        // Call the appropriate import method based on integration type
+        switch (integrationId) {
+          case 'dropbox':
+            documents = await integrationManager.importFromDropbox({
+              type: 'dropbox',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
+          case 'github':
+            documents = await integrationManager.importFromGitHub({
+              type: 'github',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
+          case 'notion':
+            documents = await integrationManager.importFromNotion({
+              type: 'notion',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
+          case 'google-drive':
+            documents = await integrationManager.importFromGoogleDrive({
+              type: 'google-drive',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
+          case 'asana':
+            documents = await integrationManager.importFromAsana({
+              type: 'asana',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
+          case 'jira':
+            documents = await integrationManager.importFromJira({
+              type: 'jira',
+              credentials: integration.credentials,
+              userId,
+              projectId
+            });
+            break;
+          default:
+            return res.status(400).json({ message: `Sync not supported for ${integrationId}` });
+        }
+
+        console.log(`Processing ${documents.length} documents from ${integrationId}`);
+        await integrationManager.processImportedDocuments(documents, projectId);
+
+        // Update last synced time
+        await storage.updateIntegration(integration.id, {
+          lastSyncedAt: new Date()
+        });
+
+        console.log(`${integrationId} sync completed successfully. ${documents.length} documents processed.`);
+        res.json({ 
+          message: "Sync completed", 
+          documentsImported: documents.length,
+          success: true
+        });
+      } catch (error) {
+        console.error(`${integrationId} sync error:`, error);
+        res.status(500).json({ 
+          message: error.message || `Failed to sync ${integrationId}`,
+          success: false
+        });
+      }
+    } catch (error) {
+      console.error("Sync error:", error);
+      res.status(500).json({ message: "Failed to sync integration" });
+    }
+  });
+
   app.post("/api/projects/:projectId/integrations/dropbox", isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.claims.sub;
