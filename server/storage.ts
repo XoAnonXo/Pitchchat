@@ -129,11 +129,31 @@ export class DatabaseStorage implements IStorage {
 
   // Document operations
   async getProjectDocuments(projectId: string): Promise<Document[]> {
-    return await db
+    const docs = await db
       .select()
       .from(documents)
       .where(eq(documents.projectId, projectId))
       .orderBy(desc(documents.createdAt));
+    
+    // Add token count and chunks info from chunks table
+    const docsWithTokens = await Promise.all(
+      docs.map(async (doc) => {
+        const docChunks = await db
+          .select()
+          .from(chunks)
+          .where(eq(chunks.documentId, doc.id));
+        
+        const totalTokens = docChunks.reduce((sum, chunk) => sum + (chunk.tokenCount || 0), 0);
+        
+        return {
+          ...doc,
+          tokens: totalTokens || doc.tokens || 0,
+          chunks: docChunks
+        };
+      })
+    );
+    
+    return docsWithTokens;
   }
 
   async getDocument(id: string): Promise<Document | undefined> {

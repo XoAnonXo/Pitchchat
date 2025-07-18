@@ -202,6 +202,10 @@ export default function Dashboard() {
                 <MessageSquare className="w-4 h-4" />
                 <span className="text-sm font-medium">Active Chats</span>
               </a>
+              <a href={`/documents/${selectedProjectId}`} className="flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
+                <FileText className="w-4 h-4" />
+                <span className="text-sm font-medium">Manage Documents</span>
+              </a>
               <a href="#" className="flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
                 <LinkIcon className="w-4 h-4" />
                 <span className="text-sm font-medium">Shared Links</span>

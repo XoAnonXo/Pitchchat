@@ -178,6 +178,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Download document route
+  app.get("/api/projects/:projectId/documents/:documentId/download", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { projectId, documentId } = req.params;
+      
+      const project = await storage.getProject(projectId);
+      if (!project || project.userId !== userId) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+      
+      const document = await storage.getDocument(documentId);
+      if (!document || document.projectId !== projectId) {
+        return res.status(404).json({ message: "Document not found" });
+      }
+      
+      const fs = require('fs');
+      const path = require('path');
+      const filePath = path.join(process.cwd(), 'uploads', document.filename);
+      
+      if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ message: "File not found on disk" });
+      }
+      
+      res.download(filePath, document.originalName);
+    } catch (error) {
+      console.error("Error downloading document:", error);
+      res.status(500).json({ message: "Failed to download document" });
+    }
+  });
+
   // Chat routes (for founder testing)
   app.post("/api/projects/:projectId/chat", isAuthenticated, async (req: any, res) => {
     try {

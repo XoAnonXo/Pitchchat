@@ -58,6 +58,7 @@ export const documents = pgTable("documents", {
   status: varchar("status").default("processing"), // processing, completed, failed
   tokens: integer("tokens").default(0),
   pageCount: integer("page_count"),
+  source: varchar("source"), // e.g., "Direct Upload", "Dropbox: filename", "GitHub: repo/file"
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
