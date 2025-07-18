@@ -1,0 +1,54 @@
+Design a sleek, modern, and user-friendly web interface for an AI-powered Voice Library, inspired by the Hume AI platform. The UI should look clean, accessible, tech-forward, and easy to use, optimized for voice exploration and TTS feature discovery.
+
+Core layout & elements:
+
+Background: Use clean white (#FFFFFF) or very light gray. Panel backgrounds should have a subtle cool undertone (#F8FAFB).
+
+Primary font: Inter, Segoe UI, or Helvetica Neue. Main text at 15–16px, headings at 20–22px, font weight 400–600.
+
+Navigation Menu (left/top): Simple labels, minimal icons, dividers appear on hover, vertical scroll if needed.
+
+Buttons: Flat style (not raised), border radius 7–8px, main accent color vibrant blue (#2152FF), faded blue for hover/secondary (#EBF1FF), text in white.
+
+Dropdowns: Rounded corners, soft shadow (box-shadow: 0 2px 24px rgba(33,82,255,0.08)), item height 36px, spacing 4–8px.
+
+Inputs: White background, soft gray borders (#E0E3EB), field height 40px, border radius 8px.
+
+Dropdown/Selector: Custom, with an arrow on the right or resembling a card, dropdown overlays above page content.
+
+Shadows: Very subtle (box-shadow: 0 1px 4px rgba(56, 64, 81, 0.12)).
+
+Voice Card Components:
+
+Card shape: Border radius 16px, smooth drop shadow, avatar image or icon in centered circle.
+
+Card background: Very pale blue or lilac.
+
+Action buttons (Play/Playground): Gradient from #2152FF to #5C8AF7, circular or pill-shaped.
+
+Pagination: Circular buttons, active = vivid blue, inactive = soft gray border.
+
+Typography & Colors:
+
+Main font: Inter, Segoe UI, Helvetica Neue, fallback Arial, sans-serif.
+
+Secondary text: #72788F, 13–14px font-size.
+
+Accent blue: #2152FF, complements with pale blue/lilac for highlights.
+
+Icons and Effects:
+
+Icons: Minimal, black/blue, small, consistent line thickness.
+
+Notifications: Pop out above UI, border radius 10px, shadow, white text on #2152FF.
+
+General usability:
+
+Layout is perfectly responsive across desktop and mobile.
+
+All controls (dropdowns, pages, search) are large enough for touch use.
+
+Design natively supports both light and dark themes (invert background/foreground as needed).
+
+Overall:
+The resulting UI should feel like a state-of-the-art SaaS product for AI, with airy spacing, soft colors, intuitive navigation, and a sharp, inspiring atmosphere. The primary blue (#2152FF) and gentle pastel tones should drive the visual identity, with subtle animations and no excessive borders or visual clutter.
