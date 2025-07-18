@@ -54,7 +54,7 @@ const platformConfigs = {
     fields: [
       { key: 'accessToken', label: 'Access Token', type: 'password' as const, required: true, placeholder: 'Enter your Dropbox access token' }
     ],
-    instructions: 'IMPORTANT: First enable permissions in your Dropbox app: Go to https://www.dropbox.com/developers/apps → Select your app → Click "Permissions" tab → Enable "files.metadata.read" and "files.content.read" → Click "Submit" → Generate new access token from "Settings" tab.',
+    instructions: 'SETUP REQUIRED: 1) Go to https://www.dropbox.com/developers/apps → Select your app → "Permissions" tab → Enable "files.metadata.read" and "files.content.read" → Click "Submit" 2) Go to "Settings" tab → Generate NEW access token (old tokens are invalid after permission changes) 3) Create .txt or .md files in your Dropbox root folder to test import.',
     docsUrl: 'https://www.dropbox.com/developers/documentation/http/documentation'
   },
   asana: {
@@ -89,12 +89,13 @@ export default function IntegrationConfigModal({
 
   const connectMutation = useMutation({
     mutationFn: async (data: Record<string, string>) => {
-      return apiRequest("POST", `/api/projects/${projectId}/integrations/${integration.id}`, data);
+      const response = await apiRequest("POST", `/api/projects/${projectId}/integrations/${integration.id}`, data);
+      return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
         title: "Integration Connected",
-        description: `${integration.name} has been connected successfully`,
+        description: `${integration.name} connected successfully. ${data.documentsImported || 0} documents imported.`,
       });
       queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
       onClose();

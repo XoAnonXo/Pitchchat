@@ -537,6 +537,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Project not found" });
       }
 
+      console.log(`Starting Dropbox import for project ${req.params.projectId}`);
       const documents = await integrationManager.importFromDropbox({
         type: 'dropbox',
         credentials: { accessToken },
@@ -544,15 +545,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
         projectId: req.params.projectId
       });
 
+      console.log(`Processing ${documents.length} documents from Dropbox`);
       await integrationManager.processImportedDocuments(documents, req.params.projectId);
 
+      console.log(`Dropbox import completed successfully. ${documents.length} documents processed.`);
       res.json({ 
         message: "Dropbox import completed", 
-        documentsImported: documents.length 
+        documentsImported: documents.length,
+        success: true
       });
     } catch (error) {
       console.error("Dropbox integration error:", error);
-      res.status(500).json({ message: "Failed to import from Dropbox" });
+      res.status(500).json({ 
+        message: error.message || "Failed to import from Dropbox",
+        success: false
+      });
     }
   });
 
