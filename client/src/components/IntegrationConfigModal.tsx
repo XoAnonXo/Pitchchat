@@ -54,7 +54,7 @@ const platformConfigs = {
     fields: [
       { key: 'accessToken', label: 'Access Token', type: 'password' as const, required: true, placeholder: 'Enter your Dropbox access token' }
     ],
-    instructions: 'Go to https://www.dropbox.com/developers/apps → Select your app → Generate access token. For testing, you can use "App Key: m1zv3m6lvh3087y" to create a test token.',
+    instructions: 'IMPORTANT: First enable permissions in your Dropbox app: Go to https://www.dropbox.com/developers/apps → Select your app → Click "Permissions" tab → Enable "files.metadata.read" and "files.content.read" → Click "Submit" → Generate new access token from "Settings" tab.',
     docsUrl: 'https://www.dropbox.com/developers/documentation/http/documentation'
   },
   asana: {
