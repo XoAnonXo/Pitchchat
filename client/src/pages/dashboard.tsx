@@ -26,7 +26,8 @@ import {
   LogOut,
   Sparkles,
   Clock,
-  CheckCircle2
+  CheckCircle2,
+  Bell
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
@@ -84,6 +85,15 @@ export default function Dashboard() {
     queryKey: ["/api/analytics"],
     enabled: !!user,
   });
+
+  // Fetch conversations to check for contact notifications
+  const { data: conversations = [] } = useQuery({
+    queryKey: ["/api/conversations"],
+    enabled: !!user,
+  });
+
+  // Check if there are any conversations with contact details
+  const hasContactNotifications = conversations.some((conv: any) => conv.contactProvidedAt);
 
   // Fetch documents for selected project
   const { data: documents = [] } = useQuery({
@@ -211,9 +221,16 @@ export default function Dashboard() {
             <span className="font-medium">Documents</span>
           </Link>
           
-          <Link href="/conversations" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <MessageSquare className="w-5 h-5" />
-            <span className="font-medium">Conversations</span>
+          <Link href="/conversations" className="flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <div className="flex items-center space-x-3">
+              <MessageSquare className="w-5 h-5" />
+              <span className="font-medium">Conversations</span>
+            </div>
+            {hasContactNotifications && (
+              <div className="flex items-center">
+                <Bell className="w-4 h-4 text-black fill-black" />
+              </div>
+            )}
           </Link>
           
           <Link href="/analytics" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">

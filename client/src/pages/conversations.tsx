@@ -36,7 +36,8 @@ import {
   Eye,
   Filter,
   ExternalLink,
-  Bell
+  Bell,
+  Phone
 } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
