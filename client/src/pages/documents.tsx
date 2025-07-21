@@ -6,14 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import { 
   Select,
   SelectContent,
@@ -21,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { 
   FileText, 
   Search, 
@@ -38,7 +30,17 @@ import {
   LinkIcon,
   MessageSquare,
   Menu,
-  X
+  X,
+  LogOut,
+  Settings,
+  Users,
+  FolderOpen,
+  Plus,
+  Sparkles,
+  Clock,
+  CheckCircle,
+  XCircle,
+  Eye
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -79,8 +81,12 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
   const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [sourceFilter, setSourceFilter] = useState<string>("all");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
+
+  const { data: project } = useQuery({
+    queryKey: [`/api/projects/${projectId}`],
+  });
 
   const { data: documents, isLoading } = useQuery<Document[]>({
     queryKey: [`/api/projects/${projectId}/documents`],
@@ -111,10 +117,8 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
     const matchesSearch = doc.filename.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          doc.originalName.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || doc.status === statusFilter;
-    const matchesSource = sourceFilter === "all" || 
-                         (doc.source && doc.source.toLowerCase().includes(sourceFilter.toLowerCase()));
     
-    return matchesSearch && matchesStatus && matchesSource;
+    return matchesSearch && matchesStatus;
   }) || [];
 
   const handleDelete = (documentId: string) => {
@@ -131,24 +135,40 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  const getStatusColor = (status: string) => {
+  const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'processing': return 'bg-yellow-100 text-yellow-800';
-      case 'failed': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case "processing":
+        return (
+          <Badge variant="secondary" className="bg-gray-100 text-black">
+            <Clock className="w-3 h-3 mr-1" />
+            Processing
+          </Badge>
+        );
+      case "completed":
+        return (
+          <Badge variant="secondary" className="bg-green-50 text-green-700">
+            <CheckCircle className="w-3 h-3 mr-1" />
+            Completed
+          </Badge>
+        );
+      case "failed":
+        return (
+          <Badge variant="secondary" className="bg-red-50 text-red-700">
+            <XCircle className="w-3 h-3 mr-1" />
+            Failed
+          </Badge>
+        );
+      default:
+        return null;
     }
   };
 
-  const getSourceIcon = (source?: string) => {
-    if (!source) return <FileText className="w-4 h-4" />;
-    
-    const lowerSource = source.toLowerCase();
-    if (lowerSource.includes('github')) return <div className="w-4 h-4 bg-gray-900 rounded-full" />;
-    if (lowerSource.includes('dropbox')) return <div className="w-4 h-4 bg-blue-600 rounded" />;
-    if (lowerSource.includes('google')) return <div className="w-4 h-4 bg-green-600 rounded-full" />;
-    if (lowerSource.includes('notion')) return <div className="w-4 h-4 bg-black rounded" />;
-    return <FileText className="w-4 h-4" />;
+  const getFileIcon = (mimeType: string) => {
+    if (mimeType.includes('pdf')) return "📄";
+    if (mimeType.includes('word') || mimeType.includes('document')) return "📝";
+    if (mimeType.includes('spreadsheet') || mimeType.includes('excel')) return "📊";
+    if (mimeType.includes('presentation') || mimeType.includes('powerpoint')) return "📋";
+    return "📄";
   };
 
   const totalTokens = filteredDocuments.reduce((sum, doc) => sum + (doc.tokens || 0), 0);
@@ -156,423 +176,308 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-[#FAFAFA] p-4 sm:p-6 lg:p-8">
         <StartupLoadingSkeleton type="documents" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation Header */}
-      <header className="bg-background border-b border-border sticky top-0 z-50">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                <div className="w-8 h-8 bg-gradient-to-r from-primary to-[#5C8AF7] rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-semibold text-sm">PC</span>
-                </div>
-                <h1 className="text-lg sm:text-xl font-semibold text-foreground hidden sm:block">PitchChat Builder</h1>
-              </Link>
+    <div className="min-h-screen bg-[#FAFAFA] flex">
+      {/* Fixed Sidebar - Same as Dashboard */}
+      <aside className={`
+        fixed top-0 left-0 h-full w-72 bg-white border-r border-gray-200 z-50
+        transform transition-transform duration-300 ease-in-out
+        ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        {/* Logo Section */}
+        <div className="h-20 px-6 flex items-center justify-between border-b border-gray-100">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-md">
+              <Sparkles className="w-6 h-6 text-white" />
             </div>
-            
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-muted-foreground hover:text-primary font-medium transition-colors">
-                Dashboard
-              </Link>
-              <Link href={`/documents/${projectId}`} className="text-primary font-medium">
-                Documents
-              </Link>
-              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Analytics</button>
-              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
-            </nav>
-
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              {user && (
-                <>
-                  <div className="hidden sm:flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
-                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                    <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
-                  </div>
-                  
-                  {/* Mobile menu button */}
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="md:hidden"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  >
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                  
-                  <div className="hidden md:flex items-center space-x-4">
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      onClick={() => window.location.href = "/api/logout"}
-                      className="text-muted-foreground hover:text-foreground"
-                    >
-                      Logout
-                    </Button>
-                    {user.profileImageUrl ? (
-                      <img 
-                        src={user.profileImageUrl} 
-                        alt="Profile" 
-                        className="w-8 h-8 rounded-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-8 h-8 bg-muted rounded-full" />
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-        
-        {/* Mobile Navigation Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-background border-t border-border">
-            <nav className="px-4 py-3 space-y-1">
-              <Link href="/" className="block px-3 py-2 text-muted-foreground hover:text-primary font-medium">
-                Dashboard
-              </Link>
-              <Link 
-                href={`/documents/${projectId}`} 
-                className="block px-3 py-2 text-primary font-medium"
-              >
-                Documents
-              </Link>
-              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
-                Analytics
-              </button>
-              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
-                Settings
-              </button>
-              <div className="flex items-center justify-between px-3 py-2 border-t border-border mt-2 pt-2">
-                <div className="flex items-center space-x-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                  <span className="text-sm font-medium text-muted-foreground">{user?.credits || 0} credits</span>
-                </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => window.location.href = "/api/logout"}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Logout
-                </Button>
-              </div>
-            </nav>
-          </div>
-        )}
-      </header>
-
-      <div className="container mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
-        {/* Page Header with Back Button */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-            <Link href="/" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Back to Dashboard</span>
-            </Link>
-            <div className="hidden sm:block h-6 w-px bg-border" />
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Document Management</h1>
-              <p className="text-sm sm:text-base text-muted-foreground mt-1">
-                Manage your uploaded documents and AI knowledge base
-              </p>
+              <h1 className="font-bold text-lg text-gray-900">PitchChat</h1>
+              <p className="text-xs text-gray-500">AI Document Assistant</p>
             </div>
           </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setMobileSidebarOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </Button>
         </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <FileText className="w-5 h-5 text-blue-600" />
+        {/* Navigation */}
+        <nav className="px-4 py-6 space-y-1">
+          <Link href="/" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <Home className="w-5 h-5" />
+            <span className="font-medium">Dashboard</span>
+          </Link>
+          
+          <Link href={`/documents/${projectId}`} className="flex items-center space-x-3 px-4 py-3 bg-gray-100 text-black rounded-xl transition-all duration-200">
+            <FolderOpen className="w-5 h-5" />
+            <span className="font-medium">Documents</span>
+          </Link>
+          
+          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <MessageSquare className="w-5 h-5" />
+            <span className="font-medium">Conversations</span>
+          </button>
+          
+          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <BarChart3 className="w-5 h-5" />
+            <span className="font-medium">Analytics</span>
+          </button>
+          
+          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <Settings className="w-5 h-5" />
+            <span className="font-medium">Settings</span>
+          </button>
+        </nav>
+
+        {/* User Profile Section */}
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100 bg-white">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              {user?.profileImageUrl ? (
+                <img 
+                  src={user.profileImageUrl} 
+                  alt="Profile" 
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                  <Users className="w-5 h-5 text-gray-500" />
+                </div>
+              )}
               <div>
-                <p className="text-sm text-gray-600">Total Documents</p>
-                <p className="text-2xl font-bold">{filteredDocuments.length}</p>
+                <p className="text-sm font-medium text-gray-900">{user?.email?.split('@')[0]}</p>
+                <p className="text-xs text-green-600">{user?.credits || 0} credits</p>
               </div>
             </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Database className="w-5 h-5 text-green-600" />
-              <div>
-                <p className="text-sm text-gray-600">Total Tokens</p>
-                <p className="text-2xl font-bold">{totalTokens.toLocaleString()}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Download className="w-5 h-5 text-purple-600" />
-              <div>
-                <p className="text-sm text-gray-600">Total Size</p>
-                <p className="text-2xl font-bold">{formatFileSize(totalSize)}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardContent className="p-4">
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-5 h-5 text-orange-600" />
-              <div>
-                <p className="text-sm text-gray-600">Processing</p>
-                <p className="text-2xl font-bold">
-                  {filteredDocuments.filter(d => d.status === 'processing').length}
-                </p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Filters */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Filter className="w-5 h-5" />
-            Filters
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-            <div className="flex items-center space-x-2 flex-1 sm:flex-initial">
-              <Search className="w-4 h-4 text-gray-500" />
-              <Input
-                placeholder="Search documents..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full sm:w-64"
-              />
-            </div>
-
-            <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-full sm:w-40">
-                <SelectValue placeholder="Status" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="processing">Processing</SelectItem>
-                <SelectItem value="failed">Failed</SelectItem>
-              </SelectContent>
-            </Select>
-
-            <Select value={sourceFilter} onValueChange={setSourceFilter}>
-              <SelectTrigger className="w-full sm:w-40">
-                <SelectValue placeholder="Source" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All Sources</SelectItem>
-                <SelectItem value="upload">Upload</SelectItem>
-                <SelectItem value="github">GitHub</SelectItem>
-                <SelectItem value="dropbox">Dropbox</SelectItem>
-                <SelectItem value="google">Google Drive</SelectItem>
-                <SelectItem value="notion">Notion</SelectItem>
-              </SelectContent>
-            </Select>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => window.location.href = "/api/logout"}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <LogOut className="h-5 w-5" />
+            </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </aside>
 
-      {/* Documents Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Documents ({filteredDocuments.length})</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {/* Desktop Table View */}
-          <div className="hidden md:block">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Document</TableHead>
-                  <TableHead>Source</TableHead>
-                  <TableHead>Size</TableHead>
-                  <TableHead>Tokens</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Uploaded</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredDocuments.map((doc) => (
-                  <TableRow key={doc.id}>
-                    <TableCell>
-                      <div className="flex items-center space-x-3">
-                        {getSourceIcon(doc.source)}
-                        <div>
-                          <p className="font-medium">{doc.originalName}</p>
-                          <p className="text-sm text-gray-500">{doc.mimeType}</p>
+      {/* Mobile Overlay */}
+      {mobileSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+
+      {/* Main Content Area */}
+      <div className="flex-1 lg:ml-72">
+        {/* Top Header */}
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+          <div className="px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setMobileSidebarOpen(true)}
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+              <div>
+                <h2 className="text-2xl font-bold text-gray-900">Document Management</h2>
+                <p className="text-sm text-gray-500">{project?.name || 'All Documents'}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Link href="/">
+                <Button variant="outline" className="rounded-xl border-gray-200 hover:bg-gray-50">
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back to Dashboard
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </header>
+
+        <div className="p-6 lg:p-8">
+          {/* Stats Overview */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Documents</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">{documents?.length || 0}</p>
+                  </div>
+                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-black" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Tokens</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">{totalTokens.toLocaleString()}</p>
+                  </div>
+                  <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
+                    <Database className="w-6 h-6 text-green-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Storage Used</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">{formatFileSize(totalSize)}</p>
+                  </div>
+                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+                    <Database className="w-6 h-6 text-blue-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Processed</p>
+                    <p className="text-2xl font-bold text-gray-900 mt-1">
+                      {documents?.filter(d => d.status === 'completed').length || 0}
+                    </p>
+                  </div>
+                  <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
+                    <CheckCircle className="w-6 h-6 text-purple-600" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Filters Section */}
+          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm mb-6">
+            <CardContent className="p-6">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex-1">
+                  <div className="relative">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Input
+                      placeholder="Search documents..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10 bg-gray-50 border-gray-200 rounded-xl"
+                    />
+                  </div>
+                </div>
+                
+                <Select value={statusFilter} onValueChange={setStatusFilter}>
+                  <SelectTrigger className="w-full sm:w-[180px] bg-gray-50 border-gray-200 rounded-xl">
+                    <SelectValue placeholder="Filter by status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">All Status</SelectItem>
+                    <SelectItem value="completed">Completed</SelectItem>
+                    <SelectItem value="processing">Processing</SelectItem>
+                    <SelectItem value="failed">Failed</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Documents List */}
+          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+            <CardHeader className="border-b border-gray-100">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xl font-bold text-gray-900">Documents</CardTitle>
+                <span className="text-sm text-gray-500">
+                  {filteredDocuments.length} document{filteredDocuments.length !== 1 ? 's' : ''}
+                </span>
+              </div>
+            </CardHeader>
+            <CardContent className="p-0">
+              {filteredDocuments.length === 0 ? (
+                <div className="p-16 text-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <FileText className="w-8 h-8 text-gray-400" />
+                  </div>
+                  <p className="text-gray-600 font-medium">No documents found</p>
+                  <p className="text-sm text-gray-400 mt-1">
+                    {searchTerm || statusFilter !== 'all' 
+                      ? 'Try adjusting your filters' 
+                      : 'Upload documents to get started'}
+                  </p>
+                </div>
+              ) : (
+                <div className="divide-y divide-gray-100">
+                  {filteredDocuments.map((doc) => (
+                    <div key={doc.id} className="p-6 hover:bg-gray-50 transition-colors">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-4 flex-1">
+                          <div className="text-2xl">{getFileIcon(doc.mimeType)}</div>
+                          <div className="flex-1">
+                            <h4 className="text-sm font-semibold text-gray-900">{doc.originalName}</h4>
+                            <div className="flex items-center gap-4 mt-1 text-xs text-gray-500">
+                              <span>{formatFileSize(doc.fileSize)}</span>
+                              <span>•</span>
+                              <span>{doc.tokens.toLocaleString()} tokens</span>
+                              <span>•</span>
+                              <span>{formatDistanceToNow(new Date(doc.createdAt))} ago</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          {getStatusBadge(doc.status)}
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-600">
+                                <MoreHorizontal className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-48">
+                              <DropdownMenuItem>
+                                <Eye className="w-4 h-4 mr-2" />
+                                View Details
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Download className="w-4 h-4 mr-2" />
+                                Download
+                              </DropdownMenuItem>
+                              <DropdownMenuItem 
+                                onClick={() => handleDelete(doc.id)}
+                                className="text-red-600 focus:text-red-600"
+                              >
+                                <Trash2 className="w-4 h-4 mr-2" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
                         </div>
                       </div>
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex items-center space-x-2">
-                        {doc.source ? (
-                          <Badge variant="secondary" className="text-xs">
-                            {doc.source}
-                          </Badge>
-                        ) : (
-                          <Badge variant="outline" className="text-xs">
-                            Direct Upload
-                          </Badge>
-                        )}
-                      </div>
-                    </TableCell>
-                    <TableCell>{formatFileSize(doc.fileSize)}</TableCell>
-                    <TableCell>
-                      <span className="font-mono text-sm">
-                        {doc.tokens?.toLocaleString() || '0'}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
-                        {doc.status}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>
-                      <div className="text-sm">
-                        <p>{formatDistanceToNow(new Date(doc.createdAt))} ago</p>
-                        <p className="text-xs text-gray-500">
-                          {new Date(doc.createdAt).toLocaleDateString()}
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="sm">
-                            <MoreHorizontal className="w-4 h-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem 
-                            onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
-                          >
-                            <Download className="w-4 h-4 mr-2" />
-                            Download
-                          </DropdownMenuItem>
-                          <DropdownMenuItem 
-                            onClick={() => handleDelete(doc.id)}
-                            className="text-red-600"
-                          >
-                            <Trash2 className="w-4 h-4 mr-2" />
-                            Delete
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-
-          {/* Mobile Card View */}
-          <div className="md:hidden space-y-4">
-            {filteredDocuments.map((doc) => (
-              <Card key={doc.id} className="p-4">
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-start space-x-3">
-                    {getSourceIcon(doc.source)}
-                    <div className="flex-1">
-                      <p className="font-medium text-sm">{doc.originalName}</p>
-                      <p className="text-xs text-muted-foreground">{doc.mimeType}</p>
                     </div>
-                  </div>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="sm">
-                        <MoreHorizontal className="w-4 h-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem 
-                        onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
-                      >
-                        <Download className="w-4 h-4 mr-2" />
-                        Download
-                      </DropdownMenuItem>
-                      <DropdownMenuItem 
-                        onClick={() => handleDelete(doc.id)}
-                        className="text-red-600"
-                      >
-                        <Trash2 className="w-4 h-4 mr-2" />
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
+                  ))}
                 </div>
-                
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div>
-                    <span className="text-muted-foreground">Source:</span>
-                    <div className="mt-1">
-                      {doc.source ? (
-                        <Badge variant="secondary" className="text-xs">
-                          {doc.source}
-                        </Badge>
-                      ) : (
-                        <Badge variant="outline" className="text-xs">
-                          Direct Upload
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Status:</span>
-                    <div className="mt-1">
-                      <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
-                        {doc.status}
-                      </Badge>
-                    </div>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Size:</span>
-                    <p className="font-medium">{formatFileSize(doc.fileSize)}</p>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Tokens:</span>
-                    <p className="font-mono font-medium">{doc.tokens?.toLocaleString() || '0'}</p>
-                  </div>
-                </div>
-                
-                <div className="mt-3 pt-3 border-t border-border text-xs text-muted-foreground">
-                  Uploaded {formatDistanceToNow(new Date(doc.createdAt))} ago
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          {filteredDocuments.length === 0 && (
-            <div className="text-center py-8">
-              <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500">No documents found</p>
-              <p className="text-sm text-gray-400 mt-2">
-                {searchTerm || statusFilter !== "all" || sourceFilter !== "all" 
-                  ? "Try adjusting your filters"
-                  : "Upload your first document to get started"
-                }
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

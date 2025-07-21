@@ -1,0 +1,579 @@
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useParams, Link } from "wouter";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableHeader, 
+  TableRow 
+} from "@/components/ui/table";
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Input } from "@/components/ui/input";
+import { 
+  FileText, 
+  Search, 
+  Calendar, 
+  Database, 
+  Trash2, 
+  Download,
+  Filter,
+  MoreHorizontal,
+  ExternalLink,
+  ArrowLeft,
+  Home,
+  BarChart3,
+  LinkIcon,
+  MessageSquare,
+  Menu,
+  X
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/hooks/useAuth";
+import { formatDistanceToNow } from "date-fns";
+import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
+
+interface Document {
+  id: string;
+  filename: string;
+  originalName: string;
+  fileSize: number;
+  mimeType: string;
+  status: 'processing' | 'completed' | 'failed';
+  tokens: number;
+  createdAt: string;
+  updatedAt: string;
+  source?: string;
+  chunks?: Array<{
+    id: string;
+    content: string;
+    tokenCount: number;
+    metadata: Record<string, any>;
+  }>;
+}
+
+interface DocumentsPageProps {
+  projectId: string;
+}
+
+export default function DocumentsPage({ projectId }: DocumentsPageProps) {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const { user } = useAuth();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [sourceFilter, setSourceFilter] = useState<string>("all");
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { data: documents, isLoading } = useQuery<Document[]>({
+    queryKey: [`/api/projects/${projectId}/documents`],
+    select: (data) => data || [],
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: async (documentId: string) => {
+      return apiRequest("DELETE", `/api/documents/${documentId}`);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Document Deleted",
+        description: "Document has been successfully deleted.",
+      });
+      queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
+    },
+    onError: (error) => {
+      toast({
+        title: "Delete Failed",
+        description: error.message || "Failed to delete document",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const filteredDocuments = documents?.filter(doc => {
+    const matchesSearch = doc.filename.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         doc.originalName.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === "all" || doc.status === statusFilter;
+    const matchesSource = sourceFilter === "all" || 
+                         (doc.source && doc.source.toLowerCase().includes(sourceFilter.toLowerCase()));
+    
+    return matchesSearch && matchesStatus && matchesSource;
+  }) || [];
+
+  const handleDelete = (documentId: string) => {
+    if (window.confirm("Are you sure you want to delete this document? This action cannot be undone.")) {
+      deleteMutation.mutate(documentId);
+    }
+  };
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'completed': return 'bg-green-100 text-green-800';
+      case 'processing': return 'bg-yellow-100 text-yellow-800';
+      case 'failed': return 'bg-red-100 text-red-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
+  const getSourceIcon = (source?: string) => {
+    if (!source) return <FileText className="w-4 h-4" />;
+    
+    const lowerSource = source.toLowerCase();
+    if (lowerSource.includes('github')) return <div className="w-4 h-4 bg-gray-900 rounded-full" />;
+    if (lowerSource.includes('dropbox')) return <div className="w-4 h-4 bg-blue-600 rounded" />;
+    if (lowerSource.includes('google')) return <div className="w-4 h-4 bg-green-600 rounded-full" />;
+    if (lowerSource.includes('notion')) return <div className="w-4 h-4 bg-black rounded" />;
+    return <FileText className="w-4 h-4" />;
+  };
+
+  const totalTokens = filteredDocuments.reduce((sum, doc) => sum + (doc.tokens || 0), 0);
+  const totalSize = filteredDocuments.reduce((sum, doc) => sum + doc.fileSize, 0);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+        <StartupLoadingSkeleton type="documents" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Navigation Header */}
+      <header className="bg-background border-b border-border sticky top-0 z-50">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <Link href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <div className="w-8 h-8 bg-gradient-to-r from-primary to-[#5C8AF7] rounded-lg flex items-center justify-center">
+                  <span className="text-primary-foreground font-semibold text-sm">PC</span>
+                </div>
+                <h1 className="text-lg sm:text-xl font-semibold text-foreground hidden sm:block">PitchChat Builder</h1>
+              </Link>
+            </div>
+            
+            <nav className="hidden md:flex space-x-8">
+              <Link href="/" className="text-muted-foreground hover:text-primary font-medium transition-colors">
+                Dashboard
+              </Link>
+              <Link href={`/documents/${projectId}`} className="text-primary font-medium">
+                Documents
+              </Link>
+              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Analytics</button>
+              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
+            </nav>
+
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              {user && (
+                <>
+                  <div className="hidden sm:flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
+                    <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                    <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
+                  </div>
+                  
+                  {/* Mobile menu button */}
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="md:hidden"
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  >
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                  
+                  <div className="hidden md:flex items-center space-x-4">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => window.location.href = "/api/logout"}
+                      className="text-muted-foreground hover:text-foreground"
+                    >
+                      Logout
+                    </Button>
+                    {user.profileImageUrl ? (
+                      <img 
+                        src={user.profileImageUrl} 
+                        alt="Profile" 
+                        className="w-8 h-8 rounded-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 bg-muted rounded-full" />
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+        
+        {/* Mobile Navigation Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border">
+            <nav className="px-4 py-3 space-y-1">
+              <Link href="/" className="block px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Dashboard
+              </Link>
+              <Link 
+                href={`/documents/${projectId}`} 
+                className="block px-3 py-2 text-primary font-medium"
+              >
+                Documents
+              </Link>
+              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Analytics
+              </button>
+              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
+                Settings
+              </button>
+              <div className="flex items-center justify-between px-3 py-2 border-t border-border mt-2 pt-2">
+                <div className="flex items-center space-x-2">
+                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                  <span className="text-sm font-medium text-muted-foreground">{user?.credits || 0} credits</span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => window.location.href = "/api/logout"}
+                  className="text-muted-foreground hover:text-foreground"
+                >
+                  Logout
+                </Button>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      <div className="container mx-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
+        {/* Page Header with Back Button */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+            <Link href="/" className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors">
+              <ArrowLeft className="w-4 h-4" />
+              <span className="text-sm font-medium">Back to Dashboard</span>
+            </Link>
+            <div className="hidden sm:block h-6 w-px bg-border" />
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Document Management</h1>
+              <p className="text-sm sm:text-base text-muted-foreground mt-1">
+                Manage your uploaded documents and AI knowledge base
+              </p>
+            </div>
+          </div>
+        </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center space-x-2">
+              <FileText className="w-5 h-5 text-blue-600" />
+              <div>
+                <p className="text-sm text-gray-600">Total Documents</p>
+                <p className="text-2xl font-bold">{filteredDocuments.length}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center space-x-2">
+              <Database className="w-5 h-5 text-green-600" />
+              <div>
+                <p className="text-sm text-gray-600">Total Tokens</p>
+                <p className="text-2xl font-bold">{totalTokens.toLocaleString()}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center space-x-2">
+              <Download className="w-5 h-5 text-purple-600" />
+              <div>
+                <p className="text-sm text-gray-600">Total Size</p>
+                <p className="text-2xl font-bold">{formatFileSize(totalSize)}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-4">
+            <div className="flex items-center space-x-2">
+              <Calendar className="w-5 h-5 text-orange-600" />
+              <div>
+                <p className="text-sm text-gray-600">Processing</p>
+                <p className="text-2xl font-bold">
+                  {filteredDocuments.filter(d => d.status === 'processing').length}
+                </p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Filters */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Filter className="w-5 h-5" />
+            Filters
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+            <div className="flex items-center space-x-2 flex-1 sm:flex-initial">
+              <Search className="w-4 h-4 text-gray-500" />
+              <Input
+                placeholder="Search documents..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full sm:w-64"
+              />
+            </div>
+
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-full sm:w-40">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="processing">Processing</SelectItem>
+                <SelectItem value="failed">Failed</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={sourceFilter} onValueChange={setSourceFilter}>
+              <SelectTrigger className="w-full sm:w-40">
+                <SelectValue placeholder="Source" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Sources</SelectItem>
+                <SelectItem value="upload">Upload</SelectItem>
+                <SelectItem value="github">GitHub</SelectItem>
+                <SelectItem value="dropbox">Dropbox</SelectItem>
+                <SelectItem value="google">Google Drive</SelectItem>
+                <SelectItem value="notion">Notion</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Documents Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Documents ({filteredDocuments.length})</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {/* Desktop Table View */}
+          <div className="hidden md:block">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Document</TableHead>
+                  <TableHead>Source</TableHead>
+                  <TableHead>Size</TableHead>
+                  <TableHead>Tokens</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Uploaded</TableHead>
+                  <TableHead>Actions</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredDocuments.map((doc) => (
+                  <TableRow key={doc.id}>
+                    <TableCell>
+                      <div className="flex items-center space-x-3">
+                        {getSourceIcon(doc.source)}
+                        <div>
+                          <p className="font-medium">{doc.originalName}</p>
+                          <p className="text-sm text-gray-500">{doc.mimeType}</p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <div className="flex items-center space-x-2">
+                        {doc.source ? (
+                          <Badge variant="secondary" className="text-xs">
+                            {doc.source}
+                          </Badge>
+                        ) : (
+                          <Badge variant="outline" className="text-xs">
+                            Direct Upload
+                          </Badge>
+                        )}
+                      </div>
+                    </TableCell>
+                    <TableCell>{formatFileSize(doc.fileSize)}</TableCell>
+                    <TableCell>
+                      <span className="font-mono text-sm">
+                        {doc.tokens?.toLocaleString() || '0'}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
+                        {doc.status}
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <div className="text-sm">
+                        <p>{formatDistanceToNow(new Date(doc.createdAt))} ago</p>
+                        <p className="text-xs text-gray-500">
+                          {new Date(doc.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm">
+                            <MoreHorizontal className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem 
+                            onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
+                          >
+                            <Download className="w-4 h-4 mr-2" />
+                            Download
+                          </DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => handleDelete(doc.id)}
+                            className="text-red-600"
+                          >
+                            <Trash2 className="w-4 h-4 mr-2" />
+                            Delete
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="md:hidden space-y-4">
+            {filteredDocuments.map((doc) => (
+              <Card key={doc.id} className="p-4">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-start space-x-3">
+                    {getSourceIcon(doc.source)}
+                    <div className="flex-1">
+                      <p className="font-medium text-sm">{doc.originalName}</p>
+                      <p className="text-xs text-muted-foreground">{doc.mimeType}</p>
+                    </div>
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        <MoreHorizontal className="w-4 h-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuItem 
+                        onClick={() => window.open(`/api/projects/${projectId}/documents/${doc.id}/download`, '_blank')}
+                      >
+                        <Download className="w-4 h-4 mr-2" />
+                        Download
+                      </DropdownMenuItem>
+                      <DropdownMenuItem 
+                        onClick={() => handleDelete(doc.id)}
+                        className="text-red-600"
+                      >
+                        <Trash2 className="w-4 h-4 mr-2" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <span className="text-muted-foreground">Source:</span>
+                    <div className="mt-1">
+                      {doc.source ? (
+                        <Badge variant="secondary" className="text-xs">
+                          {doc.source}
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-xs">
+                          Direct Upload
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Status:</span>
+                    <div className="mt-1">
+                      <Badge className={`text-xs ${getStatusColor(doc.status)}`}>
+                        {doc.status}
+                      </Badge>
+                    </div>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Size:</span>
+                    <p className="font-medium">{formatFileSize(doc.fileSize)}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Tokens:</span>
+                    <p className="font-mono font-medium">{doc.tokens?.toLocaleString() || '0'}</p>
+                  </div>
+                </div>
+                
+                <div className="mt-3 pt-3 border-t border-border text-xs text-muted-foreground">
+                  Uploaded {formatDistanceToNow(new Date(doc.createdAt))} ago
+                </div>
+              </Card>
+            ))}
+          </div>
+
+          {filteredDocuments.length === 0 && (
+            <div className="text-center py-8">
+              <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-500">No documents found</p>
+              <p className="text-sm text-gray-400 mt-2">
+                {searchTerm || statusFilter !== "all" || sourceFilter !== "all" 
+                  ? "Try adjusting your filters"
+                  : "Upload your first document to get started"
+                }
+              </p>
+            </div>
+          )}
+        </CardContent>
+      </Card>
+      </div>
+    </div>
+  );
+}
