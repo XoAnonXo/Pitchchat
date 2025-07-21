@@ -105,8 +105,11 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
         const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
         const dataBuffer = await fs.readFile(filepath);
         
+        // Convert Buffer to Uint8Array as required by pdfjs-dist
+        const uint8Array = new Uint8Array(dataBuffer);
+        
         // Load the PDF document
-        const loadingTask = pdfjsLib.getDocument({ data: dataBuffer });
+        const loadingTask = pdfjsLib.getDocument({ data: uint8Array });
         const pdfDocument = await loadingTask.promise;
         
         let fullText = '';
