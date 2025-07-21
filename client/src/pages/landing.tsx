@@ -115,11 +115,11 @@ export default function Landing() {
                 </li>
                 <li className="flex items-start">
                   <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-600 text-sm">Answers with exact citations</span>
+                  <span className="text-gray-600 text-sm">Has full context awareness</span>
                 </li>
                 <li className="flex items-start">
                   <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-600 text-sm">Multiple AI models (GPT-4, Claude)</span>
+                  <span className="text-gray-600 text-sm">Powered by OpenAI models</span>
                 </li>
               </ul>
             </div>
@@ -163,21 +163,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Integration Logos */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-lg font-semibold text-gray-900 mb-8">Import from your tools</h3>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
-            <span className="text-gray-600 font-medium">GitHub</span>
-            <span className="text-gray-600 font-medium">Notion</span>
-            <span className="text-gray-600 font-medium">Google Drive</span>
-            <span className="text-gray-600 font-medium">Dropbox</span>
-            <span className="text-gray-600 font-medium">Figma</span>
-            <span className="text-gray-600 font-medium">Asana</span>
-            <span className="text-gray-600 font-medium">Jira</span>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8">
