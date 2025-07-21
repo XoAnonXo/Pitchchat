@@ -10,6 +10,7 @@ import InvestorChat from "@/pages/investor-chat";
 import DocumentsPage from "@/pages/documents";
 import ConversationsPage from "@/pages/conversations";
 import AnalyticsPage from "@/pages/analytics";
+import SettingsPage from "@/pages/settings";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -28,6 +29,7 @@ function Router() {
           <Route path="/documents/:projectId" component={({ params }) => <DocumentsPage projectId={params.projectId} />} />
           <Route path="/conversations" component={ConversationsPage} />
           <Route path="/analytics" component={AnalyticsPage} />
+          <Route path="/settings" component={SettingsPage} />
           <Route path="/chat/:slug" component={InvestorChat} />
         </>
       )}
