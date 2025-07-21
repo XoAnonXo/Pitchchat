@@ -1,12 +1,15 @@
-import * as SibApiV3Sdk from '@sendinblue/client';
+const SibApiV3Sdk = await import('@sendinblue/client');
 
 if (!process.env.BREVO_API_KEY) {
   throw new Error("BREVO_API_KEY environment variable must be set");
 }
 
 // Initialize the API client
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-apiInstance.setApiKey(SibApiV3Sdk.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
+const defaultClient = SibApiV3Sdk.default.ApiClient.instance;
+const apiKey = defaultClient.authentications['api-key'];
+apiKey.apiKey = process.env.BREVO_API_KEY;
+
+const apiInstance = new SibApiV3Sdk.default.TransactionalEmailsApi();
 
 interface EmailParams {
   to: string;
@@ -18,41 +21,33 @@ interface EmailParams {
 
 export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
   try {
-    const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
-    
-    sendSmtpEmail.subject = params.subject;
-    sendSmtpEmail.htmlContent = params.htmlContent;
-    sendSmtpEmail.sender = {
-      name: params.senderName || "PitchChat Builder",
-      email: params.senderEmail || "support@brevo.com"
+    const sendSmtpEmail = {
+      subject: params.subject,
+      htmlContent: params.htmlContent,
+      sender: {
+        name: params.senderName || "PitchChat Builder",
+        email: params.senderEmail || "support@brevo.com"
+      },
+      to: [
+        {
+          email: params.to,
+          name: params.to.split('@')[0]
+        }
+      ]
     };
-    sendSmtpEmail.to = [
-      {
-        email: params.to,
-        name: params.to.split('@')[0]
-      }
-    ];
 
     console.log('Attempting to send email to:', params.to);
     console.log('Subject:', params.subject);
     console.log('Sender:', sendSmtpEmail.sender);
+    console.log('Full email object:', JSON.stringify(sendSmtpEmail, null, 2));
 
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
-    console.log('Brevo email sent successfully:', {
-      statusCode: result.response?.statusCode,
-      messageId: result.body?.messageId,
-      to: params.to
-    });
+    console.log('Brevo API response:', JSON.stringify(result, null, 2));
     return true;
   } catch (error: any) {
-    console.error('Brevo email error details:', {
-      message: error.message,
-      statusCode: error.response?.statusCode,
-      body: error.response?.body,
-      headers: error.response?.headers,
-      to: params.to,
-      subject: params.subject
-    });
+    console.error('Brevo email error:', error);
+    console.error('Error response:', error.response);
+    console.error('Error body:', error.response?.body);
     return false;
   }
 }
