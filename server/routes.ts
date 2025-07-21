@@ -3,7 +3,7 @@ import { createServer, type Server } from "http";
 import multer from "multer";
 import { nanoid } from "nanoid";
 import { storage } from "./storage";
-import { setupAuth, isAuthenticated } from "./replitAuth";
+import { setupAuth, isAuthenticated } from "./customAuth";
 import { saveUploadedFile, processDocument, deleteUploadedFile } from "./fileProcessor";
 import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
 import { integrationManager } from "./integrations";
@@ -37,22 +37,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth middleware
   await setupAuth(app);
 
-  // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
-    try {
-      const userId = req.user.claims.sub;
-      const user = await storage.getUser(userId);
-      res.json(user);
-    } catch (error) {
-      console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
-    }
-  });
+  // Auth routes (handled by customAuth.ts)
+  // /api/auth/register, /api/auth/login, /api/auth/logout, /api/auth/user are defined in customAuth.ts
 
   // Project routes
   app.get("/api/projects", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const projects = await storage.getUserProjects(userId);
       res.json(projects);
     } catch (error) {
@@ -92,7 +83,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Document routes
   app.get("/api/projects/:projectId/documents", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const project = await storage.getProject(req.params.projectId);
       
       if (!project || project.userId !== userId) {
@@ -109,7 +100,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/projects/:projectId/documents", isAuthenticated, upload.single('file'), async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const project = await storage.getProject(req.params.projectId);
       
       if (!project || project.userId !== userId) {
@@ -153,7 +144,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.delete("/api/documents/:id", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const document = await storage.getDocument(req.params.id);
       
       if (!document) {
@@ -181,7 +172,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Download document route
   app.get("/api/projects/:projectId/documents/:documentId/download", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { projectId, documentId } = req.params;
       
       const project = await storage.getProject(projectId);
@@ -212,7 +203,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Chat routes (for founder testing)
   app.post("/api/projects/:projectId/chat", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { message, model = 'gpt-4o' } = req.body;
       
       if (!message || typeof message !== "string") {
@@ -247,7 +238,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Link routes
   app.get("/api/projects/:projectId/links", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const project = await storage.getProject(req.params.projectId);
       
       if (!project || project.userId !== userId) {
@@ -264,7 +255,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/projects/:projectId/links", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const project = await storage.getProject(req.params.projectId);
       
       if (!project || project.userId !== userId) {

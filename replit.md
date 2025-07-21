@@ -207,3 +207,16 @@ The application is designed as a monorepo with clear separation between frontend
 - Implemented user notification preference updates through API
 - Email templates include comprehensive analytics: conversations, tokens, costs, and top performers
 - Weekly reports can be triggered via POST to /api/email/weekly-report endpoint
+
+### July 21, 2025 - Custom Authentication System Implementation
+- Replaced Replit Auth with custom email/password authentication system
+- Created comprehensive auth page with login and registration forms
+- Updated database schema to support password storage and OAuth providers
+- Added password hashing with scrypt for secure password storage
+- Created customAuth.ts module to handle all authentication logic
+- Updated all routes from `/api/login` to `/auth` throughout the application
+- Changed logout routes from `/api/logout` to `/api/auth/logout`
+- Updated all server routes to use `req.user.id` instead of `req.user.claims.sub`
+- Added support for future Google and Apple sign-in integration
+- Implemented proper session management with PostgreSQL-backed sessions
+- Created clean, minimalist auth page matching Hume-style design with black accents

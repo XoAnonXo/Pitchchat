@@ -55,7 +55,7 @@ export default function Dashboard() {
         variant: "destructive",
       });
       setTimeout(() => {
-        window.location.href = "/api/login";
+        window.location.href = "/auth";
       }, 500);
       return;
     }
@@ -108,7 +108,7 @@ export default function Dashboard() {
           variant: "destructive",
         });
         setTimeout(() => {
-          window.location.href = "/api/login";
+          window.location.href = "/auth";
         }, 500);
         return;
       }
@@ -201,7 +201,7 @@ export default function Dashboard() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => window.location.href = "/api/logout"}
+                  onClick={() => window.location.href = "/api/auth/logout"}
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Logout
@@ -247,7 +247,7 @@ export default function Dashboard() {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => window.location.href = "/api/logout"}
+                  onClick={() => window.location.href = "/api/auth/logout"}
                   className="text-muted-foreground hover:text-foreground"
                 >
                   Logout
