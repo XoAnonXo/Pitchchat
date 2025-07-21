@@ -23,6 +23,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
   const [dragActive, setDragActive] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<UploadFile[]>([]);
   const [uploadingFileIndex, setUploadingFileIndex] = useState<number | null>(null);
+  const [duplicatesCount, setDuplicatesCount] = useState(0);
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
@@ -42,12 +43,10 @@ export default function FileUpload({ projectId }: FileUploadProps) {
 
       return res.json();
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
-      toast({
-        title: "Success",
-        description: "Document uploaded and processing started",
-      });
+    onSuccess: (data) => {
+      if (!data.isDuplicate) {
+        queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
+      }
     },
     onError: (error) => {
       if (isUnauthorizedError(error)) {
@@ -108,12 +107,20 @@ export default function FileUpload({ projectId }: FileUploadProps) {
   };
 
   const uploadFiles = async () => {
+    let duplicates = 0;
+    let successful = 0;
+    
     for (let i = 0; i < selectedFiles.length; i++) {
       setUploadingFileIndex(i);
       const { file } = selectedFiles[i];
       
       try {
-        await uploadMutation.mutateAsync(file);
+        const result = await uploadMutation.mutateAsync(file);
+        if (result.isDuplicate) {
+          duplicates++;
+        } else {
+          successful++;
+        }
       } catch (error) {
         console.error(`Failed to upload ${file.name}:`, error);
         // Continue with next file even if one fails
@@ -122,6 +129,22 @@ export default function FileUpload({ projectId }: FileUploadProps) {
     
     setUploadingFileIndex(null);
     setSelectedFiles([]);
+    setDuplicatesCount(0);
+    
+    // Show appropriate notifications
+    if (duplicates > 0) {
+      toast({
+        title: "Upload Complete",
+        description: `${duplicates} duplicate${duplicates > 1 ? 's' : ''} found and ignored`,
+      });
+    }
+    
+    if (successful > 0) {
+      toast({
+        title: "Success",
+        description: `${successful} document${successful > 1 ? 's' : ''} uploaded successfully`,
+      });
+    }
   };
 
   const formatFileSize = (bytes: number) => {

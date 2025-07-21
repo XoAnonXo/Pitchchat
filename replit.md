@@ -228,3 +228,14 @@ The application is designed as a monorepo with clear separation between frontend
 - Improved file upload to handle multiple files sequentially instead of simultaneously
 - Added visual progress indicators showing upload status for each file
 - Fixed ChatInterface unauthorized redirect to use `/auth` instead of `/api/login`
+
+### July 21, 2025 - Document Management Enhancements
+- Fixed document deletion by properly handling foreign key constraints with chunks table
+- Added duplicate document detection to prevent same files from being uploaded multiple times
+- Created checkDuplicateDocument method in storage layer
+- Updated upload endpoint to check for duplicates before creating documents
+- Modified FileUpload component to track and notify about duplicates
+- Shows toast notification with count of duplicates found and ignored
+- Fixed PDF processing error by converting Buffer to Uint8Array for pdfjs-dist
+- Added text cleaning function to remove null bytes and invalid UTF-8 sequences
+- Added Cyrillic font support with Noto Sans for better international text rendering

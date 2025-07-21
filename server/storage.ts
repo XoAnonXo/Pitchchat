@@ -212,6 +212,19 @@ export class DatabaseStorage implements IStorage {
     await db.delete(documents).where(eq(documents.id, id));
   }
 
+  async checkDuplicateDocument(projectId: string, originalName: string): Promise<boolean> {
+    const [existing] = await db
+      .select()
+      .from(documents)
+      .where(and(
+        eq(documents.projectId, projectId),
+        eq(documents.originalName, originalName)
+      ))
+      .limit(1);
+    
+    return !!existing;
+  }
+
   // Chunk operations
   async getDocumentChunks(documentId: string): Promise<Chunk[]> {
     return await db

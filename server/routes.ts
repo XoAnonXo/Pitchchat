@@ -111,6 +111,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "No file uploaded" });
       }
 
+      // Check for duplicate
+      const isDuplicate = await storage.checkDuplicateDocument(
+        req.params.projectId, 
+        req.file.originalname
+      );
+
+      if (isDuplicate) {
+        return res.json({ 
+          isDuplicate: true,
+          originalName: req.file.originalname,
+          message: "Document already exists" 
+        });
+      }
+
       // Save file
       const filename = await saveUploadedFile(
         req.file.buffer,
@@ -135,7 +149,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         console.error("Error processing document:", error);
       });
 
-      res.json(document);
+      res.json({ ...document, isDuplicate: false });
     } catch (error) {
       console.error("Error uploading document:", error);
       res.status(500).json({ message: "Failed to upload document" });
