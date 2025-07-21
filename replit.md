@@ -220,3 +220,11 @@ The application is designed as a monorepo with clear separation between frontend
 - Added support for future Google and Apple sign-in integration
 - Implemented proper session management with PostgreSQL-backed sessions
 - Created clean, minimalist auth page matching Hume-style design with black accents
+
+### July 21, 2025 - Chat & File Upload Fixes
+- Fixed ChatInterface model error by removing hardcoded "o3" model parameter (uses default gpt-4o)
+- Kept visual "o3" badge for display purposes while using supported models in backend
+- Fixed missing FileText import in FileUpload component
+- Improved file upload to handle multiple files sequentially instead of simultaneously
+- Added visual progress indicators showing upload status for each file
+- Fixed ChatInterface unauthorized redirect to use `/auth` instead of `/api/login`

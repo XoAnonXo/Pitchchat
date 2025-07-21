@@ -70,7 +70,7 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
           variant: "destructive",
         });
         setTimeout(() => {
-          window.location.href = "/api/login";
+          window.location.href = "/auth";
         }, 500);
         return;
       }

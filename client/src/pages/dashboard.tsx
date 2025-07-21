@@ -427,7 +427,7 @@ export default function Dashboard() {
                     </div>
                   </div>
                   <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                    <ChatInterface projectId={selectedProject.id} model="o3" />
+                    <ChatInterface projectId={selectedProject.id} />
                   </div>
                 </div>
               </div>
