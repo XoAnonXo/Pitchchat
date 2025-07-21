@@ -127,8 +127,8 @@ export default function FileUpload({ projectId }: FileUploadProps) {
       <div
         className={`relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
           dragActive 
-            ? 'bg-[#FFF5E6] border-4 border-[#FFA500] scale-[1.02] shadow-2xl' 
-            : 'bg-white border-2 border-dashed border-gray-300 hover:border-[#FFA500] hover:bg-[#FFF5E6]/30 hover:shadow-lg'
+            ? 'bg-gray-100 border-4 border-black scale-[1.02] shadow-2xl' 
+            : 'bg-white border-2 border-dashed border-gray-300 hover:border-black hover:bg-gray-50 hover:shadow-lg'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -138,7 +138,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
       >
         <div className="p-12 text-center relative z-10">
           <div className={`mx-auto h-20 w-20 rounded-2xl flex items-center justify-center mb-6 transition-all ${
-            dragActive ? 'bg-[#FFA500] text-white rotate-12 shadow-xl' : 'bg-[#FFF5E6] text-[#FFA500]'
+            dragActive ? 'bg-black text-white rotate-12 shadow-xl' : 'bg-gray-100 text-black'
           }`}>
             <Upload className="h-10 w-10" />
           </div>
@@ -151,10 +151,10 @@ export default function FileUpload({ projectId }: FileUploadProps) {
           </p>
           
           <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
-            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">PDF</span>
-            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">DOCX</span>
-            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">PPTX</span>
-            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">TXT</span>
+            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">PDF</span>
+            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">DOCX</span>
+            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">PPTX</span>
+            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">TXT</span>
             <span className="text-gray-500">up to 500MB</span>
           </div>
           
@@ -170,8 +170,8 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         
         {/* Background decoration */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-40 h-40 bg-[#FFA500] rounded-full -translate-x-20 -translate-y-20" />
-          <div className="absolute bottom-0 right-0 w-60 h-60 bg-[#FFA500] rounded-full translate-x-30 translate-y-30" />
+          <div className="absolute top-0 left-0 w-40 h-40 bg-black rounded-full -translate-x-20 -translate-y-20" />
+          <div className="absolute bottom-0 right-0 w-60 h-60 bg-black rounded-full translate-x-30 translate-y-30" />
         </div>
       </div>
 
@@ -183,8 +183,8 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             {selectedFiles.map(({ file, id }) => (
               <div key={id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-[#FFF5E6] rounded-xl flex items-center justify-center">
-                    <FileText className="w-6 h-6 text-[#FFA500]" />
+                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-black" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-gray-900">{file.name}</p>
@@ -203,7 +203,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
           <Button 
             onClick={uploadFiles}
             disabled={uploadMutation.isPending}
-            className="w-full mt-6 bg-[#FFA500] hover:bg-[#FF8C00] text-white h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
+            className="w-full mt-6 bg-black hover:bg-gray-800 text-white h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
           >
             {uploadMutation.isPending ? (
               <div className="flex items-center justify-center space-x-2">

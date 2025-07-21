@@ -32,8 +32,8 @@ import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
 import DocumentsList from "@/components/DocumentsList";
 import ShareLinkModal from "@/components/ShareLinkModal";
-import { AIModelSelector } from "@/components/ui/ai-model-selector";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
+import { Badge } from "@/components/ui/badge";
 
 export default function Dashboard() {
   const { user, isLoading: authLoading } = useAuth();
@@ -42,7 +42,6 @@ export default function Dashboard() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [selectedModel, setSelectedModel] = useState<string>('gpt-4o');
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -154,7 +153,7 @@ export default function Dashboard() {
         {/* Logo Section */}
         <div className="h-20 px-6 flex items-center justify-between border-b border-gray-100">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#FFA500] to-[#FF8C00] rounded-xl flex items-center justify-center shadow-md">
+            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-md">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div>
@@ -174,7 +173,7 @@ export default function Dashboard() {
 
         {/* Navigation */}
         <nav className="px-4 py-6 space-y-1">
-          <Link href="/" className="flex items-center space-x-3 px-4 py-3 bg-[#FFF5E6] text-[#FF6B00] rounded-xl transition-all duration-200">
+          <Link href="/" className="flex items-center space-x-3 px-4 py-3 bg-gray-100 text-black rounded-xl transition-all duration-200">
             <Home className="w-5 h-5" />
             <span className="font-medium">Dashboard</span>
           </Link>
@@ -203,7 +202,7 @@ export default function Dashboard() {
         {/* New Project Button */}
         <div className="px-4 mb-6">
           <Button 
-            className="w-full bg-[#FFA500] hover:bg-[#FF8C00] text-white rounded-xl h-12 font-medium shadow-lg transition-all duration-200 hover:shadow-xl"
+            className="w-full bg-black hover:bg-gray-800 text-white rounded-xl h-12 font-medium shadow-lg transition-all duration-200 hover:shadow-xl"
             onClick={handleCreateProject}
             disabled={createProjectMutation.isPending}
           >
@@ -226,7 +225,7 @@ export default function Dashboard() {
                   }}
                   className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${
                     selectedProjectId === project.id 
-                      ? 'bg-[#FFF5E6] text-[#FF6B00]' 
+                      ? 'bg-gray-100 text-black font-medium' 
                       : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
@@ -305,7 +304,7 @@ export default function Dashboard() {
               <Button variant="outline" className="rounded-xl border-gray-200 hover:bg-gray-50">
                 Export Data
               </Button>
-              <Button onClick={() => setShowShareModal(true)} className="bg-[#FFA500] hover:bg-[#FF8C00] text-white rounded-xl">
+              <Button onClick={() => setShowShareModal(true)} className="bg-black hover:bg-gray-800 text-white rounded-xl">
                 Share Link
               </Button>
             </div>
@@ -328,8 +327,8 @@ export default function Dashboard() {
                 <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-[#FFF5E6] rounded-xl flex items-center justify-center">
-                        <FileText className="w-6 h-6 text-[#FFA500]" />
+                      <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                        <FileText className="w-6 h-6 text-black" />
                       </div>
                       <span className="text-3xl font-bold text-gray-900">{documents.length}</span>
                     </div>
@@ -382,11 +381,11 @@ export default function Dashboard() {
                 {/* Documents List */}
                 <div>
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                    <Database className="w-5 h-5 mr-2 text-[#FFA500]" />
+                    <Database className="w-5 h-5 mr-2 text-black" />
                     Your Documents
                   </h3>
                   <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                    <DocumentsList projectId={selectedProject.id} />
+                    <DocumentsList projectId={selectedProject.id} hideDelete={true} />
                   </div>
                 </div>
 
@@ -394,17 +393,18 @@ export default function Dashboard() {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-gray-900 flex items-center">
-                      <MessageSquare className="w-5 h-5 mr-2 text-[#FFA500]" />
+                      <MessageSquare className="w-5 h-5 mr-2 text-black" />
                       Test AI Assistant
                     </h3>
-                    <AIModelSelector 
-                      value={selectedModel} 
-                      onChange={setSelectedModel}
-                      className="w-48"
-                    />
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-gray-600">Model:</span>
+                      <Badge variant="outline" className="bg-gray-100 text-gray-800 border-gray-300">
+                        o3
+                      </Badge>
+                    </div>
                   </div>
                   <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                    <ChatInterface projectId={selectedProject.id} model={selectedModel} />
+                    <ChatInterface projectId={selectedProject.id} model="o3" />
                   </div>
                 </div>
               </div>

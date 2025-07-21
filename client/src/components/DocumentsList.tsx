@@ -23,9 +23,10 @@ interface Document {
 
 interface DocumentsListProps {
   projectId: string;
+  hideDelete?: boolean;
 }
 
-export default function DocumentsList({ projectId }: DocumentsListProps) {
+export default function DocumentsList({ projectId, hideDelete = false }: DocumentsListProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -86,7 +87,7 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
     switch (status) {
       case "processing":
         return (
-          <Badge variant="secondary" className="bg-[#FFF5E6] text-[#FF6B00]">
+          <Badge variant="secondary" className="bg-gray-100 text-black">
             <Clock className="w-3 h-3 mr-1" />
             Processing
           </Badge>
@@ -159,7 +160,7 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
                 
                 <div className="flex items-center justify-between sm:justify-end space-x-2 flex-shrink-0">
                   {getStatusBadge(doc.status)}
-                  {doc.status === "completed" && (
+                  {doc.status === "completed" && !hideDelete && (
                     <Button
                       variant="ghost"
                       size="sm"

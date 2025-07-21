@@ -161,3 +161,13 @@ The application is designed as a monorepo with clear separation between frontend
 - Extracts text from all pages, frames, components, and text nodes
 - Imports file comments for additional context
 - Supports up to 20 recent Figma files per sync
+
+### July 21, 2025 - UI Simplification & Black Theme Implementation
+- Changed AI model display from selectable dropdown to static "o3" display
+- Completely replaced orange (#FFA500) color scheme with black throughout the interface
+- Updated all primary buttons, icons, and accents to use black (#000000) with gray-800 hover state
+- Modified sidebar navigation selected state to use gray-100 background with black text
+- Hidden delete functionality from main dashboard documents list by adding optional hideDelete prop
+- Updated FileUpload component to use black theme for drag states and decorative elements
+- Changed ChatInterface to use black for user messages and AI avatar backgrounds
+- Maintained Hume-style design principles with cleaner, minimalist black aesthetic
