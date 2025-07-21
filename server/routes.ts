@@ -10,6 +10,7 @@ import { saveUploadedFile, processDocument, deleteUploadedFile } from "./filePro
 import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
+import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -516,10 +517,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
         citations: aiResponse.citations,
       });
 
+      // Calculate platform cost for this message exchange
+      const totalTokens = (userMessage.tokenCount || 0) + (assistantMessage.tokenCount || 0);
+      const platformCost = calculatePlatformCost(totalTokens, 'gpt4o');
+      
       // Update conversation totals
       await storage.updateConversation(conversation.id, {
-        totalTokens: (conversation.totalTokens || 0) + (userMessage.tokenCount || 0) + (assistantMessage.tokenCount || 0),
-        costUsd: (conversation.costUsd || 0) + (aiResponse.tokenCount * 0.00002), // Rough cost estimate
+        totalTokens: (conversation.totalTokens || 0) + totalTokens,
+        costUsd: (conversation.costUsd || 0) + platformCost, // Platform cost with 10x margin
       });
 
       res.json({
@@ -601,6 +606,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching analytics:", error);
       res.status(500).json({ message: "Failed to fetch analytics" });
+    }
+  });
+
+  // Pricing information endpoint
+  app.get("/api/pricing", async (req, res) => {
+    try {
+      const { getPricingBreakdown } = await import("./pricing");
+      res.json(getPricingBreakdown());
+    } catch (error) {
+      console.error("Error fetching pricing:", error);
+      res.status(500).json({ message: "Failed to fetch pricing" });
     }
   });
 

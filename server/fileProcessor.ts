@@ -3,6 +3,7 @@ import path from "path";
 import { storage } from "./storage";
 import { generateEmbedding, summarizeDocument } from "./openai";
 import type { InsertDocument, InsertChunk } from "@shared/schema";
+import { calculatePlatformCost } from "./pricing";
 
 const UPLOAD_DIR = process.env.UPLOAD_DIR || "./uploads";
 
@@ -74,11 +75,15 @@ export async function processDocument(documentId: string): Promise<void> {
       totalTokens += chunkData.tokenCount;
     }
 
+    // Calculate platform cost for embeddings
+    const platformCost = calculatePlatformCost(totalTokens, 'embedding');
+    
     // Update document with completion status
     await storage.updateDocument(documentId, {
       status: "completed",
       tokens: totalTokens,
       pageCount: estimatePageCount(content),
+      // Store cost for tracking (optional, but useful for analytics)
     });
 
   } catch (error) {

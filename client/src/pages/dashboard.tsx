@@ -27,7 +27,8 @@ import {
   Sparkles,
   Clock,
   CheckCircle2,
-  Bell
+  Bell,
+  CreditCard
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
@@ -460,7 +461,7 @@ export default function Dashboard() {
             {analytics && (
               <section className="mt-10">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Analytics Overview</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
@@ -502,8 +503,27 @@ export default function Dashboard() {
                             ${analytics.monthlyCost.toFixed(2)}
                           </p>
                         </div>
-                        <div className="w-12 h-12 bg-[#FFF5E6] rounded-xl flex items-center justify-center">
-                          <DollarSign className="w-6 h-6 text-[#FFA500]" />
+                        <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
+                          <DollarSign className="w-6 h-6 text-black" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border-gray-700 shadow-sm text-white">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-300">AI Usage Price</p>
+                          <p className="text-xl font-bold mt-1">
+                            $0.10/1K tokens
+                          </p>
+                          <p className="text-xs text-gray-400 mt-1">
+                            GPT-4o Model
+                          </p>
+                        </div>
+                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+                          <CreditCard className="w-6 h-6" />
                         </div>
                       </div>
                     </CardContent>
