@@ -6,7 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
 import { Upload, X } from "lucide-react";
-import IntegrationDialog from "./IntegrationDialog";
 import { StartupLoadingSkeleton } from "./StartupLoadingSkeleton";
 
 interface FileUploadProps {
@@ -223,21 +222,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         </div>
       )}
 
-      {/* Integration Options */}
-      <div className="mt-6">
-        <IntegrationDialog 
-          projectId={projectId}
-          trigger={
-            <Button 
-              variant="outline" 
-              className="w-full h-14 rounded-xl border-dashed border-2 text-muted-foreground hover:text-foreground hover:border-primary transition-all duration-200 bg-secondary/30 hover:bg-secondary/50"
-            >
-              <Upload className="w-5 h-5 mr-2" />
-              Import from External Platforms
-            </Button>
-          }
-        />
-      </div>
+
     </div>
   );
 }

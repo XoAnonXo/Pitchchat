@@ -27,7 +27,6 @@ import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
 import DocumentsList from "@/components/DocumentsList";
 import ShareLinkModal from "@/components/ShareLinkModal";
-import IntegrationDialog from "@/components/IntegrationDialog";
 import { AIModelSelector } from "@/components/ui/ai-model-selector";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 
@@ -367,7 +366,6 @@ export default function Dashboard() {
                     </p>
                   </div>
                   <div className="flex flex-wrap gap-2 sm:gap-3">
-                    <IntegrationDialog projectId={selectedProject.id} />
                     <Button variant="outline" className="rounded-lg text-sm sm:text-base">
                       Export Data
                     </Button>
