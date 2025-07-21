@@ -34,6 +34,17 @@ import DocumentsList from "@/components/DocumentsList";
 import ShareLinkModal from "@/components/ShareLinkModal";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Dashboard() {
   const { user, isLoading: authLoading } = useAuth();
@@ -42,6 +53,9 @@ export default function Dashboard() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+  const [newProjectName, setNewProjectName] = useState("");
+  const [newProjectDescription, setNewProjectDescription] = useState("");
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -118,9 +132,18 @@ export default function Dashboard() {
   });
 
   const handleCreateProject = () => {
-    const name = prompt("Enter project name:");
-    if (name?.trim()) {
-      createProjectMutation.mutate({ name: name.trim() });
+    setShowNewProjectModal(true);
+  };
+
+  const handleSubmitNewProject = () => {
+    if (newProjectName.trim()) {
+      createProjectMutation.mutate({ 
+        name: newProjectName.trim(),
+        description: newProjectDescription.trim() || undefined
+      });
+      setShowNewProjectModal(false);
+      setNewProjectName("");
+      setNewProjectDescription("");
     }
   };
 
@@ -475,7 +498,7 @@ export default function Dashboard() {
               <Button 
                 onClick={handleCreateProject}
                 disabled={createProjectMutation.isPending}
-                className="bg-[#FFA500] hover:bg-[#FF8C00] text-white rounded-xl"
+                className="bg-black hover:bg-gray-800 text-white rounded-xl"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Project
@@ -491,6 +514,83 @@ export default function Dashboard() {
           onClose={() => setShowShareModal(false)} 
         />
       )}
+
+      {/* New Project Dialog */}
+      <Dialog open={showNewProjectModal} onOpenChange={setShowNewProjectModal}>
+        <DialogContent className="bg-white rounded-2xl border-gray-200 shadow-xl max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-gray-900">Create New Project</DialogTitle>
+            <DialogDescription className="text-gray-600">
+              Give your project a name and optional description to get started.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-6">
+            <div>
+              <Label htmlFor="project-name" className="text-sm font-medium text-gray-700">
+                Project Name <span className="text-red-500">*</span>
+              </Label>
+              <Input
+                id="project-name"
+                value={newProjectName}
+                onChange={(e) => setNewProjectName(e.target.value)}
+                placeholder="My Startup Pitch"
+                className="mt-1.5 rounded-xl border-gray-300 focus:border-black focus:ring-black"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && newProjectName.trim()) {
+                    handleSubmitNewProject();
+                  }
+                }}
+              />
+            </div>
+            
+            <div>
+              <Label htmlFor="project-description" className="text-sm font-medium text-gray-700">
+                Description <span className="text-gray-500">(optional)</span>
+              </Label>
+              <Textarea
+                id="project-description"
+                value={newProjectDescription}
+                onChange={(e) => setNewProjectDescription(e.target.value)}
+                placeholder="A brief description of your project..."
+                className="mt-1.5 rounded-xl border-gray-300 focus:border-black focus:ring-black min-h-[100px]"
+                rows={3}
+              />
+            </div>
+          </div>
+          
+          <DialogFooter className="mt-6">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setShowNewProjectModal(false);
+                setNewProjectName("");
+                setNewProjectDescription("");
+              }}
+              className="rounded-xl border-gray-300 hover:bg-gray-50"
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleSubmitNewProject}
+              disabled={!newProjectName.trim() || createProjectMutation.isPending}
+              className="bg-black hover:bg-gray-800 text-white rounded-xl"
+            >
+              {createProjectMutation.isPending ? (
+                <>
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                  Creating...
+                </>
+              ) : (
+                <>
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Project
+                </>
+              )}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
