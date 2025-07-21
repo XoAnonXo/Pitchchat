@@ -81,6 +81,7 @@ export default function SettingsPage() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [deleteAccountOpen, setDeleteAccountOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState("");
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false);
   
   // Notification states
   const [emailAlerts, setEmailAlerts] = useState(user?.emailAlerts ?? true);
@@ -148,6 +149,65 @@ export default function SettingsPage() {
     },
   });
 
+  const exportDataMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest('GET', '/api/user/export');
+      const data = await response.json();
+      
+      // Create and download JSON file
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `pitchchat-export-${new Date().toISOString().split('T')[0]}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    },
+    onSuccess: () => {
+      toast({
+        title: "Data exported",
+        description: "Your data has been downloaded successfully.",
+        duration: 3000,
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Export failed",
+        description: "Failed to export your data. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const changePasswordMutation = useMutation({
+    mutationFn: async (data: { currentPassword: string; newPassword: string }) => {
+      const response = await apiRequest('POST', '/api/user/change-password', data);
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.message);
+      }
+      return result;
+    },
+    onSuccess: () => {
+      toast({
+        title: "Password changed",
+        description: "Your password has been updated successfully.",
+        duration: 3000,
+      });
+      setChangePasswordOpen(false);
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Note",
+        description: error.message || "Failed to change password. Please check your current password.",
+        duration: 5000,
+      });
+      setChangePasswordOpen(false);
+    },
+  });
+
   const handleProfileUpdate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -176,6 +236,29 @@ export default function SettingsPage() {
     if (confirmDelete === user?.email) {
       deleteAccountMutation.mutate();
     }
+  };
+
+  const handleExportData = () => {
+    exportDataMutation.mutate();
+  };
+
+  const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const currentPassword = formData.get('currentPassword') as string;
+    const newPassword = formData.get('newPassword') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+
+    if (newPassword !== confirmPassword) {
+      toast({
+        title: "Passwords don't match",
+        description: "New password and confirmation must match.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    changePasswordMutation.mutate({ currentPassword, newPassword });
   };
 
 
@@ -473,20 +556,84 @@ export default function SettingsPage() {
               <CardDescription>Manage your data and account security</CardDescription>
             </CardHeader>
             <CardContent className="p-6 space-y-4">
-              <Button variant="outline" className="w-full justify-start rounded-xl">
+              <Button 
+                variant="outline" 
+                className="w-full justify-start rounded-xl"
+                onClick={handleExportData}
+                disabled={exportDataMutation.isPending}
+              >
                 <Download className="w-4 h-4 mr-2" />
-                Export All Data
+                {exportDataMutation.isPending ? 'Exporting...' : 'Export All Data'}
               </Button>
 
-              <Button variant="outline" className="w-full justify-start rounded-xl">
-                <Lock className="w-4 h-4 mr-2" />
-                Change Password
-              </Button>
-
-              <Button variant="outline" className="w-full justify-start rounded-xl">
-                <Shield className="w-4 h-4 mr-2" />
-                Enable Two-Factor Authentication
-              </Button>
+              <Dialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen}>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="w-full justify-start rounded-xl">
+                    <Lock className="w-4 h-4 mr-2" />
+                    Change Password
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[425px]">
+                  <form onSubmit={handleChangePassword}>
+                    <DialogHeader>
+                      <DialogTitle>Change Password</DialogTitle>
+                      <DialogDescription>
+                        Enter your new password below. Make sure it's at least 8 characters long.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="space-y-4 py-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="current-password">Current Password</Label>
+                        <Input
+                          id="current-password"
+                          name="currentPassword"
+                          type="password"
+                          required
+                          className="bg-gray-50 border-gray-200 focus:border-black"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="new-password">New Password</Label>
+                        <Input
+                          id="new-password"
+                          name="newPassword"
+                          type="password"
+                          required
+                          minLength={8}
+                          className="bg-gray-50 border-gray-200 focus:border-black"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="confirm-password">Confirm New Password</Label>
+                        <Input
+                          id="confirm-password"
+                          name="confirmPassword"
+                          type="password"
+                          required
+                          minLength={8}
+                          className="bg-gray-50 border-gray-200 focus:border-black"
+                        />
+                      </div>
+                    </div>
+                    <DialogFooter>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setChangePasswordOpen(false)}
+                      >
+                        Cancel
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="bg-black hover:bg-gray-800 text-white"
+                        disabled={changePasswordMutation.isPending}
+                      >
+                        {changePasswordMutation.isPending ? 'Changing...' : 'Change Password'}
+                      </Button>
+                    </DialogFooter>
+                  </form>
+                </DialogContent>
+              </Dialog>
 
               <Separator className="my-6" />
 

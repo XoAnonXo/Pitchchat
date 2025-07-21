@@ -637,6 +637,79 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Export user data
+  app.get("/api/user/export", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      
+      // Get all user data
+      const user = await storage.getUser(userId);
+      const projects = await storage.getProjects(userId);
+      const links = await storage.getLinks(userId);
+      
+      // Get documents and conversations for each project
+      const projectData = await Promise.all(projects.map(async (project) => {
+        const documents = await storage.getDocumentsForProject(project.id);
+        const conversations = await storage.getConversationsForLink(project.id);
+        
+        return {
+          ...project,
+          documents: documents.map(doc => ({
+            id: doc.id,
+            fileName: doc.fileName,
+            fileType: doc.fileType,
+            fileSize: doc.fileSize,
+            createdAt: doc.createdAt,
+            status: doc.status,
+          })),
+          conversations: conversations.length,
+        };
+      }));
+
+      const exportData = {
+        exportDate: new Date().toISOString(),
+        user: {
+          id: user?.id,
+          email: user?.email,
+          firstName: user?.firstName,
+          lastName: user?.lastName,
+          credits: user?.credits,
+          createdAt: user?.createdAt,
+        },
+        projects: projectData,
+        links: links,
+        totalProjects: projects.length,
+        totalLinks: links.length,
+      };
+
+      res.json(exportData);
+    } catch (error) {
+      console.error("Error exporting user data:", error);
+      res.status(500).json({ message: "Failed to export data" });
+    }
+  });
+
+  // Change password - Note: Replit Auth doesn't support password changes
+  // This is a placeholder endpoint
+  app.post("/api/user/change-password", isAuthenticated, async (req: any, res) => {
+    try {
+      const { currentPassword, newPassword } = req.body;
+      
+      // Since we're using Replit Auth, we can't actually change passwords
+      // In a production app with custom auth, you would:
+      // 1. Verify the current password
+      // 2. Hash the new password
+      // 3. Update the user record
+      
+      res.status(400).json({ 
+        message: "Password changes are managed through Replit Auth. Please use your Replit account settings to change your password." 
+      });
+    } catch (error) {
+      console.error("Error changing password:", error);
+      res.status(500).json({ message: "Failed to change password" });
+    }
+  });
+
   // Conversations routes
   app.get("/api/conversations", isAuthenticated, async (req: any, res) => {
     try {
