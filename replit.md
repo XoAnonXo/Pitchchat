@@ -239,6 +239,7 @@ The application is designed as a monorepo with clear separation between frontend
 - Improved file upload to handle multiple files sequentially instead of simultaneously
 - Added visual progress indicators showing upload status for each file
 - Fixed ChatInterface unauthorized redirect to use `/auth` instead of `/api/login`
+- Fixed logout 404 error by changing logout endpoint from POST to GET and redirecting to `/auth`
 
 ### July 21, 2025 - Document Management Enhancements
 - Fixed document deletion by properly handling foreign key constraints with chunks table

@@ -279,7 +279,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
             <Button 
               variant="ghost" 
               size="icon"
-              onClick={() => window.location.href = "/api/logout"}
+              onClick={() => window.location.href = "/api/auth/logout"}
               className="text-gray-400 hover:text-gray-600"
             >
               <LogOut className="h-5 w-5" />
