@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download } from "lucide-react";
+import DocumentDownloadDialog from "@/components/DocumentDownloadDialog";
 
 interface Message {
   id: string;
@@ -30,6 +31,7 @@ export default function InvestorChat() {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [investorEmail, setInvestorEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
+  const [showDownloadDialog, setShowDownloadDialog] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Extract slug from URL
@@ -215,11 +217,11 @@ export default function InvestorChat() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => window.open(`/api/chat/${slug}/download`, '_blank')}
+                      onClick={() => setShowDownloadDialog(true)}
                       className="border-[#E0E3EB] hover:bg-gray-50"
                     >
                       <Download className="w-4 h-4 mr-2" />
-                      Download All
+                      Download Documents
                     </Button>
                   )}
                 </div>
@@ -355,6 +357,15 @@ export default function InvestorChat() {
           </p>
         </div>
       </footer>
+
+      {/* Download Dialog */}
+      {slug && (
+        <DocumentDownloadDialog
+          isOpen={showDownloadDialog}
+          onClose={() => setShowDownloadDialog(false)}
+          slug={slug}
+        />
+      )}
     </div>
   );
 }
