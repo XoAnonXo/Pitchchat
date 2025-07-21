@@ -11,7 +11,7 @@ import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
-import { sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevo";
+import { sendBrevoEmail, sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevo";
 
 // Configure multer for file uploads
 const upload = multer({
