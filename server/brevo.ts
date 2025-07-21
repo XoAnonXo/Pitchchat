@@ -24,7 +24,7 @@ export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
     sendSmtpEmail.htmlContent = params.htmlContent;
     sendSmtpEmail.sender = {
       name: params.senderName || "PitchChat Builder",
-      email: params.senderEmail || "noreply@replit.com"
+      email: params.senderEmail || "support@brevo.com"
     };
     sendSmtpEmail.to = [
       {
