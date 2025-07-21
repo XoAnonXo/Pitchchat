@@ -10,9 +10,8 @@ https://pitchchat.ai/api/auth/google/callback
 https://www.pitchchat.ai/api/auth/google/callback
 ```
 
-### Development/Replit URIs (keep these for testing)
+### Development URI (for local testing only)
 ```
-https://b3322958-1baa-426f-9bd2-4044a13cecc9-00-3px0cmc9fjp1m.spock.replit.dev/api/auth/google/callback
 http://localhost:5000/api/auth/google/callback
 ```
 

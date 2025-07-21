@@ -171,7 +171,7 @@ export async function sendPasswordResetEmail(
   userEmail: string,
   resetToken: string
 ): Promise<boolean> {
-  const resetLink = `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/reset-password/${resetToken}`;
+  const resetLink = `${process.env.PRODUCTION_URL || 'https://pitchchat.ai'}/reset-password/${resetToken}`;
   
   const htmlContent = `
     <html>

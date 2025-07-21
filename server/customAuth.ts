@@ -97,11 +97,8 @@ export function setupAuth(app: Express) {
 
   // Configure Google OAuth Strategy
   if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-    // Support production domain, Replit domain, or localhost
-    const baseUrl = process.env.PRODUCTION_URL || 
-      (process.env.REPLIT_DOMAINS 
-        ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
-        : 'http://localhost:5000');
+    // Use production domain or localhost only
+    const baseUrl = process.env.PRODUCTION_URL || 'https://pitchchat.ai';
     
     passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -227,11 +224,8 @@ export function setupAuth(app: Express) {
   app.get("/api/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/auth" }),
     (req, res) => {
-      // Successful authentication, redirect to dashboard with full URL
-      const baseUrl = process.env.PRODUCTION_URL || 
-        (process.env.REPLIT_DOMAINS 
-          ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
-          : 'http://localhost:5000');
+      // Successful authentication, redirect to dashboard
+      const baseUrl = process.env.PRODUCTION_URL || 'https://pitchchat.ai';
       res.redirect(baseUrl);
     }
   );
