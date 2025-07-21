@@ -86,21 +86,21 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
     switch (status) {
       case "processing":
         return (
-          <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
+          <Badge variant="secondary" className="bg-[#FFF5E6] text-[#FF6B00]">
             <Clock className="w-3 h-3 mr-1" />
             Processing
           </Badge>
         );
       case "completed":
         return (
-          <Badge variant="secondary" className="bg-green-100 text-green-800">
+          <Badge variant="secondary" className="bg-green-50 text-green-700">
             <CheckCircle className="w-3 h-3 mr-1" />
             Processed
           </Badge>
         );
       case "failed":
         return (
-          <Badge variant="secondary" className="bg-red-100 text-red-800">
+          <Badge variant="secondary" className="bg-red-50 text-red-700">
             <XCircle className="w-3 h-3 mr-1" />
             Failed
           </Badge>
@@ -134,7 +134,7 @@ export default function DocumentsList({ projectId }: DocumentsListProps) {
         ) : (
           <div className="space-y-3">
             {documents.map((doc: Document) => (
-              <div key={doc.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 border border-border rounded-lg">
+              <div key={doc.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 bg-gray-50 hover:bg-gray-100 rounded-xl transition-colors">
                 <div className="flex items-start sm:items-center space-x-3 flex-1 min-w-0 mb-2 sm:mb-0">
                   <div className="text-2xl flex-shrink-0">{getFileIcon(doc.mimeType)}</div>
                   <div className="flex-1 min-w-0">

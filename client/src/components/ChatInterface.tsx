@@ -126,18 +126,18 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
         {messages.map((message) => (
           <div key={message.id} className={`flex space-x-3 ${message.role === "user" ? "justify-end" : ""}`}>
             {message.role === "assistant" && (
-              <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#FFA500] to-[#FF8C00] rounded-full flex items-center justify-center flex-shrink-0 shadow-md">
                 <span className="text-white font-medium text-sm">AI</span>
               </div>
             )}
             
             <div className={`flex-1 ${message.role === "user" ? "max-w-md" : ""}`}>
-              <div className={`rounded-lg p-4 ${
+              <div className={`rounded-xl p-4 ${
                 message.role === "user" 
-                  ? "bg-primary text-white" 
-                  : "bg-slate-100"
+                  ? "bg-[#FFA500] text-white shadow-md" 
+                  : "bg-gray-100"
               }`}>
-                <p className={message.role === "user" ? "text-white" : "text-slate-900"}>
+                <p className={message.role === "user" ? "text-white" : "text-gray-900"}>
                   {message.content}
                 </p>
               </div>

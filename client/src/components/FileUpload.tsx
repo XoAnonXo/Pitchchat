@@ -127,8 +127,8 @@ export default function FileUpload({ projectId }: FileUploadProps) {
       <div
         className={`relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
           dragActive 
-            ? 'bg-primary/5 border-4 border-primary scale-[1.02]' 
-            : 'bg-gradient-to-b from-secondary/30 to-secondary/10 border-2 border-dashed border-border hover:border-primary hover:bg-secondary/40'
+            ? 'bg-[#FFF5E6] border-4 border-[#FFA500] scale-[1.02] shadow-2xl' 
+            : 'bg-white border-2 border-dashed border-gray-300 hover:border-[#FFA500] hover:bg-[#FFF5E6]/30 hover:shadow-lg'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -138,24 +138,24 @@ export default function FileUpload({ projectId }: FileUploadProps) {
       >
         <div className="p-12 text-center relative z-10">
           <div className={`mx-auto h-20 w-20 rounded-2xl flex items-center justify-center mb-6 transition-all ${
-            dragActive ? 'bg-primary text-primary-foreground rotate-12' : 'bg-primary/10 text-primary'
+            dragActive ? 'bg-[#FFA500] text-white rotate-12 shadow-xl' : 'bg-[#FFF5E6] text-[#FFA500]'
           }`}>
             <Upload className="h-10 w-10" />
           </div>
           
-          <h3 className="text-2xl font-bold text-foreground mb-2">
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">
             {dragActive ? 'Drop to upload' : 'Upload your documents'}
           </h3>
-          <p className="text-lg text-muted-foreground mb-6">
+          <p className="text-lg text-gray-600 mb-6">
             Drag & drop files here, or click to browse
           </p>
           
           <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">PDF</span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">DOCX</span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">PPTX</span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">TXT</span>
-            <span className="text-muted-foreground">up to 500MB</span>
+            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">PDF</span>
+            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">DOCX</span>
+            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">PPTX</span>
+            <span className="bg-[#FFF5E6] text-[#FF6B00] px-4 py-2 rounded-full font-medium">TXT</span>
+            <span className="text-gray-500">up to 500MB</span>
           </div>
           
           <input
@@ -169,31 +169,31 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         </div>
         
         {/* Background decoration */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 left-0 w-40 h-40 bg-primary rounded-full -translate-x-20 -translate-y-20" />
-          <div className="absolute bottom-0 right-0 w-60 h-60 bg-primary rounded-full translate-x-30 translate-y-30" />
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-40 h-40 bg-[#FFA500] rounded-full -translate-x-20 -translate-y-20" />
+          <div className="absolute bottom-0 right-0 w-60 h-60 bg-[#FFA500] rounded-full translate-x-30 translate-y-30" />
         </div>
       </div>
 
       {/* Selected Files */}
       {selectedFiles.length > 0 && (
-        <div className="mt-6 bg-card rounded-xl p-6 border border-border">
-          <h4 className="text-sm font-medium text-foreground mb-3">Selected Files</h4>
-          <div className="space-y-2">
+        <div className="mt-6 bg-white rounded-2xl p-6 border border-gray-200 shadow-card">
+          <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">Selected Files</h4>
+          <div className="space-y-3">
             {selectedFiles.map(({ file, id }) => (
-              <div key={id} className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <Upload className="w-5 h-5 text-primary" />
+              <div key={id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-[#FFF5E6] rounded-xl flex items-center justify-center">
+                    <FileText className="w-6 h-6 text-[#FFA500]" />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-foreground">{file.name}</p>
-                    <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
+                    <p className="text-sm font-semibold text-gray-900">{file.name}</p>
+                    <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
                   </div>
                 </div>
                 <button
                   onClick={() => removeFile(id)}
-                  className="text-muted-foreground hover:text-destructive transition-colors"
+                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -203,10 +203,10 @@ export default function FileUpload({ projectId }: FileUploadProps) {
           <Button 
             onClick={uploadFiles}
             disabled={uploadMutation.isPending}
-            className="w-full mt-4 gradient-primary shadow-soft h-12 text-base"
+            className="w-full mt-6 bg-[#FFA500] hover:bg-[#FF8C00] text-white h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
           >
             {uploadMutation.isPending ? (
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center justify-center space-x-2">
                 <div className="scale-50">
                   <StartupLoadingSkeleton type="upload" className="w-4 h-4" />
                 </div>

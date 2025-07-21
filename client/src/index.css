@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -122,5 +124,26 @@
   
   .border-table {
     border-color: hsl(220, 13%, 92%); /* #EAEDF2 - Table/grid lines */
+  }
+
+  /* Hume-style Orange Accent Colors */
+  .bg-orange-500 { background-color: #FFA500; }
+  .bg-orange-600 { background-color: #FF8C00; }
+  .text-orange-500 { color: #FFA500; }
+  .text-orange-600 { color: #FF8C00; }
+  .border-orange-500 { border-color: #FFA500; }
+  
+  /* Custom shadows for Hume-style cards */
+  .shadow-card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  }
+  .shadow-card-hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Typography improvements */
+  .font-display {
+    font-weight: 700;
+    letter-spacing: -0.025em;
   }
 }

@@ -15,13 +15,18 @@ import {
   Plus,
   Upload,
   DollarSign,
-  Github,
   FileText,
   Database,
   Brain,
-  Zap,
   Menu,
-  X
+  X,
+  Home,
+  FolderOpen,
+  Users,
+  LogOut,
+  Sparkles,
+  Clock,
+  CheckCircle2
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
@@ -36,9 +41,7 @@ export default function Dashboard() {
   const queryClient = useQueryClient();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-
   const [selectedModel, setSelectedModel] = useState<string>('gpt-4o');
 
   // Redirect to login if not authenticated
@@ -134,417 +137,360 @@ export default function Dashboard() {
 
   if (projectsLoading) {
     return (
-      <div className="min-h-screen bg-background p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-[#FAFAFA] p-4 sm:p-6 lg:p-8">
         <StartupLoadingSkeleton type="dashboard" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-background border-b border-border sticky top-0 z-50">
-        <div className="px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              {/* Mobile menu button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-              
-              <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-primary to-[#5C8AF7] rounded-lg flex items-center justify-center">
-                  <span className="text-primary-foreground font-semibold text-sm">PC</span>
-                </div>
-                <h1 className="text-lg sm:text-xl font-semibold text-foreground hidden sm:block">PitchChat Builder</h1>
-              </div>
+    <div className="min-h-screen bg-[#FAFAFA] flex">
+      {/* Fixed Sidebar */}
+      <aside className={`
+        fixed top-0 left-0 h-full w-72 bg-white border-r border-gray-200 z-50
+        transform transition-transform duration-300 ease-in-out
+        ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        {/* Logo Section */}
+        <div className="h-20 px-6 flex items-center justify-between border-b border-gray-100">
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#FFA500] to-[#FF8C00] rounded-xl flex items-center justify-center shadow-md">
+              <Sparkles className="w-6 h-6 text-white" />
             </div>
-            
-            <nav className="hidden md:flex space-x-8">
-              <Link href="/" className="text-primary font-medium">
-                Dashboard
-              </Link>
-              <Link href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} className="text-muted-foreground hover:text-primary font-medium transition-colors">
-                Documents
-              </Link>
-              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Analytics</button>
-              <button className="text-muted-foreground hover:text-primary font-medium transition-colors">Settings</button>
-            </nav>
+            <div>
+              <h1 className="font-bold text-lg text-gray-900">PitchChat</h1>
+              <p className="text-xs text-gray-500">AI Document Assistant</p>
+            </div>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setMobileSidebarOpen(false)}
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
 
-            <div className="flex items-center space-x-2 sm:space-x-4">
-              <div className="hidden sm:flex items-center space-x-2 bg-muted px-3 py-1.5 rounded-full">
-                <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
-              </div>
-              
-              {/* Mobile menu button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                className="md:hidden"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              >
-                <Menu className="h-5 w-5" />
-              </Button>
-              
-              <div className="hidden md:flex items-center space-x-4">
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => window.location.href = "/api/logout"}
-                  className="text-muted-foreground hover:text-foreground"
+        {/* Navigation */}
+        <nav className="px-4 py-6 space-y-1">
+          <Link href="/" className="flex items-center space-x-3 px-4 py-3 bg-[#FFF5E6] text-[#FF6B00] rounded-xl transition-all duration-200">
+            <Home className="w-5 h-5" />
+            <span className="font-medium">Dashboard</span>
+          </Link>
+          
+          <Link href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <FolderOpen className="w-5 h-5" />
+            <span className="font-medium">Documents</span>
+          </Link>
+          
+          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <MessageSquare className="w-5 h-5" />
+            <span className="font-medium">Conversations</span>
+          </button>
+          
+          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <BarChart3 className="w-5 h-5" />
+            <span className="font-medium">Analytics</span>
+          </button>
+          
+          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+            <Settings className="w-5 h-5" />
+            <span className="font-medium">Settings</span>
+          </button>
+        </nav>
+
+        {/* New Project Button */}
+        <div className="px-4 mb-6">
+          <Button 
+            className="w-full bg-[#FFA500] hover:bg-[#FF8C00] text-white rounded-xl h-12 font-medium shadow-lg transition-all duration-200 hover:shadow-xl"
+            onClick={handleCreateProject}
+            disabled={createProjectMutation.isPending}
+          >
+            <Plus className="w-5 h-5 mr-2" />
+            New Project
+          </Button>
+        </div>
+
+        {/* Projects Section */}
+        {projects.length > 0 && (
+          <div className="px-4">
+            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 mb-3">Recent Projects</h3>
+            <div className="space-y-2">
+              {projects.slice(0, 3).map((project: any) => (
+                <button
+                  key={project.id}
+                  onClick={() => {
+                    setSelectedProjectId(project.id);
+                    setMobileSidebarOpen(false);
+                  }}
+                  className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${
+                    selectedProjectId === project.id 
+                      ? 'bg-[#FFF5E6] text-[#FF6B00]' 
+                      : 'text-gray-600 hover:bg-gray-50'
+                  }`}
                 >
-                  Logout
-                </Button>
-                {user.profileImageUrl ? (
-                  <img 
-                    src={user.profileImageUrl} 
-                    alt="Profile" 
-                    className="w-8 h-8 rounded-full object-cover"
-                  />
-                ) : (
-                  <div className="w-8 h-8 bg-muted rounded-full" />
-                )}
+                  <div className="font-medium text-sm">{project.name}</div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Updated {new Date(project.updatedAt).toLocaleDateString()}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* User Profile Section */}
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100 bg-white">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              {user.profileImageUrl ? (
+                <img 
+                  src={user.profileImageUrl} 
+                  alt="Profile" 
+                  className="w-10 h-10 rounded-full object-cover"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                  <Users className="w-5 h-5 text-gray-500" />
+                </div>
+              )}
+              <div>
+                <p className="text-sm font-medium text-gray-900">{user.email?.split('@')[0]}</p>
+                <p className="text-xs text-green-600">{user.credits || 0} credits</p>
               </div>
             </div>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              onClick={() => window.location.href = "/api/logout"}
+              className="text-gray-400 hover:text-gray-600"
+            >
+              <LogOut className="h-5 w-5" />
+            </Button>
           </div>
         </div>
-        
-        {/* Mobile Navigation Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-background border-t border-border">
-            <nav className="px-4 py-3 space-y-1">
-              <Link href="/" className="block px-3 py-2 text-primary font-medium">
-                Dashboard
-              </Link>
-              <Link 
-                href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} 
-                className="block px-3 py-2 text-muted-foreground hover:text-primary font-medium"
+      </aside>
+
+      {/* Mobile Overlay */}
+      {mobileSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setMobileSidebarOpen(false)}
+        />
+      )}
+
+      {/* Main Content Area */}
+      <div className="flex-1 lg:ml-72">
+        {/* Top Header */}
+        <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
+          <div className="px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setMobileSidebarOpen(true)}
               >
-                Documents
-              </Link>
-              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
-                Analytics
-              </button>
-              <button className="block w-full text-left px-3 py-2 text-muted-foreground hover:text-primary font-medium">
-                Settings
-              </button>
-              <div className="flex items-center justify-between px-3 py-2 border-t border-border mt-2 pt-2">
-                <div className="flex items-center space-x-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full"></span>
-                  <span className="text-sm font-medium text-muted-foreground">{user.credits || 0} credits</span>
+                <Menu className="h-5 w-5" />
+              </Button>
+              {selectedProject && (
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900">{selectedProject.name}</h2>
+                  <p className="text-sm text-gray-500">Last updated {new Date(selectedProject.updatedAt).toLocaleDateString()}</p>
                 </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm"
-                  onClick={() => window.location.href = "/api/logout"}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  Logout
-                </Button>
-              </div>
-            </nav>
-          </div>
-        )}
-      </header>
-
-      <div className="flex relative">
-        {/* Mobile Sidebar Overlay */}
-        {mobileSidebarOpen && (
-          <div 
-            className="fixed inset-0 bg-black/50 z-40 md:hidden"
-            onClick={() => setMobileSidebarOpen(false)}
-          />
-        )}
-        
-        {/* Sidebar */}
-        <aside className={`
-          fixed md:relative top-0 left-0 h-full w-64 bg-card border-r border-border flex-shrink-0 z-50
-          transform transition-transform duration-200 ease-in-out
-          ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
-        `}>
-          <div className="flex items-center justify-between p-4 md:hidden border-b border-border">
-            <h2 className="font-semibold">Menu</h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setMobileSidebarOpen(false)}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-          
-          <div className="p-4 md:p-6">
-            <Button 
-              className="w-full gradient-primary text-primary-foreground hover:opacity-90 rounded-lg font-medium shadow-soft"
-              onClick={handleCreateProject}
-              disabled={createProjectMutation.isPending}
-            >
-              <Plus className="w-4 h-4 mr-2" />
-              New Project
-            </Button>
-          </div>
-          
-          <nav className="px-4 md:px-6">
-            <div className="space-y-1">
-              <Link href="/" className="flex items-center space-x-3 text-primary bg-secondary px-3 py-2 rounded-lg transition-colors">
-                <Database className="w-4 h-4" />
-                <span className="text-sm font-medium">All Projects</span>
-              </Link>
-              <button className="w-full text-left flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
-                <MessageSquare className="w-4 h-4" />
-                <span className="text-sm font-medium">Active Chats</span>
-              </button>
-              <Link 
-                href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} 
-                className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
-                  selectedProjectId 
-                    ? "text-muted-foreground hover:bg-accent hover:text-accent-foreground" 
-                    : "text-muted-foreground/50 cursor-not-allowed"
-                }`}
-              >
-                <FileText className="w-4 h-4" />
-                <span className="text-sm font-medium">Manage Documents</span>
-              </Link>
-              <button className="w-full text-left flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
-                <LinkIcon className="w-4 h-4" />
-                <span className="text-sm font-medium">Shared Links</span>
-              </button>
-              <button className="w-full text-left flex items-center space-x-3 text-muted-foreground hover:bg-accent hover:text-accent-foreground px-3 py-2 rounded-lg transition-colors">
-                <BarChart3 className="w-4 h-4" />
-                <span className="text-sm font-medium">Analytics</span>
-              </button>
+              )}
             </div>
-          </nav>
-
-          {projects.length > 0 && (
-            <div className="px-4 md:px-6 mt-8">
-              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                Recent Projects
-              </h3>
-              <div className="space-y-2">
-                {projects.slice(0, 3).map((project: any) => (
-                  <button
-                    key={project.id}
-                    onClick={() => {
-                      setSelectedProjectId(project.id);
-                      setMobileSidebarOpen(false);
-                    }}
-                    className={`block w-full text-left p-3 rounded-lg border transition-colors ${
-                      selectedProjectId === project.id 
-                        ? 'bg-primary text-primary-foreground border-primary' 
-                        : 'bg-background text-card-foreground border-border hover:bg-accent hover:text-accent-foreground'
-                    }`}
-                  >
-                    <div className="font-medium text-sm">{project.name}</div>
-                    <div className="text-xs opacity-75 mt-1">
-                      Updated {new Date(project.updatedAt).toLocaleDateString()}
-                    </div>
-                  </button>
-                ))}
-              </div>
+            <div className="flex items-center gap-3">
+              <Button variant="outline" className="rounded-xl border-gray-200 hover:bg-gray-50">
+                Export Data
+              </Button>
+              <Button onClick={() => setShowShareModal(true)} className="bg-[#FFA500] hover:bg-[#FF8C00] text-white rounded-xl">
+                Share Link
+              </Button>
             </div>
-          )}
-        </aside>
+          </div>
+        </header>
 
-        {/* Main Content */}
-        <main className="flex-1 bg-background min-w-0">
-          {selectedProject ? (
-            <>
-              {/* Project Header */}
-              <div className="bg-card border-b border-border px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                  <div>
-                    <h2 className="text-xl sm:text-2xl font-semibold text-foreground">{selectedProject.name}</h2>
-                    <p className="text-sm text-muted-foreground mt-1">
-                      Last updated {new Date(selectedProject.updatedAt).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-2 sm:gap-3">
-                    <Button variant="outline" className="rounded-lg text-sm sm:text-base">
-                      Export Data
-                    </Button>
-                    <Button onClick={() => setShowShareModal(true)} className="rounded-lg text-sm sm:text-base">
-                      Share Link
-                    </Button>
-                  </div>
-                </div>
+        {selectedProject ? (
+          <div className="p-6 lg:p-8">
+            {/* Document Upload Section */}
+            <section className="mb-10">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Upload Documents</h3>
+              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
+                <FileUpload projectId={selectedProject.id} />
               </div>
+            </section>
 
-              <div className="p-4 sm:p-6 lg:p-8">
-                {/* Central Upload Area */}
-                <div className="max-w-5xl mx-auto mb-8">
-                  <div className="text-center mb-6">
-                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                      Upload Your Documents
-                    </h2>
-                    <p className="text-muted-foreground text-lg">
-                      Add your startup documents to build an intelligent pitch assistant
-                    </p>
-                  </div>
-                  
-                  {/* Large Upload Component */}
-                  <div className="bg-card rounded-2xl shadow-soft border-2 border-dashed border-primary/20 p-8 mb-6">
-                    <FileUpload projectId={selectedProject.id} />
-                  </div>
-
-                  {/* Quick Stats */}
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                    <div className="bg-secondary/50 rounded-xl p-4 text-center">
-                      <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <p className="text-2xl font-bold text-foreground">{documents.length}</p>
-                      <p className="text-sm text-muted-foreground">Documents Uploaded</p>
+            {/* Stats Cards */}
+            <section className="mb-10">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-12 h-12 bg-[#FFF5E6] rounded-xl flex items-center justify-center">
+                        <FileText className="w-6 h-6 text-[#FFA500]" />
+                      </div>
+                      <span className="text-3xl font-bold text-gray-900">{documents.length}</span>
                     </div>
-                    <div className="bg-secondary/50 rounded-xl p-4 text-center">
-                      <Brain className="w-8 h-8 text-success mx-auto mb-2" />
-                      <p className="text-2xl font-bold text-foreground">
+                    <p className="text-sm font-medium text-gray-600">Documents Uploaded</p>
+                    <p className="text-xs text-gray-400 mt-1">All your project files</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
+                        <Brain className="w-6 h-6 text-green-600" />
+                      </div>
+                      <span className="text-3xl font-bold text-gray-900">
                         {documents.length > 0 
                           ? Math.round((documents.filter((d: any) => d.status === 'completed').length / documents.length) * 100) 
                           : 0}%
-                      </p>
-                      <p className="text-sm text-muted-foreground">Processed</p>
+                      </span>
                     </div>
-                    <div className="bg-secondary/50 rounded-xl p-4 text-center">
-                      <MessageSquare className="w-8 h-8 text-alert mx-auto mb-2" />
-                      <p className="text-2xl font-bold text-foreground">
+                    <p className="text-sm font-medium text-gray-600">Processed</p>
+                    <p className="text-xs text-gray-400 mt-1">AI analysis complete</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
+                        <MessageSquare className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <span className="text-3xl font-bold text-gray-900">
                         {documents.some((d: any) => d.status === 'completed') ? 'Ready' : 'Waiting'}
-                      </p>
-                      <p className="text-sm text-muted-foreground">AI Assistant Status</p>
+                      </span>
                     </div>
+                    <p className="text-sm font-medium text-gray-600">AI Assistant Status</p>
+                    <p className="text-xs text-gray-400 mt-1">
+                      {documents.some((d: any) => d.status === 'completed') 
+                        ? 'Chat is available' 
+                        : 'Upload documents to start'}
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Documents and Chat Section */}
+            <section>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* Documents List */}
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <Database className="w-5 h-5 mr-2 text-[#FFA500]" />
+                    Your Documents
+                  </h3>
+                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                    <DocumentsList projectId={selectedProject.id} />
                   </div>
                 </div>
 
-                {/* Documents and Chat Section */}
-                <div className="max-w-7xl mx-auto">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-                    {/* Documents List */}
-                    <div>
-                      <div className="bg-card rounded-xl shadow-subtle border border-border">
-                        <div className="p-6 border-b border-border">
-                          <h3 className="text-lg font-semibold text-foreground flex items-center">
-                            <Database className="w-5 h-5 mr-2 text-primary" />
-                            Your Documents
-                          </h3>
-                        </div>
-                        <div className="p-6">
-                          <DocumentsList projectId={selectedProject.id} />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Chat Interface */}
-                    <div>
-                      <div className="bg-card rounded-xl shadow-subtle border border-border">
-                        <div className="p-6 border-b border-border">
-                          <div className="flex items-center justify-between">
-                            <h3 className="text-lg font-semibold text-foreground flex items-center">
-                              <MessageSquare className="w-5 h-5 mr-2 text-primary" />
-                              Test AI Assistant
-                            </h3>
-                            <AIModelSelector 
-                              value={selectedModel} 
-                              onChange={setSelectedModel}
-                              className="w-48"
-                            />
-                          </div>
-                        </div>
-                        <div className="p-6">
-                          <ChatInterface projectId={selectedProject.id} model={selectedModel} />
-                        </div>
-                      </div>
-                    </div>
+                {/* Chat Interface */}
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-xl font-bold text-gray-900 flex items-center">
+                      <MessageSquare className="w-5 h-5 mr-2 text-[#FFA500]" />
+                      Test AI Assistant
+                    </h3>
+                    <AIModelSelector 
+                      value={selectedModel} 
+                      onChange={setSelectedModel}
+                      className="w-48"
+                    />
+                  </div>
+                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                    <ChatInterface projectId={selectedProject.id} model={selectedModel} />
                   </div>
                 </div>
-
-                {/* Analytics Section */}
-                {analytics && (
-                  <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <Card className="rounded-xl border-border shadow-subtle">
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-muted-foreground text-sm font-medium">Total Questions</p>
-                            <p className="text-2xl font-semibold text-foreground mt-1">
-                              {analytics.totalQuestions}
-                            </p>
-                          </div>
-                          <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
-                            <MessageSquare className="w-6 h-6 text-primary" />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="rounded-xl border-border shadow-subtle">
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-muted-foreground text-sm font-medium">Active Links</p>
-                            <p className="text-2xl font-semibold text-foreground mt-1">
-                              {analytics.activeLinks}
-                            </p>
-                          </div>
-                          <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
-                            <LinkIcon className="w-6 h-6 text-success" />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    <Card className="rounded-xl border-border shadow-subtle">
-                      <CardContent className="p-6">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="text-muted-foreground text-sm font-medium">Cost This Month</p>
-                            <p className="text-2xl font-semibold text-foreground mt-1">
-                              ${analytics.monthlyCost.toFixed(2)}
-                            </p>
-                          </div>
-                          <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
-                            <DollarSign className="w-6 h-6 text-alert" />
-                          </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
-                )}
               </div>
-            </>
-          ) : (
-            <div className="flex items-center justify-center h-full">
-              <div className="text-center">
-                <Database className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-foreground mb-2">No Projects Yet</h3>
-                <p className="text-muted-foreground mb-4">Create your first project to get started</p>
-                <Button 
-                  onClick={handleCreateProject}
-                  disabled={createProjectMutation.isPending}
-                  className="gradient-primary shadow-soft"
-                >
-                  <Plus className="w-4 h-4 mr-2" />
-                  Create Project
-                </Button>
-              </div>
+            </section>
+
+            {/* Analytics Section */}
+            {analytics && (
+              <section className="mt-10">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Analytics Overview</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-600">Total Questions</p>
+                          <p className="text-2xl font-bold text-gray-900 mt-1">
+                            {analytics.totalQuestions}
+                          </p>
+                        </div>
+                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
+                          <MessageSquare className="w-6 h-6 text-purple-600" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-600">Active Links</p>
+                          <p className="text-2xl font-bold text-gray-900 mt-1">
+                            {analytics.activeLinks}
+                          </p>
+                        </div>
+                        <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
+                          <LinkIcon className="w-6 h-6 text-green-600" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+                    <CardContent className="p-6">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm font-medium text-gray-600">Cost This Month</p>
+                          <p className="text-2xl font-bold text-gray-900 mt-1">
+                            ${analytics.monthlyCost.toFixed(2)}
+                          </p>
+                        </div>
+                        <div className="w-12 h-12 bg-[#FFF5E6] rounded-xl flex items-center justify-center">
+                          <DollarSign className="w-6 h-6 text-[#FFA500]" />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </section>
+            )}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <Database className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">No Projects Yet</h3>
+              <p className="text-gray-500 mb-4">Create your first project to get started</p>
+              <Button 
+                onClick={handleCreateProject}
+                disabled={createProjectMutation.isPending}
+                className="bg-[#FFA500] hover:bg-[#FF8C00] text-white rounded-xl"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Create Project
+              </Button>
             </div>
-          )}
-        </main>
+          </div>
+        )}
       </div>
 
-      {/* Share Link Modal */}
       {showShareModal && selectedProject && (
-        <ShareLinkModal
-          projectId={selectedProject.id}
-          isOpen={showShareModal}
-          onClose={() => setShowShareModal(false)}
+        <ShareLinkModal 
+          projectId={selectedProject.id} 
+          onClose={() => setShowShareModal(false)} 
         />
       )}
-      
-
     </div>
   );
 }

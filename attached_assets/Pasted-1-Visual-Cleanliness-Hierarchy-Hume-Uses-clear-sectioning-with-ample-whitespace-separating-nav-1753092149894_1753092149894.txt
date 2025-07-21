@@ -1,0 +1,79 @@
+1. Visual Cleanliness & Hierarchy
+
+Hume: Uses clear sectioning with ample whitespace, separating navigation, headers (like “Featured Voices”), content cards, and controls for excellent scan-ability and less cognitive load.
+
+Current Replit App: Standard dev interface with dense panels, minimal visual hierarchy, and typical utility-focused Replit tooling UI.
+
+Design Tip:
+Adopt more deliberate content sections in your app:
+
+Add padding and visual separation between different content blocks (e.g., chats, agent commands, and file uploads).
+
+Use headings, cards, and divider lines to segment sections.
+
+2. Sidebar and Navigation
+
+Hume: Uses a minimalist, vertical navigation sidebar with clearly labeled sections, icons, and grouped navigation.
+
+Current Replit App: Replit’s system side/top bar and tabs, less custom control.
+
+Design Tip:
+Introduce a fixed vertical sidebar for navigation in your app.
+
+Place your main pages (Dashboard, Chat, Files, Voices, Settings…) with icons and labels for quick access.
+
+Highlight the current section, and collapse unneeded options for simplicity.
+
+3. Cards & Lists for Items
+
+Hume: Content (like voice profiles) is presented as cards with description, image/avatar, and clearly styled action buttons (e.g., Play, Info, More).
+
+Current Replit App: No special card styling.
+
+Design Tip:
+Implement card-based layouts for key data:
+
+Make agent/chat messages, voice options, or configurable modules appear inside lightly elevated “cards.”
+
+Add a title, subtitle, avatar/icon, description, and action buttons.
+
+Use background color and box-shadow for depth.
+
+4. Accent Color & Buttons
+
+Hume: Uses a consistent accent color (often a bold yellow/orange) for CTAs (call-to-action buttons), links, and highlights to draw attention.
+
+Current Replit App: Default Replit (blue system) buttons and toggles.
+
+Design Tip:
+Pick a bold accent color (like orange: #FFA500 or a similar variation) and use it for:
+
+Primary action buttons (Submit, Play, Deploy)
+
+Highlights and focus states
+
+5. Typography & Icons
+
+Hume: Uses larger titles, clear font hierarchy, and subtle supporting text. Icons support quick navigation.
+
+Current Replit App: Default system fonts; little variation.
+
+Design Tip:
+
+Use a modern sans-serif font (like Inter, IBM Plex, or similar).
+
+Increase heading sizes, and use lighter font for less important text.
+
+Add icons next to navigation/text labels for clarity.
+
+Summary of what to do in your Replit app (PitchChatAI):
+
+Build a sidebar nav with icons and page labels, styled similarly to Hume.
+
+Use card layouts for presenting data, agent results, or user interactions.
+
+Add whitespace, padding, and clear content blocks.
+
+Pick and consistently use a distinct Hume-style accent color (#FFA500 is a solid choice).
+
+Use bigger, cleaner typography and support with small icons and visual indicators.
