@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -50,6 +50,7 @@ export default function Dashboard() {
   const { user, isLoading: authLoading } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [, setLocation] = useLocation();
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showShareModal, setShowShareModal] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -201,7 +202,10 @@ export default function Dashboard() {
             <span className="font-medium">Dashboard</span>
           </Link>
           
-          <Link href={selectedProjectId ? `/documents/${selectedProjectId}` : "#"} className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link 
+            href={selectedProjectId ? `/documents/${selectedProjectId}` : "/"} 
+            className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200"
+          >
             <FolderOpen className="w-5 h-5" />
             <span className="font-medium">Documents</span>
           </Link>
