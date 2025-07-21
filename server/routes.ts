@@ -54,7 +54,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/projects", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const projectData = insertProjectSchema.parse({ ...req.body, userId });
       const project = await storage.createProject(projectData);
       res.json(project);
@@ -66,7 +66,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/projects/:id", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const project = await storage.getProject(req.params.id);
       
       if (!project || project.userId !== userId) {
@@ -452,7 +452,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Analytics routes
   app.get("/api/analytics", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const analytics = await storage.getUserAnalytics(userId);
       res.json(analytics);
     } catch (error) {
@@ -463,7 +463,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/analytics/detailed", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const detailedAnalytics = await storage.getDetailedAnalytics(userId);
       res.json(detailedAnalytics);
     } catch (error) {
@@ -578,7 +578,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Update user notification preferences
   app.patch("/api/user/notifications", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { emailAlerts, weeklyReports } = req.body;
       
       await storage.updateUserNotifications(userId, { emailAlerts, weeklyReports });
@@ -592,7 +592,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Update user profile
   app.patch("/api/user/profile", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { name, email } = req.body;
       
       const user = await storage.getUser(userId);
@@ -617,7 +617,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Delete user account
   app.delete("/api/user/delete", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       // In a production app, you would delete all user data here
       // For now, we'll just return success
@@ -631,7 +631,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Export user data
   app.get("/api/user/export", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       // Get all user data
       const user = await storage.getUser(userId);
@@ -712,7 +712,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Conversations routes
   app.get("/api/conversations", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const conversations = await storage.getUserConversations(userId);
       res.json(conversations);
     } catch (error) {
@@ -723,7 +723,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/conversations/:conversationId/messages", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       // Verify conversation belongs to user
       const conversations = await storage.getUserConversations(userId);
@@ -744,7 +744,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Integration routes
   app.post("/api/projects/:projectId/integrations/github", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { token } = req.body;
       
       if (!token) {
@@ -777,7 +777,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/projects/:projectId/integrations/notion", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { token } = req.body;
       
       if (!token) {
@@ -810,7 +810,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.post("/api/projects/:projectId/integrations/google-drive", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { accessToken, refreshToken, clientId, clientSecret } = req.body;
       
       if (!accessToken) {
@@ -850,7 +850,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get project integrations
   app.get("/api/projects/:projectId/integrations", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       
       const project = await storage.getProject(req.params.projectId);
       if (!project || project.userId !== userId) {
@@ -868,7 +868,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Sync integration
   app.post("/api/projects/:projectId/integrations/:integrationId/sync", isAuthenticated, async (req: any, res) => {
     try {
-      const userId = req.user.claims.sub;
+      const userId = req.user.id;
       const { projectId, integrationId } = req.params;
       
       const project = await storage.getProject(projectId);

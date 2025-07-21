@@ -142,6 +142,11 @@ export default function AnalyticsPage() {
     );
   }
 
+  // Check if there's no data
+  const hasNoData = analytics.overview.totalConversations === 0 && 
+                    analytics.overview.totalDocuments === 0 && 
+                    analytics.overview.totalProjects === 0;
+
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex">
       {/* Fixed Sidebar */}
@@ -222,7 +227,7 @@ export default function AnalyticsPage() {
             <Button 
               variant="ghost" 
               size="icon"
-              onClick={() => window.location.href = "/api/logout"}
+              onClick={() => window.location.href = "/api/auth/logout"}
               className="text-gray-400 hover:text-gray-600"
             >
               <LogOut className="h-5 w-5" />
@@ -268,6 +273,27 @@ export default function AnalyticsPage() {
         </header>
 
         <div className="p-6 lg:p-8 space-y-8">
+          {/* Empty State */}
+          {hasNoData ? (
+            <div className="max-w-2xl mx-auto text-center py-20">
+              <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <BarChart3 className="w-10 h-10 text-gray-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">No Analytics Data Yet</h3>
+              <p className="text-gray-600 mb-8">
+                Analytics will appear here once you start receiving visitors and conversations through your shared pitch links. 
+                Create your first project and share it with investors to start seeing insights.
+              </p>
+              <div className="flex justify-center gap-4">
+                <Link href="/">
+                  <Button className="bg-black hover:bg-gray-800 text-white rounded-xl px-6">
+                    Go to Dashboard
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <>
           {/* Key Metrics Overview */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
@@ -621,6 +647,8 @@ export default function AnalyticsPage() {
               </CardContent>
             </Card>
           </div>
+            </>
+          )}
         </div>
       </div>
     </div>
