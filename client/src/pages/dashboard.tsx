@@ -69,6 +69,12 @@ export default function Dashboard() {
     enabled: !!user,
   });
 
+  // Fetch documents for selected project
+  const { data: documents = [] } = useQuery({
+    queryKey: ["/api/projects", selectedProjectId, "documents"],
+    enabled: !!selectedProjectId,
+  });
+
   // Auto-select first project or create default
   useEffect(() => {
     if (projects.length > 0 && !selectedProjectId) {
@@ -373,28 +379,86 @@ export default function Dashboard() {
               </div>
 
               <div className="p-4 sm:p-6 lg:p-8">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
-                  {/* Left Column: File Upload & Documents */}
-                  <div className="lg:col-span-1 space-y-4 sm:space-y-6">
+                {/* Central Upload Area */}
+                <div className="max-w-5xl mx-auto mb-8">
+                  <div className="text-center mb-6">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+                      Upload Your Documents
+                    </h2>
+                    <p className="text-muted-foreground text-lg">
+                      Add your startup documents to build an intelligent pitch assistant
+                    </p>
+                  </div>
+                  
+                  {/* Large Upload Component */}
+                  <div className="bg-card rounded-2xl shadow-soft border-2 border-dashed border-primary/20 p-8 mb-6">
                     <FileUpload projectId={selectedProject.id} />
-                    <DocumentsList projectId={selectedProject.id} />
                   </div>
 
-                  {/* Right Column: Chat Interface */}
-                  <div className="lg:col-span-2">
-                    <div className="bg-card rounded-xl shadow-subtle border border-border p-4 sm:p-6 mb-4 sm:mb-6">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-                        <h3 className="text-lg font-semibold text-foreground">AI Assistant</h3>
-                        <div className="flex items-center space-x-2">
-                          <Zap className="w-4 h-4 text-muted-foreground hidden sm:block" />
-                          <AIModelSelector 
-                            value={selectedModel} 
-                            onChange={setSelectedModel}
-                            className="w-full sm:w-48"
-                          />
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                    <div className="bg-secondary/50 rounded-xl p-4 text-center">
+                      <FileText className="w-8 h-8 text-primary mx-auto mb-2" />
+                      <p className="text-2xl font-bold text-foreground">{documents.length}</p>
+                      <p className="text-sm text-muted-foreground">Documents Uploaded</p>
+                    </div>
+                    <div className="bg-secondary/50 rounded-xl p-4 text-center">
+                      <Brain className="w-8 h-8 text-success mx-auto mb-2" />
+                      <p className="text-2xl font-bold text-foreground">
+                        {documents.length > 0 
+                          ? Math.round((documents.filter((d: any) => d.status === 'completed').length / documents.length) * 100) 
+                          : 0}%
+                      </p>
+                      <p className="text-sm text-muted-foreground">Processed</p>
+                    </div>
+                    <div className="bg-secondary/50 rounded-xl p-4 text-center">
+                      <MessageSquare className="w-8 h-8 text-alert mx-auto mb-2" />
+                      <p className="text-2xl font-bold text-foreground">
+                        {documents.some((d: any) => d.status === 'completed') ? 'Ready' : 'Waiting'}
+                      </p>
+                      <p className="text-sm text-muted-foreground">AI Assistant Status</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Documents and Chat Section */}
+                <div className="max-w-7xl mx-auto">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+                    {/* Documents List */}
+                    <div>
+                      <div className="bg-card rounded-xl shadow-subtle border border-border">
+                        <div className="p-6 border-b border-border">
+                          <h3 className="text-lg font-semibold text-foreground flex items-center">
+                            <Database className="w-5 h-5 mr-2 text-primary" />
+                            Your Documents
+                          </h3>
+                        </div>
+                        <div className="p-6">
+                          <DocumentsList projectId={selectedProject.id} />
                         </div>
                       </div>
-                      <ChatInterface projectId={selectedProject.id} model={selectedModel} />
+                    </div>
+
+                    {/* Chat Interface */}
+                    <div>
+                      <div className="bg-card rounded-xl shadow-subtle border border-border">
+                        <div className="p-6 border-b border-border">
+                          <div className="flex items-center justify-between">
+                            <h3 className="text-lg font-semibold text-foreground flex items-center">
+                              <MessageSquare className="w-5 h-5 mr-2 text-primary" />
+                              Test AI Assistant
+                            </h3>
+                            <AIModelSelector 
+                              value={selectedModel} 
+                              onChange={setSelectedModel}
+                              className="w-48"
+                            />
+                          </div>
+                        </div>
+                        <div className="p-6">
+                          <ChatInterface projectId={selectedProject.id} model={selectedModel} />
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

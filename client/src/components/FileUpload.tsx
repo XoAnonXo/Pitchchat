@@ -123,26 +123,42 @@ export default function FileUpload({ projectId }: FileUploadProps) {
   };
 
   return (
-    <Card className="rounded-xl border-border shadow-subtle">
-      <CardContent className="p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-4">Upload Documents</h3>
-        
-        {/* File Upload Dropzone */}
-        <div
-          className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
-            dragActive 
-              ? 'border-primary bg-secondary' 
-              : 'border-border hover:border-primary'
-          }`}
-          onDragEnter={handleDrag}
-          onDragLeave={handleDrag}
-          onDragOver={handleDrag}
-          onDrop={handleDrop}
-          onClick={() => document.getElementById('file-input')?.click()}
-        >
-          <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
-          <p className="text-foreground font-medium mb-1">Drop files here or click to browse</p>
-          <p className="text-sm text-muted-foreground">PDF, DOCX, PPTX, TXT up to 500MB</p>
+    <div className="w-full">
+      {/* File Upload Dropzone */}
+      <div
+        className={`relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
+          dragActive 
+            ? 'bg-primary/5 border-4 border-primary scale-[1.02]' 
+            : 'bg-gradient-to-b from-secondary/30 to-secondary/10 border-2 border-dashed border-border hover:border-primary hover:bg-secondary/40'
+        }`}
+        onDragEnter={handleDrag}
+        onDragLeave={handleDrag}
+        onDragOver={handleDrag}
+        onDrop={handleDrop}
+        onClick={() => document.getElementById('file-input')?.click()}
+      >
+        <div className="p-12 text-center relative z-10">
+          <div className={`mx-auto h-20 w-20 rounded-2xl flex items-center justify-center mb-6 transition-all ${
+            dragActive ? 'bg-primary text-primary-foreground rotate-12' : 'bg-primary/10 text-primary'
+          }`}>
+            <Upload className="h-10 w-10" />
+          </div>
+          
+          <h3 className="text-2xl font-bold text-foreground mb-2">
+            {dragActive ? 'Drop to upload' : 'Upload your documents'}
+          </h3>
+          <p className="text-lg text-muted-foreground mb-6">
+            Drag & drop files here, or click to browse
+          </p>
+          
+          <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">PDF</span>
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">DOCX</span>
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">PPTX</span>
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded-full">TXT</span>
+            <span className="text-muted-foreground">up to 500MB</span>
+          </div>
+          
           <input
             id="file-input"
             type="file"
@@ -152,66 +168,76 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             multiple
           />
         </div>
-
-        {/* Selected Files */}
-        {selectedFiles.length > 0 && (
-          <div className="mt-4">
-            <h4 className="text-sm font-medium text-foreground mb-2">Selected Files</h4>
-            <div className="space-y-2">
-              {selectedFiles.map(({ file, id }) => (
-                <div key={id} className="flex items-center justify-between p-2 bg-accent rounded-lg">
-                  <div className="flex items-center space-x-2">
-                    <Upload className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-sm font-medium text-foreground">{file.name}</span>
-                    <span className="text-xs text-muted-foreground">({formatFileSize(file.size)})</span>
-                  </div>
-                  <button
-                    onClick={() => removeFile(id)}
-                    className="text-muted-foreground hover:text-destructive"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-            </div>
-            <Button 
-              onClick={uploadFiles}
-              disabled={uploadMutation.isPending}
-              className="w-full mt-3 gradient-primary shadow-soft"
-            >
-              {uploadMutation.isPending ? (
-                <div className="flex items-center space-x-2">
-                  <div className="scale-50">
-                    <StartupLoadingSkeleton type="upload" className="w-4 h-4" />
-                  </div>
-                  <span>Uploading...</span>
-                </div>
-              ) : (
-                <>
-                  <Upload className="w-4 h-4 mr-2" />
-                  Upload {selectedFiles.length} File{selectedFiles.length > 1 ? 's' : ''}
-                </>
-              )}
-            </Button>
-          </div>
-        )}
-
-        {/* Integration Options */}
-        <div className="mt-6">
-          <IntegrationDialog 
-            projectId={projectId}
-            trigger={
-              <Button 
-                variant="outline" 
-                className="w-full h-12 rounded-lg border-dashed border-2 text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
-              >
-                <Upload className="w-4 h-4 mr-2" />
-                Import from Platforms
-              </Button>
-            }
-          />
+        
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute top-0 left-0 w-40 h-40 bg-primary rounded-full -translate-x-20 -translate-y-20" />
+          <div className="absolute bottom-0 right-0 w-60 h-60 bg-primary rounded-full translate-x-30 translate-y-30" />
         </div>
-      </CardContent>
-    </Card>
+      </div>
+
+      {/* Selected Files */}
+      {selectedFiles.length > 0 && (
+        <div className="mt-6 bg-card rounded-xl p-6 border border-border">
+          <h4 className="text-sm font-medium text-foreground mb-3">Selected Files</h4>
+          <div className="space-y-2">
+            {selectedFiles.map(({ file, id }) => (
+              <div key={id} className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Upload className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">{file.name}</p>
+                    <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => removeFile(id)}
+                  className="text-muted-foreground hover:text-destructive transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+          <Button 
+            onClick={uploadFiles}
+            disabled={uploadMutation.isPending}
+            className="w-full mt-4 gradient-primary shadow-soft h-12 text-base"
+          >
+            {uploadMutation.isPending ? (
+              <div className="flex items-center space-x-2">
+                <div className="scale-50">
+                  <StartupLoadingSkeleton type="upload" className="w-4 h-4" />
+                </div>
+                <span>Uploading...</span>
+              </div>
+            ) : (
+              <>
+                <Upload className="w-5 h-5 mr-2" />
+                Upload {selectedFiles.length} File{selectedFiles.length > 1 ? 's' : ''}
+              </>
+            )}
+          </Button>
+        </div>
+      )}
+
+      {/* Integration Options */}
+      <div className="mt-6">
+        <IntegrationDialog 
+          projectId={projectId}
+          trigger={
+            <Button 
+              variant="outline" 
+              className="w-full h-14 rounded-xl border-dashed border-2 text-muted-foreground hover:text-foreground hover:border-primary transition-all duration-200 bg-secondary/30 hover:bg-secondary/50"
+            >
+              <Upload className="w-5 h-5 mr-2" />
+              Import from External Platforms
+            </Button>
+          }
+        />
+      </div>
+    </div>
   );
 }
