@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
-import { Upload, X } from "lucide-react";
+import { Upload, X, FileText } from "lucide-react";
 import { StartupLoadingSkeleton } from "./StartupLoadingSkeleton";
 
 interface FileUploadProps {
@@ -22,6 +22,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
   const queryClient = useQueryClient();
   const [dragActive, setDragActive] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<UploadFile[]>([]);
+  const [uploadingFileIndex, setUploadingFileIndex] = useState<number | null>(null);
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
@@ -106,10 +107,20 @@ export default function FileUpload({ projectId }: FileUploadProps) {
     setSelectedFiles(prev => prev.filter(f => f.id !== id));
   };
 
-  const uploadFiles = () => {
-    selectedFiles.forEach(({ file }) => {
-      uploadMutation.mutate(file);
-    });
+  const uploadFiles = async () => {
+    for (let i = 0; i < selectedFiles.length; i++) {
+      setUploadingFileIndex(i);
+      const { file } = selectedFiles[i];
+      
+      try {
+        await uploadMutation.mutateAsync(file);
+      } catch (error) {
+        console.error(`Failed to upload ${file.name}:`, error);
+        // Continue with next file even if one fails
+      }
+    }
+    
+    setUploadingFileIndex(null);
     setSelectedFiles([]);
   };
 
@@ -180,37 +191,53 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         <div className="mt-6 bg-white rounded-2xl p-6 border border-gray-200 shadow-card">
           <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">Selected Files</h4>
           <div className="space-y-3">
-            {selectedFiles.map(({ file, id }) => (
-              <div key={id} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-                    <FileText className="w-6 h-6 text-black" />
+            {selectedFiles.map(({ file, id }, index) => {
+              const isUploading = uploadingFileIndex === index;
+              return (
+                <div key={id} className={`flex items-center justify-between p-4 rounded-xl transition-all ${
+                  isUploading 
+                    ? 'bg-gray-100 border-2 border-black shadow-md' 
+                    : 'bg-gray-50 hover:bg-gray-100'
+                }`}>
+                  <div className="flex items-center space-x-4">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                      isUploading 
+                        ? 'bg-black text-white animate-pulse' 
+                        : 'bg-gray-100'
+                    }`}>
+                      <FileText className={`w-6 h-6 ${isUploading ? 'text-white' : 'text-black'}`} />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-gray-900">{file.name}</p>
+                      <p className="text-xs text-gray-500">
+                        {isUploading ? 'Uploading...' : formatFileSize(file.size)}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-gray-900">{file.name}</p>
-                    <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
-                  </div>
+                  {!uploadingFileIndex && (
+                    <button
+                      onClick={() => removeFile(id)}
+                      className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                  {isUploading && (
+                    <div className="w-6 h-6 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                  )}
                 </div>
-                <button
-                  onClick={() => removeFile(id)}
-                  className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-            ))}
+              );
+            })}
           </div>
           <Button 
             onClick={uploadFiles}
-            disabled={uploadMutation.isPending}
+            disabled={uploadMutation.isPending || uploadingFileIndex !== null}
             className="w-full mt-6 bg-black hover:bg-gray-800 text-white h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
           >
-            {uploadMutation.isPending ? (
+            {uploadingFileIndex !== null ? (
               <div className="flex items-center justify-center space-x-2">
-                <div className="scale-50">
-                  <StartupLoadingSkeleton type="upload" className="w-4 h-4" />
-                </div>
-                <span>Uploading...</span>
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>Uploading {uploadingFileIndex + 1} of {selectedFiles.length}...</span>
               </div>
             ) : (
               <>
