@@ -2,6 +2,8 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import multer from "multer";
 import { nanoid } from "nanoid";
+import fs from "fs";
+import path from "path";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./customAuth";
 import { saveUploadedFile, processDocument, deleteUploadedFile } from "./fileProcessor";
@@ -329,14 +331,102 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Project not found" });
       }
 
+      const documentCount = await storage.getProjectDocumentCount(link.projectId);
+      
       res.json({
         name: link.name,
         projectName: project.name,
         description: project.description,
+        documentCount,
+        allowDownloads: link.allowDownloads || false,
       });
     } catch (error) {
       console.error("Error fetching chat link:", error);
       res.status(500).json({ message: "Failed to fetch chat link" });
+    }
+  });
+
+  // Public document download endpoint
+  app.get("/api/chat/:slug/download", async (req, res) => {
+    try {
+      const link = await storage.getLink(req.params.slug);
+      
+      if (!link || link.status !== "active") {
+        return res.status(404).json({ message: "Chat link not found or expired" });
+      }
+
+      if (link.expiresAt && new Date() > link.expiresAt) {
+        return res.status(404).json({ message: "Chat link has expired" });
+      }
+
+      if (!link.allowDownloads) {
+        return res.status(403).json({ message: "Downloads are not allowed for this link" });
+      }
+
+      // Get all documents for the project
+      const documents = await storage.getProjectDocuments(link.projectId);
+      
+      if (!documents || documents.length === 0) {
+        return res.status(404).json({ message: "No documents found" });
+      }
+
+      // For now, we'll send a JSON response with download URLs
+      // In a real implementation, you might want to create a ZIP file
+      const downloadInfo = documents.map(doc => ({
+        id: doc.id,
+        name: doc.name,
+        type: doc.type,
+        size: doc.size,
+        downloadUrl: `/api/chat/${req.params.slug}/download/${doc.id}`
+      }));
+
+      res.json({
+        projectId: link.projectId,
+        documents: downloadInfo
+      });
+    } catch (error) {
+      console.error("Error preparing downloads:", error);
+      res.status(500).json({ message: "Failed to prepare downloads" });
+    }
+  });
+
+  // Individual document download endpoint
+  app.get("/api/chat/:slug/download/:documentId", async (req, res) => {
+    try {
+      const link = await storage.getLink(req.params.slug);
+      
+      if (!link || link.status !== "active") {
+        return res.status(404).json({ message: "Chat link not found or expired" });
+      }
+
+      if (link.expiresAt && new Date() > link.expiresAt) {
+        return res.status(404).json({ message: "Chat link has expired" });
+      }
+
+      if (!link.allowDownloads) {
+        return res.status(403).json({ message: "Downloads are not allowed for this link" });
+      }
+
+      const document = await storage.getDocument(req.params.documentId);
+      if (!document || document.projectId !== link.projectId) {
+        return res.status(404).json({ message: "Document not found" });
+      }
+
+      // Stream the file to the client
+      const filePath = path.join(__dirname, "..", document.filePath);
+      
+      if (!fs.existsSync(filePath)) {
+        return res.status(404).json({ message: "File not found on server" });
+      }
+
+      res.setHeader('Content-Type', document.type);
+      res.setHeader('Content-Disposition', `attachment; filename="${document.name}"`);
+      
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      console.error("Error downloading document:", error);
+      res.status(500).json({ message: "Failed to download document" });
     }
   });
 

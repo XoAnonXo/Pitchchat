@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText } from "lucide-react";
+import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download } from "lucide-react";
 
 interface Message {
   id: string;
@@ -206,9 +206,22 @@ export default function InvestorChat() {
                     Ask about the business model, market opportunity, team, financials, or any aspect of this startup
                   </p>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <FileText className="w-4 h-4 text-[#72788F]" />
-                  <span className="text-sm text-[#72788F]">{linkInfo.documentCount || 0} documents</span>
+                <div className="flex items-center space-x-4">
+                  <div className="flex items-center space-x-2">
+                    <FileText className="w-4 h-4 text-[#72788F]" />
+                    <span className="text-sm text-[#72788F]">{linkInfo.documentCount || 0} documents</span>
+                  </div>
+                  {linkInfo.allowDownloads && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => window.open(`/api/chat/${slug}/download`, '_blank')}
+                      className="border-[#E0E3EB] hover:bg-gray-50"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Download All
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>
@@ -320,7 +333,7 @@ export default function InvestorChat() {
                   Press Enter to send • Shift+Enter for new line
                 </p>
                 <p className="text-xs text-[#72788F]">
-                  Powered by o3
+                  Powered by OpenAI
                 </p>
               </div>
             </div>

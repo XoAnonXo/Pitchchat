@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
-import { Copy, ExternalLink, Check } from "lucide-react";
+import { Copy, ExternalLink, Check, Download } from "lucide-react";
 
 interface ShareLinkModalProps {
   projectId: string;
@@ -22,6 +23,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
   const [linkName, setLinkName] = useState("");
   const [expiration, setExpiration] = useState("7");
   const [tokenLimit, setTokenLimit] = useState("1000");
+  const [allowDownloads, setAllowDownloads] = useState(false);
   const [generatedLink, setGeneratedLink] = useState<string | null>(null);
 
   const generateLinkMutation = useMutation({
@@ -29,6 +31,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
       name: string;
       expiresAt?: string;
       limitTokens: number;
+      allowDownloads: boolean;
     }) => {
       const res = await apiRequest("POST", `/api/projects/${projectId}/links`, linkData);
       return res.json();
@@ -85,6 +88,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
     const linkData = {
       name: linkName.trim(),
       limitTokens: parseInt(tokenLimit),
+      allowDownloads,
       ...(expiration !== "never" && {
         expiresAt: new Date(Date.now() + parseInt(expiration) * 24 * 60 * 60 * 1000).toISOString()
       })
@@ -113,6 +117,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
     setLinkName("");
     setExpiration("7");
     setTokenLimit("1000");
+    setAllowDownloads(false);
     setGeneratedLink(null);
     onClose();
   };
@@ -167,6 +172,20 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
                   <SelectItem value="50000">Unlimited</SelectItem>
                 </SelectContent>
               </Select>
+            </div>
+            
+            <div className="flex items-center justify-between space-x-2">
+              <div className="space-y-0.5">
+                <Label htmlFor="allow-downloads">Allow Document Downloads</Label>
+                <p className="text-sm text-[#72788F]">
+                  Let investors download the original documents
+                </p>
+              </div>
+              <Switch
+                id="allow-downloads"
+                checked={allowDownloads}
+                onCheckedChange={setAllowDownloads}
+              />
             </div>
             
             <div className="bg-[#F8FAFB] rounded-lg p-4 border border-[#E0E3EB]">
@@ -244,6 +263,15 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
                 <li className="flex items-start">
                   <span className="text-black mr-2">•</span>
                   {tokenLimit === "50000" ? "Unlimited usage" : `${parseInt(tokenLimit).toLocaleString()} tokens`} per investor
+                </li>
+                <li className="flex items-start">
+                  <span className="text-black mr-2">•</span>
+                  {allowDownloads ? (
+                    <span className="flex items-center">
+                      <Download className="w-3 h-3 mr-1" />
+                      Document downloads enabled
+                    </span>
+                  ) : "Document downloads disabled"}
                 </li>
               </ul>
             </div>

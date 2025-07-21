@@ -87,6 +87,7 @@ export const links = pgTable("links", {
   status: varchar("status").default("active"), // active, expired, disabled
   expiresAt: timestamp("expires_at"),
   limitTokens: integer("limit_tokens").default(1000),
+  allowDownloads: boolean("allow_downloads").default(false),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
