@@ -329,9 +329,6 @@ export default function Dashboard() {
               )}
             </div>
             <div className="flex items-center gap-3">
-              <Button variant="outline" className="rounded-xl border-gray-200 hover:bg-gray-50">
-                Export Data
-              </Button>
               <Button onClick={() => setShowShareModal(true)} className="bg-black hover:bg-gray-800 text-white rounded-xl">
                 Share Link
               </Button>

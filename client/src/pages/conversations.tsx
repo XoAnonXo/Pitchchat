@@ -176,10 +176,10 @@ export default function ConversationsPage() {
             <span className="font-medium">Dashboard</span>
           </Link>
           
-          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/documents" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <FolderOpen className="w-5 h-5" />
             <span className="font-medium">Documents</span>
-          </button>
+          </Link>
           
           <Link href="/conversations" className="flex items-center space-x-3 px-4 py-3 bg-gray-100 text-black rounded-xl transition-all duration-200">
             <MessageSquare className="w-5 h-5" />
@@ -220,7 +220,7 @@ export default function ConversationsPage() {
             <Button 
               variant="ghost" 
               size="icon"
-              onClick={() => window.location.href = "/api/logout"}
+              onClick={() => window.location.href = "/api/auth/logout"}
               className="text-gray-400 hover:text-gray-600"
             >
               <LogOut className="h-5 w-5" />
