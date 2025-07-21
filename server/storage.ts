@@ -75,6 +75,11 @@ export interface IStorage {
     monthlyCost: number;
   }>;
   
+  // User notification operations
+  getUserIdFromConversation(conversationId: string): Promise<string | undefined>;
+  getUserById(userId: string): Promise<User | undefined>;
+  updateUserNotifications(userId: string, notifications: { emailAlerts?: boolean; weeklyReports?: boolean }): Promise<void>;
+  
   // Integration operations
   getProjectIntegrations(projectId: string): Promise<Integration[]>;
   getIntegration(projectId: string, platform: string): Promise<Integration | undefined>;
@@ -615,6 +620,33 @@ export class DatabaseStorage implements IStorage {
 
   async deleteIntegration(id: string): Promise<void> {
     await db.delete(integrations).where(eq(integrations.id, id));
+  }
+
+  // User notification operations
+  async getUserIdFromConversation(conversationId: string): Promise<string | undefined> {
+    const conversation = await this.getConversation(conversationId);
+    if (!conversation) return undefined;
+    
+    const link = await db.select().from(links).where(eq(links.id, conversation.linkId)).limit(1);
+    if (!link[0]) return undefined;
+    
+    const project = await this.getProject(link[0].projectId);
+    return project?.userId;
+  }
+
+  async getUserById(userId: string): Promise<User | undefined> {
+    return this.getUser(userId);
+  }
+
+  async updateUserNotifications(userId: string, notifications: { emailAlerts?: boolean; weeklyReports?: boolean }): Promise<void> {
+    await db
+      .update(users)
+      .set({
+        emailAlerts: notifications.emailAlerts,
+        weeklyReports: notifications.weeklyReports,
+        updatedAt: new Date(),
+      })
+      .where(eq(users.id, userId));
   }
 }
 

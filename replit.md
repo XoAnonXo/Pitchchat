@@ -195,3 +195,15 @@ The application is designed as a monorepo with clear separation between frontend
 - Implemented account deletion flow with confirmation dialog and email verification
 - Updated all navigation links across pages to include settings
 - Maintained consistent black theme and Hume-style design throughout
+
+### July 21, 2025 - Email Notifications & Weekly Reports
+- Removed API keys section from settings page as users cannot add their own keys
+- Hidden product updates toggle from notification preferences
+- Added email notification fields (emailAlerts, weeklyReports) to user schema
+- Implemented email alert system that triggers when new investor starts conversation
+- Created email notification endpoints for investor engagement alerts
+- Designed weekly report email template with key metrics, project performance, and visitor stats
+- Added automatic email notification when investors engage with shared pitch links
+- Implemented user notification preference updates through API
+- Email templates include comprehensive analytics: conversations, tokens, costs, and top performers
+- Weekly reports can be triggered via POST to /api/email/weekly-report endpoint

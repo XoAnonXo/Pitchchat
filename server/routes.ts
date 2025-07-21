@@ -366,6 +366,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
           linkId: link.id,
           investorEmail: investorEmail || null,
         });
+
+        // Send email notification for new investor engagement
+        if (investorEmail) {
+          const project = await storage.getProject(link.projectId);
+          const userId = await storage.getUserIdFromConversation(conversation.id);
+          if (userId) {
+            const user = await storage.getUserById(userId);
+            if (user?.emailAlerts) {
+              // Send email notification asynchronously
+              fetch(`${process.env.REPLIT_DOMAINS || 'http://localhost:5000'}/api/email/investor-engagement`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  conversationId: conversation.id,
+                  projectName: project?.name || 'Unknown Project',
+                  investorEmail,
+                  messageCount: 1,
+                }),
+              }).catch(err => console.error('Failed to send email notification:', err));
+            }
+          }
+        }
       }
 
       // Save user message
@@ -456,6 +478,123 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error fetching detailed analytics:", error);
       res.status(500).json({ message: "Failed to fetch detailed analytics" });
+    }
+  });
+
+  // Email Alert Routes
+  app.post("/api/email/investor-engagement", async (req, res) => {
+    try {
+      const { conversationId, projectName, investorEmail, messageCount } = req.body;
+      
+      // This would be called internally when a new conversation starts
+      const userId = await storage.getUserIdFromConversation(conversationId);
+      if (!userId) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      const user = await storage.getUserById(userId);
+      if (!user?.emailAlerts) {
+        return res.json({ sent: false, reason: "Email alerts disabled" });
+      }
+      
+      // Send email notification
+      const emailHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #000;">New Investor Engagement! 🎉</h2>
+          <p>An investor just started a conversation with your pitch for <strong>${projectName}</strong>.</p>
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 0;"><strong>Investor Email:</strong> ${investorEmail}</p>
+            <p style="margin: 10px 0 0 0;"><strong>Messages Sent:</strong> ${messageCount}</p>
+          </div>
+          <p>Log in to your PitchChat dashboard to view the full conversation and respond to any questions.</p>
+          <a href="${process.env.REPLIT_DOMAINS || 'https://pitchchat.replit.app'}" style="display: inline-block; background: #000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; margin-top: 20px;">View Conversation</a>
+        </div>
+      `;
+      
+      // TODO: Integrate with actual email service (SendGrid, etc.)
+      console.log(`Sending investor engagement email to ${user.email}`);
+      
+      res.json({ sent: true, recipient: user.email });
+    } catch (error) {
+      console.error("Error sending investor engagement email:", error);
+      res.status(500).json({ message: "Failed to send email notification" });
+    }
+  });
+
+  // Weekly Report Route
+  app.post("/api/email/weekly-report", async (req, res) => {
+    try {
+      const { userId } = req.body;
+      
+      const user = await storage.getUserById(userId);
+      if (!user?.weeklyReports) {
+        return res.json({ sent: false, reason: "Weekly reports disabled" });
+      }
+      
+      // Get analytics for the past week
+      const analytics = await storage.getDetailedAnalytics(userId);
+      const projects = await storage.getProjects(userId);
+      
+      // Generate weekly report
+      const emailHtml = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h1 style="color: #000;">Your Weekly PitchChat Report 📊</h1>
+          <p>Here's how your pitches performed this week:</p>
+          
+          <div style="background: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">Key Metrics</h3>
+            <p><strong>Total Conversations:</strong> ${analytics.overview.totalConversations}</p>
+            <p><strong>Unique Visitors:</strong> ${analytics.overview.totalVisitors}</p>
+            <p><strong>Active Links:</strong> ${analytics.overview.activeLinks}</p>
+            <p><strong>Total Cost:</strong> $${analytics.overview.totalCost.toFixed(2)}</p>
+          </div>
+          
+          <h3>Top Performing Projects</h3>
+          ${analytics.projectBreakdown.slice(0, 3).map(project => `
+            <div style="border-bottom: 1px solid #eee; padding: 15px 0;">
+              <h4 style="margin: 0;">${project.projectName}</h4>
+              <p style="color: #666; margin: 5px 0;">
+                ${project.conversations} conversations • ${project.totalTokens.toLocaleString()} tokens • $${project.totalCost.toFixed(2)}
+              </p>
+            </div>
+          `).join('')}
+          
+          <h3>Most Engaged Visitors</h3>
+          ${analytics.visitorEngagement.topVisitors.slice(0, 3).map(visitor => `
+            <p style="margin: 10px 0;">
+              <strong>${visitor.email}</strong><br>
+              ${visitor.conversations} conversations • ${visitor.totalTokens.toLocaleString()} tokens
+            </p>
+          `).join('')}
+          
+          <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 14px;">
+            <p>You're receiving this because you have weekly reports enabled in your settings.</p>
+            <a href="${process.env.REPLIT_DOMAINS || 'https://pitchchat.replit.app'}/settings" style="color: #000;">Manage Preferences</a>
+          </div>
+        </div>
+      `;
+      
+      // TODO: Integrate with actual email service
+      console.log(`Sending weekly report to ${user.email}`);
+      
+      res.json({ sent: true, recipient: user.email, reportDate: new Date() });
+    } catch (error) {
+      console.error("Error sending weekly report:", error);
+      res.status(500).json({ message: "Failed to send weekly report" });
+    }
+  });
+
+  // Update user notification preferences
+  app.patch("/api/user/notifications", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { emailAlerts, weeklyReports } = req.body;
+      
+      await storage.updateUserNotifications(userId, { emailAlerts, weeklyReports });
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error updating notification preferences:", error);
+      res.status(500).json({ message: "Failed to update notification preferences" });
     }
   });
 

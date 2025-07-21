@@ -72,12 +72,7 @@ interface UserSettings {
     googleConnected: boolean;
     xaiConnected: boolean;
   };
-  apiKeys: {
-    hasOpenAI: boolean;
-    hasAnthropic: boolean;
-    hasGoogle: boolean;
-    hasXAI: boolean;
-  };
+
 }
 
 export default function SettingsPage() {
@@ -97,19 +92,12 @@ export default function SettingsPage() {
     notifications: {
       emailAlerts: true,
       weeklyReports: false,
-      productUpdates: true,
     },
     integrations: {
       openaiConnected: true,
       anthropicConnected: false,
       googleConnected: false,
       xaiConnected: false,
-    },
-    apiKeys: {
-      hasOpenAI: true,
-      hasAnthropic: false,
-      hasGoogle: false,
-      hasXAI: false,
     }
   };
 
@@ -177,13 +165,7 @@ export default function SettingsPage() {
     }
   };
 
-  const copyApiKey = (key: string) => {
-    navigator.clipboard.writeText(`sk-proj-${key}-xxxxxxxxxxxx`);
-    toast({
-      title: "Copied to clipboard",
-      description: "API key copied successfully.",
-    });
-  };
+
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex">
@@ -378,77 +360,7 @@ export default function SettingsPage() {
             </CardContent>
           </Card>
 
-          {/* API Keys */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-            <CardHeader className="border-b border-gray-100">
-              <div className="flex items-center space-x-2">
-                <Key className="w-5 h-5 text-gray-600" />
-                <CardTitle className="text-xl font-bold text-gray-900">API Keys</CardTitle>
-              </div>
-              <CardDescription>Manage your AI model API keys</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-black rounded-lg flex items-center justify-center">
-                      <Globe className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">OpenAI API Key</p>
-                      <p className="text-sm text-gray-500">
-                        {settings.apiKeys.hasOpenAI ? 'sk-proj-****...****' : 'Not configured'}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    {settings.apiKeys.hasOpenAI && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => copyApiKey('openai')}
-                      >
-                        <Copy className="w-4 h-4" />
-                      </Button>
-                    )}
-                    <Button variant="outline" size="sm" className="rounded-lg">
-                      {settings.apiKeys.hasOpenAI ? 'Update' : 'Add Key'}
-                    </Button>
-                  </div>
-                </div>
 
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                      <Globe className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">Anthropic API Key</p>
-                      <p className="text-sm text-gray-500">Not configured</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="rounded-lg">
-                    Add Key
-                  </Button>
-                </div>
-
-                <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
-                      <Globe className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-900">Google AI API Key</p>
-                      <p className="text-sm text-gray-500">Not configured</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm" className="rounded-lg">
-                    Add Key
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
 
           {/* Notifications */}
           <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
@@ -484,18 +396,7 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <Separator />
 
-              <div className="flex items-center justify-between">
-                <div className="space-y-1">
-                  <p className="font-medium text-gray-900">Product Updates</p>
-                  <p className="text-sm text-gray-500">Stay informed about new features and improvements</p>
-                </div>
-                <Switch
-                  checked={settings.notifications.productUpdates}
-                  onCheckedChange={(checked) => handleNotificationChange('productUpdates', checked)}
-                />
-              </div>
             </CardContent>
           </Card>
 
