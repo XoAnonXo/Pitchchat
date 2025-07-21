@@ -127,6 +127,21 @@ export default function DocumentDownloadDialog({ isOpen, onClose, slug }: Docume
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
+  const getFileTypeLabel = (mimeType: string) => {
+    const typeMap: { [key: string]: string } = {
+      'application/pdf': 'PDF',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'Word',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'Excel',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'PowerPoint',
+      'application/msword': 'Word',
+      'application/vnd.ms-excel': 'Excel',
+      'application/vnd.ms-powerpoint': 'PowerPoint',
+      'text/plain': 'Text',
+      'text/csv': 'CSV',
+    };
+    return typeMap[mimeType] || 'Document';
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="bg-white rounded-2xl border-gray-200 shadow-xl max-w-md">
@@ -158,7 +173,9 @@ export default function DocumentDownloadDialog({ isOpen, onClose, slug }: Docume
                     <FileText className="w-5 h-5 text-gray-400" />
                     <div className="flex-1">
                       <p className="text-sm font-medium text-gray-900">{doc.name}</p>
-                      <p className="text-xs text-gray-500">{formatFileSize(doc.size)}</p>
+                      <p className="text-xs text-gray-500">
+                        {getFileTypeLabel(doc.type)} • {formatFileSize(doc.size)}
+                      </p>
                     </div>
                   </div>
                 ))}

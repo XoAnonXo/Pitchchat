@@ -374,9 +374,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // In a real implementation, you might want to create a ZIP file
       const downloadInfo = documents.map(doc => ({
         id: doc.id,
-        name: doc.name,
-        type: doc.type,
-        size: doc.size,
+        name: doc.originalName || doc.filename,
+        type: doc.mimeType,
+        size: doc.fileSize,
         downloadUrl: `/api/chat/${req.params.slug}/download/${doc.id}`
       }));
 
@@ -413,14 +413,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Stream the file to the client
-      const filePath = path.join(__dirname, "..", document.filePath);
+      const filePath = path.join(__dirname, "..", "uploads", document.filename);
       
       if (!fs.existsSync(filePath)) {
         return res.status(404).json({ message: "File not found on server" });
       }
 
-      res.setHeader('Content-Type', document.type);
-      res.setHeader('Content-Disposition', `attachment; filename="${document.name}"`);
+      res.setHeader('Content-Type', document.mimeType);
+      res.setHeader('Content-Disposition', `attachment; filename="${document.originalName || document.filename}"`);
       
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);
