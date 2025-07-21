@@ -223,10 +223,10 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
             <span className="font-medium">Documents</span>
           </Link>
           
-          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/conversations" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <MessageSquare className="w-5 h-5" />
             <span className="font-medium">Conversations</span>
-          </button>
+          </Link>
           
           <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <BarChart3 className="w-5 h-5" />

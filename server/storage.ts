@@ -298,6 +298,37 @@ export class DatabaseStorage implements IStorage {
     return newMessage;
   }
 
+  // Get all conversations for a user's projects
+  async getUserConversations(userId: string): Promise<any[]> {
+    const userProjects = await this.getUserProjects(userId);
+    const projectIds = userProjects.map(p => p.id);
+
+    if (projectIds.length === 0) {
+      return [];
+    }
+
+    const conversationsWithDetails = await db
+      .select({
+        id: conversations.id,
+        investorEmail: conversations.investorEmail,
+        startedAt: conversations.startedAt,
+        totalTokens: conversations.totalTokens,
+        costUsd: conversations.costUsd,
+        isActive: conversations.isActive,
+        linkId: conversations.linkId,
+        linkName: links.name,
+        projectId: links.projectId,
+        projectName: projects.name,
+      })
+      .from(conversations)
+      .innerJoin(links, eq(conversations.linkId, links.id))
+      .innerJoin(projects, eq(links.projectId, projects.id))
+      .where(or(...projectIds.map(id => eq(links.projectId, id))))
+      .orderBy(desc(conversations.startedAt));
+
+    return conversationsWithDetails;
+  }
+
   // Analytics
   async getUserAnalytics(userId: string): Promise<{
     totalQuestions: number;

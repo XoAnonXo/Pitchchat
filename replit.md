@@ -174,3 +174,7 @@ The application is designed as a monorepo with clear separation between frontend
 - Redesigned documents management page to match dashboard layout with consistent sidebar navigation
 - Removed source filtering from documents page to simplify the interface
 - Applied consistent card-based design with stats overview and clean document list
+- Created conversations page to track all shared link interactions with visitor details, full chat history, tokens used, and cost analytics
+- Added conversations API endpoints to fetch user conversations and messages
+- Implemented expandable conversation view showing detailed chat history with proper role indicators
+- Added conversations navigation link across all pages with consistent black theme styling

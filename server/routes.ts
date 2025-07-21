@@ -448,6 +448,38 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Conversations routes
+  app.get("/api/conversations", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const conversations = await storage.getUserConversations(userId);
+      res.json(conversations);
+    } catch (error) {
+      console.error("Error fetching conversations:", error);
+      res.status(500).json({ message: "Failed to fetch conversations" });
+    }
+  });
+
+  app.get("/api/conversations/:conversationId/messages", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      
+      // Verify conversation belongs to user
+      const conversations = await storage.getUserConversations(userId);
+      const conversation = conversations.find(c => c.id === req.params.conversationId);
+      
+      if (!conversation) {
+        return res.status(404).json({ message: "Conversation not found" });
+      }
+      
+      const messages = await storage.getConversationMessages(req.params.conversationId);
+      res.json(messages);
+    } catch (error) {
+      console.error("Error fetching conversation messages:", error);
+      res.status(500).json({ message: "Failed to fetch messages" });
+    }
+  });
+
   // Integration routes
   app.post("/api/projects/:projectId/integrations/github", isAuthenticated, async (req: any, res) => {
     try {

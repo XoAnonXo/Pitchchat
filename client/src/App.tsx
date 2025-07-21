@@ -8,6 +8,7 @@ import Landing from "@/pages/landing";
 import Dashboard from "@/pages/dashboard";
 import InvestorChat from "@/pages/investor-chat";
 import DocumentsPage from "@/pages/documents";
+import ConversationsPage from "@/pages/conversations";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -24,6 +25,7 @@ function Router() {
         <>
           <Route path="/" component={Dashboard} />
           <Route path="/documents/:projectId" component={({ params }) => <DocumentsPage projectId={params.projectId} />} />
+          <Route path="/conversations" component={ConversationsPage} />
           <Route path="/chat/:slug" component={InvestorChat} />
         </>
       )}
