@@ -31,7 +31,8 @@ export const users = pgTable("users", {
   id: varchar("id").primaryKey().notNull().default(sql`gen_random_uuid()`),
   email: varchar("email").unique().notNull(),
   password: varchar("password"), // For email/password auth
-  provider: varchar("provider").default("local"), // local, google, apple
+  provider: varchar("provider").default("local"), // local, google
+  googleId: varchar("google_id").unique(), // For Google OAuth
   firstName: varchar("first_name"),
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),

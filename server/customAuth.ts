@@ -1,6 +1,7 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import { Express } from "express";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Express, RequestHandler } from "express";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
@@ -94,6 +95,47 @@ export function setupAuth(app: Express) {
     }
   });
 
+  // Configure Google OAuth Strategy
+  if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+    passport.use(new GoogleStrategy({
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/api/auth/google/callback",
+      scope: ["profile", "email"]
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Find or create user
+        let user = await storage.getUserByEmail(profile.emails?.[0]?.value || "");
+        
+        if (!user) {
+          // Create new user from Google profile
+          user = await storage.createUser({
+            email: profile.emails?.[0]?.value || "",
+            username: profile.emails?.[0]?.value?.split("@")[0] || profile.displayName || "user",
+            password: await hashPassword(randomBytes(32).toString("hex")), // Random password for OAuth users
+            firstName: profile.name?.givenName || null,
+            lastName: profile.name?.familyName || null,
+            profileImageUrl: profile.photos?.[0]?.value || null,
+            provider: "google",
+            googleId: profile.id,
+          });
+        } else if (!user.googleId) {
+          // Link existing account to Google
+          await storage.upsertUser({
+            ...user,
+            googleId: profile.id,
+            profileImageUrl: user.profileImageUrl || profile.photos?.[0]?.value || null,
+          });
+        }
+        
+        return done(null, user);
+      } catch (error) {
+        return done(error as Error);
+      }
+    }));
+  }
+
   // Auth routes
   app.post("/api/auth/register", async (req, res, next) => {
     try {
@@ -163,6 +205,19 @@ export function setupAuth(app: Express) {
     }
     res.json(req.user);
   });
+
+  // Google OAuth routes
+  app.get("/api/auth/google", 
+    passport.authenticate("google", { scope: ["profile", "email"] })
+  );
+
+  app.get("/api/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/auth" }),
+    (req, res) => {
+      // Successful authentication, redirect to dashboard
+      res.redirect("/");
+    }
+  );
 }
 
 export const isAuthenticated: RequestHandler = (req, res, next) => {
