@@ -25,7 +25,7 @@ import {
   type InsertIntegration,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, and, isNull, or } from "drizzle-orm";
+import { eq, desc, and, isNull, or, sql } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -223,6 +223,14 @@ export class DatabaseStorage implements IStorage {
       .limit(1);
     
     return !!existing;
+  }
+
+  async getProjectDocumentCount(projectId: string): Promise<number> {
+    const result = await db
+      .select({ count: sql<number>`count(*)` })
+      .from(documents)
+      .where(eq(documents.projectId, projectId));
+    return Number(result[0]?.count) || 0;
   }
 
   // Chunk operations
