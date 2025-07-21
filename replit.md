@@ -311,3 +311,12 @@ The application is designed as a monorepo with clear separation between frontend
 - Founder emails include pro tip to review conversation history before reaching out
 - All new email templates use consistent PitchChat.ai branding with black accent colors
 - Existing investor engagement email already sends when investors first start chatting with pitch rooms
+
+### July 21, 2025 - Email Testing and Validation Improvements
+- Added comprehensive input validations to ContactTeamDialog with error messages for name, phone, company, and website
+- Enhanced email validation on investor chat page with detailed regex-based error feedback
+- Created test email endpoint (/api/email/test-all) to send all 4 email types for testing
+- Added "Send Test Emails" button in Settings → Notifications section
+- Updated Brevo sender email to use replit.com domain to avoid domain verification issues
+- Added detailed logging to debug email sending issues with Brevo API
+- Note: Email delivery requires proper Brevo API key configuration and sender domain verification

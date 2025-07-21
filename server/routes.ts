@@ -765,6 +765,55 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Simple test endpoint for debugging email
+  app.post("/api/email/test-simple", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const user = await storage.getUser(userId);
+      
+      if (!user?.email) {
+        return res.status(400).json({ message: "No email address found for user" });
+      }
+
+      console.log("=== SIMPLE EMAIL TEST ===");
+      console.log("Sending to:", user.email);
+      console.log("BREVO_API_KEY exists:", !!process.env.BREVO_API_KEY);
+      console.log("API Key first 10 chars:", process.env.BREVO_API_KEY?.substring(0, 10) + "...");
+
+      const testHtml = `
+        <html>
+          <body>
+            <h1>Test Email from PitchChat</h1>
+            <p>This is a simple test email to verify Brevo integration is working.</p>
+            <p>Time sent: ${new Date().toISOString()}</p>
+          </body>
+        </html>
+      `;
+
+      const result = await sendBrevoEmail({
+        to: user.email,
+        subject: "Test Email - PitchChat",
+        htmlContent: testHtml,
+      });
+
+      console.log("Email send result:", result);
+      console.log("=== END EMAIL TEST ===");
+
+      res.json({ 
+        success: result,
+        sentTo: user.email,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error: any) {
+      console.error("Simple email test error:", error);
+      res.status(500).json({ 
+        message: "Failed to send test email", 
+        error: error.message,
+        stack: error.stack 
+      });
+    }
+  });
+
   // Test endpoint to send all email types  
   app.post("/api/email/test-all", isAuthenticated, async (req: any, res) => {
     try {
@@ -788,21 +837,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       // 1. Send investor engagement alert
       try {
-        await sendInvestorEngagementAlert(
+        const success = await sendInvestorEngagementAlert(
           user.email,
           testProject.name,
           "investor@example.com",
           "test-conversation-id"
         );
-        emailsSent.push("Investor engagement alert");
-        console.log("✓ Sent investor engagement alert");
+        if (success) {
+          emailsSent.push("Investor engagement alert");
+          console.log("✓ Sent investor engagement alert");
+        } else {
+          console.error("Failed to send investor engagement alert - returned false");
+        }
       } catch (error) {
-        console.error("Failed to send investor engagement alert:", error);
+        console.error("Failed to send investor engagement alert - exception:", error);
       }
 
       // 2. Send investor contact email  
       try {
-        await sendInvestorContactEmail(
+        const success = await sendInvestorContactEmail(
           user.email, // Sending to user as test
           testProject.name,
           "test-link-slug",
@@ -813,15 +866,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
             website: "https://example.vc",
           }
         );
-        emailsSent.push("Investor contact confirmation");
-        console.log("✓ Sent investor contact confirmation");
+        if (success) {
+          emailsSent.push("Investor contact confirmation");
+          console.log("✓ Sent investor contact confirmation");
+        } else {
+          console.error("Failed to send investor contact email - returned false");
+        }
       } catch (error) {
-        console.error("Failed to send investor contact email:", error);
+        console.error("Failed to send investor contact email - exception:", error);
       }
 
       // 3. Send founder contact alert
       try {
-        await sendFounderContactAlert(
+        const success = await sendFounderContactAlert(
           user.email,
           testProject.name,
           "test-conversation-id",
@@ -833,15 +890,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
             website: "https://innovationpartners.com",
           }
         );
-        emailsSent.push("Founder contact alert");
-        console.log("✓ Sent founder contact alert");
+        if (success) {
+          emailsSent.push("Founder contact alert");
+          console.log("✓ Sent founder contact alert");
+        } else {
+          console.error("Failed to send founder contact alert - returned false");
+        }
       } catch (error) {
-        console.error("Failed to send founder contact alert:", error);
+        console.error("Failed to send founder contact alert - exception:", error);
       }
 
       // 4. Send weekly report
       try {
-        await sendWeeklyReport(
+        const success = await sendWeeklyReport(
           user.email,
           {
             totalQuestions: analytics.summary?.totalConversations || 10,
@@ -851,10 +912,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
             topPerformingProject: testProject.name,
           }
         );
-        emailsSent.push("Weekly report");
-        console.log("✓ Sent weekly report");
+        if (success) {
+          emailsSent.push("Weekly report");
+          console.log("✓ Sent weekly report");
+        } else {
+          console.error("Failed to send weekly report - returned false");
+        }
       } catch (error) {
-        console.error("Failed to send weekly report:", error);
+        console.error("Failed to send weekly report - exception:", error);
       }
 
       res.json({ 

@@ -24,7 +24,7 @@ export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
     sendSmtpEmail.htmlContent = params.htmlContent;
     sendSmtpEmail.sender = {
       name: params.senderName || "PitchChat Builder",
-      email: params.senderEmail || "noreply@pitchchat.app"
+      email: params.senderEmail || "noreply@replit.com"
     };
     sendSmtpEmail.to = [
       {
@@ -33,11 +33,26 @@ export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
       }
     ];
 
+    console.log('Attempting to send email to:', params.to);
+    console.log('Subject:', params.subject);
+    console.log('Sender:', sendSmtpEmail.sender);
+
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
-    console.log('Brevo email sent successfully:', result.response?.statusCode);
+    console.log('Brevo email sent successfully:', {
+      statusCode: result.response?.statusCode,
+      messageId: result.body?.messageId,
+      to: params.to
+    });
     return true;
-  } catch (error) {
-    console.error('Brevo email error:', error);
+  } catch (error: any) {
+    console.error('Brevo email error details:', {
+      message: error.message,
+      statusCode: error.response?.statusCode,
+      body: error.response?.body,
+      headers: error.response?.headers,
+      to: params.to,
+      subject: params.subject
+    });
     return false;
   }
 }

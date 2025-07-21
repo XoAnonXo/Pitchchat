@@ -515,28 +515,60 @@ export default function SettingsPage() {
                   <p className="font-medium text-gray-900">Test Email Notifications</p>
                   <p className="text-sm text-gray-500">Send all email types to test they are working correctly</p>
                 </div>
-                <Button
-                  onClick={async () => {
-                    try {
-                      const res = await apiRequest("POST", "/api/email/test-all");
-                      const data = await res.json();
-                      toast({
-                        title: "Test emails sent!",
-                        description: `Sent ${data.totalSent} emails to ${data.sentTo}`,
-                      });
-                    } catch (error) {
-                      toast({
-                        title: "Failed to send test emails",
-                        description: error.message,
-                        variant: "destructive",
-                      });
-                    }
-                  }}
-                  variant="outline"
-                  className="border-black text-black hover:bg-gray-100"
-                >
-                  Send Test Emails
-                </Button>
+                <div className="flex gap-2">
+                  <Button
+                    onClick={async () => {
+                      try {
+                        const res = await apiRequest("POST", "/api/email/test-simple");
+                        const data = await res.json();
+                        if (data.success) {
+                          toast({
+                            title: "Simple test email sent!",
+                            description: `Check your inbox at ${data.sentTo}`,
+                          });
+                        } else {
+                          toast({
+                            title: "Email send failed",
+                            description: "Check console logs for details",
+                            variant: "destructive",
+                          });
+                        }
+                      } catch (error) {
+                        toast({
+                          title: "Failed to send test email",
+                          description: error.message,
+                          variant: "destructive",
+                        });
+                      }
+                    }}
+                    variant="outline"
+                    className="border-gray-300 text-gray-700 hover:bg-gray-100"
+                  >
+                    Test Simple
+                  </Button>
+                  <Button
+                    onClick={async () => {
+                      try {
+                        const res = await apiRequest("POST", "/api/email/test-all");
+                        const data = await res.json();
+                        toast({
+                          title: "Test emails sent!",
+                          description: `Sent ${data.totalSent} emails to ${data.sentTo}`,
+                        });
+                      } catch (error) {
+                        toast({
+                          title: "Failed to send test emails",
+                          description: error.message,
+                          variant: "destructive",
+                        });
+                      }
+                    }}
+                    variant="outline"
+                    className="border-black text-black hover:bg-gray-100"
+                  >
+                    Send All Test Emails
+                  </Button>
+                </div>
               </div>
 
             </CardContent>
