@@ -149,9 +149,21 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
   }
 }
 
+function cleanTextForDatabase(text: string): string {
+  // Remove null bytes and other invalid UTF-8 sequences
+  return text
+    .replace(/\0/g, '') // Remove null bytes
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, ' ') // Replace control characters with space except \t, \n, \r
+    .replace(/[^\x00-\x7F\u0080-\uFFFF]/g, '') // Remove invalid Unicode
+    .replace(/\s+/g, ' ') // Normalize whitespace
+    .trim();
+}
+
 function splitIntoChunks(text: string, chunkSize: number): string[] {
+  // Clean the text first to remove invalid bytes
+  const cleanedText = cleanTextForDatabase(text);
   const chunks: string[] = [];
-  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+  const sentences = cleanedText.split(/[.!?]+/).filter(s => s.trim().length > 0);
   
   let currentChunk = "";
   
@@ -160,11 +172,11 @@ function splitIntoChunks(text: string, chunkSize: number): string[] {
     
     if (currentChunk.length + trimmedSentence.length > chunkSize) {
       if (currentChunk.length > 0) {
-        chunks.push(currentChunk.trim());
+        chunks.push(cleanTextForDatabase(currentChunk.trim()));
         currentChunk = trimmedSentence;
       } else {
         // Single sentence is too long, split it
-        chunks.push(trimmedSentence.substring(0, chunkSize));
+        chunks.push(cleanTextForDatabase(trimmedSentence.substring(0, chunkSize)));
         currentChunk = trimmedSentence.substring(chunkSize);
       }
     } else {
@@ -173,7 +185,7 @@ function splitIntoChunks(text: string, chunkSize: number): string[] {
   }
   
   if (currentChunk.length > 0) {
-    chunks.push(currentChunk.trim());
+    chunks.push(cleanTextForDatabase(currentChunk.trim()));
   }
   
   return chunks;
