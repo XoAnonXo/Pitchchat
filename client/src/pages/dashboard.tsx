@@ -404,18 +404,20 @@ export default function Dashboard() {
             <section>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {/* Documents List */}
-                <div>
+                <div className="flex flex-col h-[600px]">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                     <Database className="w-5 h-5 mr-2 text-black" />
                     Your Documents
                   </h3>
-                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-                    <DocumentsList projectId={selectedProject.id} hideDelete={true} />
+                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden flex flex-col">
+                    <div className="flex-1 overflow-y-auto">
+                      <DocumentsList projectId={selectedProject.id} hideDelete={true} />
+                    </div>
                   </div>
                 </div>
 
                 {/* Chat Interface */}
-                <div>
+                <div className="flex flex-col h-[600px]">
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-gray-900 flex items-center">
                       <MessageSquare className="w-5 h-5 mr-2 text-black" />
@@ -424,11 +426,11 @@ export default function Dashboard() {
                     <div className="flex items-center space-x-2">
                       <span className="text-sm text-gray-600">Model:</span>
                       <Badge variant="outline" className="bg-gray-100 text-gray-800 border-gray-300">
-                        o3
+                        4o
                       </Badge>
                     </div>
                   </div>
-                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden">
                     <ChatInterface projectId={selectedProject.id} />
                   </div>
                 </div>
