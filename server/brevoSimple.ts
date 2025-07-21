@@ -14,8 +14,8 @@ export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
 
   const emailData = {
     sender: {
-      name: params.senderName || "PitchChat Builder",
-      email: params.senderEmail || "noreply@pitchchat.ai"
+      name: params.senderName || "PitchChatAI",
+      email: params.senderEmail || "georgiiyvl@gmail.com"
     },
     to: [{
       email: params.to,
