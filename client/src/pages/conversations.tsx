@@ -35,7 +35,8 @@ import {
   ChevronUp,
   Eye,
   Filter,
-  ExternalLink
+  ExternalLink,
+  Bell
 } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
@@ -61,6 +62,12 @@ interface Conversation {
   linkName: string;
   projectId: string;
   projectName: string;
+  // Contact details
+  contactName?: string | null;
+  contactPhone?: string | null;
+  contactCompany?: string | null;
+  contactWebsite?: string | null;
+  contactProvidedAt?: string | null;
 }
 
 export default function ConversationsPage() {
@@ -400,6 +407,12 @@ export default function ConversationsPage() {
                                   Active
                                 </Badge>
                               )}
+                              {conversation.contactProvidedAt && (
+                                <div className="flex items-center gap-1 text-black">
+                                  <Bell className="w-4 h-4 fill-black" />
+                                  <span className="text-xs font-medium">Contact info provided</span>
+                                </div>
+                              )}
                             </div>
                             <div className="flex items-center gap-4 text-xs text-gray-500">
                               {conversation.investorEmail && (
@@ -439,6 +452,55 @@ export default function ConversationsPage() {
                       {/* Expanded Chat History */}
                       {expandedConversation === conversation.id && (
                         <div className="px-6 pb-6 border-t border-gray-100">
+                          {/* Contact Details Section */}
+                          {conversation.contactProvidedAt && (
+                            <div className="mt-4 mb-4 p-4 bg-black/5 rounded-xl border border-black/10">
+                              <div className="flex items-center gap-2 mb-3">
+                                <Bell className="w-5 h-5 text-black fill-black" />
+                                <h5 className="font-semibold text-black">Contact Information Provided</h5>
+                                <span className="text-xs text-gray-500 ml-auto">
+                                  {format(new Date(conversation.contactProvidedAt), 'MMM d, yyyy h:mm a')}
+                                </span>
+                              </div>
+                              <div className="grid grid-cols-2 gap-3 text-sm">
+                                {conversation.contactName && (
+                                  <div className="flex items-center gap-2">
+                                    <User className="w-4 h-4 text-gray-500" />
+                                    <span className="text-gray-600">Name:</span>
+                                    <span className="font-medium text-gray-900">{conversation.contactName}</span>
+                                  </div>
+                                )}
+                                {conversation.contactPhone && (
+                                  <div className="flex items-center gap-2">
+                                    <Phone className="w-4 h-4 text-gray-500" />
+                                    <span className="text-gray-600">Phone:</span>
+                                    <span className="font-medium text-gray-900">{conversation.contactPhone}</span>
+                                  </div>
+                                )}
+                                {conversation.contactCompany && (
+                                  <div className="flex items-center gap-2">
+                                    <Users className="w-4 h-4 text-gray-500" />
+                                    <span className="text-gray-600">Company:</span>
+                                    <span className="font-medium text-gray-900">{conversation.contactCompany}</span>
+                                  </div>
+                                )}
+                                {conversation.contactWebsite && (
+                                  <div className="flex items-center gap-2">
+                                    <ExternalLink className="w-4 h-4 text-gray-500" />
+                                    <span className="text-gray-600">Website:</span>
+                                    <a 
+                                      href={conversation.contactWebsite}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="font-medium text-blue-600 hover:underline"
+                                    >
+                                      {conversation.contactWebsite}
+                                    </a>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          )}
                           <div className="mt-4 max-h-96 overflow-y-auto space-y-4">
                             {loadingMessages === conversation.id ? (
                               <div className="flex justify-center py-8">

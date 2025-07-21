@@ -8,8 +8,9 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download } from "lucide-react";
+import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download, Phone } from "lucide-react";
 import DocumentDownloadDialog from "@/components/DocumentDownloadDialog";
+import ContactTeamDialog from "@/components/ContactTeamDialog";
 
 interface Message {
   id: string;
@@ -32,6 +33,7 @@ export default function InvestorChat() {
   const [investorEmail, setInvestorEmail] = useState("");
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
+  const [showContactDialog, setShowContactDialog] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Extract slug from URL
@@ -341,6 +343,22 @@ export default function InvestorChat() {
             </div>
           )}
         </Card>
+
+        {/* Contact Team Button */}
+        {emailSubmitted && (
+          <div className="mt-6 text-center">
+            <Button
+              onClick={() => setShowContactDialog(true)}
+              className="bg-white text-black border-2 border-black hover:bg-gray-50 rounded-xl px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all"
+            >
+              <Phone className="w-5 h-5 mr-3" />
+              Contact the Team
+            </Button>
+            <p className="text-sm text-[#72788F] mt-3">
+              Share your contact details for direct communication with the founders
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Footer */}
@@ -364,6 +382,15 @@ export default function InvestorChat() {
           isOpen={showDownloadDialog}
           onClose={() => setShowDownloadDialog(false)}
           slug={slug}
+        />
+      )}
+
+      {/* Contact Team Dialog */}
+      {conversationId && (
+        <ContactTeamDialog
+          isOpen={showContactDialog}
+          onClose={() => setShowContactDialog(false)}
+          conversationId={conversationId}
         />
       )}
     </div>

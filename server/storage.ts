@@ -63,8 +63,16 @@ export interface IStorage {
   // Conversation operations
   getLinkConversations(linkId: string): Promise<Conversation[]>;
   getConversation(id: string): Promise<Conversation | undefined>;
+  getConversationById(id: string): Promise<Conversation | undefined>;
   createConversation(conversation: InsertConversation): Promise<Conversation>;
   updateConversation(id: string, updates: Partial<InsertConversation>): Promise<Conversation>;
+  updateConversationContactDetails(conversationId: string, contactData: {
+    contactName: string | null;
+    contactPhone: string | null;
+    contactCompany: string | null;
+    contactWebsite: string | null;
+    contactProvidedAt: Date;
+  }): Promise<void>;
   
   // Message operations
   getConversationMessages(conversationId: string): Promise<Message[]>;
@@ -328,6 +336,24 @@ export class DatabaseStorage implements IStorage {
     return updatedConversation;
   }
 
+  async getConversationById(id: string): Promise<Conversation | undefined> {
+    const [conversation] = await db.select().from(conversations).where(eq(conversations.id, id));
+    return conversation;
+  }
+
+  async updateConversationContactDetails(conversationId: string, contactData: {
+    contactName: string | null;
+    contactPhone: string | null;
+    contactCompany: string | null;
+    contactWebsite: string | null;
+    contactProvidedAt: Date;
+  }): Promise<void> {
+    await db
+      .update(conversations)
+      .set(contactData)
+      .where(eq(conversations.id, conversationId));
+  }
+
   // Message operations
   async getConversationMessages(conversationId: string): Promise<Message[]> {
     return await db
@@ -363,6 +389,12 @@ export class DatabaseStorage implements IStorage {
         linkName: links.name,
         projectId: links.projectId,
         projectName: projects.name,
+        // Contact details
+        contactName: conversations.contactName,
+        contactPhone: conversations.contactPhone,
+        contactCompany: conversations.contactCompany,
+        contactWebsite: conversations.contactWebsite,
+        contactProvidedAt: conversations.contactProvidedAt,
       })
       .from(conversations)
       .innerJoin(links, eq(conversations.linkId, links.id))

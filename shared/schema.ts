@@ -100,6 +100,12 @@ export const conversations = pgTable("conversations", {
   totalTokens: integer("total_tokens").default(0),
   costUsd: real("cost_usd").default(0),
   isActive: boolean("is_active").default(true),
+  // Contact details (optional)
+  contactName: varchar("contact_name"),
+  contactPhone: varchar("contact_phone"),
+  contactCompany: varchar("contact_company"),
+  contactWebsite: varchar("contact_website"),
+  contactProvidedAt: timestamp("contact_provided_at"),
 });
 
 export const messages = pgTable("messages", {

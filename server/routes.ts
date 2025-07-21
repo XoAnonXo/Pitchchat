@@ -553,6 +553,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Investor chat - Submit contact details
+  app.post("/api/conversations/:conversationId/contact", async (req, res) => {
+    try {
+      const { conversationId } = req.params;
+      const { name, phone, company, website } = req.body;
+
+      // Update conversation with contact details
+      await storage.updateConversationContactDetails(conversationId, {
+        contactName: name || null,
+        contactPhone: phone || null,
+        contactCompany: company || null,
+        contactWebsite: website || null,
+        contactProvidedAt: new Date(),
+      });
+
+      // Get the conversation to find the project owner
+      const conversation = await storage.getConversationById(conversationId);
+      if (conversation) {
+        const link = await storage.getLink(conversation.linkId);
+        if (link) {
+          const project = await storage.getProject(link.projectId);
+          if (project) {
+            const user = await storage.getUser(project.userId);
+            if (user?.emailAlerts) {
+              // Send email notification to project owner
+              // TODO: Implement email notification when SendGrid is configured
+              console.log(`Investor contact notification: ${conversation.investorEmail} provided contact details for project ${project.name}`);
+            }
+          }
+        }
+      }
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Contact details submission error:", error);
+      res.status(500).json({ message: "Failed to submit contact details" });
+    }
+  });
+
   // Analytics routes
   app.get("/api/analytics", isAuthenticated, async (req: any, res) => {
     try {

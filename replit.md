@@ -208,6 +208,17 @@ The application is designed as a monorepo with clear separation between frontend
 - Email templates include comprehensive analytics: conversations, tokens, costs, and top performers
 - Weekly reports can be triggered via POST to /api/email/weekly-report endpoint
 
+### July 21, 2025 - Contact Team Feature for Investor Chat
+- Added "Contact the Team" button below investor chat interface
+- Created ContactTeamDialog component allowing investors to optionally provide contact details
+- Added contact fields to conversations table: contactName, contactPhone, contactCompany, contactWebsite, contactProvidedAt
+- Implemented POST /api/conversations/:conversationId/contact endpoint to save contact information
+- Enhanced conversations page with notification bell icon for conversations with contact details
+- Added contact details display in expanded conversation view with formatted layout
+- Contact information shown includes name, phone (WhatsApp/Telegram), company, and website
+- Founders receive visual notification on dashboard when investors provide contact information
+- All contact fields are optional to reduce friction for investors
+
 ### July 21, 2025 - Custom Authentication System Implementation
 - Replaced Replit Auth with custom email/password authentication system
 - Created comprehensive auth page with login and registration forms
