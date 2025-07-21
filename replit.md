@@ -239,3 +239,15 @@ The application is designed as a monorepo with clear separation between frontend
 - Fixed PDF processing error by converting Buffer to Uint8Array for pdfjs-dist
 - Added text cleaning function to remove null bytes and invalid UTF-8 sequences
 - Added Cyrillic font support with Noto Sans for better international text rendering
+
+### July 21, 2025 - Investor Chat & Dashboard UI Improvements
+- Fixed critical __dirname error in document download endpoint by using process.cwd()
+- Changed all "o3" references to "4o" throughout the platform
+- Removed "o3" badge from investor chat page (now shows "Powered by OpenAI")
+- Created DocumentDownloadDialog component for selective document downloads
+- Added checkboxes for document selection with "Download Selected" functionality
+- Extended Cyrillic font support to document download dialog using Noto Sans font family
+- Removed decorative circle backgrounds from FileUpload component for cleaner design
+- Fixed ChatInterface layout issue by changing from fixed height (700px) to responsive (h-full)
+- Made AI assistant chat section properly scrollable on dashboard
+- Updated dashboard container to properly handle overflow for chat interface

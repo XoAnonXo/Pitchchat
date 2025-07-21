@@ -202,11 +202,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
           />
         </div>
         
-        {/* Background decoration */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-40 h-40 bg-black rounded-full -translate-x-20 -translate-y-20" />
-          <div className="absolute bottom-0 right-0 w-60 h-60 bg-black rounded-full translate-x-30 translate-y-30" />
-        </div>
+
       </div>
 
       {/* Selected Files */}

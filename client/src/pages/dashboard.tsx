@@ -430,8 +430,10 @@ export default function Dashboard() {
                       </Badge>
                     </div>
                   </div>
-                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden">
-                    <ChatInterface projectId={selectedProject.id} />
+                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm flex-1 overflow-hidden flex flex-col">
+                    <div className="flex-1 overflow-hidden">
+                      <ChatInterface projectId={selectedProject.id} />
+                    </div>
                   </div>
                 </div>
               </div>

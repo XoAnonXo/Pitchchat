@@ -172,7 +172,7 @@ export default function DocumentDownloadDialog({ isOpen, onClose, slug }: Docume
                     />
                     <FileText className="w-5 h-5 text-gray-400" />
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">{doc.name}</p>
+                      <p className="text-sm font-medium text-gray-900 font-['Noto_Sans']">{doc.name}</p>
                       <p className="text-xs text-gray-500">
                         {getFileTypeLabel(doc.type)} • {formatFileSize(doc.size)}
                       </p>

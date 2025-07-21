@@ -413,7 +413,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Stream the file to the client
-      const filePath = path.join(__dirname, "..", "uploads", document.filename);
+      const filePath = path.join(process.cwd(), "uploads", document.filename);
       
       if (!fs.existsSync(filePath)) {
         return res.status(404).json({ message: "File not found on server" });

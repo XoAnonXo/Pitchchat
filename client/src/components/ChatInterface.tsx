@@ -105,7 +105,7 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
   };
 
   return (
-    <Card className="h-[700px] flex flex-col">
+    <Card className="h-full flex flex-col">
       {/* Header */}
       <div className="p-6 border-b border-slate-200">
         <div className="flex items-center justify-between">
