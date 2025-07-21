@@ -276,3 +276,14 @@ The application is designed as a monorepo with clear separation between frontend
 - Configured Stripe integration for future payment processing
 - Added pricing endpoint (/api/pricing) to provide pricing breakdown to frontend
 - Updated document processing to calculate embedding costs using platform pricing
+
+### July 21, 2025 - Google OAuth & Brevo Email Integration
+- Added Google OAuth sign-in functionality with "Continue with Google" buttons on auth page
+- Updated database schema with googleId field and added getUserByGoogleId method
+- Fixed landing page "Create your pitch room" button to redirect to /auth instead of /api/login
+- Configured Google OAuth strategy with proper user creation and account linking
+- Added Brevo email service integration for investor engagement alerts and weekly reports
+- Created comprehensive email templates with professional styling and branding
+- Updated investor engagement notifications to use Brevo instead of SendGrid
+- Enhanced weekly report emails with detailed analytics and engagement metrics
+- Added automatic email notifications when investors start conversations with pitch rooms

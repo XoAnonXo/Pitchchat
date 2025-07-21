@@ -11,6 +11,7 @@ import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
+import { sendInvestorEngagementAlert, sendWeeklyReport } from "./brevo";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -470,17 +471,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           if (userId) {
             const user = await storage.getUserById(userId);
             if (user?.emailAlerts) {
-              // Send email notification asynchronously
-              fetch(`${process.env.REPLIT_DOMAINS || 'http://localhost:5000'}/api/email/investor-engagement`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  conversationId: conversation.id,
-                  projectName: project?.name || 'Unknown Project',
-                  investorEmail,
-                  messageCount: 1,
-                }),
-              }).catch(err => console.error('Failed to send email notification:', err));
+              // Send email notification using Brevo
+              sendInvestorEngagementAlert(
+                user.email,
+                project?.name || 'Unknown Project',
+                investorEmail,
+                conversation.id
+              ).catch(err => console.error('Failed to send email notification:', err));
             }
           }
         }
@@ -724,10 +721,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
         </div>
       `;
       
-      // TODO: Integrate with actual email service
-      console.log(`Sending weekly report to ${user.email}`);
+      // Send weekly report using Brevo
+      const success = await sendWeeklyReport(user.email, {
+        totalQuestions: analytics.overview.totalConversations,
+        activeLinks: analytics.overview.activeLinks,
+        monthlyCost: analytics.overview.totalCost,
+        weeklyConversations: analytics.overview.totalConversations,
+        topPerformingProject: analytics.projectBreakdown[0]?.projectName,
+      });
       
-      res.json({ sent: true, recipient: user.email, reportDate: new Date() });
+      if (success) {
+        res.json({ sent: true, recipient: user.email, reportDate: new Date() });
+      } else {
+        res.status(500).json({ message: "Failed to send weekly report" });
+      }
     } catch (error) {
       console.error("Error sending weekly report:", error);
       res.status(500).json({ message: "Failed to send weekly report" });
