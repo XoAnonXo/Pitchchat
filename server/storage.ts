@@ -377,6 +377,206 @@ export class DatabaseStorage implements IStorage {
     };
   }
 
+  // Comprehensive Analytics
+  async getDetailedAnalytics(userId: string): Promise<any> {
+    const userProjects = await this.getUserProjects(userId);
+    const projectIds = userProjects.map(p => p.id);
+
+    if (projectIds.length === 0) {
+      return {
+        overview: {
+          totalProjects: 0,
+          totalDocuments: 0,
+          totalConversations: 0,
+          totalTokensUsed: 0,
+          totalCost: 0,
+          totalLinks: 0,
+          activeLinks: 0,
+          totalVisitors: 0,
+        },
+        timeSeriesData: [],
+        projectBreakdown: [],
+        documentStats: {
+          byType: [],
+          byStatus: [],
+          totalSize: 0,
+        },
+        linkPerformance: [],
+        visitorEngagement: {
+          averageMessagesPerConversation: 0,
+          averageTokensPerConversation: 0,
+          topVisitors: [],
+        },
+      };
+    }
+
+    // Overview Stats
+    const allDocuments = await db
+      .select()
+      .from(documents)
+      .where(or(...projectIds.map(id => eq(documents.projectId, id))));
+
+    const allLinks = await db
+      .select()
+      .from(links)
+      .where(or(...projectIds.map(id => eq(links.projectId, id))));
+
+    const allConversations = await db
+      .select({
+        id: conversations.id,
+        investorEmail: conversations.investorEmail,
+        totalTokens: conversations.totalTokens,
+        costUsd: conversations.costUsd,
+        startedAt: conversations.startedAt,
+        linkId: conversations.linkId,
+      })
+      .from(conversations)
+      .innerJoin(links, eq(conversations.linkId, links.id))
+      .where(or(...projectIds.map(id => eq(links.projectId, id))));
+
+    const allMessages = await db
+      .select({
+        id: messages.id,
+        conversationId: messages.conversationId,
+        role: messages.role,
+        tokenCount: messages.tokenCount,
+        timestamp: messages.timestamp,
+      })
+      .from(messages)
+      .innerJoin(conversations, eq(messages.conversationId, conversations.id))
+      .innerJoin(links, eq(conversations.linkId, links.id))
+      .where(or(...projectIds.map(id => eq(links.projectId, id))));
+
+    // Time Series Data (last 30 days)
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    const timeSeriesData = [];
+    for (let i = 0; i < 30; i++) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      const dayStart = new Date(date.setHours(0, 0, 0, 0));
+      const dayEnd = new Date(date.setHours(23, 59, 59, 999));
+
+      const dayConversations = allConversations.filter(c => {
+        const startedAt = new Date(c.startedAt);
+        return startedAt >= dayStart && startedAt <= dayEnd;
+      });
+
+      const dayMessages = allMessages.filter(m => {
+        const timestamp = new Date(m.timestamp);
+        return timestamp >= dayStart && timestamp <= dayEnd;
+      });
+
+      timeSeriesData.unshift({
+        date: dayStart.toISOString().split('T')[0],
+        conversations: dayConversations.length,
+        messages: dayMessages.length,
+        tokens: dayMessages.reduce((sum, m) => sum + (m.tokenCount || 0), 0),
+        cost: dayConversations.reduce((sum, c) => sum + (c.costUsd || 0), 0),
+      });
+    }
+
+    // Project Breakdown
+    const projectBreakdown = await Promise.all(userProjects.map(async (project) => {
+      const projectDocs = allDocuments.filter(d => d.projectId === project.id);
+      const projectLinks = allLinks.filter(l => l.projectId === project.id);
+      const projectConvs = await db
+        .select()
+        .from(conversations)
+        .innerJoin(links, eq(conversations.linkId, links.id))
+        .where(eq(links.projectId, project.id));
+
+      return {
+        projectId: project.id,
+        projectName: project.name,
+        documents: projectDocs.length,
+        links: projectLinks.length,
+        conversations: projectConvs.length,
+        totalTokens: projectConvs.reduce((sum, c) => sum + (c.conversations.totalTokens || 0), 0),
+        totalCost: projectConvs.reduce((sum, c) => sum + (c.conversations.costUsd || 0), 0),
+      };
+    }));
+
+    // Document Stats
+    const documentTypes = allDocuments.reduce((acc, doc) => {
+      const type = doc.mimeType.split('/')[1] || 'other';
+      acc[type] = (acc[type] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    const documentStatus = allDocuments.reduce((acc, doc) => {
+      acc[doc.status || 'unknown'] = (acc[doc.status || 'unknown'] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>);
+
+    // Link Performance
+    const linkPerformance = await Promise.all(allLinks.map(async (link) => {
+      const linkConvs = allConversations.filter(c => c.linkId === link.id);
+      return {
+        linkId: link.id,
+        linkName: link.name,
+        status: link.status,
+        conversations: linkConvs.length,
+        uniqueVisitors: new Set(linkConvs.map(c => c.investorEmail).filter(Boolean)).size,
+        totalTokens: linkConvs.reduce((sum, c) => sum + (c.totalTokens || 0), 0),
+        totalCost: linkConvs.reduce((sum, c) => sum + (c.costUsd || 0), 0),
+        createdAt: link.createdAt,
+      };
+    }));
+
+    // Visitor Engagement
+    const visitorStats = allConversations.reduce((acc, conv) => {
+      const email = conv.investorEmail || 'Anonymous';
+      if (!acc[email]) {
+        acc[email] = {
+          email,
+          conversations: 0,
+          totalTokens: 0,
+          totalCost: 0,
+        };
+      }
+      acc[email].conversations += 1;
+      acc[email].totalTokens += conv.totalTokens || 0;
+      acc[email].totalCost += conv.costUsd || 0;
+      return acc;
+    }, {} as Record<string, any>);
+
+    const topVisitors = Object.values(visitorStats)
+      .sort((a, b) => b.conversations - a.conversations)
+      .slice(0, 10);
+
+    return {
+      overview: {
+        totalProjects: userProjects.length,
+        totalDocuments: allDocuments.length,
+        totalConversations: allConversations.length,
+        totalTokensUsed: allConversations.reduce((sum, c) => sum + (c.totalTokens || 0), 0),
+        totalCost: allConversations.reduce((sum, c) => sum + (c.costUsd || 0), 0),
+        totalLinks: allLinks.length,
+        activeLinks: allLinks.filter(l => l.status === 'active').length,
+        totalVisitors: new Set(allConversations.map(c => c.investorEmail).filter(Boolean)).size,
+      },
+      timeSeriesData,
+      projectBreakdown,
+      documentStats: {
+        byType: Object.entries(documentTypes).map(([type, count]) => ({ type, count })),
+        byStatus: Object.entries(documentStatus).map(([status, count]) => ({ status, count })),
+        totalSize: allDocuments.reduce((sum, d) => sum + (d.fileSize || 0), 0),
+      },
+      linkPerformance,
+      visitorEngagement: {
+        averageMessagesPerConversation: allConversations.length > 0 
+          ? Math.round(allMessages.length / allConversations.length * 10) / 10 
+          : 0,
+        averageTokensPerConversation: allConversations.length > 0
+          ? Math.round(allConversations.reduce((sum, c) => sum + (c.totalTokens || 0), 0) / allConversations.length)
+          : 0,
+        topVisitors,
+      },
+    };
+  }
+
   // Integration operations
   async getProjectIntegrations(projectId: string): Promise<Integration[]> {
     return await db

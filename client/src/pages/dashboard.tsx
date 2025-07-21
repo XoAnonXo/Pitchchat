@@ -188,10 +188,10 @@ export default function Dashboard() {
             <span className="font-medium">Conversations</span>
           </Link>
           
-          <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/analytics" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <BarChart3 className="w-5 h-5" />
             <span className="font-medium">Analytics</span>
-          </button>
+          </Link>
           
           <button className="w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <Settings className="w-5 h-5" />

@@ -448,6 +448,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get("/api/analytics/detailed", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const detailedAnalytics = await storage.getDetailedAnalytics(userId);
+      res.json(detailedAnalytics);
+    } catch (error) {
+      console.error("Error fetching detailed analytics:", error);
+      res.status(500).json({ message: "Failed to fetch detailed analytics" });
+    }
+  });
+
   // Conversations routes
   app.get("/api/conversations", isAuthenticated, async (req: any, res) => {
     try {
