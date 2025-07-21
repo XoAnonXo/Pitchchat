@@ -12,6 +12,8 @@ import ConversationsPage from "@/pages/conversations";
 import AnalyticsPage from "@/pages/analytics";
 import SettingsPage from "@/pages/settings";
 import AuthPage from "@/pages/auth";
+import ForgotPasswordPage from "@/pages/forgot-password";
+import ResetPasswordPage from "@/pages/reset-password";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -23,6 +25,8 @@ function Router() {
         <>
           <Route path="/" component={Landing} />
           <Route path="/auth" component={AuthPage} />
+          <Route path="/forgot-password" component={ForgotPasswordPage} />
+          <Route path="/reset-password/:token" component={ResetPasswordPage} />
           <Route path="/chat/:slug" component={InvestorChat} />
         </>
       ) : (

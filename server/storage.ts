@@ -7,6 +7,7 @@ import {
   conversations,
   messages,
   integrations,
+  passwordResetTokens,
   type User,
   type UpsertUser,
   type Project,
@@ -23,6 +24,8 @@ import {
   type InsertMessage,
   type Integration,
   type InsertIntegration,
+  type PasswordResetToken,
+  type InsertPasswordResetToken,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, isNull, or, sql } from "drizzle-orm";
@@ -97,6 +100,12 @@ export interface IStorage {
   createIntegration(integration: InsertIntegration): Promise<Integration>;
   updateIntegration(id: string, updates: Partial<InsertIntegration>): Promise<Integration>;
   deleteIntegration(id: string): Promise<void>;
+  
+  // Password reset token operations
+  createPasswordResetToken(userId: string): Promise<string>;
+  getPasswordResetToken(token: string): Promise<PasswordResetToken | undefined>;
+  deletePasswordResetToken(token: string): Promise<void>;
+  updateUserPassword(userId: string, hashedPassword: string): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -723,6 +732,56 @@ export class DatabaseStorage implements IStorage {
         weeklyReports: notifications.weeklyReports,
         updatedAt: new Date(),
       })
+      .where(eq(users.id, userId));
+  }
+
+  // Password reset token operations
+  async createPasswordResetToken(userId: string): Promise<string> {
+    // Generate a secure random token
+    const token = `prt_${Math.random().toString(36).substr(2, 9)}${Math.random().toString(36).substr(2, 9)}`;
+    
+    // Set expiration to 1 hour from now
+    const expiresAt = new Date();
+    expiresAt.setHours(expiresAt.getHours() + 1);
+    
+    // Delete any existing tokens for this user
+    await db.delete(passwordResetTokens).where(eq(passwordResetTokens.userId, userId));
+    
+    // Create new token
+    await db.insert(passwordResetTokens).values({
+      userId,
+      token,
+      expiresAt,
+    });
+    
+    return token;
+  }
+
+  async getPasswordResetToken(token: string): Promise<PasswordResetToken | undefined> {
+    const [resetToken] = await db
+      .select()
+      .from(passwordResetTokens)
+      .where(eq(passwordResetTokens.token, token));
+    
+    if (!resetToken) return undefined;
+    
+    // Check if token has expired
+    if (new Date() > resetToken.expiresAt) {
+      await db.delete(passwordResetTokens).where(eq(passwordResetTokens.token, token));
+      return undefined;
+    }
+    
+    return resetToken;
+  }
+
+  async deletePasswordResetToken(token: string): Promise<void> {
+    await db.delete(passwordResetTokens).where(eq(passwordResetTokens.token, token));
+  }
+
+  async updateUserPassword(userId: string, hashedPassword: string): Promise<void> {
+    await db
+      .update(users)
+      .set({ password: hashedPassword })
       .where(eq(users.id, userId));
   }
 }

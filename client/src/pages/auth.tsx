@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { Loader2 } from "lucide-react";
-import { useLocation } from "wouter";
+import { useLocation, Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 
 const loginSchema = z.object({
@@ -176,6 +176,12 @@ export default function AuthPage() {
                     </Button>
                   </form>
                 </Form>
+                
+                <div className="mt-4 text-center">
+                  <Link href="/forgot-password" className="text-sm text-secondary-text hover:text-primary-text">
+                    Forgot your password?
+                  </Link>
+                </div>
                 
                 <div className="relative my-4">
                   <div className="absolute inset-0 flex items-center">

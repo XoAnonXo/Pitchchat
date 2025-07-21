@@ -287,3 +287,16 @@ The application is designed as a monorepo with clear separation between frontend
 - Updated investor engagement notifications to use Brevo instead of SendGrid
 - Enhanced weekly report emails with detailed analytics and engagement metrics
 - Added automatic email notifications when investors start conversations with pitch rooms
+
+### July 21, 2025 - Complete Password Reset Flow Implementation
+- Added forgot password and reset password pages with comprehensive UI
+- Created passwordResetTokens table in database schema with token expiration handling
+- Implemented storage methods: createPasswordResetToken, getPasswordResetToken, deletePasswordResetToken, updateUserPassword
+- Added /api/auth/forgot-password endpoint that sends reset emails via Brevo
+- Added /api/auth/reset-password endpoint that validates tokens and updates passwords
+- Created professional email templates: password reset, welcome email, password changed confirmation, account deletion
+- Updated registration process to automatically send welcome emails to new users with 1,000 free tokens
+- Added password changed confirmation email when users successfully reset their password
+- Implemented secure token generation using crypto.randomBytes with 1-hour expiration
+- Added "Forgot password?" link to login form on authentication page
+- All email templates use PitchChat branding with responsive HTML design and black CTA buttons

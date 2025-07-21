@@ -169,6 +169,12 @@ export function setupAuth(app: Express) {
         provider: "local",
       });
 
+      // Send welcome email
+      const { sendWelcomeEmail } = require("./brevo");
+      sendWelcomeEmail(user.email, user.firstName).catch(err => 
+        console.error('Failed to send welcome email:', err)
+      );
+
       // Log them in
       req.login(user, (err) => {
         if (err) return next(err);
@@ -219,6 +225,81 @@ export function setupAuth(app: Express) {
       res.redirect("/");
     }
   );
+
+  // Forgot password
+  app.post("/api/auth/forgot-password", async (req, res) => {
+    try {
+      const { email } = req.body;
+      
+      if (!email) {
+        return res.status(400).json({ message: "Email is required" });
+      }
+
+      const user = await storage.getUserByEmail(email);
+      if (!user) {
+        // Don't reveal if email exists for security
+        return res.json({ message: "If an account exists, a reset email has been sent" });
+      }
+
+      if (user.provider !== "local") {
+        return res.status(400).json({ message: "Please sign in with your social provider" });
+      }
+
+      // Create reset token
+      const resetToken = await storage.createPasswordResetToken(user.id);
+      
+      // Send email using Brevo
+      const { sendPasswordResetEmail } = require("./brevo");
+      await sendPasswordResetEmail(email, resetToken);
+
+      res.json({ message: "Password reset email sent" });
+    } catch (error) {
+      console.error("Forgot password error:", error);
+      res.status(500).json({ message: "Failed to process request" });
+    }
+  });
+
+  // Reset password
+  app.post("/api/auth/reset-password", async (req, res) => {
+    try {
+      const { token, password } = req.body;
+      
+      if (!token || !password) {
+        return res.status(400).json({ message: "Token and password are required" });
+      }
+
+      if (password.length < 8) {
+        return res.status(400).json({ message: "Password must be at least 8 characters" });
+      }
+
+      // Get token
+      const resetToken = await storage.getPasswordResetToken(token);
+      if (!resetToken) {
+        return res.status(400).json({ message: "Invalid or expired reset token" });
+      }
+
+      // Update password
+      const hashedPassword = await hashPassword(password);
+      await storage.updateUserPassword(resetToken.userId, hashedPassword);
+      
+      // Delete token
+      await storage.deletePasswordResetToken(token);
+
+      // Send password changed email
+      const user = await storage.getUser(resetToken.userId);
+      if (user && user.email) {
+        const { sendPasswordChangedEmail } = require("./brevo");
+        sendPasswordChangedEmail(user.email).catch(err => 
+          console.error('Failed to send password changed email:', err)
+        );
+      }
+
+      res.json({ message: "Password reset successful" });
+    } catch (error) {
+      console.error("Reset password error:", error);
+      res.status(500).json({ message: "Failed to reset password" });
+    }
+  });
 }
 
 export const isAuthenticated: RequestHandler = (req, res, next) => {
