@@ -98,6 +98,9 @@ export default function Dashboard() {
     }
   }, [projects, selectedProjectId]);
 
+  // Get the selected project object
+  const selectedProject = projects.find((p: any) => p.id === selectedProjectId);
+
   // Create project mutation
   const createProjectMutation = useMutation({
     mutationFn: async (projectData: { name: string; description?: string }) => {
@@ -147,8 +150,6 @@ export default function Dashboard() {
       setNewProjectDescription("");
     }
   };
-
-  const selectedProject = projects.find((p: any) => p.id === selectedProjectId);
 
   if (authLoading || !user) {
     return (
