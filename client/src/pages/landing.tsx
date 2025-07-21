@@ -1,165 +1,215 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Upload, Share2, BarChart3, Zap, Shield } from "lucide-react";
+import { Upload, MessageSquare, Share2, BarChart3, ArrowRight, Check } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Redirect } from "wouter";
 
 export default function Landing() {
+  const { user } = useAuth();
+
+  if (user) {
+    return <Redirect to="/dashboard" />;
+  }
+
   return (
-    <div className="min-h-screen bg-slate-50">
-      {/* Header */}
-      <header className="bg-white border-b border-slate-200">
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-gray-100 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-black rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-sm">PC</span>
               </div>
-              <h1 className="text-xl font-semibold text-slate-900">PitchChat Builder</h1>
+              <span className="text-xl font-semibold text-gray-900">PitchChat</span>
             </div>
             
-            <Button onClick={() => window.location.href = "/api/login"}>
+            <Button 
+              className="bg-black hover:bg-gray-800 text-white rounded-xl"
+              onClick={() => window.location.href = "/api/login"}
+            >
               Sign In
             </Button>
           </div>
         </div>
-      </header>
+      </nav>
 
       {/* Hero Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-slate-900 mb-6">
-            Turn Your Startup Docs Into
-            <span className="text-primary"> AI-Powered Pitch Rooms</span>
-          </h1>
-          <p className="text-xl text-slate-600 mb-10 max-w-3xl mx-auto">
-            Upload your pitch deck, business plan, and financials. Get an AI assistant that can answer any investor question instantly, with citations from your documents.
-          </p>
-          <Button 
-            size="lg" 
-            className="bg-gradient-to-r from-primary to-secondary hover:opacity-90"
-            onClick={() => window.location.href = "/api/login"}
-          >
-            Get Started Free
-          </Button>
+      <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+              Turn Documents Into
+              <span className="block text-black">AI Pitch Rooms</span>
+            </h1>
+            <p className="text-xl text-gray-600 mb-10">
+              Upload. Chat. Share. Track investor engagement in real-time.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-black hover:bg-gray-800 text-white rounded-xl px-8 py-6 text-lg"
+              onClick={() => window.location.href = "/api/login"}
+            >
+              Start Free <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">
-              Everything You Need for Investor Conversations
-            </h2>
-            <p className="text-lg text-slate-600">
-              Transform static documents into dynamic, interactive pitch experiences
-            </p>
+      {/* How it Works - Visual Steps */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">How It Works</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {/* Step 1 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Upload className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Upload</h3>
+              <p className="text-sm text-gray-600">PDFs, PPTX, XLSX, DOCX</p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <MessageSquare className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Chat</h3>
+              <p className="text-sm text-gray-600">AI answers from your docs</p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <Share2 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Share</h3>
+              <p className="text-sm text-gray-600">Send secure links to investors</p>
+            </div>
+
+            {/* Step 4 */}
+            <div className="text-center">
+              <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <BarChart3 className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Track</h3>
+              <p className="text-sm text-gray-600">See engagement analytics</p>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card>
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-                  <Upload className="w-6 h-6 text-blue-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Smart Document Upload</h3>
-                <p className="text-slate-600">
-                  Upload PDFs, Word docs, spreadsheets, and presentations. Our AI automatically processes and indexes everything.
-                </p>
-              </CardContent>
-            </Card>
+      {/* Key Features - Minimal Grid */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">Built for Founders</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-gray-50 rounded-2xl p-8">
+              <h3 className="font-semibold text-gray-900 mb-4">Instant Answers</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">AI reads all your documents</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Answers with exact citations</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Multiple AI models (GPT-4, Claude)</span>
+                </li>
+              </ul>
+            </div>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-                  <MessageSquare className="w-6 h-6 text-green-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">AI Chat Assistant</h3>
-                <p className="text-slate-600">
-                  Powered by GPT-4o, answers investor questions using only your documents with proper citations.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="bg-gray-50 rounded-2xl p-8">
+              <h3 className="font-semibold text-gray-900 mb-4">Investor Ready</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Shareable pitch links</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Email-gated access</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">24/7 availability</span>
+                </li>
+              </ul>
+            </div>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <Share2 className="w-6 h-6 text-purple-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Shareable Links</h3>
-                <p className="text-slate-600">
-                  Generate secure, time-limited links for investors. No signups required for them to start chatting.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="bg-gray-50 rounded-2xl p-8">
+              <h3 className="font-semibold text-gray-900 mb-4">Full Analytics</h3>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Track all conversations</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Engagement metrics</span>
+                </li>
+                <li className="flex items-start">
+                  <Check className="w-5 h-5 text-black mr-3 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm">Weekly email reports</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <Card>
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
-                  <BarChart3 className="w-6 h-6 text-yellow-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Analytics & Insights</h3>
-                <p className="text-slate-600">
-                  Track which questions investors ask most, conversation costs, and engagement metrics.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
-                  <Zap className="w-6 h-6 text-red-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Lightning Fast</h3>
-                <p className="text-slate-600">
-                  Responses in seconds, not hours. Your AI assistant is available 24/7 to engage with investors.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center mb-4">
-                  <Shield className="w-6 h-6 text-slate-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 mb-2">Enterprise Security</h3>
-                <p className="text-slate-600">
-                  Bank-grade encryption, secure file storage, and granular access controls protect your sensitive data.
-                </p>
-              </CardContent>
-            </Card>
+      {/* Integration Logos */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="text-lg font-semibold text-gray-900 mb-8">Import from your tools</h3>
+          <div className="flex flex-wrap justify-center items-center gap-8 opacity-60">
+            <span className="text-gray-600 font-medium">GitHub</span>
+            <span className="text-gray-600 font-medium">Notion</span>
+            <span className="text-gray-600 font-medium">Google Drive</span>
+            <span className="text-gray-600 font-medium">Dropbox</span>
+            <span className="text-gray-600 font-medium">Figma</span>
+            <span className="text-gray-600 font-medium">Asana</span>
+            <span className="text-gray-600 font-medium">Jira</span>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-secondary">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Transform Your Fundraising?
+      <section className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+            Ready to impress investors?
           </h2>
-          <p className="text-lg text-blue-100 mb-8">
-            Join hundreds of founders who've streamlined their investor conversations
+          <p className="text-xl text-gray-600 mb-10">
+            Join founders using AI to handle investor questions 24/7
           </p>
           <Button 
             size="lg" 
-            variant="secondary"
+            className="bg-black hover:bg-gray-800 text-white rounded-xl px-8 py-6 text-lg"
             onClick={() => window.location.href = "/api/login"}
           >
-            Start Building Your Pitch Room
+            Create Your Pitch Room <ArrowRight className="ml-2 w-5 h-5" />
           </Button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-white border-t border-slate-200 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-6 h-6 bg-gradient-to-r from-primary to-secondary rounded"></div>
-              <span className="text-slate-900 font-semibold">PitchChat Builder</span>
+      <footer className="border-t border-gray-200 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center space-x-2 mb-4 md:mb-0">
+              <div className="w-8 h-8 bg-black rounded-xl flex items-center justify-center">
+                <span className="text-white font-bold text-sm">PC</span>
+              </div>
+              <span className="text-lg font-semibold text-gray-900">PitchChat</span>
             </div>
-            <p className="text-slate-500 text-sm">
-              © 2024 PitchChat Builder. All rights reserved.
+            <p className="text-sm text-gray-600">
+              © 2025 PitchChat. Built for founders, by founders.
             </p>
           </div>
         </div>
