@@ -183,7 +183,7 @@ export default function AnalyticsPage() {
             <span className="font-medium">Dashboard</span>
           </Link>
           
-          <Link href="/documents" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <FolderOpen className="w-5 h-5" />
             <span className="font-medium">Documents</span>
           </Link>

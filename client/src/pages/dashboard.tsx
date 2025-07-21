@@ -510,9 +510,10 @@ export default function Dashboard() {
         )}
       </div>
 
-      {showShareModal && selectedProject && (
+      {selectedProject && (
         <ShareLinkModal 
           projectId={selectedProject.id} 
+          isOpen={showShareModal}
           onClose={() => setShowShareModal(false)} 
         />
       )}

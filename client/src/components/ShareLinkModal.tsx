@@ -50,7 +50,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
           variant: "destructive",
         });
         setTimeout(() => {
-          window.location.href = "/api/login";
+          window.location.href = "/auth";
         }, 500);
         return;
       }
