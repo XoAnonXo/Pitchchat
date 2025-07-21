@@ -12,10 +12,16 @@ export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
     throw new Error("BREVO_API_KEY environment variable must be set");
   }
 
+  // Use the verified sender for now, can switch to noreply@pitchchat.ai once domain is verified
+  const defaultSender = {
+    name: "PitchChat",
+    email: "georgiiyvl@gmail.com" // Switch to "noreply@pitchchat.ai" after domain verification
+  };
+
   const emailData = {
     sender: {
-      name: params.senderName || "PitchChatAI",
-      email: params.senderEmail || "georgiiyvl@gmail.com"
+      name: params.senderName || defaultSender.name,
+      email: params.senderEmail || defaultSender.email
     },
     to: [{
       email: params.to,
