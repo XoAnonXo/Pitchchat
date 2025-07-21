@@ -98,14 +98,29 @@ export default function InvestorChat() {
   };
 
   const handleEmailSubmit = () => {
-    if (!investorEmail.trim() || !investorEmail.includes("@")) {
+    const email = investorEmail.trim();
+    
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    if (!email) {
       toast({
-        title: "Invalid Email",
-        description: "Please enter a valid email address",
+        title: "Email Required",
+        description: "Please enter your email address",
         variant: "destructive",
       });
       return;
     }
+    
+    if (!emailRegex.test(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address (e.g., name@example.com)",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     setEmailSubmitted(true);
   };
 
@@ -157,9 +172,7 @@ export default function InvestorChat() {
               <h1 className="text-2xl font-bold text-[#1A1A26]">{linkInfo.projectName}</h1>
               <p className="text-[#72788F] mt-1">{linkInfo.name}</p>
             </div>
-            <Badge variant="secondary" className="bg-[#F8FAFB] text-black border-0">
-              <span className="text-sm font-medium">o3</span>
-            </Badge>
+
           </div>
           {linkInfo.description && (
             <p className="text-[#72788F] mt-6 text-base leading-relaxed">{linkInfo.description}</p>

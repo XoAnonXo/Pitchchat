@@ -765,6 +765,110 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Test endpoint to send all email types  
+  app.post("/api/email/test-all", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const user = await storage.getUser(userId);
+      
+      if (!user?.email) {
+        return res.status(400).json({ message: "No email address found for user" });
+      }
+
+      // Get user's first project for testing
+      const projects = await storage.getUserProjects(userId);
+      const testProject = projects[0] || { name: "Test Project", id: "test-project-id" };
+      
+      // Get analytics for weekly report
+      const analytics = await storage.getDetailedAnalytics(userId);
+
+      const emailsSent = [];
+
+      console.log("Sending test emails to:", user.email);
+
+      // 1. Send investor engagement alert
+      try {
+        await sendInvestorEngagementAlert(
+          user.email,
+          testProject.name,
+          "investor@example.com",
+          "test-conversation-id"
+        );
+        emailsSent.push("Investor engagement alert");
+        console.log("✓ Sent investor engagement alert");
+      } catch (error) {
+        console.error("Failed to send investor engagement alert:", error);
+      }
+
+      // 2. Send investor contact email  
+      try {
+        await sendInvestorContactEmail(
+          user.email, // Sending to user as test
+          testProject.name,
+          "test-link-slug",
+          {
+            name: "John Smith",
+            phone: "+1 555-123-4567",
+            company: "Venture Capital Inc.",
+            website: "https://example.vc",
+          }
+        );
+        emailsSent.push("Investor contact confirmation");
+        console.log("✓ Sent investor contact confirmation");
+      } catch (error) {
+        console.error("Failed to send investor contact email:", error);
+      }
+
+      // 3. Send founder contact alert
+      try {
+        await sendFounderContactAlert(
+          user.email,
+          testProject.name,
+          "test-conversation-id",
+          {
+            email: "investor@example.com",
+            name: "Jane Doe",
+            phone: "+1 555-987-6543",
+            company: "Innovation Partners",
+            website: "https://innovationpartners.com",
+          }
+        );
+        emailsSent.push("Founder contact alert");
+        console.log("✓ Sent founder contact alert");
+      } catch (error) {
+        console.error("Failed to send founder contact alert:", error);
+      }
+
+      // 4. Send weekly report
+      try {
+        await sendWeeklyReport(
+          user.email,
+          {
+            totalQuestions: analytics.summary?.totalConversations || 10,
+            activeLinks: analytics.charts?.linkPerformance?.length || 5,
+            monthlyCost: analytics.summary?.totalCost || 5.00,
+            weeklyConversations: 5,
+            topPerformingProject: testProject.name,
+          }
+        );
+        emailsSent.push("Weekly report");
+        console.log("✓ Sent weekly report");
+      } catch (error) {
+        console.error("Failed to send weekly report:", error);
+      }
+
+      res.json({ 
+        message: "Test emails sent",
+        emailsSent,
+        sentTo: user.email,
+        totalSent: emailsSent.length
+      });
+    } catch (error) {
+      console.error("Error sending test emails:", error);
+      res.status(500).json({ message: "Failed to send test emails", error: error.message });
+    }
+  });
+
   // Update user notification preferences
   app.patch("/api/user/notifications", isAuthenticated, async (req: any, res) => {
     try {

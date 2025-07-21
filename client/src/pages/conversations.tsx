@@ -265,9 +265,7 @@ export default function ConversationsPage() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="text-sm text-gray-600">
-                AI Model: <span className="font-semibold text-black">o3</span>
-              </div>
+
             </div>
           </div>
         </header>

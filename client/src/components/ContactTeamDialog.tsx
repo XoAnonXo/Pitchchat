@@ -21,7 +21,56 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
     company: "",
     website: "",
   });
+  const [errors, setErrors] = useState({
+    name: "",
+    phone: "",
+    company: "",
+    website: "",
+  });
   const [success, setSuccess] = useState(false);
+
+  // Validation functions
+  const validatePhone = (phone: string): string => {
+    if (!phone) return "";
+    // Allow international phone formats with optional + and digits/spaces/dashes
+    const phoneRegex = /^[\+]?[(]?[0-9]{1,3}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,4}[-\s\.]?[0-9]{1,9}$/;
+    if (!phoneRegex.test(phone.replace(/\s/g, ""))) {
+      return "Please enter a valid phone number";
+    }
+    return "";
+  };
+
+  const validateWebsite = (website: string): string => {
+    if (!website) return "";
+    try {
+      const url = new URL(website.startsWith("http") ? website : `https://${website}`);
+      if (!["http:", "https:"].includes(url.protocol)) {
+        return "Please enter a valid website URL";
+      }
+    } catch {
+      return "Please enter a valid website URL";
+    }
+    return "";
+  };
+
+  const validateName = (name: string): string => {
+    if (!name) return "";
+    if (name.length < 2) {
+      return "Name must be at least 2 characters";
+    }
+    if (!/^[a-zA-Z\s'-]+$/.test(name)) {
+      return "Name can only contain letters, spaces, hyphens, and apostrophes";
+    }
+    return "";
+  };
+
+  const validateCompany = (company: string): string => {
+    if (!company) return "";
+    if (company.length < 2) {
+      return "Company name must be at least 2 characters";
+    }
+    return "";
+  };
 
   const submitMutation = useMutation({
     mutationFn: async (data: typeof formData) => {
@@ -59,6 +108,22 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate all fields
+    const newErrors = {
+      name: validateName(formData.name),
+      phone: validatePhone(formData.phone),
+      company: validateCompany(formData.company),
+      website: validateWebsite(formData.website),
+    };
+    
+    setErrors(newErrors);
+    
+    // Check if there are any errors
+    const hasErrors = Object.values(newErrors).some(error => error !== "");
+    if (hasErrors) {
+      return;
+    }
+    
     // Only submit if at least one field is filled
     if (formData.name || formData.phone || formData.company || formData.website) {
       submitMutation.mutate(formData);
@@ -67,6 +132,15 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
         title: "Please provide at least one contact detail",
         variant: "destructive",
       });
+    }
+  };
+
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData({ ...formData, [field]: value });
+    
+    // Clear error for this field when user starts typing
+    if (errors[field]) {
+      setErrors({ ...errors, [field]: "" });
     }
   };
 
@@ -100,10 +174,13 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
                 <Input
                   id="name"
                   value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
                   placeholder="John Smith"
-                  className="border-gray-300 focus:border-black"
+                  className={`border-gray-300 focus:border-black ${errors.name ? "border-red-500" : ""}`}
                 />
+                {errors.name && (
+                  <p className="text-sm text-red-500 mt-1">{errors.name}</p>
+                )}
               </div>
 
               <div>
@@ -114,10 +191,13 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
                 <Input
                   id="phone"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
                   placeholder="+1 234 567 8900"
-                  className="border-gray-300 focus:border-black"
+                  className={`border-gray-300 focus:border-black ${errors.phone ? "border-red-500" : ""}`}
                 />
+                {errors.phone && (
+                  <p className="text-sm text-red-500 mt-1">{errors.phone}</p>
+                )}
               </div>
 
               <div>
@@ -128,10 +208,13 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
                 <Input
                   id="company"
                   value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  onChange={(e) => handleInputChange("company", e.target.value)}
                   placeholder="Venture Capital Inc."
-                  className="border-gray-300 focus:border-black"
+                  className={`border-gray-300 focus:border-black ${errors.company ? "border-red-500" : ""}`}
                 />
+                {errors.company && (
+                  <p className="text-sm text-red-500 mt-1">{errors.company}</p>
+                )}
               </div>
 
               <div>
@@ -142,10 +225,13 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
                 <Input
                   id="website"
                   value={formData.website}
-                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  onChange={(e) => handleInputChange("website", e.target.value)}
                   placeholder="https://example.com"
-                  className="border-gray-300 focus:border-black"
+                  className={`border-gray-300 focus:border-black ${errors.website ? "border-red-500" : ""}`}
                 />
+                {errors.website && (
+                  <p className="text-sm text-red-500 mt-1">{errors.website}</p>
+                )}
               </div>
             </div>
 
