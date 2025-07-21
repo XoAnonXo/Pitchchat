@@ -644,13 +644,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Get all user data
       const user = await storage.getUser(userId);
-      const projects = await storage.getProjects(userId);
-      const links = await storage.getLinks(userId);
+      const projects = await storage.getUserProjects(userId);
       
-      // Get documents and conversations for each project
+      // Get all project-related data
       const projectData = await Promise.all(projects.map(async (project) => {
-        const documents = await storage.getDocumentsForProject(project.id);
-        const conversations = await storage.getConversationsForLink(project.id);
+        const documents = await storage.getProjectDocuments(project.id);
+        const links = await storage.getProjectLinks(project.id);
+        
+        // Get conversations for each link
+        const linkData = await Promise.all(links.map(async (link) => {
+          const conversations = await storage.getLinkConversations(link.id);
+          return {
+            ...link,
+            conversationCount: conversations.length,
+          };
+        }));
         
         return {
           ...project,
@@ -662,7 +670,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             createdAt: doc.createdAt,
             status: doc.status,
           })),
-          conversations: conversations.length,
+          links: linkData,
         };
       }));
 
@@ -677,9 +685,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
           createdAt: user?.createdAt,
         },
         projects: projectData,
-        links: links,
         totalProjects: projects.length,
-        totalLinks: links.length,
+        totalLinks: projectData.reduce((acc, p) => acc + p.links.length, 0),
+        totalDocuments: projectData.reduce((acc, p) => acc + p.documents.length, 0),
       };
 
       res.json(exportData);
