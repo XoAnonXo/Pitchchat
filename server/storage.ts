@@ -206,6 +206,9 @@ export class DatabaseStorage implements IStorage {
   }
 
   async deleteDocument(id: string): Promise<void> {
+    // First delete all chunks associated with this document
+    await db.delete(chunks).where(eq(chunks.documentId, id));
+    // Then delete the document itself
     await db.delete(documents).where(eq(documents.id, id));
   }
 
