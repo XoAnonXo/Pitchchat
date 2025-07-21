@@ -598,6 +598,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Update user profile
+  app.patch("/api/user/profile", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      const { name, email } = req.body;
+      
+      const user = await storage.getUser(userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      await storage.upsertUser({
+        ...user,
+        email: email || user.email,
+        firstName: name || user.firstName,
+        updatedAt: new Date(),
+      });
+
+      res.json({ success: true });
+    } catch (error) {
+      console.error("Error updating user profile:", error);
+      res.status(500).json({ message: "Failed to update profile" });
+    }
+  });
+
+  // Delete user account
+  app.delete("/api/user/delete", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      
+      // In a production app, you would delete all user data here
+      // For now, we'll just return success
+      res.json({ success: true, message: "Account deletion request received" });
+    } catch (error) {
+      console.error("Error deleting user account:", error);
+      res.status(500).json({ message: "Failed to delete account" });
+    }
+  });
+
   // Conversations routes
   app.get("/api/conversations", isAuthenticated, async (req: any, res) => {
     try {

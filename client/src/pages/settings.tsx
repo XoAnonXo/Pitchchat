@@ -103,10 +103,7 @@ export default function SettingsPage() {
 
   const updateProfileMutation = useMutation({
     mutationFn: async (data: { name: string; email: string }) => {
-      return apiRequest('/api/user/profile', {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-      });
+      return apiRequest('PATCH', '/api/user/profile', data);
     },
     onSuccess: () => {
       toast({
@@ -119,10 +116,7 @@ export default function SettingsPage() {
 
   const updateNotificationsMutation = useMutation({
     mutationFn: async (notifications: typeof settings.notifications) => {
-      return apiRequest('/api/user/notifications', {
-        method: 'PATCH',
-        body: JSON.stringify(notifications),
-      });
+      return apiRequest('PATCH', '/api/user/notifications', notifications);
     },
     onSuccess: () => {
       toast({
@@ -134,9 +128,7 @@ export default function SettingsPage() {
 
   const deleteAccountMutation = useMutation({
     mutationFn: async () => {
-      return apiRequest('/api/user/delete', {
-        method: 'DELETE',
-      });
+      return apiRequest('DELETE', '/api/user/delete');
     },
     onSuccess: () => {
       window.location.href = '/api/logout';
