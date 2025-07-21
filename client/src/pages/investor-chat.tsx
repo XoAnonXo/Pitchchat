@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { MessageSquare, Send, Clock, ExternalLink } from "lucide-react";
+import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText } from "lucide-react";
 
 interface Message {
   id: string;
@@ -118,20 +118,20 @@ export default function InvestorChat() {
 
   if (linkLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
+        <div className="animate-spin w-8 h-8 border-4 border-black border-t-transparent rounded-full" />
       </div>
     );
   }
 
   if (linkError || !linkInfo) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <Card className="w-full max-w-md mx-4">
+      <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
+        <Card className="w-full max-w-md mx-4 shadow-subtle">
           <CardContent className="pt-6 text-center">
             <MessageSquare className="h-12 w-12 text-red-500 mx-auto mb-4" />
-            <h1 className="text-xl font-bold text-gray-900 mb-2">Chat Link Not Found</h1>
-            <p className="text-sm text-gray-600">
+            <h1 className="text-xl font-bold text-[#1A1A26] mb-2">Chat Link Not Found</h1>
+            <p className="text-sm text-[#72788F]">
               This chat link may have expired or doesn't exist.
             </p>
           </CardContent>
@@ -141,73 +141,89 @@ export default function InvestorChat() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#FAFAFA]">
       {/* Header */}
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <header className="bg-white border-b border-[#E0E3EB]">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center space-x-4">
-            <div className="w-10 h-10 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">PC</span>
+            <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center shadow-md">
+              <Sparkles className="w-7 h-7 text-white" />
             </div>
-            <div>
-              <h1 className="text-xl font-semibold text-slate-900">{linkInfo.name}</h1>
-              <p className="text-slate-600">{linkInfo.projectName}</p>
+            <div className="flex-1">
+              <h1 className="text-2xl font-bold text-[#1A1A26]">{linkInfo.projectName}</h1>
+              <p className="text-[#72788F] mt-1">{linkInfo.name}</p>
             </div>
+            <Badge variant="secondary" className="bg-[#F8FAFB] text-black border-0">
+              <span className="text-sm font-medium">o3</span>
+            </Badge>
           </div>
           {linkInfo.description && (
-            <p className="text-slate-600 mt-4">{linkInfo.description}</p>
+            <p className="text-[#72788F] mt-6 text-base leading-relaxed">{linkInfo.description}</p>
           )}
         </div>
       </header>
 
       {/* Main Chat Interface */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card className="h-[600px] flex flex-col">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <Card className="min-h-[700px] flex flex-col shadow-soft bg-white">
           {/* Email Collection */}
           {!emailSubmitted && (
-            <div className="p-6 border-b border-slate-200 bg-blue-50">
-              <h3 className="text-lg font-medium text-slate-900 mb-2">Welcome!</h3>
-              <p className="text-slate-600 mb-4">
-                Please provide your email address to start the conversation. This helps the founder track engagement.
-              </p>
-              <div className="flex space-x-2">
-                <Input
-                  type="email"
-                  placeholder="your@email.com"
-                  value={investorEmail}
-                  onChange={(e) => setInvestorEmail(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  className="flex-1"
-                />
-                <Button onClick={handleEmailSubmit}>
-                  Start Chat
-                </Button>
+            <div className="p-8 border-b border-[#E0E3EB] bg-[#F8FAFB]">
+              <div className="max-w-md mx-auto text-center">
+                <MessageSquare className="w-12 h-12 text-black mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-[#1A1A26] mb-2">Welcome to the Pitch Room</h3>
+                <p className="text-[#72788F] mb-6">
+                  Please provide your email to start exploring this startup's vision. Your information helps founders understand investor interest.
+                </p>
+                <div className="flex space-x-3">
+                  <Input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={investorEmail}
+                    onChange={(e) => setInvestorEmail(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    className="flex-1 border-[#E0E3EB] focus:border-black"
+                  />
+                  <Button 
+                    onClick={handleEmailSubmit}
+                    className="bg-black text-white hover:bg-gray-800"
+                  >
+                    <ArrowRight className="w-4 h-4 mr-2" />
+                    Start Chat
+                  </Button>
+                </div>
               </div>
             </div>
           )}
 
           {/* Chat Header */}
-          <div className="p-6 border-b border-slate-200">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold text-slate-900">Ask Me Anything</h3>
-              <Badge variant="secondary" className="flex items-center space-x-1">
-                <Clock className="w-3 h-3" />
-                <span>GPT-4o</span>
-              </Badge>
+          {emailSubmitted && (
+            <div className="p-6 border-b border-[#E0E3EB]">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-lg font-bold text-[#1A1A26]">AI Pitch Assistant</h3>
+                  <p className="text-[#72788F] text-sm mt-1">
+                    Ask about the business model, market opportunity, team, financials, or any aspect of this startup
+                  </p>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <FileText className="w-4 h-4 text-[#72788F]" />
+                  <span className="text-sm text-[#72788F]">{linkInfo.documentCount || 0} documents</span>
+                </div>
+              </div>
             </div>
-            <p className="text-slate-600 text-sm mt-1">
-              I can answer questions about the startup's pitch, business model, financials, and more.
-            </p>
-          </div>
+          )}
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
+          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-[#FAFAFA]">
             {messages.length === 0 && emailSubmitted && (
-              <div className="text-center py-8">
-                <MessageSquare className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-slate-900 mb-2">Start the Conversation</h3>
-                <p className="text-slate-600">
-                  Ask me about the startup's business model, market opportunity, financials, or any other questions you have.
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-[#F8FAFB] rounded-2xl flex items-center justify-center mx-auto mb-6">
+                  <Sparkles className="w-8 h-8 text-black" />
+                </div>
+                <h3 className="text-xl font-bold text-[#1A1A26] mb-3">Ready to Explore</h3>
+                <p className="text-[#72788F] max-w-md mx-auto">
+                  I have full context on this startup's vision, strategy, and metrics. What would you like to know?
                 </p>
               </div>
             )}
@@ -215,18 +231,18 @@ export default function InvestorChat() {
             {messages.map((msg: Message) => (
               <div key={msg.id} className={`flex space-x-3 ${msg.role === "user" ? "justify-end" : ""}`}>
                 {msg.role === "assistant" && (
-                  <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-medium text-sm">AI</span>
+                  <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
+                    <Sparkles className="w-5 h-5 text-white" />
                   </div>
                 )}
                 
-                <div className={`flex-1 ${msg.role === "user" ? "max-w-md" : ""}`}>
-                  <div className={`rounded-lg p-4 ${
+                <div className={`flex-1 ${msg.role === "user" ? "max-w-lg" : "max-w-2xl"}`}>
+                  <div className={`rounded-2xl px-5 py-4 ${
                     msg.role === "user" 
-                      ? "bg-primary text-white" 
-                      : "bg-slate-100"
+                      ? "bg-black text-white shadow-md" 
+                      : "bg-white border border-[#E0E3EB] shadow-subtle"
                   }`}>
-                    <p className={msg.role === "user" ? "text-white" : "text-slate-900"}>
+                    <p className={`leading-relaxed ${msg.role === "user" ? "text-white" : "text-[#1A1A26]"}`}>
                       {msg.content}
                     </p>
                   </div>
@@ -235,12 +251,12 @@ export default function InvestorChat() {
                   {msg.citations && msg.citations.length > 0 && (
                     <div className="mt-3 space-y-2">
                       {msg.citations.map((citation, idx) => (
-                        <div key={idx} className="border-l-4 border-blue-200 pl-3 bg-white rounded-r p-2">
-                          <p className="text-sm text-slate-600 italic">"{citation.content}"</p>
-                          <p className="text-xs text-slate-500 mt-1 flex items-center space-x-1">
-                            <ExternalLink className="w-3 h-3" />
-                            <span>Source: {citation.source}</span>
-                            {citation.page && <span>, page {citation.page}</span>}
+                        <div key={idx} className="border-l-2 border-[#E0E3EB] pl-4 ml-1">
+                          <p className="text-sm text-[#72788F] italic leading-relaxed">"{citation.content}"</p>
+                          <p className="text-xs text-[#B5B8CB] mt-2 flex items-center space-x-1">
+                            <FileText className="w-3 h-3" />
+                            <span>{citation.source}</span>
+                            {citation.page && <span> • Page {citation.page}</span>}
                           </p>
                         </div>
                       ))}
@@ -248,22 +264,26 @@ export default function InvestorChat() {
                   )}
                   
                   <div className="flex items-center space-x-2 mt-2">
-                    <p className="text-xs text-slate-500">
-                      {new Date(msg.timestamp).toLocaleTimeString()}
+                    <p className="text-xs text-[#B5B8CB]">
+                      {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                     {msg.role === "assistant" && (
                       <>
-                        <span className="text-xs text-slate-500">•</span>
-                        <Badge variant="outline" className="text-xs">
+                        <span className="text-xs text-[#B5B8CB]">•</span>
+                        <span className="text-xs text-[#B5B8CB]">
                           {msg.tokenCount} tokens
-                        </Badge>
+                        </span>
                       </>
                     )}
                   </div>
                 </div>
 
                 {msg.role === "user" && (
-                  <div className="w-8 h-8 bg-slate-300 rounded-full flex-shrink-0" />
+                  <div className="w-10 h-10 bg-[#F8FAFB] rounded-xl flex items-center justify-center flex-shrink-0">
+                    <span className="text-[#1A1A26] font-medium text-sm">
+                      {investorEmail ? investorEmail.charAt(0).toUpperCase() : "U"}
+                    </span>
+                  </div>
                 )}
               </div>
             ))}
@@ -273,19 +293,20 @@ export default function InvestorChat() {
 
           {/* Message Input */}
           {emailSubmitted && (
-            <div className="p-6 border-t border-slate-200">
+            <div className="p-6 border-t border-[#E0E3EB] bg-white">
               <div className="flex space-x-3">
                 <Input
-                  placeholder="Ask a question about the startup..."
+                  placeholder="Ask about the business model, team, metrics..."
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  className="flex-1"
+                  className="flex-1 border-[#E0E3EB] focus:border-black placeholder:text-[#B5B8CB]"
                   disabled={sendMessageMutation.isPending}
                 />
                 <Button 
                   onClick={handleSendMessage}
                   disabled={!message.trim() || sendMessageMutation.isPending}
+                  className="bg-black text-white hover:bg-gray-800 px-6"
                 >
                   {sendMessageMutation.isPending ? (
                     <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
@@ -294,19 +315,30 @@ export default function InvestorChat() {
                   )}
                 </Button>
               </div>
-              <p className="text-xs text-slate-500 mt-2">
-                Ask about business model, market size, financials, team, or any other aspect of the startup
-              </p>
+              <div className="flex items-center justify-between mt-3">
+                <p className="text-xs text-[#B5B8CB]">
+                  Press Enter to send • Shift+Enter for new line
+                </p>
+                <p className="text-xs text-[#72788F]">
+                  Powered by o3
+                </p>
+              </div>
             </div>
           )}
         </Card>
       </div>
 
       {/* Footer */}
-      <footer className="mt-16 border-t border-slate-200 py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-slate-500 text-sm">
-            Powered by <span className="font-semibold">PitchChat Builder</span> - AI-driven investor conversations
+      <footer className="mt-16 border-t border-[#E0E3EB] py-8 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="flex items-center justify-center space-x-2 mb-2">
+            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+              <Sparkles className="w-4 h-4 text-white" />
+            </div>
+            <span className="font-bold text-[#1A1A26]">PitchChat</span>
+          </div>
+          <p className="text-[#72788F] text-sm">
+            Intelligent conversations between founders and investors
           </p>
         </div>
       </footer>

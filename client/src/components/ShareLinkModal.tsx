@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useToast } from "@/hooks/use-toast";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
-import { Copy, ExternalLink } from "lucide-react";
+import { Copy, ExternalLink, Check } from "lucide-react";
 
 interface ShareLinkModalProps {
   projectId: string;
@@ -169,21 +169,21 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
               </Select>
             </div>
             
-            <div className="bg-slate-50 rounded-lg p-4">
+            <div className="bg-[#F8FAFB] rounded-lg p-4 border border-[#E0E3EB]">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-slate-600">Estimated cost:</span>
-                <span className="font-medium text-slate-900">{estimatedCost} credits</span>
+                <span className="text-[#72788F]">Estimated cost:</span>
+                <span className="font-bold text-[#1A1A26]">{estimatedCost} credits</span>
               </div>
             </div>
             
-            <div className="flex space-x-3">
-              <Button variant="outline" onClick={handleClose} className="flex-1">
+            <div className="flex space-x-3 pt-2">
+              <Button variant="outline" onClick={handleClose} className="flex-1 border-[#E0E3EB] hover:bg-gray-50">
                 Cancel
               </Button>
               <Button 
                 onClick={handleGenerate}
                 disabled={generateLinkMutation.isPending}
-                className="flex-1"
+                className="flex-1 bg-black text-white hover:bg-gray-800"
               >
                 {generateLinkMutation.isPending ? (
                   <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
@@ -195,33 +195,60 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
         ) : (
           <div className="space-y-4">
             <div>
-              <Label>Your Share Link</Label>
-              <div className="flex items-center space-x-2 mt-1">
+              <Label className="text-[#1A1A26] font-medium">Your Share Link</Label>
+              <div className="flex items-center space-x-2 mt-2">
                 <Input 
                   value={generatedLink} 
                   readOnly 
-                  className="flex-1 bg-slate-50"
+                  className="flex-1 bg-[#F8FAFB] border-[#E0E3EB] text-[#1A1A26]"
                 />
-                <Button variant="outline" size="sm" onClick={copyToClipboard}>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={copyToClipboard}
+                  className="border-[#E0E3EB] hover:bg-gray-50"
+                >
                   <Copy className="w-4 h-4" />
                 </Button>
-                <Button variant="outline" size="sm" onClick={openLink}>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={openLink}
+                  className="border-[#E0E3EB] hover:bg-gray-50"
+                >
                   <ExternalLink className="w-4 h-4" />
                 </Button>
               </div>
             </div>
             
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h4 className="font-medium text-green-900 mb-2">Link Created Successfully!</h4>
-              <ul className="text-sm text-green-700 space-y-1">
-                <li>• Share this link with investors</li>
-                <li>• No signup required for investors</li>
-                <li>• {expiration === "never" ? "No expiration" : `Expires in ${expiration} days`}</li>
-                <li>• {tokenLimit === "50000" ? "Unlimited" : `${parseInt(tokenLimit).toLocaleString()} tokens`} per investor</li>
+            <div className="bg-[#F8FAFB] border border-[#E0E3EB] rounded-lg p-5">
+              <div className="flex items-center space-x-2 mb-3">
+                <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+                  <Check className="w-5 h-5 text-white" />
+                </div>
+                <h4 className="font-bold text-[#1A1A26]">Link Created Successfully!</h4>
+              </div>
+              <ul className="text-sm text-[#72788F] space-y-2">
+                <li className="flex items-start">
+                  <span className="text-black mr-2">•</span>
+                  Share this link with investors to start conversations
+                </li>
+                <li className="flex items-start">
+                  <span className="text-black mr-2">•</span>
+                  No signup required - investors just need their email
+                </li>
+                <li className="flex items-start">
+                  <span className="text-black mr-2">•</span>
+                  {expiration === "never" ? "No expiration date" : `Active for ${expiration} days`}
+                </li>
+                <li className="flex items-start">
+                  <span className="text-black mr-2">•</span>
+                  {tokenLimit === "50000" ? "Unlimited usage" : `${parseInt(tokenLimit).toLocaleString()} tokens`} per investor
+                </li>
               </ul>
             </div>
             
-            <Button onClick={handleClose} className="w-full">
+            <Button onClick={handleClose} className="w-full bg-black text-white hover:bg-gray-800">
               Done
             </Button>
           </div>
