@@ -11,7 +11,7 @@ import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
-import { sendInvestorEngagementAlert, sendWeeklyReport } from "./brevo";
+import { sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevo";
 
 // Configure multer for file uploads
 const upload = multer({
@@ -578,10 +578,34 @@ export async function registerRoutes(app: Express): Promise<Server> {
           const project = await storage.getProject(link.projectId);
           if (project) {
             const user = await storage.getUser(project.userId);
+            
+            // Send email to investor confirming their contact details were shared
+            await sendInvestorContactEmail(
+              conversation.investorEmail,
+              project.name,
+              link.slug,
+              {
+                name: name || undefined,
+                phone: phone || undefined,
+                company: company || undefined,
+                website: website || undefined,
+              }
+            );
+            
+            // Send email to founder if they have email alerts enabled
             if (user?.emailAlerts) {
-              // Send email notification to project owner
-              // TODO: Implement email notification when SendGrid is configured
-              console.log(`Investor contact notification: ${conversation.investorEmail} provided contact details for project ${project.name}`);
+              await sendFounderContactAlert(
+                user.email!,
+                project.name,
+                conversationId,
+                {
+                  email: conversation.investorEmail,
+                  name: name || undefined,
+                  phone: phone || undefined,
+                  company: company || undefined,
+                  website: website || undefined,
+                }
+              );
             }
           }
         }

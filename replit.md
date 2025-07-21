@@ -300,3 +300,14 @@ The application is designed as a monorepo with clear separation between frontend
 - Implemented secure token generation using crypto.randomBytes with 1-hour expiration
 - Added "Forgot password?" link to login form on authentication page
 - All email templates use PitchChat branding with responsive HTML design and black CTA buttons
+
+### July 21, 2025 - Enhanced Email Notifications for Investor Interactions
+- Created two new email templates: sendInvestorContactEmail and sendFounderContactAlert
+- Added email notification to investors when they submit contact details, confirming their information was shared
+- Investors receive a personalized email with a link to revisit their conversation on pitchchat.ai
+- Founders receive immediate email alert when investors share contact details with all contact information formatted
+- Updated contact submission endpoint to trigger both email notifications automatically
+- Investor emails include summary of shared contact details and continue conversation button
+- Founder emails include pro tip to review conversation history before reaching out
+- All new email templates use consistent PitchChat.ai branding with black accent colors
+- Existing investor engagement email already sends when investors first start chatting with pitch rooms

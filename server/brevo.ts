@@ -317,6 +317,136 @@ export async function sendPasswordChangedEmail(
   });
 }
 
+export async function sendInvestorContactEmail(
+  investorEmail: string,
+  projectName: string,
+  conversationSlug: string,
+  contactDetails?: {
+    name?: string;
+    phone?: string;
+    company?: string;
+    website?: string;
+  }
+): Promise<boolean> {
+  const conversationLink = `${process.env.PRODUCTION_URL || 'https://pitchchat.ai'}/link/${conversationSlug}`;
+  
+  const htmlContent = `
+    <html>
+      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #000;">Thank you for your interest!</h2>
+          
+          <p>Hi${contactDetails?.name ? ` ${contactDetails.name}` : ''},</p>
+          
+          <p>Thank you for engaging with the <strong>${projectName}</strong> pitch room. Your contact information has been shared with the founders.</p>
+          
+          ${contactDetails ? `
+          <div style="background: #f8fafb; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0;">Contact Details Shared:</h3>
+            ${contactDetails.name ? `<p><strong>Name:</strong> ${contactDetails.name}</p>` : ''}
+            ${contactDetails.phone ? `<p><strong>Phone:</strong> ${contactDetails.phone}</p>` : ''}
+            ${contactDetails.company ? `<p><strong>Company:</strong> ${contactDetails.company}</p>` : ''}
+            ${contactDetails.website ? `<p><strong>Website:</strong> ${contactDetails.website}</p>` : ''}
+          </div>
+          ` : ''}
+          
+          <p>You can revisit your conversation at any time by clicking the link below:</p>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${conversationLink}" 
+               style="background: #000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+              Continue Conversation
+            </a>
+          </div>
+          
+          <p>The founders will be in touch with you soon. In the meantime, feel free to continue exploring the pitch room and asking questions.</p>
+          
+          <p style="color: #666; font-size: 14px; margin-top: 30px;">
+            Best regards,<br>
+            The PitchChat Team
+          </p>
+          
+          <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px;">
+              Powered by <a href="https://pitchchat.ai" style="color: #000;">PitchChat.ai</a>
+            </p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+  
+  return sendBrevoEmail({
+    to: investorEmail,
+    subject: `Thank you for your interest in ${projectName}`,
+    htmlContent,
+  });
+}
+
+export async function sendFounderContactAlert(
+  userEmail: string,
+  projectName: string,
+  conversationId: string,
+  contactDetails: {
+    name?: string;
+    phone?: string;
+    company?: string;
+    website?: string;
+    email: string;
+  }
+): Promise<boolean> {
+  const htmlContent = `
+    <html>
+      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #000;">🎉 Investor Shared Contact Details!</h2>
+          
+          <p>Great news! An investor has shared their contact information for your project <strong>${projectName}</strong>.</p>
+          
+          <div style="background: #f8fafb; padding: 20px; border-radius: 8px; margin: 20px 0; border: 2px solid #000;">
+            <h3 style="margin-top: 0; color: #000;">Contact Information:</h3>
+            <p><strong>Email:</strong> ${contactDetails.email}</p>
+            ${contactDetails.name ? `<p><strong>Name:</strong> ${contactDetails.name}</p>` : ''}
+            ${contactDetails.phone ? `<p><strong>Phone (WhatsApp/Telegram):</strong> ${contactDetails.phone}</p>` : ''}
+            ${contactDetails.company ? `<p><strong>Company:</strong> ${contactDetails.company}</p>` : ''}
+            ${contactDetails.website ? `<p><strong>Website:</strong> <a href="${contactDetails.website}" style="color: #000;">${contactDetails.website}</a></p>` : ''}
+          </div>
+          
+          <p>This investor is actively interested in your project. We recommend reaching out to them within 24 hours while their interest is high.</p>
+          
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${process.env.PRODUCTION_URL || 'https://pitchchat.ai'}/conversations" 
+               style="background: #000; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block;">
+              View Full Conversation
+            </a>
+          </div>
+          
+          <div style="background: #fffbeb; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 0;"><strong>💡 Pro Tip:</strong> Check their full conversation to understand what aspects of your project interested them most before reaching out.</p>
+          </div>
+          
+          <p style="color: #666; font-size: 14px; margin-top: 30px;">
+            Best regards,<br>
+            The PitchChat Team
+          </p>
+          
+          <div style="text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 12px;">
+              Powered by <a href="https://pitchchat.ai" style="color: #000;">PitchChat.ai</a>
+            </p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+  
+  return sendBrevoEmail({
+    to: userEmail,
+    subject: `🎯 Investor Contact Details - ${projectName}`,
+    htmlContent,
+  });
+}
+
 export async function sendAccountDeletionEmail(
   userEmail: string
 ): Promise<boolean> {
