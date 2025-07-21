@@ -101,8 +101,32 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
     }
     
     if (mimeType === "application/pdf") {
-      // For MVP, return placeholder - in production use pdf-parse
-      return "PDF content extraction not yet implemented in MVP. Please use text files for testing.";
+      try {
+        const pdfjsLib = await import("pdfjs-dist/legacy/build/pdf.mjs");
+        const dataBuffer = await fs.readFile(filepath);
+        
+        // Load the PDF document
+        const loadingTask = pdfjsLib.getDocument({ data: dataBuffer });
+        const pdfDocument = await loadingTask.promise;
+        
+        let fullText = '';
+        const numPages = pdfDocument.numPages;
+        
+        // Extract text from each page
+        for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+          const page = await pdfDocument.getPage(pageNum);
+          const textContent = await page.getTextContent();
+          const pageText = textContent.items
+            .map((item: any) => item.str)
+            .join(' ');
+          fullText += pageText + '\n\n';
+        }
+        
+        return fullText.trim();
+      } catch (error) {
+        console.error("Error parsing PDF:", error);
+        throw new Error("Failed to extract text from PDF");
+      }
     }
     
     if (mimeType.includes("word") || mimeType.includes("document")) {
