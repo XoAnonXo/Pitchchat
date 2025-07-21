@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
@@ -81,6 +81,18 @@ export default function SettingsPage() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [deleteAccountOpen, setDeleteAccountOpen] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState("");
+  
+  // Notification states
+  const [emailAlerts, setEmailAlerts] = useState(user?.emailAlerts ?? true);
+  const [weeklyReports, setWeeklyReports] = useState(user?.weeklyReports ?? false);
+  
+  // Update notification states when user data changes
+  useEffect(() => {
+    if (user) {
+      setEmailAlerts(user.emailAlerts ?? true);
+      setWeeklyReports(user.weeklyReports ?? false);
+    }
+  }, [user]);
 
   // Mock settings data - in production this would come from the API
   const settings: UserSettings = {
@@ -90,8 +102,8 @@ export default function SettingsPage() {
     profileImageUrl: user?.profileImageUrl,
     credits: user?.credits || 0,
     notifications: {
-      emailAlerts: true,
-      weeklyReports: false,
+      emailAlerts: emailAlerts,
+      weeklyReports: weeklyReports,
     },
     integrations: {
       openaiConnected: true,
@@ -122,6 +134,7 @@ export default function SettingsPage() {
       toast({
         title: "Notifications updated",
         description: "Your notification preferences have been saved.",
+        duration: 2000, // 2 seconds
       });
     },
   });
@@ -145,6 +158,14 @@ export default function SettingsPage() {
   };
 
   const handleNotificationChange = (key: keyof typeof settings.notifications, value: boolean) => {
+    // Update local state immediately for responsive UI
+    if (key === 'emailAlerts') {
+      setEmailAlerts(value);
+    } else if (key === 'weeklyReports') {
+      setWeeklyReports(value);
+    }
+    
+    // Send update to backend
     updateNotificationsMutation.mutate({
       ...settings.notifications,
       [key]: value,
