@@ -337,3 +337,8 @@ The application is designed as a monorepo with clear separation between frontend
 - Fixed Stripe configuration with proper price IDs: monthly ($29) and annual ($278.40)
 - Re-enabled subscription limits after Stripe price IDs were configured
 - System now properly enforces 1 link for free users, unlimited for paid subscribers
+- Fixed critical PostgreSQL array query error in getUserLinksCount function
+- Created comprehensive links management page at /links/:projectId with full CRUD functionality
+- Added "Manage Links" button to dashboard for easy navigation
+- Implemented copy-to-clipboard functionality for sharing links with investors
+- Fixed navigation routing issue where links were broken after visiting links page (dashboard route is `/` not `/dashboard`)

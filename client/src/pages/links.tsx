@@ -76,12 +76,12 @@ export default function LinksPage({ projectId }: LinksPageProps) {
         </div>
         
         <nav className="flex-1 p-4 space-y-2">
-          <Link href="/dashboard" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <LayoutDashboard className="w-5 h-5" />
             <span className="font-medium">Dashboard</span>
           </Link>
           
-          <Link href="/documents" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href={`/documents/${projectId}`} className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
             <FileText className="w-5 h-5" />
             <span className="font-medium">Documents</span>
           </Link>
@@ -229,7 +229,7 @@ export default function LinksPage({ projectId }: LinksPageProps) {
                 <LinkIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">No links created yet</h3>
                 <p className="text-gray-600 mb-4">Create share links from your project dashboard</p>
-                <Link href="/dashboard">
+                <Link href="/">
                   <Button className="bg-black hover:bg-gray-800 text-white rounded-xl">
                     Go to Dashboard
                   </Button>
