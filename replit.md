@@ -334,3 +334,6 @@ The application is designed as a monorepo with clear separation between frontend
 - Added getUserLinksCount method to storage layer for tracking link usage
 - Updated all UI references from tokens/credits to link-based limits
 - Maintained existing Stripe integration for subscription management
+- Fixed Stripe configuration with proper price IDs: monthly ($29) and annual ($278.40)
+- Re-enabled subscription limits after Stripe price IDs were configured
+- System now properly enforces 1 link for free users, unlimited for paid subscribers
