@@ -11,6 +11,7 @@ import DocumentsPage from "@/pages/documents";
 import ConversationsPage from "@/pages/conversations";
 import AnalyticsPage from "@/pages/analytics";
 import SettingsPage from "@/pages/settings";
+import LinksPage from "@/pages/links";
 import AuthPage from "@/pages/auth";
 import ForgotPasswordPage from "@/pages/forgot-password";
 import ResetPasswordPage from "@/pages/reset-password";
@@ -33,6 +34,7 @@ function Router() {
         <>
           <Route path="/" component={Dashboard} />
           <Route path="/documents/:projectId" component={({ params }) => <DocumentsPage projectId={params.projectId} />} />
+          <Route path="/links/:projectId" component={({ params }) => <LinksPage projectId={params.projectId} />} />
           <Route path="/conversations" component={ConversationsPage} />
           <Route path="/analytics" component={AnalyticsPage} />
           <Route path="/settings" component={SettingsPage} />

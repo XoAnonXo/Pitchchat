@@ -291,7 +291,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Free users can only create 1 link
       if (user.subscriptionStatus !== 'active' && existingLinksCount >= 1) {
-        return res.status(402).json({ message: "Free users can only create 1 link. Upgrade to create unlimited links." });
+        return res.status(402).json({ 
+          message: "You've reached your free plan limit",
+          details: "Free users can create 1 pitch link. Upgrade to Premium for unlimited pitch links and share your startup with more investors.",
+          upgradeUrl: "/settings#billing"
+        });
       }
 
       const slug = nanoid(12);

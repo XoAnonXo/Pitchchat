@@ -349,8 +349,17 @@ export default function Dashboard() {
               )}
             </div>
             <div className="flex items-center gap-3">
+              {selectedProject && (
+                <Link href={`/links/${selectedProject.id}`}>
+                  <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 rounded-xl">
+                    <LinkIcon className="w-4 h-4 mr-2" />
+                    Manage Links
+                  </Button>
+                </Link>
+              )}
               <Button onClick={() => setShowShareModal(true)} className="bg-black hover:bg-gray-800 text-white rounded-xl">
-                Share Link
+                <Plus className="w-4 h-4 mr-2" />
+                Create Link
               </Button>
             </div>
           </div>

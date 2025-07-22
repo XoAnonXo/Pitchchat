@@ -45,7 +45,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
         description: "Share link created successfully",
       });
     },
-    onError: (error) => {
+    onError: async (error) => {
       if (isUnauthorizedError(error)) {
         toast({
           title: "Unauthorized",
@@ -58,18 +58,29 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
         return;
       }
       
-      if (error.message.includes("Insufficient credits")) {
+      // Handle 402 Payment Required error for link limits
+      if ((error as any).status === 402) {
+        const errorData = (error as any).data;
         toast({
-          title: "Insufficient Credits",
-          description: "You need at least 25 credits to create a share link",
+          title: errorData?.message || "You've reached your free plan limit",
+          description: errorData?.details || "Free users can create 1 pitch link. Upgrade to Premium for unlimited pitch links.",
           variant: "destructive",
+          action: (
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={() => window.location.href = errorData?.upgradeUrl || "/settings#billing"}
+            >
+              Upgrade
+            </Button>
+          ),
         });
         return;
       }
       
       toast({
         title: "Error",
-        description: "Failed to create share link",
+        description: error.message || "Failed to create share link",
         variant: "destructive",
       });
     },
