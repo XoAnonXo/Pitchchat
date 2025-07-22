@@ -1,16 +1,3 @@
-const SibApiV3Sdk = await import('@sendinblue/client');
-
-if (!process.env.BREVO_API_KEY) {
-  throw new Error("BREVO_API_KEY environment variable must be set");
-}
-
-// Initialize the API client
-const defaultClient = SibApiV3Sdk.default.ApiClient.instance;
-const apiKey = defaultClient.authentications['api-key'];
-apiKey.apiKey = process.env.BREVO_API_KEY;
-
-const apiInstance = new SibApiV3Sdk.default.TransactionalEmailsApi();
-
 interface EmailParams {
   to: string;
   subject: string;
@@ -19,8 +6,28 @@ interface EmailParams {
   senderEmail?: string;
 }
 
+// Initialize Brevo client dynamically
+async function initializeBrevo() {
+  if (!process.env.BREVO_API_KEY) {
+    throw new Error("BREVO_API_KEY environment variable must be set");
+  }
+
+  const SibApiV3Sdk = await import('@sendinblue/client');
+  
+  // Initialize the API client
+  const defaultClient = SibApiV3Sdk.default.ApiClient.instance;
+  const apiKey = defaultClient.authentications['api-key'];
+  apiKey.apiKey = process.env.BREVO_API_KEY;
+
+  const apiInstance = new SibApiV3Sdk.default.TransactionalEmailsApi();
+  
+  return apiInstance;
+}
+
 export async function sendBrevoEmail(params: EmailParams): Promise<boolean> {
   try {
+    const apiInstance = await initializeBrevo();
+    
     const sendSmtpEmail = {
       subject: params.subject,
       htmlContent: params.htmlContent,

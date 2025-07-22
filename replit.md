@@ -342,3 +342,11 @@ The application is designed as a monorepo with clear separation between frontend
 - Added "Manage Links" button to dashboard for easy navigation
 - Implemented copy-to-clipboard functionality for sharing links with investors
 - Fixed navigation routing issue where links were broken after visiting links page (dashboard route is `/` not `/dashboard`)
+
+### July 22, 2025 - Deployment Fix for Top-Level Await Issue
+- Fixed critical deployment issue in server/brevo.ts that caused esbuild bundling failure
+- Replaced top-level await with dynamic import inside initializeBrevo function
+- Moved SibApiV3Sdk import from module level to function level to avoid bundling conflicts
+- Updated sendBrevoEmail function to initialize Brevo client on each call instead of at module load
+- This resolves "Top-level await in server/brevo.ts is incompatible with esbuild bundling process" error
+- Application can now be successfully deployed to production environments
