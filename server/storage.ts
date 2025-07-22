@@ -34,7 +34,7 @@ import {
   type InsertTokenUsage,
 } from "@shared/schema";
 import { db } from "./db";
-import { eq, desc, and, isNull, or, sql } from "drizzle-orm";
+import { eq, desc, and, isNull, or, sql, inArray } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -358,7 +358,7 @@ export class DatabaseStorage implements IStorage {
     const linksCount = await db
       .select({ count: sql<number>`count(*)::int` })
       .from(links)
-      .where(sql`${links.projectId} = ANY(${projectIds})`);
+      .where(inArray(links.projectId, projectIds));
     
     return linksCount[0]?.count || 0;
   }
