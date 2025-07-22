@@ -69,6 +69,7 @@ export interface IStorage {
   createLink(link: InsertLink): Promise<Link>;
   updateLink(id: string, updates: Partial<InsertLink>): Promise<Link>;
   deleteLink(id: string): Promise<void>;
+  getUserLinksCount(userId: string): Promise<number>;
   
   // Conversation operations
   getLinkConversations(linkId: string): Promise<Conversation[]>;
@@ -341,6 +342,25 @@ export class DatabaseStorage implements IStorage {
 
   async deleteLink(id: string): Promise<void> {
     await db.delete(links).where(eq(links.id, id));
+  }
+
+  async getUserLinksCount(userId: string): Promise<number> {
+    const userProjects = await db
+      .select({ id: projects.id })
+      .from(projects)
+      .where(eq(projects.userId, userId));
+    
+    if (userProjects.length === 0) {
+      return 0;
+    }
+    
+    const projectIds = userProjects.map(p => p.id);
+    const linksCount = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(links)
+      .where(sql`${links.projectId} = ANY(${projectIds})`);
+    
+    return linksCount[0]?.count || 0;
   }
 
   // Conversation operations

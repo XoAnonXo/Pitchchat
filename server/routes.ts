@@ -280,10 +280,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Project not found" });
       }
 
-      // Check user credits (simplified for MVP)
+      // Check user subscription and link limits
       const user = await storage.getUser(userId);
-      if (!user || (user.credits || 0) < 25) {
-        return res.status(402).json({ message: "Insufficient credits" });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // Check link limits based on subscription
+      const existingLinksCount = await storage.getUserLinksCount(userId);
+      
+      // Free users can only create 1 link
+      if (user.subscriptionStatus !== 'active' && existingLinksCount >= 1) {
+        return res.status(402).json({ message: "Free users can only create 1 link. Upgrade to create unlimited links." });
       }
 
       const slug = nanoid(12);
@@ -301,12 +309,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       const link = await storage.createLink(linkData);
-
-      // Deduct credits (simplified for MVP)
-      await storage.upsertUser({
-        ...user,
-        credits: (user.credits || 0) - 25,
-      });
 
       res.json(link);
     } catch (error) {
@@ -491,25 +493,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         tokenCount: Math.ceil(message.length / 4),
       });
 
-      // Get project owner to check tokens
+      // Get project for context
       const project = await storage.getProject(link.projectId);
       if (!project) {
         return res.status(404).json({ message: "Project not found" });
-      }
-
-      const projectOwner = await storage.getUser(project.userId);
-      if (!projectOwner) {
-        return res.status(404).json({ message: "Project owner not found" });
-      }
-
-      // Check if owner has enough tokens (estimate 1000 tokens per message)
-      const estimatedTokens = 1000;
-      if (projectOwner.tokens < estimatedTokens) {
-        return res.status(402).json({ 
-          message: "Project owner has insufficient tokens. Please ask them to purchase more.",
-          tokensRequired: estimatedTokens,
-          tokensAvailable: projectOwner.tokens
-        });
       }
 
       // Get relevant context
@@ -545,21 +532,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         costUsd: (conversation.costUsd || 0) + platformCost, // Platform cost with 10x margin
       });
 
-      // Deduct tokens from project owner
-      const tokensDeducted = await storage.deductUserTokens(project.userId, totalTokens);
-      if (!tokensDeducted) {
-        console.error("Failed to deduct tokens - this shouldn't happen as we checked earlier");
-      }
 
-      // Record token usage
-      await storage.createTokenUsage({
-        userId: project.userId,
-        projectId: project.id,
-        conversationId: conversation.id,
-        tokens: totalTokens,
-        cost: platformCost,
-        description: `Chat with investor: ${investorEmail || 'Anonymous'}`,
-      });
 
       res.json({
         message: assistantMessage,
@@ -738,30 +711,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Create payment intent for one-time token purchase
-  app.post("/api/tokens/purchase", isAuthenticated, async (req: any, res) => {
-    try {
-      const user = req.user;
-      const { SUBSCRIPTION_PRICING } = await import("./pricing");
-      const pricing = SUBSCRIPTION_PRICING.oneTime;
 
-      // Create payment intent
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: pricing.price,
-        currency: 'usd',
-        metadata: {
-          userId: user.id,
-          type: 'oneTime',
-          tokens: pricing.tokens.toString(),
-        },
-      });
-
-      res.json({ clientSecret: paymentIntent.client_secret });
-    } catch (error) {
-      console.error("Error creating payment intent:", error);
-      res.status(500).json({ message: "Failed to create payment intent" });
-    }
-  });
 
   // Cancel subscription
   app.post("/api/subscriptions/cancel", isAuthenticated, async (req: any, res) => {
@@ -817,8 +767,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             // Fetch subscription details
             const subscription = await stripe.subscriptions.retrieve(session.subscription);
             const isAnnual = subscription.metadata.isAnnual === 'true';
-            const { SUBSCRIPTION_PRICING: SUB_PRICING } = await import("./pricing");
-            const tokens = isAnnual ? SUB_PRICING.annual.tokens : SUB_PRICING.monthly.tokens;
 
             // Update user subscription
             await storage.updateUserSubscription(userId, {
@@ -827,22 +775,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
               subscriptionCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
               subscriptionIsAnnual: isAnnual,
             });
-
-            // Add tokens to user
-            const user = await storage.getUser(userId);
-            if (user) {
-              await storage.updateUserTokens(userId, user.tokens + tokens);
-              
-              // Record token purchase
-              await storage.createTokenPurchase({
-                userId,
-                type: 'subscription',
-                stripePaymentIntentId: session.payment_intent,
-                amount: session.amount_total,
-                tokens,
-                status: 'completed',
-              });
-            }
           }
           break;
         }
@@ -854,26 +786,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
             const userId = subscription.metadata.userId;
             
             if (userId) {
-              const isAnnual = subscription.metadata.isAnnual === 'true';
-              const { SUBSCRIPTION_PRICING: SUB_PRICING2 } = await import("./pricing");
-              const tokens = isAnnual ? SUB_PRICING2.annual.tokens : SUB_PRICING2.monthly.tokens;
-
-              // Add tokens for renewal
-              const user = await storage.getUser(userId);
-              if (user) {
-                await storage.updateUserTokens(userId, user.tokens + tokens);
-                
-                // Record token purchase
-                await storage.createTokenPurchase({
-                  userId,
-                  type: 'subscription',
-                  stripePaymentIntentId: invoice.payment_intent,
-                  amount: invoice.amount_paid,
-                  tokens,
-                  status: 'completed',
-                });
-              }
-
               // Update subscription period end
               await storage.updateUserSubscription(userId, {
                 subscriptionCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
@@ -884,30 +796,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           break;
         }
 
-        case 'payment_intent.succeeded': {
-          const paymentIntent = event.data.object as any;
-          if (paymentIntent.metadata.type === 'oneTime') {
-            const userId = paymentIntent.metadata.userId;
-            const tokens = parseInt(paymentIntent.metadata.tokens);
 
-            // Add tokens to user
-            const user = await storage.getUser(userId);
-            if (user) {
-              await storage.updateUserTokens(userId, user.tokens + tokens);
-              
-              // Record token purchase
-              await storage.createTokenPurchase({
-                userId,
-                type: 'one_time',
-                stripePaymentIntentId: paymentIntent.id,
-                amount: paymentIntent.amount,
-                tokens,
-                status: 'completed',
-              });
-            }
-          }
-          break;
-        }
 
         case 'customer.subscription.deleted':
         case 'customer.subscription.updated': {

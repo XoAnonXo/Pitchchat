@@ -2,7 +2,7 @@
 
 ## Overview
 
-PitchChat Builder is a SaaS MVP that transforms startup documentation into AI-powered conversational pitch rooms. The application allows founders to upload documents (PDFs, presentations, spreadsheets), chat with an AI assistant about their startup, and share interactive chat links with investors.
+PitchChat Builder is a SaaS MVP that transforms startup documentation into AI-powered conversational pitch rooms. The application allows founders to upload documents (PDFs, presentations, spreadsheets), chat with an AI assistant about their startup, and share interactive chat links with investors. The platform uses a link-based subscription model where free tier users can create 1 pitch link and paid subscribers get unlimited link generation.
 
 ## User Preferences
 
@@ -320,3 +320,17 @@ The application is designed as a monorepo with clear separation between frontend
 - Updated Brevo sender email to use replit.com domain to avoid domain verification issues
 - Added detailed logging to debug email sending issues with Brevo API
 - Note: Email delivery requires proper Brevo API key configuration and sender domain verification
+
+### July 22, 2025 - Link-Based Subscription Model Implementation
+- Completely pivoted from token-based to link-based subscription model
+- Free tier users can now create 1 pitch link, paid subscribers get unlimited links
+- Removed all token checking and deduction logic from link creation process
+- Updated dashboard to display link limits instead of token balances
+- Removed token deduction from investor chat functionality
+- Updated settings page billing section to show subscription status and link limits
+- Removed one-time token purchase endpoints and functionality
+- Updated Stripe webhook handlers to remove token addition logic
+- Simplified pricing structure to focus on monthly/annual subscriptions only
+- Added getUserLinksCount method to storage layer for tracking link usage
+- Updated all UI references from tokens/credits to link-based limits
+- Maintained existing Stripe integration for subscription management

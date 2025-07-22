@@ -302,7 +302,9 @@ export default function Dashboard() {
               )}
               <div>
                 <p className="text-sm font-medium text-gray-900">{user.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">{(user.tokens || 0).toLocaleString()} tokens</p>
+                <p className="text-xs text-green-600">
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free tier'}
+                </p>
               </div>
             </div>
             <Button 
@@ -514,14 +516,14 @@ export default function Dashboard() {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-medium text-gray-300">Token Balance</p>
+                          <p className="text-sm font-medium text-gray-300">Link Generation</p>
                           <p className="text-xl font-bold mt-1">
-                            {(user?.tokens || 0).toLocaleString()}
+                            {user?.subscriptionStatus === 'active' ? 'Unlimited' : '1 Link'}
                           </p>
                           <p className="text-xs text-gray-400 mt-1">
                             {user?.subscriptionStatus === 'active' 
                               ? `${user?.subscriptionIsAnnual ? 'Annual' : 'Monthly'} Plan`
-                              : 'No Subscription'
+                              : 'Free Plan'
                             }
                           </p>
                         </div>

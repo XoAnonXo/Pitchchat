@@ -105,41 +105,29 @@ export function getPricingBreakdown() {
     chatMessage: {
       estimatedTokens: 100,
       costInCents: calculateMessageCostInCents(100),
-      costInCredits: dollarsToCredits(calculatePlatformCost(100))
     },
     embedding: {
       estimatedTokens: 1000,
       costInCents: calculateMessageCostInCents(1000, 'embedding'),
-      costInCredits: dollarsToCredits(calculatePlatformCost(1000, 'embedding'))
     },
-    creditPackages: [
-      { credits: 1000, dollars: 10, label: "Starter" },
-      { credits: 5000, dollars: 50, label: "Professional" },
-      { credits: 10000, dollars: 100, label: "Business" },
-      { credits: 50000, dollars: 500, label: "Enterprise" }
-    ]
   };
 }
 
-// Subscription and token pricing
+// Subscription pricing for link-based model
 export const SUBSCRIPTION_PRICING = {
   monthly: {
     priceId: process.env.STRIPE_MONTHLY_PRICE_ID || 'price_monthly', // Stripe price ID
     price: 2900, // $29 in cents
-    tokens: 1000000, // 1M tokens
+    links: 'unlimited', // Unlimited links
     label: "Monthly Plan",
+    description: "Create unlimited pitch links",
   },
   annual: {
     priceId: process.env.STRIPE_ANNUAL_PRICE_ID || 'price_annual', // Stripe price ID
     price: 27840, // $278.40 in cents (20% discount)
-    tokens: 12000000, // 12M tokens (full year)
+    links: 'unlimited', // Unlimited links
     label: "Annual Plan",
     monthlyEquivalent: 2320, // $23.20/month
-  },
-  oneTime: {
-    priceId: null, // No subscription for one-time
-    price: 1000, // $10 in cents
-    tokens: 100000, // 100k tokens
-    label: "Token Pack",
+    description: "Create unlimited pitch links + 20% savings",
   },
 };

@@ -428,7 +428,9 @@ export default function SettingsPage() {
               )}
               <div>
                 <p className="text-sm font-medium text-gray-900">{user?.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">{(user?.tokens || 0).toLocaleString()} tokens</p>
+                <p className="text-xs text-green-600">
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free tier'}
+                </p>
               </div>
             </div>
             <Button 
@@ -654,20 +656,30 @@ export default function SettingsPage() {
             <CardHeader className="border-b border-gray-100">
               <div className="flex items-center space-x-2">
                 <CreditCard className="w-5 h-5 text-gray-600" />
-                <CardTitle className="text-xl font-bold text-gray-900">Billing & Credits</CardTitle>
+                <CardTitle className="text-xl font-bold text-gray-900">Billing & Subscription</CardTitle>
               </div>
-              <CardDescription>Manage your subscription and credits</CardDescription>
+              <CardDescription>Manage your subscription and link generation</CardDescription>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-6">
                 <div className="flex items-center justify-between p-6 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-xl">
                   <div>
-                    <p className="text-sm font-medium text-gray-300">Available Tokens</p>
-                    <p className="text-3xl font-bold mt-1">{settings.tokens.toLocaleString()}</p>
+                    <p className="text-sm font-medium text-gray-300">Link Generation</p>
+                    <p className="text-3xl font-bold mt-1">
+                      {user?.subscriptionStatus === 'active' ? 'Unlimited' : '1 Link'}
+                    </p>
+                    <p className="text-xs mt-1 text-gray-400">
+                      {user?.subscriptionStatus === 'active' ? 'Premium access' : 'Free tier'}
+                    </p>
                   </div>
-                  <Button className="bg-white text-black hover:bg-gray-100">
-                    Buy More Tokens
-                  </Button>
+                  {user?.subscriptionStatus !== 'active' && (
+                    <Button 
+                      className="bg-white text-black hover:bg-gray-100"
+                      onClick={() => subscriptionMutation.mutate('monthly')}
+                    >
+                      Upgrade Now
+                    </Button>
+                  )}
                 </div>
 
                 {/* Subscription Status */}
@@ -689,16 +701,16 @@ export default function SettingsPage() {
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600">Monthly Token Allowance</span>
+                        <span className="text-sm text-gray-600">Link Generation</span>
                         <span className="text-sm font-medium">
-                          {user?.subscriptionIsAnnual ? '1M tokens' : '1M tokens'}
+                          Unlimited Links
                         </span>
                       </div>
                     </>
                   ) : (
                     <div className="text-center py-4">
                       <p className="text-gray-600 mb-2">No active subscription</p>
-                      <p className="text-sm text-gray-500">Subscribe to get monthly token refills</p>
+                      <p className="text-sm text-gray-500">Subscribe to create unlimited pitch links</p>
                     </div>
                   )}
                 </div>
@@ -716,7 +728,7 @@ export default function SettingsPage() {
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
                             <h5 className="font-medium text-gray-900">Monthly Plan</h5>
-                            <p className="text-sm text-gray-600 mt-1">1M tokens per month</p>
+                            <p className="text-sm text-gray-600 mt-1">Unlimited pitch links</p>
                           </div>
                           <div className="text-right">
                             <p className="text-2xl font-bold">$29</p>
@@ -740,7 +752,7 @@ export default function SettingsPage() {
                         <div className="flex items-center justify-between">
                           <div className="flex-1">
                             <h5 className="font-medium text-gray-900">Annual Plan</h5>
-                            <p className="text-sm text-gray-600 mt-1">12M tokens per year</p>
+                            <p className="text-sm text-gray-600 mt-1">Unlimited pitch links</p>
                           </div>
                           <div className="text-right">
                             <p className="text-2xl font-bold">$278</p>
@@ -761,27 +773,7 @@ export default function SettingsPage() {
                   </>
                 )}
 
-                {/* One-time Purchase */}
-                <div className="space-y-4">
-                  <h4 className="font-medium text-gray-900">Need More Tokens?</h4>
-                  <div className="border border-gray-200 rounded-xl p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <div>
-                        <h5 className="font-medium text-gray-900">Token Pack</h5>
-                        <p className="text-sm text-gray-600">100k tokens - one time purchase</p>
-                      </div>
-                      <p className="text-xl font-bold">$10</p>
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      className="w-full rounded-xl"
-                      onClick={() => handleTokenPurchase()}
-                      disabled={tokenPurchaseMutation.isPending}
-                    >
-                      {tokenPurchaseMutation.isPending ? 'Processing...' : 'Buy Token Pack'}
-                    </Button>
-                  </div>
-                </div>
+
 
                 {/* Manage Subscription */}
                 {user?.subscriptionStatus === 'active' && (
