@@ -110,7 +110,7 @@ export default function SettingsPage() {
     email: user?.email || "",
     name: user?.email?.split('@')[0] || "",
     profileImageUrl: user?.profileImageUrl,
-    credits: user?.credits || 0,
+    tokens: user?.tokens || 0,
     notifications: {
       emailAlerts: emailAlerts,
       weeklyReports: weeklyReports,
@@ -185,6 +185,67 @@ export default function SettingsPage() {
       toast({
         title: "Export failed",
         description: "Failed to export your data. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Subscription mutations
+  const subscriptionMutation = useMutation({
+    mutationFn: async (priceType: 'monthly' | 'annual') => {
+      const response = await apiRequest('POST', '/api/subscriptions/create-checkout', { priceType });
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+      return data;
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Subscription failed",
+        description: error.message || "Failed to create subscription. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const tokenPurchaseMutation = useMutation({
+    mutationFn: async () => {
+      const response = await apiRequest('POST', '/api/tokens/purchase');
+      const data = await response.json();
+      return data;
+    },
+    onSuccess: (data) => {
+      // Would need to implement Stripe payment modal here
+      toast({
+        title: "Redirecting to payment",
+        description: "Please complete your purchase.",
+      });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Purchase failed",
+        description: error.message || "Failed to initiate purchase. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const cancelMutation = useMutation({
+    mutationFn: async () => {
+      return apiRequest('POST', '/api/subscriptions/cancel');
+    },
+    onSuccess: () => {
+      toast({
+        title: "Subscription canceled",
+        description: "Your subscription will remain active until the end of the billing period.",
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/auth/user'] });
+    },
+    onError: (error: any) => {
+      toast({
+        title: "Cancellation failed",
+        description: error.message || "Failed to cancel subscription. Please try again.",
         variant: "destructive",
       });
     },
@@ -270,6 +331,20 @@ export default function SettingsPage() {
     changePasswordMutation.mutate({ currentPassword, newPassword });
   };
 
+  const handleSubscription = (priceType: 'monthly' | 'annual') => {
+    subscriptionMutation.mutate(priceType);
+  };
+
+  const handleTokenPurchase = () => {
+    tokenPurchaseMutation.mutate();
+  };
+
+  const handleCancelSubscription = () => {
+    if (window.confirm('Are you sure you want to cancel your subscription? You will retain access until the end of your billing period.')) {
+      cancelMutation.mutate();
+    }
+  };
+
 
 
   return (
@@ -353,7 +428,7 @@ export default function SettingsPage() {
               )}
               <div>
                 <p className="text-sm font-medium text-gray-900">{user?.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">{user?.credits || 0} credits</p>
+                <p className="text-xs text-green-600">{(user?.tokens || 0).toLocaleString()} tokens</p>
               </div>
             </div>
             <Button 
@@ -587,39 +662,150 @@ export default function SettingsPage() {
               <div className="space-y-6">
                 <div className="flex items-center justify-between p-6 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-xl">
                   <div>
-                    <p className="text-sm font-medium text-gray-300">Available Credits</p>
-                    <p className="text-3xl font-bold mt-1">{settings.credits.toLocaleString()}</p>
+                    <p className="text-sm font-medium text-gray-300">Available Tokens</p>
+                    <p className="text-3xl font-bold mt-1">{settings.tokens.toLocaleString()}</p>
                   </div>
                   <Button className="bg-white text-black hover:bg-gray-100">
-                    Buy More Credits
+                    Buy More Tokens
                   </Button>
                 </div>
 
+                {/* Subscription Status */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Current Plan</span>
-                    <Badge variant="secondary" className="bg-black text-white">Pro Plan</Badge>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Billing Period</span>
-                    <span className="text-sm font-medium">Monthly</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">Next Billing Date</span>
-                    <span className="text-sm font-medium">Aug 21, 2025</span>
-                  </div>
+                  {user?.subscriptionStatus === 'active' ? (
+                    <>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-600">Current Plan</span>
+                        <Badge variant="secondary" className="bg-black text-white">
+                          {user?.subscriptionIsAnnual ? 'Annual' : 'Monthly'} Subscription
+                        </Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-600">Next Renewal</span>
+                        <span className="text-sm font-medium">
+                          {user?.subscriptionCurrentPeriodEnd 
+                            ? new Date(user.subscriptionCurrentPeriodEnd).toLocaleDateString()
+                            : 'N/A'}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-gray-600">Monthly Token Allowance</span>
+                        <span className="text-sm font-medium">
+                          {user?.subscriptionIsAnnual ? '1M tokens' : '1M tokens'}
+                        </span>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="text-center py-4">
+                      <p className="text-gray-600 mb-2">No active subscription</p>
+                      <p className="text-sm text-gray-500">Subscribe to get monthly token refills</p>
+                    </div>
+                  )}
                 </div>
 
                 <Separator />
 
-                <div className="flex justify-between">
-                  <Button variant="outline" className="rounded-xl">
-                    View Billing History
-                  </Button>
-                  <Button variant="outline" className="rounded-xl">
-                    Manage Subscription
-                  </Button>
+                {/* Subscription Options */}
+                {user?.subscriptionStatus !== 'active' && (
+                  <>
+                    <div className="space-y-4">
+                      <h4 className="font-medium text-gray-900">Choose a Subscription Plan</h4>
+                      
+                      {/* Monthly Plan */}
+                      <div className="border border-gray-200 rounded-xl p-4 hover:border-black transition-colors cursor-pointer">
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <h5 className="font-medium text-gray-900">Monthly Plan</h5>
+                            <p className="text-sm text-gray-600 mt-1">1M tokens per month</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-2xl font-bold">$29</p>
+                            <p className="text-xs text-gray-500">per month</p>
+                          </div>
+                        </div>
+                        <Button 
+                          className="w-full mt-3 bg-black hover:bg-gray-800 text-white"
+                          onClick={() => handleSubscription('monthly')}
+                          disabled={subscriptionMutation.isPending}
+                        >
+                          {subscriptionMutation.isPending ? 'Processing...' : 'Subscribe Monthly'}
+                        </Button>
+                      </div>
+
+                      {/* Annual Plan */}
+                      <div className="border border-gray-200 rounded-xl p-4 hover:border-black transition-colors cursor-pointer relative">
+                        <div className="absolute -top-3 right-4">
+                          <Badge className="bg-green-100 text-green-800 border-green-200">Save 20%</Badge>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <h5 className="font-medium text-gray-900">Annual Plan</h5>
+                            <p className="text-sm text-gray-600 mt-1">12M tokens per year</p>
+                          </div>
+                          <div className="text-right">
+                            <p className="text-2xl font-bold">$278</p>
+                            <p className="text-xs text-gray-500">per year ($23.20/mo)</p>
+                          </div>
+                        </div>
+                        <Button 
+                          className="w-full mt-3 bg-black hover:bg-gray-800 text-white"
+                          onClick={() => handleSubscription('annual')}
+                          disabled={subscriptionMutation.isPending}
+                        >
+                          {subscriptionMutation.isPending ? 'Processing...' : 'Subscribe Annually'}
+                        </Button>
+                      </div>
+                    </div>
+
+                    <Separator />
+                  </>
+                )}
+
+                {/* One-time Purchase */}
+                <div className="space-y-4">
+                  <h4 className="font-medium text-gray-900">Need More Tokens?</h4>
+                  <div className="border border-gray-200 rounded-xl p-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <div>
+                        <h5 className="font-medium text-gray-900">Token Pack</h5>
+                        <p className="text-sm text-gray-600">100k tokens - one time purchase</p>
+                      </div>
+                      <p className="text-xl font-bold">$10</p>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      className="w-full rounded-xl"
+                      onClick={() => handleTokenPurchase()}
+                      disabled={tokenPurchaseMutation.isPending}
+                    >
+                      {tokenPurchaseMutation.isPending ? 'Processing...' : 'Buy Token Pack'}
+                    </Button>
+                  </div>
                 </div>
+
+                {/* Manage Subscription */}
+                {user?.subscriptionStatus === 'active' && (
+                  <>
+                    <Separator />
+                    <div className="flex justify-between">
+                      <Button 
+                        variant="outline" 
+                        className="rounded-xl"
+                        onClick={() => window.open('https://billing.stripe.com/p/login/test', '_blank')}
+                      >
+                        Manage Billing
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="rounded-xl text-red-600 hover:text-red-700"
+                        onClick={() => handleCancelSubscription()}
+                        disabled={cancelMutation.isPending}
+                      >
+                        {cancelMutation.isPending ? 'Canceling...' : 'Cancel Subscription'}
+                      </Button>
+                    </div>
+                  </>
+                )}
               </div>
             </CardContent>
           </Card>

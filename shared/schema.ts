@@ -37,7 +37,12 @@ export const users = pgTable("users", {
   lastName: varchar("last_name"),
   profileImageUrl: varchar("profile_image_url"),
   emailVerified: boolean("email_verified").default(false),
-  credits: integer("credits").default(1000),
+  stripeCustomerId: varchar("stripe_customer_id"),
+  stripeSubscriptionId: varchar("stripe_subscription_id"),
+  tokens: integer("tokens").default(100000).notNull(), // Start with 100k free tokens
+  subscriptionStatus: varchar("subscription_status"), // active, canceled, past_due, trialing
+  subscriptionCurrentPeriodEnd: timestamp("subscription_current_period_end"),
+  subscriptionIsAnnual: boolean("subscription_is_annual").default(false),
   emailAlerts: boolean("email_alerts").default(true),
   weeklyReports: boolean("weekly_reports").default(false),
   createdAt: timestamp("created_at").defaultNow(),
@@ -139,9 +144,33 @@ export const integrations = pgTable("integrations", {
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
+// Token purchases and usage tracking
+export const tokenPurchases = pgTable("token_purchases", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  type: varchar("type").notNull(), // subscription, one_time
+  stripePaymentIntentId: varchar("stripe_payment_intent_id"),
+  amount: integer("amount").notNull(), // in cents
+  tokens: integer("tokens").notNull(), // tokens granted
+  status: varchar("status").notNull(), // pending, completed, failed
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const tokenUsage = pgTable("token_usage", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: varchar("user_id").references(() => users.id).notNull(),
+  conversationId: uuid("conversation_id").references(() => conversations.id),
+  tokensUsed: integer("tokens_used").notNull(),
+  action: varchar("action").notNull(), // chat, embedding
+  model: varchar("model"),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   projects: many(projects),
+  tokenPurchases: many(tokenPurchases),
+  tokenUsage: many(tokenUsage),
 }));
 
 export const projectsRelations = relations(projects, ({ one, many }) => ({
@@ -206,6 +235,24 @@ export const passwordResetTokensRelations = relations(passwordResetTokens, ({ on
   }),
 }));
 
+export const tokenPurchasesRelations = relations(tokenPurchases, ({ one }) => ({
+  user: one(users, {
+    fields: [tokenPurchases.userId],
+    references: [users.id],
+  }),
+}));
+
+export const tokenUsageRelations = relations(tokenUsage, ({ one }) => ({
+  user: one(users, {
+    fields: [tokenUsage.userId],
+    references: [users.id],
+  }),
+  conversation: one(conversations, {
+    fields: [tokenUsage.conversationId],
+    references: [conversations.id],
+  }),
+}));
+
 // Insert schemas
 export const insertUserSchema = createInsertSchema(users).omit({
   createdAt: true,
@@ -256,6 +303,16 @@ export const insertPasswordResetTokenSchema = createInsertSchema(passwordResetTo
   createdAt: true,
 });
 
+export const insertTokenPurchaseSchema = createInsertSchema(tokenPurchases).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertTokenUsageSchema = createInsertSchema(tokenUsage).omit({
+  id: true,
+  createdAt: true,
+});
+
 // Types
 export type UpsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
@@ -275,3 +332,7 @@ export type InsertIntegration = z.infer<typeof insertIntegrationSchema>;
 export type Integration = typeof integrations.$inferSelect;
 export type InsertPasswordResetToken = z.infer<typeof insertPasswordResetTokenSchema>;
 export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
+export type InsertTokenPurchase = z.infer<typeof insertTokenPurchaseSchema>;
+export type TokenPurchase = typeof tokenPurchases.$inferSelect;
+export type InsertTokenUsage = z.infer<typeof insertTokenUsageSchema>;
+export type TokenUsage = typeof tokenUsage.$inferSelect;

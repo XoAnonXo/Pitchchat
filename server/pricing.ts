@@ -120,3 +120,26 @@ export function getPricingBreakdown() {
     ]
   };
 }
+
+// Subscription and token pricing
+export const SUBSCRIPTION_PRICING = {
+  monthly: {
+    priceId: process.env.STRIPE_MONTHLY_PRICE_ID || 'price_monthly', // Stripe price ID
+    price: 2900, // $29 in cents
+    tokens: 1000000, // 1M tokens
+    label: "Monthly Plan",
+  },
+  annual: {
+    priceId: process.env.STRIPE_ANNUAL_PRICE_ID || 'price_annual', // Stripe price ID
+    price: 27840, // $278.40 in cents (20% discount)
+    tokens: 12000000, // 12M tokens (full year)
+    label: "Annual Plan",
+    monthlyEquivalent: 2320, // $23.20/month
+  },
+  oneTime: {
+    priceId: null, // No subscription for one-time
+    price: 1000, // $10 in cents
+    tokens: 100000, // 100k tokens
+    label: "Token Pack",
+  },
+};

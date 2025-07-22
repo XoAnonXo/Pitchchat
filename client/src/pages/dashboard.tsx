@@ -302,7 +302,7 @@ export default function Dashboard() {
               )}
               <div>
                 <p className="text-sm font-medium text-gray-900">{user.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">{user.credits || 0} credits</p>
+                <p className="text-xs text-green-600">{(user.tokens || 0).toLocaleString()} tokens</p>
               </div>
             </div>
             <Button 
@@ -514,12 +514,15 @@ export default function Dashboard() {
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="text-sm font-medium text-gray-300">AI Usage Price</p>
+                          <p className="text-sm font-medium text-gray-300">Token Balance</p>
                           <p className="text-xl font-bold mt-1">
-                            $0.10/1K tokens
+                            {(user?.tokens || 0).toLocaleString()}
                           </p>
                           <p className="text-xs text-gray-400 mt-1">
-                            GPT-4o Model
+                            {user?.subscriptionStatus === 'active' 
+                              ? `${user?.subscriptionIsAnnual ? 'Annual' : 'Monthly'} Plan`
+                              : 'No Subscription'
+                            }
                           </p>
                         </div>
                         <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">

@@ -8,6 +8,8 @@ import {
   messages,
   integrations,
   passwordResetTokens,
+  tokenPurchases,
+  tokenUsage,
   type User,
   type UpsertUser,
   type Project,
@@ -26,6 +28,10 @@ import {
   type InsertIntegration,
   type PasswordResetToken,
   type InsertPasswordResetToken,
+  type TokenPurchase,
+  type InsertTokenPurchase,
+  type TokenUsage,
+  type InsertTokenUsage,
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, isNull, or, sql } from "drizzle-orm";
@@ -106,6 +112,20 @@ export interface IStorage {
   getPasswordResetToken(token: string): Promise<PasswordResetToken | undefined>;
   deletePasswordResetToken(token: string): Promise<void>;
   updateUserPassword(userId: string, hashedPassword: string): Promise<void>;
+  
+  // Token and subscription operations
+  updateUserTokens(userId: string, tokens: number): Promise<void>;
+  deductUserTokens(userId: string, tokensUsed: number): Promise<boolean>;
+  createTokenPurchase(purchase: InsertTokenPurchase): Promise<TokenPurchase>;
+  createTokenUsage(usage: InsertTokenUsage): Promise<TokenUsage>;
+  getUserTokenUsage(userId: string): Promise<TokenUsage[]>;
+  updateUserSubscription(userId: string, subscription: {
+    stripeCustomerId?: string;
+    stripeSubscriptionId?: string;
+    subscriptionStatus?: string;
+    subscriptionCurrentPeriodEnd?: Date;
+    subscriptionIsAnnual?: boolean;
+  }): Promise<void>;
 }
 
 export class DatabaseStorage implements IStorage {
@@ -782,6 +802,62 @@ export class DatabaseStorage implements IStorage {
     await db
       .update(users)
       .set({ password: hashedPassword })
+      .where(eq(users.id, userId));
+  }
+
+  // Token and subscription operations
+  async updateUserTokens(userId: string, tokens: number): Promise<void> {
+    await db
+      .update(users)
+      .set({ tokens })
+      .where(eq(users.id, userId));
+  }
+
+  async deductUserTokens(userId: string, tokensUsed: number): Promise<boolean> {
+    const user = await this.getUser(userId);
+    if (!user || user.tokens < tokensUsed) {
+      return false;
+    }
+    
+    await db
+      .update(users)
+      .set({ tokens: user.tokens - tokensUsed })
+      .where(eq(users.id, userId));
+    
+    return true;
+  }
+
+  async createTokenPurchase(purchase: InsertTokenPurchase): Promise<TokenPurchase> {
+    const [newPurchase] = await db.insert(tokenPurchases).values(purchase).returning();
+    return newPurchase;
+  }
+
+  async createTokenUsage(usage: InsertTokenUsage): Promise<TokenUsage> {
+    const [newUsage] = await db.insert(tokenUsage).values(usage).returning();
+    return newUsage;
+  }
+
+  async getUserTokenUsage(userId: string): Promise<TokenUsage[]> {
+    return await db
+      .select()
+      .from(tokenUsage)
+      .where(eq(tokenUsage.userId, userId))
+      .orderBy(desc(tokenUsage.createdAt));
+  }
+
+  async updateUserSubscription(userId: string, subscription: {
+    stripeCustomerId?: string;
+    stripeSubscriptionId?: string;
+    subscriptionStatus?: string;
+    subscriptionCurrentPeriodEnd?: Date;
+    subscriptionIsAnnual?: boolean;
+  }): Promise<void> {
+    await db
+      .update(users)
+      .set({
+        ...subscription,
+        updatedAt: new Date(),
+      })
       .where(eq(users.id, userId));
   }
 }

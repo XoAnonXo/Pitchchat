@@ -491,6 +491,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
         tokenCount: Math.ceil(message.length / 4),
       });
 
+      // Get project owner to check tokens
+      const project = await storage.getProject(link.projectId);
+      if (!project) {
+        return res.status(404).json({ message: "Project not found" });
+      }
+
+      const projectOwner = await storage.getUser(project.userId);
+      if (!projectOwner) {
+        return res.status(404).json({ message: "Project owner not found" });
+      }
+
+      // Check if owner has enough tokens (estimate 1000 tokens per message)
+      const estimatedTokens = 1000;
+      if (projectOwner.tokens < estimatedTokens) {
+        return res.status(402).json({ 
+          message: "Project owner has insufficient tokens. Please ask them to purchase more.",
+          tokensRequired: estimatedTokens,
+          tokensAvailable: projectOwner.tokens
+        });
+      }
+
       // Get relevant context
       const chunks = await storage.searchChunks(link.projectId, message, 5);
       
@@ -522,6 +543,22 @@ export async function registerRoutes(app: Express): Promise<Server> {
       await storage.updateConversation(conversation.id, {
         totalTokens: (conversation.totalTokens || 0) + totalTokens,
         costUsd: (conversation.costUsd || 0) + platformCost, // Platform cost with 10x margin
+      });
+
+      // Deduct tokens from project owner
+      const tokensDeducted = await storage.deductUserTokens(project.userId, totalTokens);
+      if (!tokensDeducted) {
+        console.error("Failed to deduct tokens - this shouldn't happen as we checked earlier");
+      }
+
+      // Record token usage
+      await storage.createTokenUsage({
+        userId: project.userId,
+        projectId: project.id,
+        conversationId: conversation.id,
+        tokens: totalTokens,
+        cost: platformCost,
+        description: `Chat with investor: ${investorEmail || 'Anonymous'}`,
       });
 
       res.json({
@@ -633,11 +670,264 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Pricing information endpoint
   app.get("/api/pricing", async (req, res) => {
     try {
-      const { getPricingBreakdown } = await import("./pricing");
-      res.json(getPricingBreakdown());
+      const { getPricingBreakdown, SUBSCRIPTION_PRICING } = await import("./pricing");
+      res.json({
+        ...getPricingBreakdown(),
+        subscriptions: SUBSCRIPTION_PRICING,
+      });
     } catch (error) {
       console.error("Error fetching pricing:", error);
       res.status(500).json({ message: "Failed to fetch pricing" });
+    }
+  });
+
+  // Stripe subscription endpoints
+  const Stripe = await import("stripe");
+  const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY!, {
+    apiVersion: "2024-12-18.acacia",
+  });
+
+  // Create checkout session for subscription
+  app.post("/api/subscriptions/create-checkout", isAuthenticated, async (req: any, res) => {
+    try {
+      const { priceType } = req.body; // 'monthly' or 'annual'
+      const user = req.user;
+      const { SUBSCRIPTION_PRICING } = await import("./pricing");
+      
+      const pricing = SUBSCRIPTION_PRICING[priceType as keyof typeof SUBSCRIPTION_PRICING];
+      if (!pricing || priceType === 'oneTime') {
+        return res.status(400).json({ message: "Invalid subscription type" });
+      }
+
+      // Create or get Stripe customer
+      let stripeCustomerId = user.stripeCustomerId;
+      if (!stripeCustomerId) {
+        const customer = await stripe.customers.create({
+          email: user.email,
+          metadata: {
+            userId: user.id,
+          },
+        });
+        stripeCustomerId = customer.id;
+        await storage.updateUserSubscription(user.id, { stripeCustomerId });
+      }
+
+      // Create checkout session
+      const session = await stripe.checkout.sessions.create({
+        customer: stripeCustomerId,
+        mode: 'subscription',
+        payment_method_types: ['card'],
+        line_items: [{
+          price: pricing.priceId,
+          quantity: 1,
+        }],
+        subscription_data: {
+          metadata: {
+            userId: user.id,
+            isAnnual: priceType === 'annual' ? 'true' : 'false',
+          },
+        },
+        success_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/settings?subscription=success`,
+        cancel_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/settings?subscription=cancel`,
+      });
+
+      res.json({ url: session.url });
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+      res.status(500).json({ message: "Failed to create checkout session" });
+    }
+  });
+
+  // Create payment intent for one-time token purchase
+  app.post("/api/tokens/purchase", isAuthenticated, async (req: any, res) => {
+    try {
+      const user = req.user;
+      const { SUBSCRIPTION_PRICING } = await import("./pricing");
+      const pricing = SUBSCRIPTION_PRICING.oneTime;
+
+      // Create payment intent
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: pricing.price,
+        currency: 'usd',
+        metadata: {
+          userId: user.id,
+          type: 'oneTime',
+          tokens: pricing.tokens.toString(),
+        },
+      });
+
+      res.json({ clientSecret: paymentIntent.client_secret });
+    } catch (error) {
+      console.error("Error creating payment intent:", error);
+      res.status(500).json({ message: "Failed to create payment intent" });
+    }
+  });
+
+  // Cancel subscription
+  app.post("/api/subscriptions/cancel", isAuthenticated, async (req: any, res) => {
+    try {
+      const user = req.user;
+      
+      if (!user.stripeSubscriptionId) {
+        return res.status(400).json({ message: "No active subscription" });
+      }
+
+      // Cancel subscription at period end
+      const subscription = await stripe.subscriptions.update(user.stripeSubscriptionId, {
+        cancel_at_period_end: true,
+      });
+
+      await storage.updateUserSubscription(user.id, {
+        subscriptionStatus: 'canceled',
+      });
+
+      res.json({ 
+        message: "Subscription will be canceled at the end of the billing period",
+        endsAt: new Date(subscription.current_period_end * 1000),
+      });
+    } catch (error) {
+      console.error("Error canceling subscription:", error);
+      res.status(500).json({ message: "Failed to cancel subscription" });
+    }
+  });
+
+  // Webhook endpoint for Stripe events
+  app.post("/api/stripe/webhook", async (req, res) => {
+    const sig = req.headers['stripe-signature'] as string;
+    let event;
+
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET!
+      );
+    } catch (err: any) {
+      console.error('Webhook signature verification failed:', err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    try {
+      switch (event.type) {
+        case 'checkout.session.completed': {
+          const session = event.data.object as any;
+          const userId = session.subscription_metadata?.userId || session.customer_metadata?.userId;
+          
+          if (userId && session.subscription) {
+            // Fetch subscription details
+            const subscription = await stripe.subscriptions.retrieve(session.subscription);
+            const isAnnual = subscription.metadata.isAnnual === 'true';
+            const { SUBSCRIPTION_PRICING: SUB_PRICING } = await import("./pricing");
+            const tokens = isAnnual ? SUB_PRICING.annual.tokens : SUB_PRICING.monthly.tokens;
+
+            // Update user subscription
+            await storage.updateUserSubscription(userId, {
+              stripeSubscriptionId: subscription.id,
+              subscriptionStatus: subscription.status,
+              subscriptionCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+              subscriptionIsAnnual: isAnnual,
+            });
+
+            // Add tokens to user
+            const user = await storage.getUser(userId);
+            if (user) {
+              await storage.updateUserTokens(userId, user.tokens + tokens);
+              
+              // Record token purchase
+              await storage.createTokenPurchase({
+                userId,
+                type: 'subscription',
+                stripePaymentIntentId: session.payment_intent,
+                amount: session.amount_total,
+                tokens,
+                status: 'completed',
+              });
+            }
+          }
+          break;
+        }
+
+        case 'invoice.payment_succeeded': {
+          const invoice = event.data.object as any;
+          if (invoice.subscription && invoice.billing_reason === 'subscription_cycle') {
+            const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
+            const userId = subscription.metadata.userId;
+            
+            if (userId) {
+              const isAnnual = subscription.metadata.isAnnual === 'true';
+              const { SUBSCRIPTION_PRICING: SUB_PRICING2 } = await import("./pricing");
+              const tokens = isAnnual ? SUB_PRICING2.annual.tokens : SUB_PRICING2.monthly.tokens;
+
+              // Add tokens for renewal
+              const user = await storage.getUser(userId);
+              if (user) {
+                await storage.updateUserTokens(userId, user.tokens + tokens);
+                
+                // Record token purchase
+                await storage.createTokenPurchase({
+                  userId,
+                  type: 'subscription',
+                  stripePaymentIntentId: invoice.payment_intent,
+                  amount: invoice.amount_paid,
+                  tokens,
+                  status: 'completed',
+                });
+              }
+
+              // Update subscription period end
+              await storage.updateUserSubscription(userId, {
+                subscriptionCurrentPeriodEnd: new Date(subscription.current_period_end * 1000),
+                subscriptionStatus: subscription.status,
+              });
+            }
+          }
+          break;
+        }
+
+        case 'payment_intent.succeeded': {
+          const paymentIntent = event.data.object as any;
+          if (paymentIntent.metadata.type === 'oneTime') {
+            const userId = paymentIntent.metadata.userId;
+            const tokens = parseInt(paymentIntent.metadata.tokens);
+
+            // Add tokens to user
+            const user = await storage.getUser(userId);
+            if (user) {
+              await storage.updateUserTokens(userId, user.tokens + tokens);
+              
+              // Record token purchase
+              await storage.createTokenPurchase({
+                userId,
+                type: 'one_time',
+                stripePaymentIntentId: paymentIntent.id,
+                amount: paymentIntent.amount,
+                tokens,
+                status: 'completed',
+              });
+            }
+          }
+          break;
+        }
+
+        case 'customer.subscription.deleted':
+        case 'customer.subscription.updated': {
+          const subscription = event.data.object as any;
+          const userId = subscription.metadata.userId;
+          
+          if (userId) {
+            await storage.updateUserSubscription(userId, {
+              subscriptionStatus: subscription.status,
+              subscriptionCurrentPeriodEnd: subscription.current_period_end ? new Date(subscription.current_period_end * 1000) : null,
+            });
+          }
+          break;
+        }
+      }
+
+      res.json({ received: true });
+    } catch (error) {
+      console.error('Webhook handler error:', error);
+      res.status(500).json({ message: 'Webhook handler failed' });
     }
   });
 
