@@ -472,8 +472,8 @@ export default function Dashboard() {
             {analytics && (
               <section className="mt-10">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Analytics Overview</h3>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -489,7 +489,7 @@ export default function Dashboard() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
+                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
@@ -505,23 +505,7 @@ export default function Dashboard() {
                     </CardContent>
                   </Card>
 
-                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-gray-600">Cost This Month</p>
-                          <p className="text-2xl font-bold text-gray-900 mt-1">
-                            ${analytics.monthlyCost.toFixed(2)}
-                          </p>
-                        </div>
-                        <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-                          <DollarSign className="w-6 h-6 text-black" />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border-gray-700 shadow-sm text-white">
+                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border-gray-700 shadow-sm text-white hover:shadow-lg transition-shadow duration-200">
                     <CardContent className="p-6">
                       <div className="flex items-center justify-between">
                         <div>
