@@ -143,11 +143,6 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
       }
     }
     
-    if (mimeType.includes("word") || mimeType.includes("document")) {
-      // For MVP, return placeholder - in production use mammoth
-      return "Word document extraction not yet implemented in MVP. Please use text files for testing.";
-    }
-    
     if (mimeType.includes("spreadsheet") || mimeType.includes("excel")) {
       try {
         console.log("Processing Excel file:", { filepath, mimeType });
@@ -178,6 +173,11 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
         console.error("Error parsing Excel file:", error);
         throw new Error("Failed to extract text from Excel file");
       }
+    }
+    
+    if (mimeType.includes("word") || mimeType.includes("document")) {
+      // For MVP, return placeholder - in production use mammoth
+      return "Word document extraction not yet implemented in MVP. Please use text files for testing.";
     }
     
     throw new Error(`Unsupported file type: ${mimeType}`);
