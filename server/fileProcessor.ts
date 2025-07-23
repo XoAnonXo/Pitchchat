@@ -54,6 +54,11 @@ export async function processDocument(documentId: string): Promise<void> {
     // Split content into chunks
     const chunks = splitIntoChunks(content, 1000); // ~1000 characters per chunk
     
+    console.log(`Processing ${document.originalName}: ${chunks.length} chunks from ${content.length} chars`);
+    if (chunks.length > 0) {
+      console.log("First chunk preview:", chunks[0].substring(0, 200));
+    }
+    
     // Process each chunk
     let totalTokens = 0;
     for (let i = 0; i < chunks.length; i++) {
@@ -164,6 +169,9 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
           
           fullText += csvData + '\n';
         });
+        
+        console.log("Excel extraction complete. Text length:", fullText.length);
+        console.log("First 500 chars:", fullText.substring(0, 500));
         
         return fullText.trim();
       } catch (error) {
