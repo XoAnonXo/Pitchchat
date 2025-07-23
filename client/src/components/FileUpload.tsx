@@ -198,7 +198,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             type="file"
             className="hidden"
             onChange={handleFileSelect}
-            accept=".pdf,.docx,.pptx,.txt,.md,.xls,.xlsx,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            accept="*"
             multiple
           />
         </div>
