@@ -364,4 +364,7 @@ The application is designed as a monorepo with clear separation between frontend
 - Updated server routes to accept 'application/vnd.ms-excel' MIME type
 - Modified FileUpload component to display 'XLS/XLSX' as supported formats
 - Added .xls and .xlsx to the accept attribute in file input
-- Note: Excel file processing still shows placeholder message in MVP ("Spreadsheet extraction not yet implemented")
+- Implemented full Excel text extraction functionality using xlsx package
+- Excel files are processed by extracting text from all sheets in CSV format
+- Each sheet is clearly labeled in the extracted text with sheet names
+- Both XLS and XLSX formats are fully supported for text extraction

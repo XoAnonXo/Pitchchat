@@ -1,5 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
+import * as XLSX from "xlsx";
 import { storage } from "./storage";
 import { generateEmbedding, summarizeDocument } from "./openai";
 import type { InsertDocument, InsertChunk } from "@shared/schema";
@@ -143,8 +144,31 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
     }
     
     if (mimeType.includes("spreadsheet") || mimeType.includes("excel")) {
-      // For MVP, return placeholder - in production use xlsx
-      return "Spreadsheet extraction not yet implemented in MVP. Please use text files for testing.";
+      try {
+        const buffer = await fs.readFile(filepath);
+        const workbook = XLSX.read(buffer, { type: "buffer" });
+        
+        let fullText = '';
+        
+        // Iterate through all sheets
+        workbook.SheetNames.forEach((sheetName) => {
+          fullText += `\n=== Sheet: ${sheetName} ===\n\n`;
+          
+          const worksheet = workbook.Sheets[sheetName];
+          // Convert sheet to CSV format for text extraction
+          const csvData = XLSX.utils.sheet_to_csv(worksheet, {
+            blankrows: false,
+            skipHidden: true,
+          });
+          
+          fullText += csvData + '\n';
+        });
+        
+        return fullText.trim();
+      } catch (error) {
+        console.error("Error parsing Excel file:", error);
+        throw new Error("Failed to extract text from Excel file");
+      }
     }
     
     throw new Error(`Unsupported file type: ${mimeType}`);
