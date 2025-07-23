@@ -1,6 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
-import * as XLSX from "xlsx";
+import XLSX from "xlsx";
 import { storage } from "./storage";
 import { generateEmbedding, summarizeDocument } from "./openai";
 import type { InsertDocument, InsertChunk } from "@shared/schema";
@@ -145,6 +145,7 @@ async function extractTextFromFile(filepath: string, mimeType: string): Promise<
     
     if (mimeType.includes("spreadsheet") || mimeType.includes("excel")) {
       try {
+        console.log("Processing Excel file:", { filepath, mimeType });
         const buffer = await fs.readFile(filepath);
         const workbook = XLSX.read(buffer, { type: "buffer" });
         

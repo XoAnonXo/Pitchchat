@@ -116,6 +116,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(400).json({ message: "No file uploaded" });
       }
 
+      console.log("File upload received:", {
+        originalName: req.file.originalname,
+        mimeType: req.file.mimetype,
+        size: req.file.size
+      });
+
       // Check for duplicate
       const isDuplicate = await storage.checkDuplicateDocument(
         req.params.projectId, 
