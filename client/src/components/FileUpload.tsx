@@ -38,7 +38,14 @@ export default function FileUpload({ projectId }: FileUploadProps) {
 
       if (!res.ok) {
         const text = await res.text();
-        throw new Error(`${res.status}: ${text}`);
+        let errorMessage = `${res.status}: ${text}`;
+        try {
+          const errorData = JSON.parse(text);
+          errorMessage = errorData.message || errorMessage;
+        } catch (e) {
+          // text is not JSON
+        }
+        throw new Error(errorMessage);
       }
 
       return res.json();
