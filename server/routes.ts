@@ -30,10 +30,13 @@ const upload = multer({
       "application/vnd.openxmlformats-officedocument.presentationml.presentation",
     ];
     
+    console.log("File upload filter - filename:", file.originalname, "mimetype:", file.mimetype);
+    
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(new Error("Unsupported file type"));
+      console.error("Rejected file type:", file.mimetype, "for file:", file.originalname);
+      cb(new Error(`Unsupported file type: ${file.mimetype}`));
     }
   },
 });
