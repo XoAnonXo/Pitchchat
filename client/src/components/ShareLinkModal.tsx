@@ -22,7 +22,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
   const queryClient = useQueryClient();
   const [linkName, setLinkName] = useState("");
   const [expiration, setExpiration] = useState("7");
-  const [tokenLimit, setTokenLimit] = useState("1000");
+  const [tokenLimit, setTokenLimit] = useState("50000"); // Set to unlimited by default
   const [allowDownloads, setAllowDownloads] = useState(false);
   const [generatedLink, setGeneratedLink] = useState<string | null>(null);
 
@@ -127,7 +127,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
   const handleClose = () => {
     setLinkName("");
     setExpiration("7");
-    setTokenLimit("1000");
+    setTokenLimit("50000"); // Reset to unlimited
     setAllowDownloads(false);
     setGeneratedLink(null);
     onClose();
@@ -166,21 +166,6 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
                   <SelectItem value="14">14 days</SelectItem>
                   <SelectItem value="30">30 days</SelectItem>
                   <SelectItem value="never">Never</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div>
-              <Label htmlFor="token-limit">Usage Limit per Investor</Label>
-              <Select value={tokenLimit} onValueChange={setTokenLimit}>
-                <SelectTrigger className="mt-1">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="1000">1,000 tokens</SelectItem>
-                  <SelectItem value="5000">5,000 tokens</SelectItem>
-                  <SelectItem value="10000">10,000 tokens</SelectItem>
-                  <SelectItem value="50000">Unlimited</SelectItem>
                 </SelectContent>
               </Select>
             </div>
