@@ -358,3 +358,10 @@ The application is designed as a monorepo with clear separation between frontend
 - Successfully added API key as Replit secret and verified TestSprite functionality
 - TestSprite CLI is working properly despite Node.js version warning (requires v22+, running v20.19.3)
 - TestSprite is ready for automated testing workflows and can generate and execute tests
+
+### July 23, 2025 - XLS File Support Addition
+- Added support for XLS (Excel 97-2003) file uploads alongside existing XLSX support
+- Updated server routes to accept 'application/vnd.ms-excel' MIME type
+- Modified FileUpload component to display 'XLS/XLSX' as supported formats
+- Added .xls and .xlsx to the accept attribute in file input
+- Note: Excel file processing still shows placeholder message in MVP ("Spreadsheet extraction not yet implemented")

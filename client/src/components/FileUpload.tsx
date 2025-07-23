@@ -186,6 +186,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
           
           <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
             <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">PDF</span>
+            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">XLS/XLSX</span>
             <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">DOCX</span>
             <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">PPTX</span>
             <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">TXT</span>
@@ -197,7 +198,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             type="file"
             className="hidden"
             onChange={handleFileSelect}
-            accept=".pdf,.docx,.pptx,.txt,.md"
+            accept=".pdf,.docx,.pptx,.txt,.md,.xls,.xlsx"
             multiple
           />
         </div>
