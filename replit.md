@@ -350,3 +350,10 @@ The application is designed as a monorepo with clear separation between frontend
 - Updated sendBrevoEmail function to initialize Brevo client on each call instead of at module load
 - This resolves "Top-level await in server/brevo.ts is incompatible with esbuild bundling process" error
 - Application can now be successfully deployed to production environments
+
+### July 23, 2025 - TestSprite MCP Integration
+- Installed @testsprite/testsprite-mcp package for testing framework integration
+- Created mcp.json configuration file for TestSprite MCP server setup
+- Configured TestSprite to use environment variable TESTSPRITE_API_KEY for authentication
+- Note: TestSprite MCP requires Node.js v22+ (current environment has v20.19.3) which may cause compatibility issues
+- API key needs to be added as a Replit secret named TESTSPRITE_API_KEY
