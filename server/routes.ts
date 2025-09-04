@@ -44,6 +44,36 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Helper function to sync subscription status with Stripe
+  async function syncUserSubscription(user: any) {
+    try {
+      if (user?.stripeCustomerId && process.env.STRIPE_SECRET_KEY) {
+        const subscriptions = await stripe.subscriptions.list({
+          customer: user.stripeCustomerId,
+          status: 'active',
+          limit: 1
+        });
+        
+        if (subscriptions.data.length > 0) {
+          const sub = subscriptions.data[0];
+          await storage.updateUserSubscription(user.id, {
+            stripeSubscriptionId: sub.id,
+            subscriptionStatus: sub.status,
+            subscriptionCurrentPeriodEnd: new Date(sub.current_period_end * 1000),
+            subscriptionIsAnnual: sub.items.data[0]?.price?.id === 'price_1Ruu7zFbfaTMQEZOUT3v0FeI'
+          });
+        } else if (user.subscriptionStatus === 'active') {
+          // No active subscription found, update status
+          await storage.updateUserSubscription(user.id, {
+            subscriptionStatus: null
+          });
+        }
+      }
+    } catch (error) {
+      console.log('Subscription sync error:', error);
+    }
+  }
+
   // Auth middleware
   await setupAuth(app);
 
@@ -767,11 +797,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     const sig = req.headers['stripe-signature'] as string;
     let event;
 
+    // If webhook secret is not configured, skip verification (development mode)
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      console.log('Warning: STRIPE_WEBHOOK_SECRET not configured, skipping webhook verification');
+      event = req.body;
+      // In production, you should always verify webhooks
+      res.json({ received: true, warning: 'Webhook not verified' });
+      return;
+    }
+
     try {
       event = stripe.webhooks.constructEvent(
         req.body,
         sig,
-        process.env.STRIPE_WEBHOOK_SECRET!
+        process.env.STRIPE_WEBHOOK_SECRET
       );
     } catch (err: any) {
       console.error('Webhook signature verification failed:', err.message);

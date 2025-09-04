@@ -211,11 +211,46 @@ export function setupAuth(app: Express) {
     });
   });
 
-  app.get("/api/auth/user", (req, res) => {
+  app.get("/api/auth/user", async (req, res) => {
     if (!req.isAuthenticated()) {
       return res.status(401).json({ message: "Not authenticated" });
     }
-    res.json(req.user);
+    
+    // Sync subscription status with Stripe if customer exists
+    const user = req.user as any;
+    if (user?.stripeCustomerId && process.env.STRIPE_SECRET_KEY) {
+      try {
+        const Stripe = await import("stripe");
+        const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY, {
+          apiVersion: "2024-12-18.acacia",
+        });
+        
+        const subscriptions = await stripe.subscriptions.list({
+          customer: user.stripeCustomerId,
+          status: 'active',
+          limit: 1
+        });
+        
+        if (subscriptions.data.length > 0) {
+          const sub = subscriptions.data[0];
+          await storage.updateUserSubscription(user.id, {
+            stripeSubscriptionId: sub.id,
+            subscriptionStatus: sub.status,
+            subscriptionCurrentPeriodEnd: new Date(sub.current_period_end * 1000),
+            subscriptionIsAnnual: sub.items.data[0]?.price?.id === 'price_1Ruu7zFbfaTMQEZOUT3v0FeI'
+          });
+          // Update user object with latest subscription info
+          user.stripeSubscriptionId = sub.id;
+          user.subscriptionStatus = sub.status;
+          user.subscriptionCurrentPeriodEnd = new Date(sub.current_period_end * 1000);
+          user.subscriptionIsAnnual = sub.items.data[0]?.price?.id === 'price_1Ruu7zFbfaTMQEZOUT3v0FeI';
+        }
+      } catch (error: any) {
+        console.log('Subscription sync skipped:', error.message);
+      }
+    }
+    
+    res.json(user);
   });
 
   // Google OAuth routes
