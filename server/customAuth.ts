@@ -97,8 +97,10 @@ export function setupAuth(app: Express) {
 
   // Configure Google OAuth Strategy
   if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-    // Use production domain or localhost only
-    const baseUrl = process.env.PRODUCTION_URL || 'https://pitchchat.ai';
+    // Detect the correct base URL for the environment
+    const baseUrl = process.env.REPLIT_DOMAINS 
+      ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
+      : (process.env.PRODUCTION_URL || 'http://localhost:5000');
     
     passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
