@@ -736,6 +736,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         await storage.updateUserSubscription(user.id, { stripeCustomerId });
       }
 
+      // Get the correct domain from request headers
+      const protocol = req.get('x-forwarded-proto') || 'https';
+      const host = req.get('host') || process.env.REPLIT_DOMAINS?.split(',')[0] || 'localhost:5000';
+      const baseUrl = `${protocol}://${host}`;
+      
+      console.log('Creating checkout with redirect URLs:', {
+        success: `${baseUrl}/?subscription=success`,
+        cancel: `${baseUrl}/settings?subscription=cancel`
+      });
+
       // Create checkout session
       const session = await stripe.checkout.sessions.create({
         customer: stripeCustomerId,
@@ -751,8 +761,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             isAnnual: priceType === 'annual' ? 'true' : 'false',
           },
         },
-        success_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/?subscription=success`,
-        cancel_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/settings?subscription=cancel`,
+        success_url: `${baseUrl}/?subscription=success`,
+        cancel_url: `${baseUrl}/settings?subscription=cancel`,
       });
 
       res.json({ url: session.url });
