@@ -721,7 +721,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
             isAnnual: priceType === 'annual' ? 'true' : 'false',
           },
         },
-        success_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/settings?subscription=success`,
+        success_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/?subscription=success`,
         cancel_url: `${process.env.REPLIT_DOMAINS ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}` : 'http://localhost:5000'}/settings?subscription=cancel`,
       });
 
