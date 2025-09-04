@@ -97,10 +97,11 @@ export function setupAuth(app: Express) {
 
   // Configure Google OAuth Strategy
   if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
-    // Detect the correct base URL for the environment
-    const baseUrl = process.env.REPLIT_DOMAINS 
-      ? `https://${process.env.REPLIT_DOMAINS.split(',')[0]}`
-      : (process.env.PRODUCTION_URL || 'http://localhost:5000');
+    // Use the production domain for Google OAuth
+    // This must match what's configured in Google OAuth Console
+    const baseUrl = process.env.PRODUCTION_URL || 'https://pitchchat.ai';
+    
+    console.log('Google OAuth callback URL:', `${baseUrl}/api/auth/google/callback`);
     
     passport.use(new GoogleStrategy({
       clientID: process.env.GOOGLE_CLIENT_ID,
