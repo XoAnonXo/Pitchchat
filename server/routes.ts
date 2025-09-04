@@ -12,6 +12,8 @@ import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
 import { sendBrevoEmail, sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevoSimple";
+import Stripe from "stripe";
+
 
 // Configure multer for file uploads
 const upload = multer({
@@ -669,10 +671,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Stripe subscription endpoints
-  const Stripe = await import("stripe");
-  const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY!, {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
     apiVersion: "2024-12-18.acacia",
   });
+  
+  // Define price IDs for subscription plans
+  const STRIPE_PRICE_IDS = {
+    monthly: 'price_1Ruu6pFbfaTMQEZORAhCEGnp', // $29/month
+    annual: 'price_1Ruu7zFbfaTMQEZOUT3v0FeI', // $278.40/year
+  };
 
   // Create checkout session for subscription
   app.post("/api/subscriptions/create-checkout", isAuthenticated, async (req: any, res) => {

@@ -116,14 +116,14 @@ export function getPricingBreakdown() {
 // Subscription pricing for link-based model
 export const SUBSCRIPTION_PRICING = {
   monthly: {
-    priceId: process.env.STRIPE_MONTHLY_PRICE_ID || 'price_monthly', // Stripe price ID
+    priceId: 'price_1Ruu6pFbfaTMQEZORAhCEGnp', // $29/month Stripe price ID
     price: 2900, // $29 in cents
     links: 'unlimited', // Unlimited links
     label: "Monthly Plan",
     description: "Create unlimited pitch links",
   },
   annual: {
-    priceId: process.env.STRIPE_ANNUAL_PRICE_ID || 'price_annual', // Stripe price ID
+    priceId: 'price_1Ruu7zFbfaTMQEZOUT3v0FeI', // $278.40/year Stripe price ID  
     price: 27840, // $278.40 in cents (20% discount)
     links: 'unlimited', // Unlimited links
     label: "Annual Plan",
