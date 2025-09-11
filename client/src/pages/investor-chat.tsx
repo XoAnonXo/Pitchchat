@@ -11,6 +11,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download, Phone } from "lucide-react";
 import DocumentDownloadDialog from "@/components/DocumentDownloadDialog";
 import ContactTeamDialog from "@/components/ContactTeamDialog";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface Message {
   id: string;
@@ -26,6 +27,7 @@ interface Message {
 }
 
 export default function InvestorChat() {
+  usePageTitle('Investor Chat');
   const [location] = useLocation();
   const { toast } = useToast();
   const [message, setMessage] = useState("");

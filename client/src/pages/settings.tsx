@@ -54,6 +54,7 @@ import {
   ExternalLink
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface UserSettings {
   id: string;
@@ -76,6 +77,7 @@ interface UserSettings {
 }
 
 export default function SettingsPage() {
+  usePageTitle('Settings');
   const { user } = useAuth();
   const { toast } = useToast();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);

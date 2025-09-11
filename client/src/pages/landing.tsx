@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Upload, MessageSquare, Share2, BarChart3, ArrowRight, Check } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { usePageTitle } from "@/hooks/usePageTitle";
 import { Redirect } from "wouter";
 
 export default function Landing() {
+  usePageTitle('Home');
   const { user } = useAuth();
 
   if (user) {

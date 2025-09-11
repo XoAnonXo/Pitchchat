@@ -61,6 +61,7 @@ import {
 } from "lucide-react";
 import { format } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface AnalyticsData {
   overview: {
@@ -119,6 +120,7 @@ interface AnalyticsData {
 const COLORS = ["#000000", "#4B5563", "#9CA3AF", "#D1D5DB", "#E5E7EB", "#F3F4F6"];
 
 export default function AnalyticsPage() {
+  usePageTitle('Analytics');
   const { user } = useAuth();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [timeRange, setTimeRange] = useState("30");

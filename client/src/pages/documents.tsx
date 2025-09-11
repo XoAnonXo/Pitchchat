@@ -50,6 +50,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/hooks/useAuth";
+import { usePageTitle } from "@/hooks/usePageTitle";
 import { formatDistanceToNow } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 
@@ -77,6 +78,7 @@ interface DocumentsPageProps {
 }
 
 export default function DocumentsPage({ projectId }: DocumentsPageProps) {
+  usePageTitle('Documents');
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { user } = useAuth();

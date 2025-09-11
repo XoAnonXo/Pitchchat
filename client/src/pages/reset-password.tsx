@@ -6,8 +6,10 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { useLocation, useRoute } from "wouter";
 import { Lock, CheckCircle } from "lucide-react";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function ResetPasswordPage() {
+  usePageTitle('Reset Password');
   const [, params] = useRoute("/reset-password/:token");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");

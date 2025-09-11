@@ -13,6 +13,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { Loader2 } from "lucide-react";
 import { useLocation, Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -32,6 +33,7 @@ type LoginForm = z.infer<typeof loginSchema>;
 type RegisterForm = z.infer<typeof registerSchema>;
 
 export default function AuthPage() {
+  usePageTitle('Sign In');
   const [location, setLocation] = useLocation();
   const { toast } = useToast();
   const { isLoading, isAuthenticated } = useAuth();

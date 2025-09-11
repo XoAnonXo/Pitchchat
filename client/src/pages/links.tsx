@@ -21,12 +21,14 @@ import {
 import { Link } from "wouter";
 import { formatDistanceToNow } from "date-fns";
 import { useAuth } from "@/hooks/useAuth";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface LinksPageProps {
   projectId: string;
 }
 
 export default function LinksPage({ projectId }: LinksPageProps) {
+  usePageTitle('Share Links');
   const { user } = useAuth();
   const { toast } = useToast();
   const [copiedId, setCopiedId] = useState<string | null>(null);

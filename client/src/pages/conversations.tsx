@@ -41,6 +41,7 @@ import {
 } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 interface Message {
   id: string;
@@ -72,6 +73,7 @@ interface Conversation {
 }
 
 export default function ConversationsPage() {
+  usePageTitle('Conversations');
   const { user } = useAuth();
   const [searchTerm, setSearchTerm] = useState("");
   const [projectFilter, setProjectFilter] = useState<string>("all");

@@ -6,8 +6,10 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { Link } from "wouter";
 import { ArrowLeft, Mail } from "lucide-react";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function ForgotPasswordPage() {
+  usePageTitle('Forgot Password');
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
