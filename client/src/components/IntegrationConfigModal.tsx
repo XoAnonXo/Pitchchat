@@ -27,7 +27,15 @@ interface IntegrationConfigModalProps {
   projectId: string;
 }
 
-const platformConfigs = {
+interface IntegrationField {
+  key: string;
+  label: string;
+  type: 'text' | 'password' | 'email';
+  required: boolean;
+  placeholder?: string;
+}
+
+const platformConfigs: Record<string, { fields: IntegrationField[]; instructions: string; docsUrl: string }> = {
   github: {
     fields: [
       { key: 'token', label: 'Personal Access Token', type: 'password' as const, required: true }

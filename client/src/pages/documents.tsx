@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useParams, Link } from "wouter";
+import { Link } from "wouter";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
@@ -17,31 +17,25 @@ import {
 import { 
   FileText, 
   Search, 
-  Calendar, 
   Database, 
   Trash2, 
   Download,
-  Filter,
   MoreHorizontal,
-  ExternalLink,
   ArrowLeft,
   Home,
   BarChart3,
-  LinkIcon,
   MessageSquare,
-  Menu,
   X,
-  LogOut,
-  Settings,
-  Users,
   FolderOpen,
-  Plus,
-  Sparkles,
+  Users,
+  LogOut,
   Clock,
   CheckCircle,
   XCircle,
   Eye,
-  Bell
+  Bell,
+  Settings,
+  Menu
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -53,25 +47,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { formatDistanceToNow } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
-
-interface Document {
-  id: string;
-  filename: string;
-  originalName: string;
-  fileSize: number;
-  mimeType: string;
-  status: 'processing' | 'completed' | 'failed';
-  tokens: number;
-  createdAt: string;
-  updatedAt: string;
-  source?: string;
-  chunks?: Array<{
-    id: string;
-    content: string;
-    tokenCount: number;
-    metadata: Record<string, any>;
-  }>;
-}
+import { Project, Document, Conversation } from "@shared/schema";
 
 interface DocumentsPageProps {
   projectId: string;
@@ -85,25 +61,21 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
 
-  const { data: project } = useQuery({
+  const { data: project } = useQuery<Project>({
     queryKey: [`/api/projects/${projectId}`],
   });
 
-  const { data: documents, isLoading } = useQuery<Document[]>({
+  const { data: documents = [], isLoading } = useQuery<Document[]>({
     queryKey: [`/api/projects/${projectId}/documents`],
-    select: (data) => data || [],
   });
 
-  // Fetch conversations to check for contact notifications
-  const { data: conversations = [] } = useQuery({
+  const { data: conversations = [] } = useQuery<Conversation[]>({
     queryKey: ["/api/conversations"],
     enabled: !!user,
   });
 
-  // Check if there are any conversations with contact details
-  const hasContactNotifications = conversations.some((conv: any) => conv.contactProvidedAt);
+  const hasContactNotifications = conversations.some((conv) => (conv as any).contactProvidedAt);
 
   const deleteMutation = useMutation({
     mutationFn: async (documentId: string) => {
@@ -116,7 +88,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
       });
       queryClient.invalidateQueries({ queryKey: [`/api/projects/${projectId}/documents`] });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       toast({
         title: "Delete Failed",
         description: error.message || "Failed to delete document",
@@ -125,13 +97,13 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
     },
   });
 
-  const filteredDocuments = documents?.filter(doc => {
-    const matchesSearch = doc.filename.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         doc.originalName.toLowerCase().includes(searchTerm.toLowerCase());
+  const filteredDocuments = documents.filter(doc => {
+    const matchesSearch = (doc.filename || "").toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (doc.originalName || "").toLowerCase().includes(searchTerm.toLowerCase());
     const matchesStatus = statusFilter === "all" || doc.status === statusFilter;
     
     return matchesSearch && matchesStatus;
-  }) || [];
+  });
 
   const handleDelete = (documentId: string) => {
     if (window.confirm("Are you sure you want to delete this document? This action cannot be undone.")) {
@@ -147,26 +119,26 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  const getStatusBadge = (status: string) => {
+  const getStatusBadge = (status: string | null) => {
     switch (status) {
       case "processing":
         return (
-          <Badge variant="secondary" className="bg-gray-100 text-black">
-            <Clock className="w-3 h-3 mr-1" />
+          <Badge variant="outline" className="bg-gray-50 text-gray-500 border-gray-200 text-[10px] font-bold uppercase py-0.5 px-2">
+            <Clock className="w-2.5 h-2.5 mr-1" />
             Processing
           </Badge>
         );
       case "completed":
         return (
-          <Badge variant="secondary" className="bg-green-50 text-green-700">
-            <CheckCircle className="w-3 h-3 mr-1" />
-            Completed
+          <Badge variant="outline" className="bg-green-50 text-green-600 border-green-100 text-[10px] font-bold uppercase py-0.5 px-2">
+            <CheckCircle className="w-2.5 h-2.5 mr-1" />
+            Ready
           </Badge>
         );
       case "failed":
         return (
-          <Badge variant="secondary" className="bg-red-50 text-red-700">
-            <XCircle className="w-3 h-3 mr-1" />
+          <Badge variant="outline" className="bg-red-50 text-red-600 border-red-100 text-[10px] font-bold uppercase py-0.5 px-2">
+            <XCircle className="w-2.5 h-2.5 mr-1" />
             Failed
           </Badge>
         );
@@ -183,315 +155,292 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
     return "📄";
   };
 
-  const totalTokens = filteredDocuments.reduce((sum, doc) => sum + (doc.tokens || 0), 0);
-  const totalSize = filteredDocuments.reduce((sum, doc) => sum + doc.fileSize, 0);
+  const totalTokens = documents.reduce((sum, doc) => sum + (doc.tokens || 0), 0);
+  const totalSize = documents.reduce((sum, doc) => sum + (doc.fileSize || 0), 0);
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#FAFAFA] p-4 sm:p-6 lg:p-8">
-        <StartupLoadingSkeleton type="documents" />
+      <div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center">
+        <StartupLoadingSkeleton type="dashboard" />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex">
-      {/* Fixed Sidebar - Same as Dashboard */}
       <aside className={`
-        fixed top-0 left-0 h-full w-72 bg-white border-r border-gray-200 z-50
+        fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-50
         transform transition-transform duration-300 ease-in-out
         ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        {/* Logo Section */}
-        <div className="h-20 px-6 flex items-center justify-between border-b border-gray-100">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-md">
-              <Sparkles className="w-6 h-6 text-white" />
+        <div className="h-20 px-6 flex items-center justify-between">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-base font-inter-tight">PC</span>
             </div>
-            <div>
-              <h1 className="font-bold text-lg text-gray-900">PitchChat</h1>
-              <p className="text-xs text-gray-500">AI Document Assistant</p>
-            </div>
+            <span className="font-bold text-lg text-black font-inter-tight tracking-tight">PitchChat</span>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden h-8 w-8"
             onClick={() => setMobileSidebarOpen(false)}
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </Button>
         </div>
 
-        {/* Navigation */}
-        <nav className="px-4 py-6 space-y-1">
-          <Link href="/" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <Home className="w-5 h-5" />
-            <span className="font-medium">Dashboard</span>
+        <nav className="px-3 py-2 space-y-0.5">
+          <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <Home className="w-4 h-4" />
+            <span className="font-medium text-sm">Dashboard</span>
           </Link>
           
-          <Link href={`/documents/${projectId}`} className="flex items-center space-x-3 px-4 py-3 bg-gray-100 text-black rounded-xl transition-all duration-200">
-            <FolderOpen className="w-5 h-5" />
-            <span className="font-medium">Documents</span>
+          <Link href={`/documents/${projectId}`} className="flex items-center space-x-3 px-3 py-2 bg-gray-50 text-black rounded-lg transition-all duration-200">
+            <FolderOpen className="w-4 h-4" />
+            <span className="font-semibold text-sm">Documents</span>
           </Link>
           
-          <Link href="/conversations" className="flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/conversations" className="flex items-center justify-between px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
             <div className="flex items-center space-x-3">
-              <MessageSquare className="w-5 h-5" />
-              <span className="font-medium">Conversations</span>
+              <MessageSquare className="w-4 h-4" />
+              <span className="font-medium text-sm">Conversations</span>
             </div>
             {hasContactNotifications && (
-              <div className="flex items-center">
-                <Bell className="w-4 h-4 text-black fill-black" />
-              </div>
+              <Badge className="h-2 w-2 p-0 rounded-full bg-blue-600 border-none" />
             )}
           </Link>
           
-          <Link href="/analytics" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <BarChart3 className="w-5 h-5" />
-            <span className="font-medium">Analytics</span>
+          <Link href="/analytics" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <BarChart3 className="w-4 h-4" />
+            <span className="font-medium text-sm">Analytics</span>
           </Link>
           
-          <Link href="/settings" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <Settings className="w-5 h-5" />
-            <span className="font-medium">Settings</span>
+          <Link href="/settings" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <Settings className="w-4 h-4" />
+            <span className="font-medium text-sm">Settings</span>
           </Link>
         </nav>
 
-        {/* User Profile Section */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100 bg-white">
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 overflow-hidden">
               {user?.profileImageUrl ? (
                 <img 
                   src={user.profileImageUrl} 
                   alt="Profile" 
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-8 h-8 rounded-full object-cover border border-gray-100"
                 />
               ) : (
-                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                  <Users className="w-5 h-5 text-gray-500" />
+                <div className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100">
+                  <Users className="w-4 h-4 text-gray-400" />
                 </div>
               )}
-              <div>
-                <p className="text-sm font-medium text-gray-900">{user?.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">{user?.credits || 0} credits</p>
+              <div className="overflow-hidden">
+                <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
+                <p className="text-[10px] text-green-600 font-medium uppercase tracking-wider">
+                  {user?.tokens || 0} tokens
+                </p>
               </div>
             </div>
             <Button 
               variant="ghost" 
               size="icon"
               onClick={() => window.location.href = "/api/auth/logout"}
-              className="text-gray-400 hover:text-gray-600"
+              className="h-8 w-8 text-gray-400 hover:text-black"
             >
-              <LogOut className="h-5 w-5" />
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>
       </aside>
 
-      {/* Mobile Overlay */}
-      {mobileSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setMobileSidebarOpen(false)}
-        />
-      )}
-
-      {/* Main Content Area */}
-      <div className="flex-1 lg:ml-72">
-        {/* Top Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-          <div className="px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="flex-1 lg:ml-64 flex flex-col">
+        <header className="bg-white border-b border-gray-100 sticky top-0 z-30 h-20 flex items-center shrink-0">
+          <div className="px-6 lg:px-8 w-full flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden"
+                className="lg:hidden h-9 w-9"
                 onClick={() => setMobileSidebarOpen(true)}
               >
                 <Menu className="h-5 w-5" />
               </Button>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Document Management</h2>
-                <p className="text-sm text-gray-500">{project?.name || 'All Documents'}</p>
+                <h2 className="text-xl font-bold text-black font-inter-tight tracking-tight leading-none">Library</h2>
+                <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1.5">
+                  {project?.name || 'Managing Project Documents'}
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <Link href="/">
-                <Button variant="outline" className="rounded-xl border-gray-200 hover:bg-gray-50">
-                  <ArrowLeft className="w-4 h-4 mr-2" />
-                  Back to Dashboard
+                <Button variant="ghost" size="sm" className="text-gray-500 hover:text-black text-xs font-semibold h-9">
+                  <ArrowLeft className="w-3.5 h-3.5 mr-1.5" />
+                  Dashboard
                 </Button>
               </Link>
             </div>
           </div>
         </header>
 
-        <div className="p-6 lg:p-8">
-          {/* Stats Overview */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Total Documents</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">{documents?.length || 0}</p>
-                  </div>
-                  <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-                    <FileText className="w-6 h-6 text-black" />
-                  </div>
+        <div className="p-6 lg:p-8 space-y-8 max-w-[1600px]">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+              <CardContent className="p-5 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total</p>
+                  <p className="text-2xl font-bold text-black font-inter-tight">{documents.length}</p>
+                </div>
+                <div className="w-9 h-9 bg-gray-50 rounded-lg flex items-center justify-center border border-gray-100">
+                  <FileText className="w-4 h-4 text-gray-400" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Total Tokens</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">{totalTokens.toLocaleString()}</p>
-                  </div>
-                  <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
-                    <Database className="w-6 h-6 text-green-600" />
-                  </div>
+            <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+              <CardContent className="p-5 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Tokens</p>
+                  <p className="text-2xl font-bold text-black font-inter-tight">{totalTokens.toLocaleString()}</p>
+                </div>
+                <div className="w-9 h-9 bg-blue-50/50 rounded-lg flex items-center justify-center border border-blue-100/50">
+                  <Database className="w-4 h-4 text-blue-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Storage Used</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">{formatFileSize(totalSize)}</p>
-                  </div>
-                  <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
-                    <Database className="w-6 h-6 text-blue-600" />
-                  </div>
+            <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+              <CardContent className="p-5 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Storage</p>
+                  <p className="text-2xl font-bold text-black font-inter-tight">{formatFileSize(totalSize)}</p>
+                </div>
+                <div className="w-9 h-9 bg-green-50/50 rounded-lg flex items-center justify-center border border-green-100/50">
+                  <Database className="w-4 h-4 text-green-500" />
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">Processed</p>
-                    <p className="text-2xl font-bold text-gray-900 mt-1">
-                      {documents?.filter(d => d.status === 'completed').length || 0}
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-purple-600" />
-                  </div>
+            <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+              <CardContent className="p-5 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Ready</p>
+                  <p className="text-2xl font-bold text-black font-inter-tight">
+                    {documents.filter(d => d.status === 'completed').length}
+                  </p>
+                </div>
+                <div className="w-9 h-9 bg-purple-50/50 rounded-lg flex items-center justify-center border border-purple-100/50">
+                  <CheckCircle className="w-4 h-4 text-purple-500" />
                 </div>
               </CardContent>
             </Card>
           </div>
 
-          {/* Filters Section */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm mb-6">
-            <CardContent className="p-6">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex-1">
-                  <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <Input
-                      placeholder="Search documents..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-gray-50 border-gray-200 rounded-xl"
-                    />
-                  </div>
-                </div>
-                
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="w-full sm:w-[180px] bg-gray-50 border-gray-200 rounded-xl">
-                    <SelectValue placeholder="Filter by status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Status</SelectItem>
-                    <SelectItem value="completed">Completed</SelectItem>
-                    <SelectItem value="processing">Processing</SelectItem>
-                    <SelectItem value="failed">Failed</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex flex-col sm:flex-row gap-4 items-center">
+            <div className="relative flex-1 w-full">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Input
+                placeholder="Search documents..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 h-10 bg-white border-gray-200 rounded-xl text-sm focus:border-black focus:ring-0 transition-all shadow-subtle"
+              />
+            </div>
+            
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-full sm:w-[180px] h-10 bg-white border-gray-200 rounded-xl text-xs font-semibold shadow-subtle">
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent className="rounded-xl border-gray-100 shadow-xl">
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="processing">Processing</SelectItem>
+                <SelectItem value="failed">Failed</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-          {/* Documents List */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-            <CardHeader className="border-b border-gray-100">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-bold text-gray-900">Documents</CardTitle>
-                <span className="text-sm text-gray-500">
-                  {filteredDocuments.length} document{filteredDocuments.length !== 1 ? 's' : ''}
-                </span>
-              </div>
-            </CardHeader>
+          <Card className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
             <CardContent className="p-0">
               {filteredDocuments.length === 0 ? (
-                <div className="p-16 text-center">
-                  <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                    <FileText className="w-8 h-8 text-gray-400" />
+                <div className="p-20 text-center">
+                  <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-100">
+                    <FileText className="w-8 h-8 text-gray-300" />
                   </div>
-                  <p className="text-gray-600 font-medium">No documents found</p>
-                  <p className="text-sm text-gray-400 mt-1">
+                  <p className="text-xl font-bold text-black font-inter-tight mb-2">No Documents Found</p>
+                  <p className="text-gray-500 max-w-sm mx-auto leading-relaxed">
                     {searchTerm || statusFilter !== 'all' 
-                      ? 'Try adjusting your filters' 
-                      : 'Upload documents to get started'}
+                      ? 'Try adjusting your search or status filters.' 
+                      : 'Upload your first pitch deck or financial document to get started.'}
                   </p>
                 </div>
               ) : (
-                <div className="divide-y divide-gray-100">
-                  {filteredDocuments.map((doc) => (
-                    <div key={doc.id} className="p-6 hover:bg-gray-50 transition-colors">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-4 flex-1">
-                          <div className="text-2xl">{getFileIcon(doc.mimeType)}</div>
-                          <div className="flex-1">
-                            <h4 className="text-sm font-semibold text-gray-900">{doc.originalName}</h4>
-                            <div className="flex items-center gap-4 mt-1 text-xs text-gray-500">
-                              <span>{formatFileSize(doc.fileSize)}</span>
-                              <span>•</span>
-                              <span>{doc.tokens.toLocaleString()} tokens</span>
-                              <span>•</span>
-                              <span>{formatDistanceToNow(new Date(doc.createdAt))} ago</span>
+                <div className="overflow-x-auto">
+                  <table className="w-full">
+                    <thead className="bg-gray-50/50 border-b border-gray-100">
+                      <tr>
+                        <th className="px-6 py-4 text-left text-[10px] font-bold text-gray-400 uppercase tracking-wider">Document Name</th>
+                        <th className="px-6 py-4 text-center text-[10px] font-bold text-gray-400 uppercase tracking-wider">Status</th>
+                        <th className="px-6 py-4 text-center text-[10px] font-bold text-gray-400 uppercase tracking-wider">Tokens</th>
+                        <th className="px-6 py-4 text-right text-[10px] font-bold text-gray-400 uppercase tracking-wider">Added</th>
+                        <th className="px-6 py-4 text-right text-[10px] font-bold text-gray-400 uppercase tracking-wider"></th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                      {filteredDocuments.map((doc) => (
+                        <tr key={doc.id} className="hover:bg-gray-50 transition-colors group">
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center gap-3">
+                              <div className="w-9 h-9 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-white group-hover:shadow-sm border border-transparent group-hover:border-gray-100 transition-all text-xl">
+                                {getFileIcon(doc.mimeType)}
+                              </div>
+                              <div className="min-w-0">
+                                <p className="text-sm font-bold text-black truncate max-w-[240px]">{doc.originalName}</p>
+                                <p className="text-[10px] text-gray-400 font-medium uppercase">{formatFileSize(doc.fileSize)}</p>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          {getStatusBadge(doc.status)}
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-400 hover:text-gray-600">
-                                <MoreHorizontal className="h-4 w-4" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-48">
-                              <DropdownMenuItem>
-                                <Eye className="w-4 h-4 mr-2" />
-                                View Details
-                              </DropdownMenuItem>
-                              <DropdownMenuItem>
-                                <Download className="w-4 h-4 mr-2" />
-                                Download
-                              </DropdownMenuItem>
-                              <DropdownMenuItem 
-                                onClick={() => handleDelete(doc.id)}
-                                className="text-red-600 focus:text-red-600"
-                              >
-                                <Trash2 className="w-4 h-4 mr-2" />
-                                Delete
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-center">
+                            {getStatusBadge(doc.status)}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-semibold text-gray-600 tabular-nums">
+                            {doc.tokens?.toLocaleString() || 0}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium text-gray-400">
+                            {doc.createdAt ? formatDistanceToNow(new Date(doc.createdAt)) : 'Just now'} ago
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-right">
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button variant="ghost" size="icon" className="h-8 w-8 text-gray-300 hover:text-black rounded-lg">
+                                  <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end" className="rounded-xl border-gray-100 shadow-xl w-44">
+                                <DropdownMenuItem className="text-xs font-semibold">
+                                  <Eye className="w-3.5 h-3.5 mr-2 text-gray-400" />
+                                  View Analysis
+                                </DropdownMenuItem>
+                                <DropdownMenuItem className="text-xs font-semibold">
+                                  <Download className="w-3.5 h-3.5 mr-2 text-gray-400" />
+                                  Download Original
+                                </DropdownMenuItem>
+                                <DropdownMenuItem 
+                                  onClick={() => handleDelete(doc.id)}
+                                  className="text-red-600 focus:text-red-600 text-xs font-semibold"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5 mr-2" />
+                                  Delete Permanently
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
             </CardContent>

@@ -4,3 +4,20 @@ dist
 server/public
 vite.config.ts.*
 *.tar.gz
+
+# Environment files
+.env
+
+# Logs
+*.log
+backend.log
+frontend.log
+dev.log
+start.log
+
+# Screenshots (for testing)
+screenshot*.png
+
+# Temporary files
+pid.txt
+cookies.txt

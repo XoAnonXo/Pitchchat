@@ -193,7 +193,7 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
   const [showConfigModal, setShowConfigModal] = useState(false);
 
   // Fetch connected integrations for this project
-  const { data: connectedIntegrations = [] } = useQuery({
+  const { data: connectedIntegrations = [] } = useQuery<any[]>({
     queryKey: [`/api/projects/${projectId}/integrations`],
     enabled: !!projectId,
   });
@@ -221,8 +221,6 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
     }
   });
 
-
-
   const handleConnect = async (integrationId: string) => {
     const integration = integrations.find(i => i.id === integrationId);
     if (!integration) return;
@@ -237,7 +235,6 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
       toast({
         title: "Coming Soon",
         description: `${integration.name} integration will be available soon.`,
-        variant: "secondary"
       });
     }
   };
@@ -246,8 +243,6 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
   const integrationsWithStatus = integrations.map(integration => {
     const connected = connectedIntegrations.find((ci: any) => ci.platform === integration.id);
     const newStatus = connected && connected.status === 'connected' ? 'connected' : integration.status;
-    
-
     
     return {
       ...integration,
@@ -296,7 +291,7 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
                   <div>
                     <h3 className="font-semibold text-foreground">{integration.name}</h3>
                     <Badge 
-                      variant={integration.status === "connected" ? "default" : "secondary"}
+                      variant={integration.status === "connected" ? "default" : "outline"}
                       className="mt-1"
                     >
                       {integration.status === "connected" ? "Connected" : 
@@ -325,7 +320,7 @@ export default function IntegrationGrid({ projectId }: IntegrationGridProps) {
                   onClick={() => handleConnect(integration.id)}
                   disabled={integration.status !== "available"}
                   className="w-full"
-                  variant={integration.status === "available" ? "default" : "secondary"}
+                  variant={integration.status === "available" ? "default" : "outline"}
                 >
                   {integration.status === "available" ? "Connect" : "Coming Soon"}
                 </Button>

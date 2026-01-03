@@ -30,7 +30,7 @@ export default function DocumentsList({ projectId, hideDelete = false }: Documen
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const { data: documents = [], isLoading } = useQuery({
+  const { data: documents = [], isLoading } = useQuery<Document[]>({
     queryKey: [`/api/projects/${projectId}/documents`],
     enabled: !!projectId,
     refetchInterval: 5000, // Poll for status updates

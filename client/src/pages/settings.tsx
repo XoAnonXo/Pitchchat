@@ -51,17 +51,19 @@ import {
   AlertCircle,
   Check,
   Copy,
-  ExternalLink
+  ExternalLink,
+  ArrowLeft
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { Conversation } from "@shared/schema";
 
 interface UserSettings {
   id: string;
   email: string;
   name?: string;
-  profileImageUrl?: string;
-  credits: number;
+  profileImageUrl?: string | null;
+  tokens: number;
   notifications: {
     emailAlerts: boolean;
     weeklyReports: boolean;
@@ -73,7 +75,6 @@ interface UserSettings {
     googleConnected: boolean;
     xaiConnected: boolean;
   };
-
 }
 
 export default function SettingsPage() {
@@ -85,11 +86,9 @@ export default function SettingsPage() {
   const [confirmDelete, setConfirmDelete] = useState("");
   const [changePasswordOpen, setChangePasswordOpen] = useState(false);
   
-  // Notification states
   const [emailAlerts, setEmailAlerts] = useState(user?.emailAlerts ?? true);
   const [weeklyReports, setWeeklyReports] = useState(user?.weeklyReports ?? false);
   
-  // Update notification states when user data changes
   useEffect(() => {
     if (user) {
       setEmailAlerts(user.emailAlerts ?? true);
@@ -97,16 +96,13 @@ export default function SettingsPage() {
     }
   }, [user]);
 
-  // Fetch conversations to check for contact notifications
-  const { data: conversations = [] } = useQuery({
+  const { data: conversations = [] } = useQuery<Conversation[]>({
     queryKey: ["/api/conversations"],
     enabled: !!user,
   });
 
-  // Check if there are any conversations with contact details
-  const hasContactNotifications = conversations.some((conv: any) => conv.contactProvidedAt);
+  const hasContactNotifications = conversations.some((conv) => (conv as any).contactProvidedAt);
 
-  // Mock settings data - in production this would come from the API
   const settings: UserSettings = {
     id: user?.id || "",
     email: user?.email || "",
@@ -116,6 +112,7 @@ export default function SettingsPage() {
     notifications: {
       emailAlerts: emailAlerts,
       weeklyReports: weeklyReports,
+      productUpdates: false,
     },
     integrations: {
       openaiConnected: true,
@@ -146,7 +143,7 @@ export default function SettingsPage() {
       toast({
         title: "Notifications updated",
         description: "Your notification preferences have been saved.",
-        duration: 2000, // 2 seconds
+        duration: 2000,
       });
     },
   });
@@ -164,8 +161,6 @@ export default function SettingsPage() {
     mutationFn: async () => {
       const response = await apiRequest('GET', '/api/user/export');
       const data = await response.json();
-      
-      // Create and download JSON file
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -192,7 +187,6 @@ export default function SettingsPage() {
     },
   });
 
-  // Subscription mutations
   const subscriptionMutation = useMutation({
     mutationFn: async (priceType: 'monthly' | 'annual') => {
       const response = await apiRequest('POST', '/api/subscriptions/create-checkout', { priceType });
@@ -206,28 +200,6 @@ export default function SettingsPage() {
       toast({
         title: "Subscription failed",
         description: error.message || "Failed to create subscription. Please try again.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const tokenPurchaseMutation = useMutation({
-    mutationFn: async () => {
-      const response = await apiRequest('POST', '/api/tokens/purchase');
-      const data = await response.json();
-      return data;
-    },
-    onSuccess: (data) => {
-      // Would need to implement Stripe payment modal here
-      toast({
-        title: "Redirecting to payment",
-        description: "Please complete your purchase.",
-      });
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Purchase failed",
-        description: error.message || "Failed to initiate purchase. Please try again.",
         variant: "destructive",
       });
     },
@@ -290,14 +262,12 @@ export default function SettingsPage() {
   };
 
   const handleNotificationChange = (key: keyof typeof settings.notifications, value: boolean) => {
-    // Update local state immediately for responsive UI
     if (key === 'emailAlerts') {
       setEmailAlerts(value);
     } else if (key === 'weeklyReports') {
       setWeeklyReports(value);
     }
     
-    // Send update to backend
     updateNotificationsMutation.mutate({
       ...settings.notifications,
       [key]: value,
@@ -308,10 +278,6 @@ export default function SettingsPage() {
     if (confirmDelete === user?.email) {
       deleteAccountMutation.mutate();
     }
-  };
-
-  const handleExportData = () => {
-    exportDataMutation.mutate();
   };
 
   const handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
@@ -333,105 +299,80 @@ export default function SettingsPage() {
     changePasswordMutation.mutate({ currentPassword, newPassword });
   };
 
-  const handleSubscription = (priceType: 'monthly' | 'annual') => {
-    subscriptionMutation.mutate(priceType);
+  const handleExportData = () => {
+    exportDataMutation.mutate();
   };
-
-  const handleTokenPurchase = () => {
-    tokenPurchaseMutation.mutate();
-  };
-
-  const handleCancelSubscription = () => {
-    if (window.confirm('Are you sure you want to cancel your subscription? You will retain access until the end of your billing period.')) {
-      cancelMutation.mutate();
-    }
-  };
-
-
 
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex">
-      {/* Fixed Sidebar */}
       <aside className={`
-        fixed top-0 left-0 h-full w-72 bg-white border-r border-gray-200 z-50
+        fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-50
         transform transition-transform duration-300 ease-in-out
         ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
-        {/* Logo Section */}
-        <div className="h-20 px-6 flex items-center justify-between border-b border-gray-100">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-md">
-              <Sparkles className="w-6 h-6 text-white" />
+        <div className="h-20 px-6 flex items-center justify-between">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-base font-inter-tight">PC</span>
             </div>
-            <div>
-              <h1 className="font-bold text-lg text-gray-900">PitchChat</h1>
-              <p className="text-xs text-gray-500">AI Document Assistant</p>
-            </div>
+            <span className="font-bold text-lg text-black font-inter-tight tracking-tight">PitchChat</span>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden h-8 w-8"
             onClick={() => setMobileSidebarOpen(false)}
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </Button>
         </div>
 
-        {/* Navigation */}
-        <nav className="px-4 py-6 space-y-1">
-          <Link href="/" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <Home className="w-5 h-5" />
-            <span className="font-medium">Dashboard</span>
+        <nav className="px-3 py-2 space-y-0.5">
+          <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <Home className="w-4 h-4" />
+            <span className="font-medium text-sm">Dashboard</span>
           </Link>
-          
-          <Link href="/" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <FolderOpen className="w-5 h-5" />
-            <span className="font-medium">Documents</span>
+          <Link href="/documents" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <FolderOpen className="w-4 h-4" />
+            <span className="font-medium text-sm">Documents</span>
           </Link>
-          
-          <Link href="/conversations" className="flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/conversations" className="flex items-center justify-between px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
             <div className="flex items-center space-x-3">
-              <MessageSquare className="w-5 h-5" />
-              <span className="font-medium">Conversations</span>
+              <MessageSquare className="w-4 h-4" />
+              <span className="font-medium text-sm">Conversations</span>
             </div>
             {hasContactNotifications && (
-              <div className="flex items-center">
-                <Bell className="w-4 h-4 text-black fill-black" />
-              </div>
+              <Badge className="h-2 w-2 p-0 rounded-full bg-blue-600 border-none" />
             )}
           </Link>
-          
-          <Link href="/analytics" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <BarChart3 className="w-5 h-5" />
-            <span className="font-medium">Analytics</span>
+          <Link href="/analytics" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <BarChart3 className="w-4 h-4" />
+            <span className="font-medium text-sm">Analytics</span>
           </Link>
-          
-          <Link href="/settings" className="flex items-center space-x-3 px-4 py-3 bg-gray-100 text-black rounded-xl transition-all duration-200">
-            <Settings className="w-5 h-5" />
-            <span className="font-medium">Settings</span>
+          <Link href="/settings" className="flex items-center space-x-3 px-3 py-2 bg-gray-50 text-black rounded-lg transition-all duration-200">
+            <Settings className="w-4 h-4" />
+            <span className="font-semibold text-sm">Settings</span>
           </Link>
         </nav>
 
-        {/* User Profile Section */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100 bg-white">
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 overflow-hidden">
               {user?.profileImageUrl ? (
                 <img 
                   src={user.profileImageUrl} 
                   alt="Profile" 
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-8 h-8 rounded-full object-cover border border-gray-100"
                 />
               ) : (
-                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                  <Users className="w-5 h-5 text-gray-500" />
+                <div className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100">
+                  <Users className="w-4 h-4 text-gray-400" />
                 </div>
               )}
-              <div>
-                <p className="text-sm font-medium text-gray-900">{user?.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">
-                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free tier'}
+              <div className="overflow-hidden">
+                <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
+                <p className="text-[10px] text-green-600 font-medium uppercase tracking-wider">
+                  {user?.tokens || 0} tokens
                 </p>
               </div>
             </div>
@@ -439,101 +380,96 @@ export default function SettingsPage() {
               variant="ghost" 
               size="icon"
               onClick={() => window.location.href = "/api/auth/logout"}
-              className="text-gray-400 hover:text-gray-600"
+              className="h-8 w-8 text-gray-400 hover:text-black"
             >
-              <LogOut className="h-5 w-5" />
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>
       </aside>
 
-      {/* Mobile Overlay */}
-      {mobileSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
-          onClick={() => setMobileSidebarOpen(false)}
-        />
-      )}
-
-      {/* Main Content Area */}
-      <div className="flex-1 lg:ml-72">
-        {/* Top Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-          <div className="px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="flex-1 lg:ml-64 flex flex-col">
+        <header className="bg-white border-b border-gray-100 sticky top-0 z-30 h-20 flex items-center shrink-0">
+          <div className="px-6 lg:px-8 w-full flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden"
+                className="lg:hidden h-9 w-9"
                 onClick={() => setMobileSidebarOpen(true)}
               >
                 <Menu className="h-5 w-5" />
               </Button>
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">Settings</h2>
-                <p className="text-sm text-gray-500">Manage your account and preferences</p>
+                <h2 className="text-xl font-bold text-black font-inter-tight tracking-tight leading-none">Settings</h2>
+                <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1.5">
+                  Account and preferences
+                </p>
               </div>
             </div>
           </div>
         </header>
 
         <div className="p-6 lg:p-8 max-w-4xl space-y-8">
-          {/* Profile Settings */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-            <CardHeader className="border-b border-gray-100">
-              <div className="flex items-center space-x-2">
-                <User className="w-5 h-5 text-gray-600" />
-                <CardTitle className="text-xl font-bold text-gray-900">Profile</CardTitle>
+          <Card className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
+            <CardHeader className="border-b border-gray-50 px-8 py-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                  <User className="w-5 h-5 text-black" />
+                </div>
+                <div>
+                  <CardTitle className="text-lg font-bold text-black font-inter-tight">Profile</CardTitle>
+                  <CardDescription className="text-xs uppercase font-bold tracking-wider">Personal Information</CardDescription>
+                </div>
               </div>
-              <CardDescription>Update your personal information</CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
-              <form onSubmit={handleProfileUpdate} className="space-y-6">
+            <CardContent className="p-8">
+              <form onSubmit={handleProfileUpdate} className="space-y-8">
                 <div className="flex items-center space-x-6">
-                  <div className="relative">
+                  <div className="relative group">
                     {settings.profileImageUrl ? (
                       <img 
                         src={settings.profileImageUrl} 
                         alt="Profile" 
-                        className="w-24 h-24 rounded-full object-cover"
+                        className="w-20 h-20 rounded-2xl object-cover border border-gray-100 shadow-sm group-hover:scale-105 transition-transform"
                       />
                     ) : (
-                      <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center">
-                        <User className="w-12 h-12 text-gray-500" />
+                      <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:scale-105 transition-transform">
+                        <User className="w-8 h-8 text-gray-300" />
                       </div>
                     )}
                     <Button
                       type="button"
                       size="sm"
-                      className="absolute bottom-0 right-0 rounded-full bg-black hover:bg-gray-800"
+                      className="absolute -bottom-2 -right-2 rounded-xl bg-black hover:bg-gray-800 h-8 w-8 p-0 border-2 border-white shadow-lg"
                     >
-                      <Upload className="w-4 h-4" />
+                      <Upload className="w-3.5 h-3.5" />
                     </Button>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900">{settings.name}</h3>
-                    <p className="text-sm text-gray-500">{settings.email}</p>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-xl font-bold text-black font-inter-tight truncate">{settings.name}</h3>
+                    <p className="text-sm text-gray-400 font-medium truncate">{settings.email}</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name</Label>
+                    <Label htmlFor="name" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Full Name</Label>
                     <Input
                       id="name"
                       name="name"
                       defaultValue={settings.name}
-                      className="bg-gray-50 border-gray-200 focus:border-black"
+                      className="h-11 rounded-xl border-gray-200 bg-gray-50/50 focus:border-black focus:ring-0 transition-all font-medium text-sm"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Email Address</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       defaultValue={settings.email}
-                      className="bg-gray-50 border-gray-200 focus:border-black"
+                      className="h-11 rounded-xl border-gray-200 bg-gray-50/50 focus:border-black focus:ring-0 transition-all font-medium text-sm"
                     />
                   </div>
                 </div>
@@ -541,32 +477,33 @@ export default function SettingsPage() {
                 <div className="flex justify-end">
                   <Button 
                     type="submit"
-                    className="bg-black hover:bg-gray-800 text-white rounded-xl"
+                    className="bg-black hover:bg-gray-800 text-white rounded-xl px-8 h-11 font-bold text-sm shadow-lg shadow-black/10"
                     disabled={updateProfileMutation.isPending}
                   >
-                    Save Changes
+                    Update Profile
                   </Button>
                 </div>
               </form>
             </CardContent>
           </Card>
 
-
-
-          {/* Notifications */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-            <CardHeader className="border-b border-gray-100">
-              <div className="flex items-center space-x-2">
-                <Bell className="w-5 h-5 text-gray-600" />
-                <CardTitle className="text-xl font-bold text-gray-900">Notifications</CardTitle>
+          <Card className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
+            <CardHeader className="border-b border-gray-50 px-8 py-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                  <Bell className="w-5 h-5 text-black" />
+                </div>
+                <div>
+                  <CardTitle className="text-lg font-bold text-black font-inter-tight">Notifications</CardTitle>
+                  <CardDescription className="text-xs uppercase font-bold tracking-wider">Alert Preferences</CardDescription>
+                </div>
               </div>
-              <CardDescription>Configure how you receive updates</CardDescription>
             </CardHeader>
-            <CardContent className="p-6 space-y-6">
-              <div className="flex items-center justify-between">
+            <CardContent className="p-8 space-y-6">
+              <div className="flex items-center justify-between group">
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-900">Email Alerts</p>
-                  <p className="text-sm text-gray-500">Get notified when investors engage with your pitch</p>
+                  <p className="font-bold text-black text-sm group-hover:text-blue-600 transition-colors">Email Alerts</p>
+                  <p className="text-xs text-gray-400 font-medium">Get notified when investors engage with your pitch links.</p>
                 </div>
                 <Switch
                   checked={settings.notifications.emailAlerts}
@@ -574,12 +511,12 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <Separator />
+              <Separator className="opacity-50" />
 
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between group">
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-900">Weekly Reports</p>
-                  <p className="text-sm text-gray-500">Receive weekly analytics and performance summaries</p>
+                  <p className="font-bold text-black text-sm group-hover:text-blue-600 transition-colors">Weekly Reports</p>
+                  <p className="text-xs text-gray-400 font-medium">Receive weekly analytics and link performance summaries.</p>
                 </div>
                 <Switch
                   checked={settings.notifications.weeklyReports}
@@ -587,360 +524,134 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <Separator />
+              <Separator className="opacity-50" />
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
-                  <p className="font-medium text-gray-900">Test Email Notifications</p>
-                  <p className="text-sm text-gray-500">Send all email types to test they are working correctly</p>
+                  <p className="font-bold text-black text-sm">System Connectivity</p>
+                  <p className="text-xs text-gray-400 font-medium">Test if email services are properly configured.</p>
                 </div>
                 <div className="flex gap-2">
                   <Button
+                    size="sm"
                     onClick={async () => {
                       try {
                         const res = await apiRequest("POST", "/api/email/test-simple");
                         const data = await res.json();
                         if (data.success) {
-                          toast({
-                            title: "Simple test email sent!",
-                            description: `Check your inbox at ${data.sentTo}`,
-                          });
-                        } else {
-                          toast({
-                            title: "Email send failed",
-                            description: "Check console logs for details",
-                            variant: "destructive",
-                          });
+                          toast({ title: "Sent!", description: `Check ${data.sentTo}` });
                         }
-                      } catch (error) {
-                        toast({
-                          title: "Failed to send test email",
-                          description: error.message,
-                          variant: "destructive",
-                        });
+                      } catch (error: any) {
+                        toast({ title: "Failed", description: error.message, variant: "destructive" });
                       }
                     }}
                     variant="outline"
-                    className="border-gray-300 text-gray-700 hover:bg-gray-100"
+                    className="border-gray-200 text-gray-600 text-[10px] font-bold uppercase tracking-wider h-9"
                   >
-                    Test Simple
-                  </Button>
-                  <Button
-                    onClick={async () => {
-                      try {
-                        const res = await apiRequest("POST", "/api/email/test-all");
-                        const data = await res.json();
-                        toast({
-                          title: "Test emails sent!",
-                          description: `Sent ${data.totalSent} emails to ${data.sentTo}`,
-                        });
-                      } catch (error) {
-                        toast({
-                          title: "Failed to send test emails",
-                          description: error.message,
-                          variant: "destructive",
-                        });
-                      }
-                    }}
-                    variant="outline"
-                    className="border-black text-black hover:bg-gray-100"
-                  >
-                    Send All Test Emails
+                    Test Mailer
                   </Button>
                 </div>
               </div>
-
             </CardContent>
           </Card>
 
-          {/* Billing */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-            <CardHeader className="border-b border-gray-100">
-              <div className="flex items-center space-x-2">
-                <CreditCard className="w-5 h-5 text-gray-600" />
-                <CardTitle className="text-xl font-bold text-gray-900">Billing & Subscription</CardTitle>
+          <Card className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
+            <CardHeader className="border-b border-gray-50 px-8 py-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                  <Shield className="w-5 h-5 text-black" />
+                </div>
+                <div>
+                  <CardTitle className="text-lg font-bold text-black font-inter-tight">Security & Export</CardTitle>
+                  <CardDescription className="text-xs uppercase font-bold tracking-wider">Account Control</CardDescription>
+                </div>
               </div>
-              <CardDescription>Manage your subscription and link generation</CardDescription>
             </CardHeader>
-            <CardContent className="p-6">
-              <div className="space-y-6">
-                <div className="flex items-center justify-between p-6 bg-gradient-to-r from-gray-900 to-gray-700 text-white rounded-xl">
-                  <div>
-                    <p className="text-sm font-medium text-gray-300">Link Generation</p>
-                    <p className="text-3xl font-bold mt-1">
-                      {user?.subscriptionStatus === 'active' ? 'Unlimited' : '1 Link'}
-                    </p>
-                    <p className="text-xs mt-1 text-gray-400">
-                      {user?.subscriptionStatus === 'active' ? 'Premium access' : 'Free tier'}
-                    </p>
-                  </div>
-                  {user?.subscriptionStatus !== 'active' && (
-                    <Button 
-                      className="bg-white text-black hover:bg-gray-100"
-                      onClick={() => subscriptionMutation.mutate('monthly')}
-                    >
-                      Upgrade Now
+            <CardContent className="p-8 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Button 
+                  variant="outline" 
+                  className="h-12 justify-start rounded-xl border-gray-200 font-bold text-sm text-gray-700"
+                  onClick={handleExportData}
+                  disabled={exportDataMutation.isPending}
+                >
+                  <Download className="w-4 h-4 mr-3 text-gray-400" />
+                  Export Account Data
+                </Button>
+
+                <Dialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen}>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="h-12 justify-start rounded-xl border-gray-200 font-bold text-sm text-gray-700">
+                      <Lock className="w-4 h-4 mr-3 text-gray-400" />
+                      Rotate Password
                     </Button>
-                  )}
-                </div>
-
-                {/* Subscription Status */}
-                <div className="space-y-4">
-                  {user?.subscriptionStatus === 'active' ? (
-                    <>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600">Current Plan</span>
-                        <Badge variant="secondary" className="bg-black text-white">
-                          {user?.subscriptionIsAnnual ? 'Annual' : 'Monthly'} Subscription
-                        </Badge>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600">Next Renewal</span>
-                        <span className="text-sm font-medium">
-                          {user?.subscriptionCurrentPeriodEnd 
-                            ? new Date(user.subscriptionCurrentPeriodEnd).toLocaleDateString()
-                            : 'N/A'}
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-gray-600">Link Generation</span>
-                        <span className="text-sm font-medium">
-                          Unlimited Links
-                        </span>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="text-center py-4">
-                      <p className="text-gray-600 mb-2">No active subscription</p>
-                      <p className="text-sm text-gray-500">Subscribe to create unlimited pitch links</p>
-                    </div>
-                  )}
-                </div>
-
-                <Separator />
-
-                {/* Subscription Options */}
-                {user?.subscriptionStatus !== 'active' && (
-                  <>
-                    <div className="space-y-4">
-                      <h4 className="font-medium text-gray-900">Choose a Subscription Plan</h4>
-                      
-                      {/* Monthly Plan */}
-                      <div className="border border-gray-200 rounded-xl p-4 hover:border-black transition-colors cursor-pointer">
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <h5 className="font-medium text-gray-900">Monthly Plan</h5>
-                            <p className="text-sm text-gray-600 mt-1">Unlimited pitch links</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-2xl font-bold">$29</p>
-                            <p className="text-xs text-gray-500">per month</p>
-                          </div>
+                  </DialogTrigger>
+                  <DialogContent className="rounded-3xl border-none shadow-2xl p-0 overflow-hidden">
+                    <form onSubmit={handleChangePassword}>
+                      <DialogHeader className="bg-black text-white p-8">
+                        <DialogTitle className="text-xl font-bold font-inter-tight">Rotate Password</DialogTitle>
+                        <DialogDescription className="text-white/60 font-medium">Update your credentials to maintain security.</DialogDescription>
+                      </DialogHeader>
+                      <div className="p-8 space-y-5">
+                        <div className="space-y-1.5">
+                          <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Current Password</Label>
+                          <Input name="currentPassword" type="password" required className="rounded-xl h-11 border-gray-200 bg-gray-50/50" />
                         </div>
-                        <Button 
-                          className="w-full mt-3 bg-black hover:bg-gray-800 text-white"
-                          onClick={() => handleSubscription('monthly')}
-                          disabled={subscriptionMutation.isPending}
-                        >
-                          {subscriptionMutation.isPending ? 'Processing...' : 'Subscribe Monthly'}
+                        <div className="space-y-1.5">
+                          <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">New Password</Label>
+                          <Input name="newPassword" type="password" required minLength={8} className="rounded-xl h-11 border-gray-200 bg-gray-50/50" />
+                        </div>
+                        <div className="space-y-1.5">
+                          <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Confirm New</Label>
+                          <Input name="confirmPassword" type="password" required minLength={8} className="rounded-xl h-11 border-gray-200 bg-gray-50/50" />
+                        </div>
+                      </div>
+                      <DialogFooter className="p-8 pt-0">
+                        <Button type="submit" className="bg-black text-white rounded-xl px-8 h-11 font-bold w-full" disabled={changePasswordMutation.isPending}>
+                          Update Password
                         </Button>
-                      </div>
-
-                      {/* Annual Plan */}
-                      <div className="border border-gray-200 rounded-xl p-4 hover:border-black transition-colors cursor-pointer relative">
-                        <div className="absolute -top-3 right-4">
-                          <Badge className="bg-green-100 text-green-800 border-green-200">Save 20%</Badge>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <div className="flex-1">
-                            <h5 className="font-medium text-gray-900">Annual Plan</h5>
-                            <p className="text-sm text-gray-600 mt-1">Unlimited pitch links</p>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-2xl font-bold">$278</p>
-                            <p className="text-xs text-gray-500">per year ($23.20/mo)</p>
-                          </div>
-                        </div>
-                        <Button 
-                          className="w-full mt-3 bg-black hover:bg-gray-800 text-white"
-                          onClick={() => handleSubscription('annual')}
-                          disabled={subscriptionMutation.isPending}
-                        >
-                          {subscriptionMutation.isPending ? 'Processing...' : 'Subscribe Annually'}
-                        </Button>
-                      </div>
-                    </div>
-
-                    <Separator />
-                  </>
-                )}
-
-
-
-                {/* Manage Subscription */}
-                {user?.subscriptionStatus === 'active' && (
-                  <>
-                    <Separator />
-                    <div className="flex justify-between">
-                      <Button 
-                        variant="outline" 
-                        className="rounded-xl"
-                        onClick={() => window.open('https://billing.stripe.com/p/login/test', '_blank')}
-                      >
-                        Manage Billing
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        className="rounded-xl text-red-600 hover:text-red-700"
-                        onClick={() => handleCancelSubscription()}
-                        disabled={cancelMutation.isPending}
-                      >
-                        {cancelMutation.isPending ? 'Canceling...' : 'Cancel Subscription'}
-                      </Button>
-                    </div>
-                  </>
-                )}
+                      </DialogFooter>
+                    </form>
+                  </DialogContent>
+                </Dialog>
               </div>
-            </CardContent>
-          </Card>
 
-          {/* Data & Privacy */}
-          <Card className="bg-white rounded-2xl border-gray-200 shadow-sm">
-            <CardHeader className="border-b border-gray-100">
-              <div className="flex items-center space-x-2">
-                <Shield className="w-5 h-5 text-gray-600" />
-                <CardTitle className="text-xl font-bold text-gray-900">Data & Privacy</CardTitle>
-              </div>
-              <CardDescription>Manage your data and account security</CardDescription>
-            </CardHeader>
-            <CardContent className="p-6 space-y-4">
-              <Button 
-                variant="outline" 
-                className="w-full justify-start rounded-xl"
-                onClick={handleExportData}
-                disabled={exportDataMutation.isPending}
-              >
-                <Download className="w-4 h-4 mr-2" />
-                {exportDataMutation.isPending ? 'Exporting...' : 'Export All Data'}
-              </Button>
-
-              <Dialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen}>
-                <DialogTrigger asChild>
-                  <Button variant="outline" className="w-full justify-start rounded-xl">
-                    <Lock className="w-4 h-4 mr-2" />
-                    Change Password
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[425px]">
-                  <form onSubmit={handleChangePassword}>
-                    <DialogHeader>
-                      <DialogTitle>Change Password</DialogTitle>
-                      <DialogDescription>
-                        Enter your new password below. Make sure it's at least 8 characters long.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="space-y-4 py-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="current-password">Current Password</Label>
-                        <Input
-                          id="current-password"
-                          name="currentPassword"
-                          type="password"
-                          required
-                          className="bg-gray-50 border-gray-200 focus:border-black"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="new-password">New Password</Label>
-                        <Input
-                          id="new-password"
-                          name="newPassword"
-                          type="password"
-                          required
-                          minLength={8}
-                          className="bg-gray-50 border-gray-200 focus:border-black"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="confirm-password">Confirm New Password</Label>
-                        <Input
-                          id="confirm-password"
-                          name="confirmPassword"
-                          type="password"
-                          required
-                          minLength={8}
-                          className="bg-gray-50 border-gray-200 focus:border-black"
-                        />
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        onClick={() => setChangePasswordOpen(false)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        className="bg-black hover:bg-gray-800 text-white"
-                        disabled={changePasswordMutation.isPending}
-                      >
-                        {changePasswordMutation.isPending ? 'Changing...' : 'Change Password'}
-                      </Button>
-                    </DialogFooter>
-                  </form>
-                </DialogContent>
-              </Dialog>
-
-              <Separator className="my-6" />
-
-              <div className="space-y-4">
-                <div className="flex items-start space-x-2">
-                  <AlertCircle className="w-5 h-5 text-red-500 mt-0.5" />
-                  <div className="space-y-2 flex-1">
-                    <p className="font-medium text-gray-900">Delete Account</p>
-                    <p className="text-sm text-gray-500">
-                      Permanently delete your account and all associated data. This action cannot be undone.
-                    </p>
+              <div className="pt-6 border-t border-gray-50">
+                <div className="p-6 rounded-2xl bg-red-50 border border-red-100 flex items-start gap-4">
+                  <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+                  <div className="flex-1">
+                    <p className="font-bold text-red-900 text-sm">Danger Zone</p>
+                    <p className="text-xs text-red-700 mt-1 mb-4 font-medium leading-relaxed">Permanently delete your account and all associated pitch rooms, documents, and analytics. This action is irreversible.</p>
                     <Dialog open={deleteAccountOpen} onOpenChange={setDeleteAccountOpen}>
                       <DialogTrigger asChild>
-                        <Button variant="destructive" className="rounded-xl">
-                          <Trash2 className="w-4 h-4 mr-2" />
+                        <Button variant="outline" className="h-9 px-4 rounded-lg border-red-200 text-red-600 bg-white hover:bg-red-600 hover:text-white font-bold text-[10px] uppercase tracking-widest transition-all">
                           Delete Account
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle>Delete Account</DialogTitle>
-                          <DialogDescription>
-                            This will permanently delete your account and all associated data. This action cannot be undone.
-                          </DialogDescription>
+                      <DialogContent className="rounded-3xl border-none shadow-2xl p-0 overflow-hidden max-w-sm">
+                        <DialogHeader className="bg-red-600 text-white p-8">
+                          <DialogTitle className="text-xl font-bold font-inter-tight">Are you sure?</DialogTitle>
+                          <DialogDescription className="text-white/80 font-medium">This will destroy everything. No recovery possible.</DialogDescription>
                         </DialogHeader>
-                        <div className="space-y-4 py-4">
-                          <p className="text-sm text-gray-600">
-                            Type <span className="font-mono font-semibold">{user?.email}</span> to confirm:
+                        <div className="p-8 space-y-4">
+                          <p className="text-xs text-gray-500 font-medium leading-relaxed">
+                            To confirm, please type <span className="font-bold text-black select-all">{user?.email}</span> below:
                           </p>
                           <Input
                             value={confirmDelete}
                             onChange={(e) => setConfirmDelete(e.target.value)}
-                            placeholder="Enter your email"
-                            className="font-mono"
+                            placeholder="Type your email"
+                            className="h-11 rounded-xl border-gray-200 bg-gray-50/50"
                           />
                         </div>
-                        <DialogFooter>
-                          <Button
-                            variant="outline"
-                            onClick={() => setDeleteAccountOpen(false)}
-                          >
-                            Cancel
-                          </Button>
-                          <Button
-                            variant="destructive"
+                        <DialogFooter className="p-8 pt-0">
+                          <Button 
+                            variant="destructive" 
+                            className="w-full h-11 rounded-xl font-bold"
                             onClick={handleDeleteAccount}
                             disabled={confirmDelete !== user?.email || deleteAccountMutation.isPending}
                           >
-                            Delete Account
+                            Destroy Account
                           </Button>
                         </DialogFooter>
                       </DialogContent>

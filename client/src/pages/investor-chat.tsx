@@ -5,13 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download, Phone } from "lucide-react";
 import DocumentDownloadDialog from "@/components/DocumentDownloadDialog";
 import ContactTeamDialog from "@/components/ContactTeamDialog";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { format } from "date-fns";
 
 interface Message {
   id: string;
@@ -26,6 +26,15 @@ interface Message {
   timestamp: string;
 }
 
+interface ChatLinkInfo {
+  id: string;
+  name: string;
+  projectName: string;
+  description?: string;
+  documentCount: number;
+  allowDownloads: boolean;
+}
+
 export default function InvestorChat() {
   usePageTitle('Investor Chat');
   const [location] = useLocation();
@@ -38,24 +47,20 @@ export default function InvestorChat() {
   const [showContactDialog, setShowContactDialog] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Extract slug from URL
   const slug = location.split("/").pop();
 
-  // Fetch chat link info
-  const { data: linkInfo, isLoading: linkLoading, error: linkError } = useQuery({
+  const { data: linkInfo, isLoading: linkLoading, error: linkError } = useQuery<ChatLinkInfo>({
     queryKey: [`/api/chat/${slug}`],
     enabled: !!slug,
     retry: false,
   });
 
-  // Fetch messages if we have a conversation
-  const { data: messages = [], refetch: refetchMessages } = useQuery({
+  const { data: messages = [], refetch: refetchMessages } = useQuery<Message[]>({
     queryKey: [`/api/chat/${slug}/messages/${conversationId}`],
     enabled: !!conversationId,
-    refetchInterval: 5000, // Poll for new messages
+    refetchInterval: 5000,
   });
 
-  // Send message mutation
   const sendMessageMutation = useMutation({
     mutationFn: async (messageData: { message: string; conversationId?: string; investorEmail?: string }) => {
       const res = await apiRequest("POST", `/api/chat/${slug}/messages`, messageData);
@@ -66,7 +71,7 @@ export default function InvestorChat() {
       setMessage("");
       refetchMessages();
     },
-    onError: (error) => {
+    onError: () => {
       toast({
         title: "Error",
         description: "Failed to send message",
@@ -75,7 +80,6 @@ export default function InvestorChat() {
     },
   });
 
-  // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -101,23 +105,12 @@ export default function InvestorChat() {
 
   const handleEmailSubmit = () => {
     const email = investorEmail.trim();
-    
-    // Email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
-    if (!email) {
-      toast({
-        title: "Email Required",
-        description: "Please enter your email address",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    if (!emailRegex.test(email)) {
+    if (!email || !emailRegex.test(email)) {
       toast({
         title: "Invalid Email",
-        description: "Please enter a valid email address (e.g., name@example.com)",
+        description: "Please enter a valid email address",
         variant: "destructive",
       });
       return;
@@ -162,236 +155,187 @@ export default function InvestorChat() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA]">
-      {/* Header */}
-      <header className="bg-white border-b border-[#E0E3EB]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="min-h-screen bg-[#FAFAFA] font-sans selection:bg-black selection:text-white">
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-30">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center shadow-md">
-              <Sparkles className="w-7 h-7 text-white" />
+            <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center shadow-lg shadow-black/5">
+              <Sparkles className="w-6 h-6 text-white" />
             </div>
-            <div className="flex-1">
-              <h1 className="text-2xl font-bold text-[#1A1A26]">{linkInfo.projectName}</h1>
-              <p className="text-[#72788F] mt-1">{linkInfo.name}</p>
+            <div className="flex-1 text-left">
+              <h1 className="text-xl font-bold text-black font-inter-tight tracking-tight leading-none">{linkInfo.projectName}</h1>
+              <p className="text-[11px] text-gray-400 font-bold uppercase tracking-wider mt-1.5">{linkInfo.name}</p>
             </div>
-
           </div>
-          {linkInfo.description && (
-            <p className="text-[#72788F] mt-6 text-base leading-relaxed">{linkInfo.description}</p>
-          )}
+          
+          <div className="flex items-center gap-3">
+            {emailSubmitted && linkInfo.allowDownloads && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setShowDownloadDialog(true)}
+                className="hidden sm:flex border-gray-200 text-gray-600 hover:text-black hover:bg-gray-50 rounded-lg h-9 text-xs font-semibold"
+              >
+                <Download className="w-3.5 h-3.5 mr-1.5" />
+                Documents
+              </Button>
+            )}
+          </div>
         </div>
       </header>
 
-      {/* Main Chat Interface */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <Card className="min-h-[700px] flex flex-col shadow-soft bg-white">
-          {/* Email Collection */}
+        <div className="flex flex-col min-h-[calc(100vh-12rem)] space-y-8">
           {!emailSubmitted && (
-            <div className="p-8 border-b border-[#E0E3EB] bg-[#F8FAFB]">
-              <div className="max-w-md mx-auto text-center">
-                <MessageSquare className="w-12 h-12 text-black mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-[#1A1A26] mb-2">Welcome to the Pitch Room</h3>
-                <p className="text-[#72788F] mb-6">
-                  Please provide your email to start exploring this startup's vision. Your information helps founders understand investor interest.
-                </p>
-                <div className="flex space-x-3">
+            <Card className="rounded-[2rem] border-none shadow-soft overflow-hidden bg-white">
+              <CardContent className="p-12 text-center">
+                <div className="max-w-md mx-auto">
+                  <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-100">
+                    <MessageSquare className="w-8 h-8 text-black" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-black font-inter-tight mb-2">Welcome to the Pitch Room</h3>
+                  <p className="text-gray-500 mb-8 leading-relaxed">
+                    Please provide your email to start exploring this startup's vision. Your information helps founders understand investor interest.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Input
+                      type="email"
+                      placeholder="your@email.com"
+                      value={investorEmail}
+                      onChange={(e) => setInvestorEmail(e.target.value)}
+                      onKeyPress={handleKeyPress}
+                      className="flex-1 h-12 rounded-xl border-gray-200 focus:border-black focus:ring-0 transition-all text-sm"
+                    />
+                    <Button 
+                      onClick={handleEmailSubmit}
+                      className="h-12 px-8 bg-black text-white hover:bg-gray-800 rounded-xl font-bold text-sm shadow-lg shadow-black/10 transition-all"
+                    >
+                      Enter Room
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {emailSubmitted && (
+            <Card className="flex-1 flex flex-col rounded-[2.5rem] border border-gray-100 shadow-soft bg-white overflow-hidden">
+              <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-8 bg-gray-50/30">
+                {messages.length === 0 && (
+                  <div className="py-20 text-center">
+                    <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-gray-100">
+                      <Sparkles className="w-8 h-8 text-black" />
+                    </div>
+                    <h3 className="text-xl font-bold text-black font-inter-tight mb-2">AI Pitch Assistant</h3>
+                    <p className="text-gray-500 max-w-sm mx-auto leading-relaxed">
+                      I have full context on this startup's vision, financials, and team. What would you like to explore first?
+                    </p>
+                  </div>
+                )}
+
+                {messages.map((msg) => (
+                  <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end pl-12" : "justify-start pr-12"}`}>
+                    <div className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} max-w-full`}>
+                      <div className={`rounded-[1.5rem] px-5 py-4 shadow-subtle ${
+                        msg.role === "user" 
+                          ? "bg-black text-white rounded-tr-none" 
+                          : "bg-white border border-gray-100 text-black rounded-tl-none"
+                      }`}>
+                        <p className="text-sm font-medium leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+                        
+                        {msg.citations && msg.citations.length > 0 && (
+                          <div className={`mt-4 pt-4 border-t ${msg.role === "user" ? "border-white/10" : "border-gray-50"}`}>
+                            <p className={`text-[10px] font-bold uppercase tracking-widest mb-2 ${msg.role === "user" ? "text-white/40" : "text-gray-400"}`}>Sources</p>
+                            <div className="flex flex-wrap gap-2">
+                              {msg.citations.map((cite, i) => (
+                                <div key={i} className={`text-[9px] font-bold px-2 py-0.5 rounded-full uppercase ${msg.role === "user" ? "bg-white/10 text-white/60" : "bg-gray-100 text-gray-500"}`}>
+                                  {cite.source} {cite.page && `• p. ${cite.page}`}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex items-center space-x-3 mt-3 px-2">
+                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                          {msg.timestamp ? format(new Date(msg.timestamp), 'h:mm a') : ''}
+                        </p>
+                        {msg.role === "assistant" && (
+                          <Badge variant="outline" className="text-[9px] font-bold uppercase h-4 px-1.5 opacity-50 border-gray-200">
+                            {msg.tokenCount} tokens
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+
+              <div className="p-6 sm:p-8 bg-white border-t border-gray-100">
+                <div className="relative flex items-center">
                   <Input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={investorEmail}
-                    onChange={(e) => setInvestorEmail(e.target.value)}
+                    placeholder="Ask about revenue, competition, roadmap..."
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="flex-1 border-[#E0E3EB] focus:border-black"
+                    className="flex-1 h-14 pl-6 pr-16 rounded-2xl border-gray-100 bg-gray-50/50 focus:border-black focus:ring-0 transition-all text-sm font-medium placeholder:text-gray-400"
+                    disabled={sendMessageMutation.isPending}
                   />
                   <Button 
-                    onClick={handleEmailSubmit}
-                    className="bg-black text-white hover:bg-gray-800"
+                    onClick={handleSendMessage}
+                    disabled={!message.trim() || sendMessageMutation.isPending}
+                    className="absolute right-2 w-10 h-10 bg-black text-white hover:bg-gray-800 rounded-xl flex items-center justify-center p-0 transition-transform hover:scale-105 active:scale-95 shadow-lg"
                   >
-                    <ArrowRight className="w-4 h-4 mr-2" />
-                    Start Chat
+                    {sendMessageMutation.isPending ? (
+                      <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
+                    ) : (
+                      <ArrowRight className="w-5 h-5" />
+                    )}
                   </Button>
                 </div>
-              </div>
-            </div>
-          )}
-
-          {/* Chat Header */}
-          {emailSubmitted && (
-            <div className="p-6 border-b border-[#E0E3EB]">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h3 className="text-lg font-bold text-[#1A1A26]">AI Pitch Assistant</h3>
-                  <p className="text-[#72788F] text-sm mt-1">
-                    Ask about the business model, market opportunity, team, financials, or any aspect of this startup
+                <div className="flex items-center justify-between mt-4 px-2">
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest flex items-center">
+                    <Clock className="w-3 h-3 mr-1.5" />
+                    Instant Response Mode
+                  </p>
+                  <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">
+                    Press Enter to send
                   </p>
                 </div>
-                <div className="flex items-center space-x-4">
-                  <div className="flex items-center space-x-2">
-                    <FileText className="w-4 h-4 text-[#72788F]" />
-                    <span className="text-sm text-[#72788F]">{linkInfo.documentCount || 0} documents</span>
-                  </div>
-                  {linkInfo.allowDownloads && (
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setShowDownloadDialog(true)}
-                      className="border-[#E0E3EB] hover:bg-gray-50"
-                    >
-                      <Download className="w-4 h-4 mr-2" />
-                      Download Documents
-                    </Button>
-                  )}
-                </div>
               </div>
-            </div>
+            </Card>
           )}
 
-          {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-[#FAFAFA]">
-            {messages.length === 0 && emailSubmitted && (
-              <div className="text-center py-12">
-                <div className="w-16 h-16 bg-[#F8FAFB] rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <Sparkles className="w-8 h-8 text-black" />
-                </div>
-                <h3 className="text-xl font-bold text-[#1A1A26] mb-3">Ready to Explore</h3>
-                <p className="text-[#72788F] max-w-md mx-auto">
-                  I have full context on this startup's vision, strategy, and metrics. What would you like to know?
-                </p>
-              </div>
-            )}
-
-            {messages.map((msg: Message) => (
-              <div key={msg.id} className={`flex space-x-3 ${msg.role === "user" ? "justify-end" : ""}`}>
-                {msg.role === "assistant" && (
-                  <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center flex-shrink-0 shadow-md">
-                    <Sparkles className="w-5 h-5 text-white" />
-                  </div>
-                )}
-                
-                <div className={`flex-1 ${msg.role === "user" ? "max-w-lg" : "max-w-2xl"}`}>
-                  <div className={`rounded-2xl px-5 py-4 ${
-                    msg.role === "user" 
-                      ? "bg-black text-white shadow-md" 
-                      : "bg-white border border-[#E0E3EB] shadow-subtle"
-                  }`}>
-                    <p className={`leading-relaxed ${msg.role === "user" ? "text-white" : "text-[#1A1A26]"}`}>
-                      {msg.content}
-                    </p>
-                  </div>
-                  
-                  {/* Citations */}
-                  {msg.citations && msg.citations.length > 0 && (
-                    <div className="mt-3 space-y-2">
-                      {msg.citations.map((citation, idx) => (
-                        <div key={idx} className="border-l-2 border-[#E0E3EB] pl-4 ml-1">
-                          <p className="text-sm text-[#72788F] italic leading-relaxed">"{citation.content}"</p>
-                          <p className="text-xs text-[#B5B8CB] mt-2 flex items-center space-x-1">
-                            <FileText className="w-3 h-3" />
-                            <span>{citation.source}</span>
-                            {citation.page && <span> • Page {citation.page}</span>}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  <div className="flex items-center space-x-2 mt-2">
-                    <p className="text-xs text-[#B5B8CB]">
-                      {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                    </p>
-                    {msg.role === "assistant" && (
-                      <>
-                        <span className="text-xs text-[#B5B8CB]">•</span>
-                        <span className="text-xs text-[#B5B8CB]">
-                          {msg.tokenCount} tokens
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {msg.role === "user" && (
-                  <div className="w-10 h-10 bg-[#F8FAFB] rounded-xl flex items-center justify-center flex-shrink-0">
-                    <span className="text-[#1A1A26] font-medium text-sm">
-                      {investorEmail ? investorEmail.charAt(0).toUpperCase() : "U"}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-            
-            <div ref={messagesEndRef} />
-          </div>
-
-          {/* Message Input */}
           {emailSubmitted && (
-            <div className="p-6 border-t border-[#E0E3EB] bg-white">
-              <div className="flex space-x-3">
-                <Input
-                  placeholder="Ask about the business model, team, metrics..."
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  className="flex-1 border-[#E0E3EB] focus:border-black placeholder:text-[#B5B8CB]"
-                  disabled={sendMessageMutation.isPending}
-                />
-                <Button 
-                  onClick={handleSendMessage}
-                  disabled={!message.trim() || sendMessageMutation.isPending}
-                  className="bg-black text-white hover:bg-gray-800 px-6"
-                >
-                  {sendMessageMutation.isPending ? (
-                    <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-                  ) : (
-                    <Send className="w-4 h-4" />
-                  )}
-                </Button>
-              </div>
-              <div className="flex items-center justify-between mt-3">
-                <p className="text-xs text-[#B5B8CB]">
-                  Press Enter to send • Shift+Enter for new line
-                </p>
-                <p className="text-xs text-[#72788F]">
-                  Powered by OpenAI
-                </p>
-              </div>
+            <div className="flex flex-col items-center justify-center pt-4">
+              <Button
+                variant="ghost"
+                onClick={() => setShowContactDialog(true)}
+                className="text-gray-400 hover:text-black font-bold uppercase tracking-widest text-[10px] h-10 px-6 rounded-full border border-transparent hover:border-gray-100 transition-all"
+              >
+                <Phone className="w-3.5 h-3.5 mr-2" />
+                Contact Team
+              </Button>
             </div>
           )}
-        </Card>
-
-        {/* Contact Team Button */}
-        {emailSubmitted && (
-          <div className="mt-6 text-center">
-            <Button
-              onClick={() => setShowContactDialog(true)}
-              className="bg-white text-black border-2 border-black hover:bg-gray-50 rounded-xl px-8 py-6 text-base font-medium shadow-lg hover:shadow-xl transition-all"
-            >
-              <Phone className="w-5 h-5 mr-3" />
-              Contact the Team
-            </Button>
-            <p className="text-sm text-[#72788F] mt-3">
-              Share your contact details for direct communication with the founders
-            </p>
-          </div>
-        )}
+        </div>
       </div>
 
-      {/* Footer */}
-      <footer className="mt-16 border-t border-[#E0E3EB] py-8 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-2">
-            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+      <footer className="py-12 px-4 border-t border-gray-100 bg-white">
+        <div className="max-w-5xl mx-auto flex flex-col items-center">
+          <div className="flex items-center space-x-2 mb-4">
+            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center shadow-sm">
               <Sparkles className="w-4 h-4 text-white" />
             </div>
-            <span className="font-bold text-[#1A1A26]">PitchChat</span>
+            <span className="font-bold text-black font-inter-tight">PitchChat</span>
           </div>
-          <p className="text-[#72788F] text-sm">
-            Intelligent conversations between founders and investors
+          <p className="text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+            Professional intelligence for founders and investors.
           </p>
         </div>
       </footer>
 
-      {/* Download Dialog */}
       {slug && (
         <DocumentDownloadDialog
           isOpen={showDownloadDialog}
@@ -400,7 +344,6 @@ export default function InvestorChat() {
         />
       )}
 
-      {/* Contact Team Dialog */}
       {conversationId && (
         <ContactTeamDialog
           isOpen={showContactDialog}

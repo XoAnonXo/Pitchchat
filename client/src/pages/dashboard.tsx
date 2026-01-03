@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import { apiRequest } from "@/lib/queryClient";
+import { Project, Document, Conversation } from "@shared/schema";
 import { 
   MessageSquare, 
   Link as LinkIcon, 
@@ -29,7 +30,8 @@ import {
   Clock,
   CheckCircle2,
   Bell,
-  CreditCard
+  CreditCard,
+  ArrowRight
 } from "lucide-react";
 import FileUpload from "@/components/FileUpload";
 import ChatInterface from "@/components/ChatInterface";
@@ -78,28 +80,32 @@ export default function Dashboard() {
   }, [user, authLoading, toast]);
 
   // Fetch projects
-  const { data: projects = [], isLoading: projectsLoading } = useQuery({
+  const { data: projects = [], isLoading: projectsLoading } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
     enabled: !!user,
   });
 
   // Fetch analytics
-  const { data: analytics } = useQuery({
+  const { data: analytics } = useQuery<{
+    totalQuestions: number;
+    activeLinks: number;
+    monthlyCost: number;
+  }>({
     queryKey: ["/api/analytics"],
     enabled: !!user,
   });
 
   // Fetch conversations to check for contact notifications
-  const { data: conversations = [] } = useQuery({
+  const { data: conversations = [] } = useQuery<Conversation[]>({
     queryKey: ["/api/conversations"],
     enabled: !!user,
   });
 
   // Check if there are any conversations with contact details
-  const hasContactNotifications = conversations.some((conv: any) => conv.contactProvidedAt);
+  const hasContactNotifications = conversations.some((conv) => conv.contactProvidedAt);
 
   // Fetch documents for selected project
-  const { data: documents = [] } = useQuery({
+  const { data: documents = [] } = useQuery<Document[]>({
     queryKey: ["/api/projects", selectedProjectId, "documents"],
     enabled: !!selectedProjectId,
   });
@@ -112,7 +118,7 @@ export default function Dashboard() {
   }, [projects, selectedProjectId]);
 
   // Get the selected project object
-  const selectedProject = projects.find((p: any) => p.id === selectedProjectId);
+  const selectedProject = projects.find((p) => p.id === selectedProjectId);
 
   // Create project mutation
   const createProjectMutation = useMutation({
@@ -184,128 +190,83 @@ export default function Dashboard() {
     <div className="min-h-screen bg-[#FAFAFA] flex">
       {/* Fixed Sidebar */}
       <aside className={`
-        fixed top-0 left-0 h-full w-72 bg-white border-r border-gray-200 z-50
+        fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-50
         transform transition-transform duration-300 ease-in-out
         ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         {/* Logo Section */}
-        <div className="h-20 px-6 flex items-center justify-between border-b border-gray-100">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-black rounded-xl flex items-center justify-center shadow-md">
-              <Sparkles className="w-6 h-6 text-white" />
+        <div className="h-20 px-6 flex items-center justify-between">
+          <div className="flex items-center space-x-2.5">
+            <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-base font-inter-tight">PC</span>
             </div>
-            <div>
-              <h1 className="font-bold text-lg text-gray-900">PitchChat</h1>
-              <p className="text-xs text-gray-500">AI Document Assistant</p>
-            </div>
+            <span className="font-bold text-lg text-black font-inter-tight tracking-tight">PitchChat</span>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden"
+            className="lg:hidden h-8 w-8"
             onClick={() => setMobileSidebarOpen(false)}
           >
-            <X className="h-5 w-5" />
+            <X className="h-4 w-4" />
           </Button>
         </div>
 
         {/* Navigation */}
-        <nav className="px-4 py-6 space-y-1">
-          <Link href="/" className="flex items-center space-x-3 px-4 py-3 bg-gray-100 text-black rounded-xl transition-all duration-200">
-            <Home className="w-5 h-5" />
-            <span className="font-medium">Dashboard</span>
+        <nav className="px-3 py-2 space-y-0.5">
+          <Link href="/" className="flex items-center space-x-3 px-3 py-2 bg-gray-50 text-black rounded-lg transition-all duration-200">
+            <Home className="w-4 h-4" />
+            <span className="font-semibold text-sm">Dashboard</span>
           </Link>
           
           <Link 
             href={selectedProjectId ? `/documents/${selectedProjectId}` : "/"} 
-            className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200"
+            className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200"
           >
-            <FolderOpen className="w-5 h-5" />
-            <span className="font-medium">Documents</span>
+            <FolderOpen className="w-4 h-4" />
+            <span className="font-medium text-sm">Documents</span>
           </Link>
           
-          <Link href="/conversations" className="flex items-center justify-between px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
+          <Link href="/conversations" className="flex items-center justify-between px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
             <div className="flex items-center space-x-3">
-              <MessageSquare className="w-5 h-5" />
-              <span className="font-medium">Conversations</span>
+              <MessageSquare className="w-4 h-4" />
+              <span className="font-medium text-sm">Conversations</span>
             </div>
             {hasContactNotifications && (
-              <div className="flex items-center">
-                <Bell className="w-4 h-4 text-black fill-black" />
-              </div>
+              <Badge className="h-2 w-2 p-0 rounded-full bg-blue-600 border-none" />
             )}
           </Link>
           
-          <Link href="/analytics" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <BarChart3 className="w-5 h-5" />
-            <span className="font-medium">Analytics</span>
+          <Link href="/analytics" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <BarChart3 className="w-4 h-4" />
+            <span className="font-medium text-sm">Analytics</span>
           </Link>
           
-          <Link href="/settings" className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-50 rounded-xl transition-all duration-200">
-            <Settings className="w-5 h-5" />
-            <span className="font-medium">Settings</span>
+          <Link href="/settings" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+            <Settings className="w-4 h-4" />
+            <span className="font-medium text-sm">Settings</span>
           </Link>
         </nav>
 
-        {/* New Project Button */}
-        <div className="px-4 mb-6">
-          <Button 
-            className="w-full bg-black hover:bg-gray-800 text-white rounded-xl h-12 font-medium shadow-lg transition-all duration-200 hover:shadow-xl"
-            onClick={handleCreateProject}
-            disabled={createProjectMutation.isPending}
-          >
-            <Plus className="w-5 h-5 mr-2" />
-            New Project
-          </Button>
-        </div>
-
-        {/* Projects Section */}
-        {projects.length > 0 && (
-          <div className="px-4">
-            <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-4 mb-3">Recent Projects</h3>
-            <div className="space-y-2">
-              {projects.slice(0, 3).map((project: any) => (
-                <button
-                  key={project.id}
-                  onClick={() => {
-                    setSelectedProjectId(project.id);
-                    setMobileSidebarOpen(false);
-                  }}
-                  className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-200 ${
-                    selectedProjectId === project.id 
-                      ? 'bg-gray-100 text-black font-medium' 
-                      : 'text-gray-600 hover:bg-gray-50'
-                  }`}
-                >
-                  <div className="font-medium text-sm">{project.name}</div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    Updated {new Date(project.updatedAt).toLocaleDateString()}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* User Profile Section */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100 bg-white">
+        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 overflow-hidden">
               {user.profileImageUrl ? (
                 <img 
                   src={user.profileImageUrl} 
                   alt="Profile" 
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-8 h-8 rounded-full object-cover border border-gray-100"
                 />
               ) : (
-                <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-                  <Users className="w-5 h-5 text-gray-500" />
+                <div className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100">
+                  <Users className="w-4 h-4 text-gray-400" />
                 </div>
               )}
-              <div>
-                <p className="text-sm font-medium text-gray-900">{user.email?.split('@')[0]}</p>
-                <p className="text-xs text-green-600">
-                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free tier'}
+              <div className="overflow-hidden">
+                <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user.email?.split('@')[0]}</p>
+                <p className="text-[10px] text-gray-400 font-medium uppercase tracking-wider">
+                  {user?.subscriptionStatus === 'active' ? 'Pro' : 'Free'}
                 </p>
               </div>
             </div>
@@ -313,9 +274,9 @@ export default function Dashboard() {
               variant="ghost" 
               size="icon"
               onClick={() => window.location.href = "/api/auth/logout"}
-              className="text-gray-400 hover:text-gray-600"
+              className="h-8 w-8 text-gray-400 hover:text-black"
             >
-              <LogOut className="h-5 w-5" />
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -330,37 +291,39 @@ export default function Dashboard() {
       )}
 
       {/* Main Content Area */}
-      <div className="flex-1 lg:ml-72">
+      <div className="flex-1 lg:ml-64 flex flex-col">
         {/* Top Header */}
-        <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-          <div className="px-6 lg:px-8 h-20 flex items-center justify-between">
+        <header className="bg-white border-b border-gray-100 sticky top-0 z-30 h-20 flex items-center shrink-0">
+          <div className="px-6 lg:px-8 w-full flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden"
+                className="lg:hidden h-9 w-9"
                 onClick={() => setMobileSidebarOpen(true)}
               >
                 <Menu className="h-5 w-5" />
               </Button>
               {selectedProject && (
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-900">{selectedProject.name}</h2>
-                  <p className="text-sm text-gray-500">Last updated {new Date(selectedProject.updatedAt).toLocaleDateString()}</p>
+                  <h2 className="text-xl font-bold text-black font-inter-tight tracking-tight leading-none">{selectedProject.name}</h2>
+                  <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1.5">
+                    Updated {selectedProject.updatedAt ? new Date(selectedProject.updatedAt).toLocaleDateString() : 'Just now'}
+                  </p>
                 </div>
               )}
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               {selectedProject && (
                 <Link href={`/links/${selectedProject.id}`}>
-                  <Button variant="outline" className="border-gray-300 text-gray-700 hover:bg-gray-50 rounded-xl">
-                    <LinkIcon className="w-4 h-4 mr-2" />
+                  <Button variant="outline" size="sm" className="border-gray-200 text-gray-600 hover:text-black hover:bg-gray-50 rounded-lg h-9 text-xs font-semibold">
+                    <LinkIcon className="w-3.5 h-3.5 mr-1.5" />
                     Manage Links
                   </Button>
                 </Link>
               )}
-              <Button onClick={() => setShowShareModal(true)} className="bg-black hover:bg-gray-800 text-white rounded-xl">
-                <Plus className="w-4 h-4 mr-2" />
+              <Button size="sm" onClick={() => setShowShareModal(true)} className="bg-black hover:bg-gray-800 text-white rounded-lg h-9 text-xs font-semibold shadow-sm">
+                <Plus className="w-3.5 h-3.5 mr-1.5" />
                 Create Link
               </Button>
             </div>
@@ -368,183 +331,135 @@ export default function Dashboard() {
         </header>
 
         {selectedProject ? (
-          <div className="p-6 lg:p-8">
-            {/* Document Upload Section */}
-            <section className="mb-10">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Upload Documents</h3>
-              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-8">
-                <FileUpload projectId={selectedProject.id} />
-              </div>
-            </section>
-
+          <div className="p-6 lg:p-8 space-y-8 max-w-[1600px]">
             {/* Stats Cards */}
-            <section className="mb-10">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center">
-                        <FileText className="w-6 h-6 text-black" />
-                      </div>
-                      <span className="text-3xl font-bold text-gray-900">{documents.length}</span>
-                    </div>
-                    <p className="text-sm font-medium text-gray-600">Documents Uploaded</p>
-                    <p className="text-xs text-gray-400 mt-1">All your project files</p>
-                  </CardContent>
-                </Card>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+                <CardContent className="p-5 flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Documents</p>
+                    <p className="text-2xl font-bold text-black font-inter-tight">{documents.length}</p>
+                  </div>
+                  <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                    <FileText className="w-5 h-5 text-gray-400" />
+                  </div>
+                </CardContent>
+              </Card>
 
-                <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
-                        <Brain className="w-6 h-6 text-green-600" />
-                      </div>
-                      <span className="text-3xl font-bold text-gray-900">
-                        {documents.length > 0 
-                          ? Math.round((documents.filter((d: any) => d.status === 'completed').length / documents.length) * 100) 
-                          : 0}%
-                      </span>
-                    </div>
-                    <p className="text-sm font-medium text-gray-600">Processed</p>
-                    <p className="text-xs text-gray-400 mt-1">AI analysis complete</p>
-                  </CardContent>
-                </Card>
-
-                <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
-                        <MessageSquare className="w-6 h-6 text-blue-600" />
-                      </div>
-                      <span className="text-3xl font-bold text-gray-900">
-                        {documents.some((d: any) => d.status === 'completed') ? 'Ready' : 'Waiting'}
-                      </span>
-                    </div>
-                    <p className="text-sm font-medium text-gray-600">AI Assistant Status</p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      {documents.some((d: any) => d.status === 'completed') 
-                        ? 'Chat is available' 
-                        : 'Upload documents to start'}
+              <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+                <CardContent className="p-5 flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Processed</p>
+                    <p className="text-2xl font-bold text-black font-inter-tight">
+                      {documents.length > 0 
+                        ? Math.round((documents.filter((d) => d.status === 'completed').length / documents.length) * 100) 
+                        : 0}%
                     </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </section>
-
-            {/* Documents and Chat Section */}
-            <section>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                {/* Documents List */}
-                <div className="flex flex-col h-[600px]">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                    <Database className="w-5 h-5 mr-2 text-black" />
-                    Your Documents
-                  </h3>
-                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6 flex-1 overflow-hidden flex flex-col">
-                    <div className="flex-1 overflow-y-auto">
-                      <DocumentsList projectId={selectedProject.id} hideDelete={true} />
-                    </div>
                   </div>
-                </div>
+                  <div className="w-10 h-10 bg-blue-50/50 rounded-xl flex items-center justify-center border border-blue-100/50">
+                    <Brain className="w-5 h-5 text-blue-500" />
+                  </div>
+                </CardContent>
+              </Card>
 
-                {/* Chat Interface */}
-                <div className="flex flex-col h-[600px]">
+              <Card className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-soft transition-all duration-300">
+                <CardContent className="p-5 flex items-center justify-between">
+                  <div>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">AI Status</p>
+                    <p className="text-2xl font-bold text-black font-inter-tight">
+                      {documents.some((d) => d.status === 'completed') ? 'Ready' : 'Waiting'}
+                    </p>
+                  </div>
+                  <div className="w-10 h-10 bg-green-50/50 rounded-xl flex items-center justify-center border border-green-100/50">
+                    <MessageSquare className="w-5 h-5 text-green-500" />
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
+              <div className="xl:col-span-5 space-y-8">
+                <section>
+                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Quick Upload</h3>
+                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 hover:shadow-soft transition-all duration-300">
+                    <FileUpload projectId={selectedProject.id} />
+                  </div>
+                </section>
+
+                <section>
+                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Your Documents</h3>
+                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-1 min-h-[400px] flex flex-col hover:shadow-soft transition-all duration-300">
+                    <DocumentsList projectId={selectedProject.id} hideDelete={true} />
+                  </div>
+                </section>
+              </div>
+
+              <div className="xl:col-span-7">
+                <section className="h-full flex flex-col">
                   <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold text-gray-900 flex items-center">
-                      <MessageSquare className="w-5 h-5 mr-2 text-black" />
-                      Test AI Assistant
-                    </h3>
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm text-gray-600">Model:</span>
-                      <Badge variant="outline" className="bg-gray-100 text-gray-800 border-gray-300">
-                        4o
-                      </Badge>
-                    </div>
+                    <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Test AI Assistant</h3>
+                    <Badge variant="outline" className="text-[10px] font-bold uppercase border-gray-200 text-gray-500 bg-white">
+                      GPT-4o
+                    </Badge>
                   </div>
-                  <div className="bg-white rounded-2xl border border-gray-200 shadow-sm flex-1 overflow-hidden flex flex-col">
-                    <div className="flex-1 overflow-hidden">
-                      <ChatInterface projectId={selectedProject.id} />
-                    </div>
+                  <div className="bg-white rounded-3xl border border-gray-100 shadow-sm flex-1 overflow-hidden min-h-[600px] flex flex-col hover:shadow-soft transition-all duration-300">
+                    <ChatInterface projectId={selectedProject.id} />
                   </div>
-                </div>
+                </section>
               </div>
-            </section>
+            </div>
 
-            {/* Analytics Section */}
             {analytics && (
-              <section className="mt-10">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Analytics Overview</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-gray-600">Total Questions</p>
-                          <p className="text-2xl font-bold text-gray-900 mt-1">
-                            {analytics.totalQuestions}
-                          </p>
-                        </div>
-                        <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
-                          <MessageSquare className="w-6 h-6 text-purple-600" />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-white rounded-2xl border-gray-200 shadow-sm hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-gray-600">Active Links</p>
-                          <p className="text-2xl font-bold text-gray-900 mt-1">
-                            {analytics.activeLinks}
-                          </p>
-                        </div>
-                        <div className="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center">
-                          <LinkIcon className="w-6 h-6 text-green-600" />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border-gray-700 shadow-sm text-white hover:shadow-lg transition-shadow duration-200">
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm font-medium text-gray-300">Link Generation</p>
-                          <p className="text-xl font-bold mt-1">
-                            {user?.subscriptionStatus === 'active' ? 'Unlimited' : '1 Link'}
-                          </p>
-                          <p className="text-xs text-gray-400 mt-1">
-                            {user?.subscriptionStatus === 'active' 
-                              ? `${user?.subscriptionIsAnnual ? 'Annual' : 'Monthly'} Plan`
-                              : 'Free Plan'
-                            }
-                          </p>
-                        </div>
-                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                          <CreditCard className="w-6 h-6" />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+              <section className="pt-8 border-t border-gray-100">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Quick Analytics</h3>
+                  <Link href="/analytics">
+                    <Button variant="ghost" size="sm" className="text-xs font-semibold text-gray-500 hover:text-black">
+                      Full Report <ArrowRight className="ml-1.5 w-3 h-3" />
+                    </Button>
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Questions</p>
+                    <p className="text-2xl font-bold text-black font-inter-tight">{analytics.totalQuestions}</p>
+                  </div>
+                  <div className="p-5 rounded-2xl bg-gray-50 border border-gray-100">
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Active Links</p>
+                    <p className="text-2xl font-bold text-black font-inter-tight">{analytics.activeLinks}</p>
+                  </div>
+                  <div className="p-5 rounded-2xl bg-black text-white md:col-span-2 flex items-center justify-between overflow-hidden relative">
+                    <div className="relative z-10">
+                      <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">Plan</p>
+                      <p className="text-xl font-bold font-inter-tight">
+                        {user?.subscriptionStatus === 'active' ? 'Unlimited Pro' : 'Free Tier'}
+                      </p>
+                    </div>
+                    <Button size="sm" className="bg-white text-black hover:bg-gray-100 rounded-lg h-8 text-[10px] font-bold uppercase relative z-10">
+                      Upgrade
+                    </Button>
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-3xl -mr-16 -mt-16" />
+                  </div>
                 </div>
               </section>
             )}
           </div>
         ) : (
-          <div className="flex items-center justify-center h-full">
-            <div className="text-center">
-              <Database className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">No Projects Yet</h3>
-              <p className="text-gray-500 mb-4">Create your first project to get started</p>
+          <div className="flex-1 flex items-center justify-center p-8">
+            <div className="max-w-md w-full text-center">
+              <div className="w-16 h-16 bg-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-gray-100">
+                <Plus className="w-8 h-8 text-gray-300" />
+              </div>
+              <h3 className="text-xl font-bold text-black font-inter-tight mb-2">No Projects Yet</h3>
+              <p className="text-gray-500 mb-8 leading-relaxed">
+                Create your first project to start transforming your pitch decks into intelligent conversations.
+              </p>
               <Button 
                 onClick={handleCreateProject}
                 disabled={createProjectMutation.isPending}
-                className="bg-black hover:bg-gray-800 text-white rounded-xl"
+                className="bg-black hover:bg-gray-800 text-white rounded-xl px-8 h-12 font-bold shadow-lg shadow-black/10"
               >
-                <Plus className="w-4 h-4 mr-2" />
-                Create Project
+                Create First Project
               </Button>
             </div>
           </div>
