@@ -47,7 +47,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Helper function to sync subscription status with Stripe
   async function syncUserSubscription(user: any) {
     try {
-      if (user?.stripeCustomerId && process.env.STRIPE_SECRET_KEY) {
+      const stripe = getStripeClient();
+      if (user?.stripeCustomerId && stripe) {
         const subscriptions = await stripe.subscriptions.list({
           customer: user.stripeCustomerId,
           status: 'active',
@@ -715,10 +716,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Stripe subscription endpoints
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2025-08-27.basil",
-  });
+  // Stripe subscription endpoints (lazy init so Stripe is only required for checkout/purchase)
+  let stripeClient: Stripe | null = null;
+  const getStripeClient = () => {
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return null;
+    }
+    if (!stripeClient) {
+      stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY, {
+        apiVersion: "2025-08-27.basil",
+      });
+    }
+    return stripeClient;
+  };
   
   // Define price IDs for subscription plans
   const STRIPE_PRICE_IDS = {
@@ -729,6 +739,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Create checkout session for subscription
   app.post("/api/subscriptions/create-checkout", isAuthenticated, async (req: any, res) => {
     try {
+      const stripe = getStripeClient();
+      if (!stripe) {
+        return res.status(503).json({ message: "Stripe is not configured" });
+      }
+
       const { priceType } = req.body; // 'monthly' or 'annual'
       const user = req.user;
       const { SUBSCRIPTION_PRICING } = await import("./pricing");
@@ -792,6 +807,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Cancel subscription
   app.post("/api/subscriptions/cancel", isAuthenticated, async (req: any, res) => {
     try {
+      const stripe = getStripeClient();
+      if (!stripe) {
+        return res.status(503).json({ message: "Stripe is not configured" });
+      }
+
       const user = req.user;
       
       if (!user.stripeSubscriptionId) {
@@ -819,6 +839,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Webhook endpoint for Stripe events
   app.post("/api/stripe/webhook", async (req, res) => {
+    const stripe = getStripeClient();
+    if (!stripe) {
+      return res.status(503).json({ message: "Stripe is not configured" });
+    }
+
     const sig = req.headers['stripe-signature'] as string;
     let event;
 
@@ -946,10 +971,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
         </div>
       `;
       
-      // TODO: Integrate with actual email service (SendGrid, etc.)
-      console.log(`Sending investor engagement email to ${user.email}`);
-      
-      res.json({ sent: true, recipient: user.email });
+      const success = await sendBrevoEmail({
+        to: user.email,
+        subject: `New investor engagement on ${projectName}`,
+        htmlContent: emailHtml,
+      });
+
+      if (success) {
+        res.json({ sent: true, recipient: user.email });
+      } else {
+        res.status(500).json({ message: "Failed to send email notification" });
+      }
     } catch (error) {
       console.error("Error sending investor engagement email:", error);
       res.status(500).json({ message: "Failed to send email notification" });

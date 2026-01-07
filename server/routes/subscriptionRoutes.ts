@@ -7,10 +7,19 @@ import { sendPaymentReceipt, sendPaymentFailed, sendSubscriptionCanceled } from 
 
 const router = Router();
 
-// Initialize Stripe
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-08-27.basil',
-});
+// Initialize Stripe lazily so only checkout/purchase require it
+let stripeClient: Stripe | null = null;
+const getStripeClient = () => {
+  if (!process.env.STRIPE_SECRET_KEY) {
+    return null;
+  }
+  if (!stripeClient) {
+    stripeClient = new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-08-27.basil',
+    });
+  }
+  return stripeClient;
+};
 
 /**
  * Create a Stripe checkout session for subscription
@@ -18,6 +27,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
  */
 router.post('/create-checkout', isAuthenticated, async (req: any, res) => {
   try {
+    const stripe = getStripeClient();
+    if (!stripe) {
+      return res.status(503).json({ message: 'Stripe is not configured' });
+    }
+
     const { priceType } = req.body; // 'monthly' or 'annual'
     const user = req.user;
 
@@ -83,6 +97,11 @@ router.post('/create-checkout', isAuthenticated, async (req: any, res) => {
  */
 router.post('/cancel', isAuthenticated, async (req: any, res) => {
   try {
+    const stripe = getStripeClient();
+    if (!stripe) {
+      return res.status(503).json({ message: 'Stripe is not configured' });
+    }
+
     const user = req.user;
 
     if (!user.stripeSubscriptionId) {
@@ -119,6 +138,11 @@ router.post('/cancel', isAuthenticated, async (req: any, res) => {
  * POST /api/stripe/webhook
  */
 router.post('/webhook', async (req, res) => {
+  const stripe = getStripeClient();
+  if (!stripe) {
+    return res.status(503).json({ message: 'Stripe is not configured' });
+  }
+
   const sig = req.headers['stripe-signature'] as string;
   let event;
 
