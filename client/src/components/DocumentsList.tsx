@@ -142,12 +142,6 @@ export default function DocumentsList({ projectId, hideDelete = false }: Documen
                         <span>{doc.pageCount} pages</span>
                       </>
                     )}
-                    {doc.tokens > 0 && (
-                      <>
-                        <span className="hidden sm:inline">•</span>
-                        <span>{doc.tokens} tokens</span>
-                      </>
-                    )}
                   </div>
                 </div>
               </div>

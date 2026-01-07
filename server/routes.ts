@@ -80,6 +80,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Auth routes (handled by customAuth.ts)
   // /api/auth/register, /api/auth/login, /api/auth/logout, /api/auth/user are defined in customAuth.ts
 
+  // Bootstrap route for initial dashboard data
+  app.get("/api/bootstrap", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.id;
+      const bootstrap = await storage.getUserBootstrap(userId);
+      res.json({
+        user: req.user,
+        ...bootstrap,
+      });
+    } catch (error) {
+      console.error("Error fetching bootstrap data:", error);
+      res.status(500).json({ message: "Failed to fetch bootstrap data" });
+    }
+  });
+
   // Project routes
   app.get("/api/projects", isAuthenticated, async (req: any, res) => {
     try {

@@ -1,0 +1,309 @@
+name: Performance Testing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  performance:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        id: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json', 'yarn.lock', 'pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+        timeout-minutes: 10
+        env:
+          NODE_ENV: production
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.13.x
+
+      - name: Run Lighthouse CI
+        id: lighthouse
+        run: |
+          lhci autorun --config=lighthouserc.js || true
+          # Create summary file for PR comment
+          if [ -d ".lighthouseci" ]; then
+            echo "LIGHTHOUSE_RESULTS_PATH=.lighthouseci" >> $GITHUB_OUTPUT
+            echo "lighthouse_ran=true" >> $GITHUB_OUTPUT
+          else
+            echo "lighthouse_ran=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+
+      - name: Run bundle size check
+        id: bundle-size
+        run: |
+          # Check if dist directory exists
+          if [ ! -d "dist" ]; then
+            echo "Build directory 'dist' not found"
+            exit 1
+          fi
+
+          # Calculate bundle sizes
+          echo "## Bundle Size Report" > bundle-report.md
+          echo "" >> bundle-report.md
+          echo "| File | Size | Gzipped |" >> bundle-report.md
+          echo "|------|------|---------|" >> bundle-report.md
+
+          total_size=0
+          total_gzip=0
+
+          # Find JS files in dist
+          for file in $(find dist -name "*.js" -type f 2>/dev/null); do
+            if [ -f "$file" ]; then
+              size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file" 2>/dev/null)
+              gzip_size=$(gzip -c "$file" | wc -c)
+              size_kb=$(echo "scale=2; $size / 1024" | bc)
+              gzip_kb=$(echo "scale=2; $gzip_size / 1024" | bc)
+              filename=$(basename "$file")
+              echo "| $filename | ${size_kb}KB | ${gzip_kb}KB |" >> bundle-report.md
+              total_size=$((total_size + size))
+              total_gzip=$((total_gzip + gzip_size))
+            fi
+          done
+
+          # Find CSS files in dist
+          for file in $(find dist -name "*.css" -type f 2>/dev/null); do
+            if [ -f "$file" ]; then
+              size=$(stat -c%s "$file" 2>/dev/null || stat -f%z "$file" 2>/dev/null)
+              gzip_size=$(gzip -c "$file" | wc -c)
+              size_kb=$(echo "scale=2; $size / 1024" | bc)
+              gzip_kb=$(echo "scale=2; $gzip_size / 1024" | bc)
+              filename=$(basename "$file")
+              echo "| $filename | ${size_kb}KB | ${gzip_kb}KB |" >> bundle-report.md
+              total_size=$((total_size + size))
+              total_gzip=$((total_gzip + gzip_size))
+            fi
+          done
+
+          echo "" >> bundle-report.md
+          total_size_kb=$(echo "scale=2; $total_size / 1024" | bc)
+          total_gzip_kb=$(echo "scale=2; $total_gzip / 1024" | bc)
+          echo "**Total Size:** ${total_size_kb}KB (${total_gzip_kb}KB gzipped)" >> bundle-report.md
+
+          # Set outputs for budget check
+          echo "total_size=$total_size" >> $GITHUB_OUTPUT
+          echo "total_gzip=$total_gzip" >> $GITHUB_OUTPUT
+
+          # Bundle size budget (500KB gzipped for JS)
+          BUDGET_GZIP=512000
+          if [ "$total_gzip" -gt "$BUDGET_GZIP" ]; then
+            echo "bundle_exceeded=true" >> $GITHUB_OUTPUT
+            echo "" >> bundle-report.md
+            echo "**Warning:** Bundle size exceeds budget of 500KB gzipped!" >> bundle-report.md
+          else
+            echo "bundle_exceeded=false" >> $GITHUB_OUTPUT
+            echo "" >> bundle-report.md
+            echo "Bundle size is within budget." >> bundle-report.md
+          fi
+
+          cat bundle-report.md
+
+      - name: Parse Lighthouse results
+        id: parse-lighthouse
+        if: steps.lighthouse.outputs.lighthouse_ran == 'true'
+        run: |
+          # Find the latest Lighthouse JSON report
+          REPORT_FILE=$(find .lighthouseci -name "lhr-*.json" -type f | head -1)
+
+          if [ -n "$REPORT_FILE" ] && [ -f "$REPORT_FILE" ]; then
+            # Extract scores using Node.js for reliable JSON parsing
+            node -e "
+              const fs = require('fs');
+              const report = JSON.parse(fs.readFileSync('$REPORT_FILE', 'utf8'));
+              const categories = report.categories;
+
+              console.log('PERFORMANCE=' + Math.round(categories.performance.score * 100));
+              console.log('ACCESSIBILITY=' + Math.round(categories.accessibility.score * 100));
+              console.log('BEST_PRACTICES=' + Math.round((categories['best-practices']?.score || 0) * 100));
+              console.log('SEO=' + Math.round(categories.seo.score * 100));
+            " > lighthouse-scores.txt
+
+            source lighthouse-scores.txt
+
+            echo "performance=$PERFORMANCE" >> $GITHUB_OUTPUT
+            echo "accessibility=$ACCESSIBILITY" >> $GITHUB_OUTPUT
+            echo "best_practices=$BEST_PRACTICES" >> $GITHUB_OUTPUT
+            echo "seo=$SEO" >> $GITHUB_OUTPUT
+            echo "has_scores=true" >> $GITHUB_OUTPUT
+
+            # Check performance budgets
+            PERF_BUDGET=80
+            if [ "$PERFORMANCE" -lt "$PERF_BUDGET" ]; then
+              echo "perf_failed=true" >> $GITHUB_OUTPUT
+            else
+              echo "perf_failed=false" >> $GITHUB_OUTPUT
+            fi
+          else
+            echo "has_scores=false" >> $GITHUB_OUTPUT
+            echo "perf_failed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Upload Lighthouse reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: |
+            .lighthouseci/
+            bundle-report.md
+          retention-days: 30
+          if-no-files-found: warn
+
+      - name: Comment on PR with performance summary
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            // Read bundle report
+            let bundleReport = '';
+            try {
+              bundleReport = fs.readFileSync('bundle-report.md', 'utf8');
+            } catch (e) {
+              bundleReport = 'Bundle report not available.';
+            }
+
+            // Get Lighthouse scores from outputs
+            const hasScores = '${{ steps.parse-lighthouse.outputs.has_scores }}' === 'true';
+            const performance = '${{ steps.parse-lighthouse.outputs.performance }}';
+            const accessibility = '${{ steps.parse-lighthouse.outputs.accessibility }}';
+            const bestPractices = '${{ steps.parse-lighthouse.outputs.best_practices }}';
+            const seo = '${{ steps.parse-lighthouse.outputs.seo }}';
+
+            // Build Lighthouse section
+            let lighthouseSection = '';
+            if (hasScores) {
+              const getEmoji = (score) => {
+                if (score >= 90) return '🟢';
+                if (score >= 50) return '🟠';
+                return '🔴';
+              };
+
+              lighthouseSection = `
+            ## Lighthouse Scores
+
+            | Category | Score |
+            |----------|-------|
+            | ${getEmoji(performance)} Performance | ${performance} |
+            | ${getEmoji(accessibility)} Accessibility | ${accessibility} |
+            | ${getEmoji(bestPractices)} Best Practices | ${bestPractices} |
+            | ${getEmoji(seo)} SEO | ${seo} |
+            `;
+            } else {
+              lighthouseSection = `
+            ## Lighthouse Scores
+
+            Lighthouse scores are not available for this run. Please ensure \`lighthouserc.js\` is properly configured.
+            `;
+            }
+
+            // Check for failures
+            const bundleExceeded = '${{ steps.bundle-size.outputs.bundle_exceeded }}' === 'true';
+            const perfFailed = '${{ steps.parse-lighthouse.outputs.perf_failed }}' === 'true';
+
+            let statusSection = '';
+            if (bundleExceeded || perfFailed) {
+              statusSection = `
+            ## Status: Failed
+
+            ${bundleExceeded ? '- Bundle size exceeds the 500KB gzipped budget\n' : ''}${perfFailed ? '- Performance score is below the 80 threshold\n' : ''}
+            `;
+            } else {
+              statusSection = `
+            ## Status: Passed
+
+            All performance checks passed!
+            `;
+            }
+
+            const body = `# Performance Report
+
+            ${statusSection}
+            ${lighthouseSection}
+            ${bundleReport}
+
+            ---
+            *Generated by Performance Testing workflow*
+            `;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('# Performance Report')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }
+
+      - name: Fail if performance budgets not met
+        if: steps.bundle-size.outputs.bundle_exceeded == 'true' || steps.parse-lighthouse.outputs.perf_failed == 'true'
+        run: |
+          echo "Performance budgets not met!"
+          if [ "${{ steps.bundle-size.outputs.bundle_exceeded }}" == "true" ]; then
+            echo "- Bundle size exceeds the 500KB gzipped budget"
+          fi
+          if [ "${{ steps.parse-lighthouse.outputs.perf_failed }}" == "true" ]; then
+            echo "- Performance score is below the 80 threshold"
+          fi
+          exit 1

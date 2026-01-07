@@ -1,0 +1,137 @@
+# Pitchchat pSEO Execution Plan
+
+## Goal and success criteria
+- Goal: Launch programmatic SEO pages that convert founders (seed/Series A) to signup.
+- Success criteria (pilot):
+  - 70 pages indexed within 2 to 4 weeks.
+  - CTR and on-page engagement are stable (no mass "Crawled - not indexed").
+  - Measurable signup conversions from pilot pages.
+
+## Status
+- Phase 0 started: `pseo` Next.js app scaffolded with the `/investor-questions/` route.
+- Phase 1 started: pSEO schema drafted in `pseo/src/db/schema.ts`.
+- Phase 2 started: pilot matrix + seed generator scripts created; `pseo/data/pilot_matrix.json` and `pseo/data/pilot_seed.json` generated.
+- Phase 3 started: investor Q&A template wired for `/investor-questions/[industry]/[stage]/investor-questions/`.
+- Added remaining templates: pitch deck, metrics benchmarks, diligence checklist, investor update.
+- Added DB migration + seed scripts and source ingestion pipeline.
+- Applied pSEO migrations and seeded 70 pilot pages.
+- Added internal linking components, hub pages, sitemap, robots, and CTA analytics wiring.
+- Added segmented sitemap endpoints and page-view analytics events.
+- Added sitemap validation script and validated URL counts for the pilot.
+- Added JSON-LD schema output for FAQPage, HowTo, Dataset, and Article templates.
+- Generated projected data JSONs for all 70 pilot pages and seeded the database.
+- Added quality gate and pruning scripts for projected data health checks.
+
+## Scope
+- Target persona: founders raising capital + AI-curious founders.
+- Primary conversion: signup.
+- Industries (pilot): aerospace, hardware, robotics, chemistry, finance, blockchain, AI.
+- Stages (pilot): seed, Series A.
+- Primary subdirectory: `/investor-questions/`.
+
+## Stack (default)
+- Frontend: Next.js App Router with static generation (SSG).
+- Database: Postgres (Drizzle ORM).
+- Hosting: any Node-compatible platform (Vercel, Render, Fly). SSG pages can be exported if needed.
+
+## Page types (pilot set)
+1. Investor Q&A (primary)
+2. Pitch deck outline
+3. Metrics benchmarks
+4. Diligence checklist
+5. Investor update template
+
+## Data and anonymization rules
+- Use anonymized customer decks and rewritten investor Q&A.
+- No direct quotes or identifying details; preserve intent and outcomes.
+- Each page must have:
+  - 5+ unique data points.
+  - 30 to 50 percent unique visible text (non-template).
+
+## Template requirements (all page types)
+- Direct answer within first 200 words.
+- Structured tables or definition lists for key metrics.
+- Conditional sections for missing data (hide empty blocks).
+- Primary CTA: "Create your PitchChat room".
+- Schema markup aligned to page type (FAQPage, HowTo, Dataset, Article).
+
+## Execution plan (actionable tasks)
+
+### Phase 0: Repo setup and routing (start now)
+- Create a `pseo` app using Next.js App Router.
+- Define URL pattern: `/investor-questions/[industry]/[stage]/[pageType]/`.
+- Add base SEO helpers (metadata, canonicals, robots).
+- Deliverable: new `pseo` app scaffolded and routing map drafted.
+
+### Phase 1: Schema and data contracts (Day 1 to 2)
+- Define Postgres tables:
+  - `industries`, `stages`, `page_types`
+  - `investor_questions`, `benchmarks`, `deck_outlines`, `checklists`, `investor_updates`
+- Define required fields per page type and validation rules.
+- Deliverable: migration files + schema spec.
+
+### Phase 2: Ingestion and enrichment (Day 2 to 4)
+- Build ingestion script to parse anonymized decks and Q&A.
+- Build AI enrichment scripts with deterministic prompts.
+- Add validators to block thin pages (run `npm run pseo:quality-check`).
+- Deliverable: usable pilot dataset for 70 pages.
+
+### Phase 3: Templates (Day 3 to 5)
+- Build five templates with consistent layout and schema JSON-LD.
+- Add internal linking blocks (industry hub, stage hub, related industries + neighbor mesh).
+- Deliverable: template QA pass with real data.
+
+### Phase 4: Indexation and analytics (Day 4 to 6)
+- Generate segmented sitemaps by industry and stage.
+- Add GA4 events for CTA clicks and signup conversions.
+- Deliverable: sitemap routes + analytics instrumentation.
+
+### Phase 5: Pilot launch (Day 6 to 8)
+- Publish 70 pages and submit sitemaps to GSC.
+- Manual QA 10 percent of pages for rendering and data correctness.
+- Deliverable: pilot launch report and fixes.
+
+### Phase 6: Scale and optimize (Week 2 to 4)
+- Scale to 500 to 1,500 pages after pilot health checks.
+- Launch UGC submission flow (anonymized Q&A).
+- Publish quarterly PR report based on aggregated data.
+- Run pruning report from GSC exports (`npm run pseo:prune-report -- --input path/to/gsc.csv`).
+- Deliverable: stable scale pipeline and authority signals.
+
+## Pilot matrix (70 pages)
+- 7 industries x 2 stages x 5 page types.
+- Prioritize investor Q&A pages for early conversion learnings.
+
+## Risks and mitigations
+- Risk: doorway or thin pages. Mitigation: uniqueness thresholds + data tables.
+- Risk: indexation delays. Mitigation: segmented sitemaps + internal linking.
+- Risk: low conversion. Mitigation: CTA testing and template iteration.
+
+## CTA success metrics
+- Track `pseo_signup_cta_view` and `pseo_signup_cta_click` by industry, stage, page type, and variant.
+- Primary CTR target: 2-6% per page type in the pilot.
+- Upgrade path: measure signup conversion after auth (once signup event is instrumented).
+- Report script: `npm run pseo:cta-report -- --input /path/to/ga4_export.csv`.
+
+## Monitoring cadence
+- Weekly: GSC Coverage (indexed vs. crawled-not-indexed), sitemap fetch health.
+- Weekly: CTA view/click counts and CTR by variant.
+- Monthly: prune report from GSC export and content refresh on low performers.
+
+## Next steps (immediate)
+- Run `npm run pseo:migrate` and `npm run pseo:seed` with DATABASE_URL set.
+- Add anonymized source JSONs under `pseo/data/source/` and run `npm run pseo:ingest-source`.
+- Or drop raw anonymized files under `pseo/data/raw/` and run `npm run pseo:enrich-raw` before ingesting.
+- Generate projected source JSONs with `npm run pseo:generate-projected` before ingesting.
+- Run `npm run pseo:quality-check` to enforce thin-content gates before seeding.
+- Replace seed data with live DB content as source data grows.
+- Set `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_SIGNUP_URL` for sitemap and CTA links.
+- Optional: set `NEXT_PUBLIC_GA_ID` to enable GA4 event tracking.
+- Submit sitemaps to GSC:
+  - `https://pitchchat.ai/sitemap.xml`
+  - `https://pitchchat.ai/sitemaps/industries`
+  - `https://pitchchat.ai/sitemaps/stages`
+  - `https://pitchchat.ai/sitemaps/pages`
+- Run `npm run pseo:validate-sitemaps` after config updates to re-check URL counts.
+- Replace `pseo/data/source/example.json` with real anonymized data and re-run ingestion + seed.
+- Use `npm run pseo:prune-report -- --input path/to/gsc.csv` to flag low-performing pages.

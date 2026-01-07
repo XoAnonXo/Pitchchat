@@ -1,0 +1,102 @@
+{
+  "industry": "hardware",
+  "stage": "seed",
+  "pageType": "investor-questions",
+  "slug": "/investor-questions/hardware/seed/investor-questions/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Investor questions for Hardware Seed startups",
+  "summary": "Projected investor questions and preparation guidance for Hardware founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+  "questions": [
+    {
+      "category": "Problem",
+      "question": "What is the wedge problem and why does it matter now?",
+      "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+    },
+    {
+      "category": "Buyer",
+      "question": "Who is the buyer and how do you reach them efficiently?",
+      "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+    },
+    {
+      "category": "Moat",
+      "question": "What makes the business defensible beyond speed?",
+      "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+    },
+    {
+      "category": "Traction",
+      "question": "What early signals prove pull from the market?",
+      "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+    },
+    {
+      "category": "Economics",
+      "question": "How will margins improve as you scale?",
+      "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+    },
+    {
+      "category": "Roadmap",
+      "question": "What milestones unlock the next round?",
+      "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+    },
+    {
+      "category": "Validation",
+      "question": "What proof shows the market will pay for this?",
+      "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+    },
+    {
+      "category": "Risk",
+      "question": "What is the single biggest technical or regulatory risk?",
+      "answer": "Explain the plan to de-risk it within the seed runway."
+    },
+    {
+      "category": "Capital",
+      "question": "How will the seed round extend runway to key proof points?",
+      "answer": "Tie the round to milestones that unlock Series A readiness."
+    },
+    {
+      "category": "Manufacturing",
+      "question": "How will you scale manufacturing and manage supply chain risk? (Hardware Seed)",
+      "answer": "Outline partners, tooling plans, and cost-down milestones. Focus on Hardware at the Seed stage."
+    },
+    {
+      "category": "Margins",
+      "question": "How do margins improve after initial production? (Hardware Seed)",
+      "answer": "Show unit cost curves and economies of scale targets. Focus on Hardware at the Seed stage."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "6-12 months",
+      "note": "Projected target range; update with real data. Hardware Seed."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "20-35%",
+      "note": "Projected target range; update with real data. Hardware Seed."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "40-60%",
+      "note": "Projected target range; update with real data. Hardware Seed."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "High; 18-24 mo runway",
+      "note": "Projected target range; update with real data. Hardware Seed."
+    }
+  ],
+  "objections": [
+    {
+      "objection": "Adoption cycles are too long for this market.",
+      "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+    },
+    {
+      "objection": "The product requires heavy upfront investment.",
+      "response": "Detail staged milestones and how capital de-risks the core thesis."
+    },
+    {
+      "objection": "Hardware margins are too low to scale. (Hardware Seed)",
+      "response": "Show cost-down plans and service revenue expansion. Tie it to Hardware Seed milestones."
+    }
+  ]
+}

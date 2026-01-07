@@ -1,0 +1,495 @@
+{
+  "generatedAt": "2026-01-06T12:11:03.489Z",
+  "items": [
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/aerospace/seed/investor-questions/",
+      "title": "Investor Questions for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/aerospace/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/aerospace/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/aerospace/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/aerospace/seed/investor-update/",
+      "title": "Investor Update for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/aerospace/series-a/investor-questions/",
+      "title": "Investor Questions for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/aerospace/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/aerospace/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/aerospace/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/aerospace/series-a/investor-update/",
+      "title": "Investor Update for Aerospace Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/hardware/seed/investor-questions/",
+      "title": "Investor Questions for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/hardware/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/hardware/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/hardware/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/hardware/seed/investor-update/",
+      "title": "Investor Update for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/hardware/series-a/investor-questions/",
+      "title": "Investor Questions for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/hardware/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/hardware/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/hardware/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/hardware/series-a/investor-update/",
+      "title": "Investor Update for Hardware Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/robotics/seed/investor-questions/",
+      "title": "Investor Questions for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/robotics/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/robotics/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/robotics/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/robotics/seed/investor-update/",
+      "title": "Investor Update for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/robotics/series-a/investor-questions/",
+      "title": "Investor Questions for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/robotics/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/robotics/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/robotics/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/robotics/series-a/investor-update/",
+      "title": "Investor Update for Robotics Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/chemistry/seed/investor-questions/",
+      "title": "Investor Questions for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/chemistry/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/chemistry/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/chemistry/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/chemistry/seed/investor-update/",
+      "title": "Investor Update for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/chemistry/series-a/investor-questions/",
+      "title": "Investor Questions for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/chemistry/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/chemistry/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/chemistry/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/chemistry/series-a/investor-update/",
+      "title": "Investor Update for Chemistry Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/finance/seed/investor-questions/",
+      "title": "Investor Questions for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/finance/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/finance/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/finance/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/finance/seed/investor-update/",
+      "title": "Investor Update for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/finance/series-a/investor-questions/",
+      "title": "Investor Questions for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/finance/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/finance/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/finance/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/finance/series-a/investor-update/",
+      "title": "Investor Update for Finance Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/blockchain/seed/investor-questions/",
+      "title": "Investor Questions for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/blockchain/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/blockchain/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/blockchain/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/blockchain/seed/investor-update/",
+      "title": "Investor Update for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/blockchain/series-a/investor-questions/",
+      "title": "Investor Questions for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/blockchain/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/blockchain/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/blockchain/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/blockchain/series-a/investor-update/",
+      "title": "Investor Update for Blockchain Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/ai/seed/investor-questions/",
+      "title": "Investor Questions for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/ai/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/ai/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/ai/seed/diligence-checklist/",
+      "title": "Diligence Checklist for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "path": "/investor-questions/ai/seed/investor-update/",
+      "title": "Investor Update for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "path": "/investor-questions/ai/series-a/investor-questions/",
+      "title": "Investor Questions for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "path": "/investor-questions/ai/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "path": "/investor-questions/ai/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "path": "/investor-questions/ai/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "path": "/investor-questions/ai/series-a/investor-update/",
+      "title": "Investor Update for AI Series A"
+    }
+  ]
+}

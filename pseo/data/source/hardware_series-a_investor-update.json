@@ -1,0 +1,39 @@
+{
+  "industry": "hardware",
+  "stage": "series-a",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/hardware/series-a/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Hardware Series A investor update template",
+  "summary": "Projected update format for Hardware founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "sections": [
+    {
+      "section": "Highlights",
+      "content": "Summarize the most meaningful wins since the last update."
+    },
+    {
+      "section": "Key metrics",
+      "content": "Share the handful of metrics that show momentum and retention."
+    },
+    {
+      "section": "Product",
+      "content": "List major product milestones and what they unlock next."
+    },
+    {
+      "section": "Go-to-market",
+      "content": "Explain pipeline progress and conversion velocity."
+    },
+    {
+      "section": "Help needed",
+      "content": "Ask for specific customer intros or domain expertise."
+    },
+    {
+      "section": "Manufacturing readiness (Series A)",
+      "content": "Summarize production milestones and cost improvements."
+    },
+    {
+      "section": "Series A milestones",
+      "content": "Summarize the milestone progress expected for Hardware founders at Series A."
+    }
+  ]
+}

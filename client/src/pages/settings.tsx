@@ -55,6 +55,7 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { Logo } from "@/components/Logo";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Conversation } from "@shared/schema";
 
@@ -63,7 +64,6 @@ interface UserSettings {
   email: string;
   name?: string;
   profileImageUrl?: string | null;
-  tokens: number;
   notifications: {
     emailAlerts: boolean;
     weeklyReports: boolean;
@@ -108,7 +108,6 @@ export default function SettingsPage() {
     email: user?.email || "",
     name: user?.email?.split('@')[0] || "",
     profileImageUrl: user?.profileImageUrl,
-    tokens: user?.tokens || 0,
     notifications: {
       emailAlerts: emailAlerts,
       weeklyReports: weeklyReports,
@@ -313,7 +312,7 @@ export default function SettingsPage() {
         <div className="h-20 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
             <div className="w-9 h-9 bg-black rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-base">PC</span>
+              <Logo size="md" variant="white" className="p-1" />
             </div>
             <span className="font-bold text-lg text-black tracking-tight">PitchChat</span>
           </div>
@@ -372,7 +371,7 @@ export default function SettingsPage() {
               <div className="overflow-hidden">
                 <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
                 <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
-                  {user?.tokens || 0} tokens
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free Plan'}
                 </p>
               </div>
             </div>

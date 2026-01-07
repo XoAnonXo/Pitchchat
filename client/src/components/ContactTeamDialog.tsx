@@ -146,118 +146,134 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white rounded-2xl border-gray-200 shadow-xl max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-xl font-bold text-gray-900">Contact the Team</DialogTitle>
-        </DialogHeader>
+      <DialogContent className="bg-[#FAFAFA] border border-black/8 rounded-3xl max-w-md shadow-[0_24px_80px_rgba(0,0,0,0.18)] font-sans p-0 overflow-hidden">
+        {/* Header with subtle gradient */}
+        <div className="px-7 pt-7 pb-5 bg-gradient-to-b from-white to-transparent">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-black tracking-tight">Contact the Team</DialogTitle>
+          </DialogHeader>
+        </div>
 
-        {success ? (
-          <div className="py-12 text-center">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">Success!</h3>
-            <p className="text-gray-600">
-              The team has been notified and will be in contact with you soon!
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-            <p className="text-sm text-gray-600 mb-4">
-              Share your contact details so the founding team can reach out to you directly. All fields are optional.
-            </p>
-
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="name" className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <User className="w-4 h-4 mr-2" />
-                  Your Name
-                </Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => handleInputChange("name", e.target.value)}
-                  placeholder="John Smith"
-                  className={`border-gray-300 focus:border-black ${errors.name ? "border-red-500" : ""}`}
-                />
-                {errors.name && (
-                  <p className="text-sm text-red-500 mt-1">{errors.name}</p>
-                )}
+        <div className="px-7 pb-7">
+          {success ? (
+            <div className="py-12 text-center">
+              <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg shadow-emerald-500/20">
+                <CheckCircle className="w-8 h-8 text-white" />
               </div>
-
-              <div>
-                <Label htmlFor="phone" className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <Phone className="w-4 h-4 mr-2" />
-                  WhatsApp/Telegram Phone
-                </Label>
-                <Input
-                  id="phone"
-                  value={formData.phone}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  placeholder="+1 234 567 8900"
-                  className={`border-gray-300 focus:border-black ${errors.phone ? "border-red-500" : ""}`}
-                />
-                {errors.phone && (
-                  <p className="text-sm text-red-500 mt-1">{errors.phone}</p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor="company" className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <Building2 className="w-4 h-4 mr-2" />
-                  Company
-                </Label>
-                <Input
-                  id="company"
-                  value={formData.company}
-                  onChange={(e) => handleInputChange("company", e.target.value)}
-                  placeholder="Venture Capital Inc."
-                  className={`border-gray-300 focus:border-black ${errors.company ? "border-red-500" : ""}`}
-                />
-                {errors.company && (
-                  <p className="text-sm text-red-500 mt-1">{errors.company}</p>
-                )}
-              </div>
-
-              <div>
-                <Label htmlFor="website" className="text-sm font-medium text-gray-700 mb-1 flex items-center">
-                  <Globe className="w-4 h-4 mr-2" />
-                  Website
-                </Label>
-                <Input
-                  id="website"
-                  value={formData.website}
-                  onChange={(e) => handleInputChange("website", e.target.value)}
-                  placeholder="https://example.com"
-                  className={`border-gray-300 focus:border-black ${errors.website ? "border-red-500" : ""}`}
-                />
-                {errors.website && (
-                  <p className="text-sm text-red-500 mt-1">{errors.website}</p>
-                )}
-              </div>
+              <h3 className="text-xl font-bold text-black mb-2">Success!</h3>
+              <p className="text-black/50 max-w-[240px] mx-auto leading-relaxed text-sm">
+                The team has been notified and will be in contact with you soon!
+              </p>
             </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div className="p-4 rounded-2xl bg-white border border-black/8 shadow-sm">
+                <p className="text-sm text-black/60 leading-relaxed">
+                  Share your contact details so the founding team can reach out to you directly.
+                </p>
+              </div>
 
-            <div className="flex space-x-3 mt-6">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={onClose}
-                className="flex-1"
-              >
-                Cancel
-              </Button>
-              <Button
-                type="submit"
-                disabled={submitMutation.isPending}
-                className="flex-1 bg-black hover:bg-gray-800 text-white"
-              >
-                {submitMutation.isPending ? (
-                  <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-                ) : (
-                  "Submit"
-                )}
-              </Button>
-            </div>
-          </form>
-        )}
+              <div className="space-y-4">
+                <div>
+                  <Label htmlFor="name" className="text-sm font-semibold text-black/80 mb-1.5 block">
+                    Your Name
+                  </Label>
+                  <div className="relative">
+                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30" />
+                    <Input
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      placeholder="John Smith"
+                      className={`pl-11 h-12 bg-white border-black/10 rounded-2xl text-sm focus:border-black focus:ring-black/10 transition-all placeholder:text-black/30 ${errors.name ? "border-red-500 focus:border-red-500" : ""}`}
+                    />
+                  </div>
+                  {errors.name && (
+                    <p className="text-xs text-red-500 mt-1.5 font-medium ml-1">{errors.name}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="phone" className="text-sm font-semibold text-black/80 mb-1.5 block">
+                    Phone Number
+                  </Label>
+                  <div className="relative">
+                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30" />
+                    <Input
+                      id="phone"
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      placeholder="+1 234 567 8900"
+                      className={`pl-11 h-12 bg-white border-black/10 rounded-2xl text-sm focus:border-black focus:ring-black/10 transition-all placeholder:text-black/30 ${errors.phone ? "border-red-500 focus:border-red-500" : ""}`}
+                    />
+                  </div>
+                  {errors.phone && (
+                    <p className="text-xs text-red-500 mt-1.5 font-medium ml-1">{errors.phone}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="company" className="text-sm font-semibold text-black/80 mb-1.5 block">
+                    Company
+                  </Label>
+                  <div className="relative">
+                    <Building2 className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30" />
+                    <Input
+                      id="company"
+                      value={formData.company}
+                      onChange={(e) => handleInputChange("company", e.target.value)}
+                      placeholder="Venture Capital Inc."
+                      className={`pl-11 h-12 bg-white border-black/10 rounded-2xl text-sm focus:border-black focus:ring-black/10 transition-all placeholder:text-black/30 ${errors.company ? "border-red-500 focus:border-red-500" : ""}`}
+                    />
+                  </div>
+                  {errors.company && (
+                    <p className="text-xs text-red-500 mt-1.5 font-medium ml-1">{errors.company}</p>
+                  )}
+                </div>
+
+                <div>
+                  <Label htmlFor="website" className="text-sm font-semibold text-black/80 mb-1.5 block">
+                    Website
+                  </Label>
+                  <div className="relative">
+                    <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-black/30" />
+                    <Input
+                      id="website"
+                      value={formData.website}
+                      onChange={(e) => handleInputChange("website", e.target.value)}
+                      placeholder="https://example.com"
+                      className={`pl-11 h-12 bg-white border-black/10 rounded-2xl text-sm focus:border-black focus:ring-black/10 transition-all placeholder:text-black/30 ${errors.website ? "border-red-500 focus:border-red-500" : ""}`}
+                    />
+                  </div>
+                  {errors.website && (
+                    <p className="text-xs text-red-500 mt-1.5 font-medium ml-1">{errors.website}</p>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={onClose}
+                  className="flex-1 h-12 rounded-2xl border-black/10 text-black/60 hover:bg-black/[0.04] hover:text-black font-semibold"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={submitMutation.isPending}
+                  className="flex-1 h-12 rounded-2xl bg-black hover:bg-black/90 text-white font-bold shadow-[0_8px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)] transition-all"
+                >
+                  {submitMutation.isPending ? (
+                    <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
+                  ) : null}
+                  Submit
+                </Button>
+              </div>
+            </form>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

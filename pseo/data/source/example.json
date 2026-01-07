@@ -1,0 +1,28 @@
+{
+  "industry": "ai",
+  "stage": "seed",
+  "pageType": "investor-questions",
+  "title": "Investor questions for AI Seed startups",
+  "summary": "Questions AI founders should be ready to answer at seed stage.",
+  "ctaText": "Create your PitchChat room",
+  "questions": [
+    {
+      "category": "Problem",
+      "question": "What is the wedge problem and why does it matter now?",
+      "answer": "Focus on a clear pain point and explain timing advantages."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Pilot conversion",
+      "value": "Share pilot-to-contract conversion rate",
+      "note": "Signals early product pull."
+    }
+  ],
+  "objections": [
+    {
+      "objection": "AI workflows are still early.",
+      "response": "Show adoption metrics and customer pull."
+    }
+  ]
+}

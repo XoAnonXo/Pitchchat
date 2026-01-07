@@ -133,150 +133,144 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
     onClose();
   };
 
-  const estimatedCost = 25; // 25 credits for creating a link
-
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-lg">
-        <DialogHeader>
-          <DialogTitle>Generate Share Link</DialogTitle>
-        </DialogHeader>
+      <DialogContent className="bg-[#FAFAFA] border border-black/8 rounded-3xl max-w-md shadow-[0_24px_80px_rgba(0,0,0,0.18)] font-sans p-0 overflow-hidden">
+        {/* Header with subtle gradient */}
+        <div className="px-7 pt-7 pb-5 bg-gradient-to-b from-white to-transparent">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-black tracking-tight">Generate Share Link</DialogTitle>
+          </DialogHeader>
+        </div>
         
-        {!generatedLink ? (
-          <div className="space-y-4">
-            <div>
-              <Label htmlFor="link-name">Link Name</Label>
-              <Input
-                id="link-name"
-                value={linkName}
-                onChange={(e) => setLinkName(e.target.value)}
-                placeholder="e.g., tech-startup-pitch-2024"
-                className="mt-1"
-              />
-            </div>
-            
-            <div>
-              <Label htmlFor="expiration">Expiration</Label>
-              <Select value={expiration} onValueChange={setExpiration}>
-                <SelectTrigger className="mt-1">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="7">7 days</SelectItem>
-                  <SelectItem value="14">14 days</SelectItem>
-                  <SelectItem value="30">30 days</SelectItem>
-                  <SelectItem value="never">Never</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="flex items-center justify-between space-x-2">
-              <div className="space-y-0.5">
-                <Label htmlFor="allow-downloads">Allow Document Downloads</Label>
-                <p className="text-sm text-[#72788F]">
-                  Let investors download the original documents
-                </p>
-              </div>
-              <Switch
-                id="allow-downloads"
-                checked={allowDownloads}
-                onCheckedChange={setAllowDownloads}
-              />
-            </div>
-            
-            <div className="bg-[#F8FAFB] rounded-lg p-4 border border-[#E0E3EB]">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-[#72788F]">Estimated cost:</span>
-                <span className="font-bold text-[#1A1A26]">{estimatedCost} credits</span>
-              </div>
-            </div>
-            
-            <div className="flex space-x-3 pt-2">
-              <Button variant="outline" onClick={handleClose} className="flex-1 border-[#E0E3EB] hover:bg-gray-50">
-                Cancel
-              </Button>
-              <Button 
-                onClick={handleGenerate}
-                disabled={generateLinkMutation.isPending}
-                className="flex-1 bg-black text-white hover:bg-gray-800"
-              >
-                {generateLinkMutation.isPending ? (
-                  <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
-                ) : null}
-                Generate Link
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div>
-              <Label className="text-[#1A1A26] font-medium">Your Share Link</Label>
-              <div className="flex items-center space-x-2 mt-2">
-                <Input 
-                  value={generatedLink} 
-                  readOnly 
-                  className="flex-1 bg-[#F8FAFB] border-[#E0E3EB] text-[#1A1A26]"
+        <div className="px-7 pb-7">
+          {!generatedLink ? (
+            <div className="space-y-5">
+              <div>
+                <Label htmlFor="link-name" className="text-sm font-semibold text-black/80">Link Name <span className="text-black/40">*</span></Label>
+                <Input
+                  id="link-name"
+                  value={linkName}
+                  onChange={(e) => setLinkName(e.target.value)}
+                  placeholder="e.g., tech-startup-pitch-2024"
+                  className="mt-2 bg-white border-black/10 focus:border-black focus:ring-black/10 rounded-2xl h-12 px-4 text-base placeholder:text-black/30"
                 />
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={copyToClipboard}
-                  className="border-[#E0E3EB] hover:bg-gray-50"
-                >
-                  <Copy className="w-4 h-4" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  onClick={openLink}
-                  className="border-[#E0E3EB] hover:bg-gray-50"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                </Button>
               </div>
-            </div>
-            
-            <div className="bg-[#F8FAFB] border border-[#E0E3EB] rounded-lg p-5">
-              <div className="flex items-center space-x-2 mb-3">
-                <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-                  <Check className="w-5 h-5 text-white" />
+              
+              <div>
+                <Label htmlFor="expiration" className="text-sm font-semibold text-black/80">Expiration</Label>
+                <Select value={expiration} onValueChange={setExpiration}>
+                  <SelectTrigger className="mt-2 bg-white border-black/10 focus:ring-black/10 rounded-2xl h-12 px-4 text-base">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-2xl border-black/10 shadow-xl">
+                    <SelectItem value="7">7 days</SelectItem>
+                    <SelectItem value="14">14 days</SelectItem>
+                    <SelectItem value="30">30 days</SelectItem>
+                    <SelectItem value="never">Never</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="flex items-center justify-between gap-4 p-4 rounded-2xl bg-white border border-black/8 shadow-sm">
+                <div className="space-y-0.5">
+                  <Label htmlFor="allow-downloads" className="text-sm font-semibold text-black/80 cursor-pointer">Allow Downloads</Label>
+                  <p className="text-xs text-black/45">
+                    Let investors download original documents
+                  </p>
                 </div>
-                <h4 className="font-bold text-[#1A1A26]">Link Created Successfully!</h4>
+                <Switch
+                  id="allow-downloads"
+                  checked={allowDownloads}
+                  onCheckedChange={setAllowDownloads}
+                />
               </div>
-              <ul className="text-sm text-[#72788F] space-y-2">
-                <li className="flex items-start">
-                  <span className="text-black mr-2">•</span>
-                  Share this link with investors to start conversations
-                </li>
-                <li className="flex items-start">
-                  <span className="text-black mr-2">•</span>
-                  No signup required - investors just need their email
-                </li>
-                <li className="flex items-start">
-                  <span className="text-black mr-2">•</span>
-                  {expiration === "never" ? "No expiration date" : `Active for ${expiration} days`}
-                </li>
-                <li className="flex items-start">
-                  <span className="text-black mr-2">•</span>
-                  {tokenLimit === "50000" ? "Unlimited usage" : `${parseInt(tokenLimit).toLocaleString()} tokens`} per investor
-                </li>
-                <li className="flex items-start">
-                  <span className="text-black mr-2">•</span>
-                  {allowDownloads ? (
-                    <span className="flex items-center">
-                      <Download className="w-3 h-3 mr-1" />
-                      Document downloads enabled
-                    </span>
-                  ) : "Document downloads disabled"}
-                </li>
-              </ul>
+              
+              <div className="flex gap-3 pt-2">
+                <Button 
+                  variant="outline" 
+                  onClick={handleClose} 
+                  className="flex-1 border-black/10 text-black/60 hover:bg-black/[0.04] hover:text-black rounded-2xl h-12 font-semibold"
+                >
+                  Cancel
+                </Button>
+                <Button 
+                  onClick={handleGenerate}
+                  disabled={generateLinkMutation.isPending}
+                  className="flex-1 bg-black hover:bg-black/90 text-white rounded-2xl h-12 font-semibold shadow-[0_8px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)] transition-all"
+                >
+                  {generateLinkMutation.isPending ? (
+                    <div className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2" />
+                  ) : null}
+                  Generate Link
+                </Button>
+              </div>
             </div>
-            
-            <Button onClick={handleClose} className="w-full bg-black text-white hover:bg-gray-800">
-              Done
-            </Button>
-          </div>
-        )}
+          ) : (
+            <div className="space-y-6">
+              <div>
+                <Label className="text-sm font-semibold text-black/80">Your Share Link</Label>
+                <div className="flex items-center gap-2 mt-2">
+                  <Input 
+                    value={generatedLink} 
+                    readOnly 
+                    className="flex-1 h-12 bg-white border-black/10 rounded-2xl px-4 text-sm font-medium text-black/70"
+                  />
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={copyToClipboard}
+                    className="h-12 w-12 rounded-2xl border-black/10 hover:bg-black/[0.04] shrink-0"
+                  >
+                    <Copy className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    onClick={openLink}
+                    className="h-12 w-12 rounded-2xl border-black/10 hover:bg-black/[0.04] shrink-0"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                    <Check className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-emerald-900 leading-none">Link Created!</h4>
+                    <p className="text-xs text-emerald-700/70 mt-1">Ready to share with investors</p>
+                  </div>
+                </div>
+                <ul className="text-xs text-emerald-800/70 space-y-2.5">
+                  <li className="flex items-start gap-2">
+                    <div className="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                    <span>Share this link with investors to start conversations instantly</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                    <span>No signup required - investors just need their email to access</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                    <span>{expiration === "never" ? "No expiration date" : `Active for ${expiration} days`}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="w-1 h-1 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                    <span>{allowDownloads ? "Document downloads enabled" : "Document downloads disabled"}</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <Button onClick={handleClose} className="w-full h-12 rounded-2xl bg-black hover:bg-black/90 text-white font-bold shadow-[0_8px_24px_rgba(0,0,0,0.2)] hover:shadow-[0_12px_32px_rgba(0,0,0,0.25)] transition-all">
+                Done
+              </Button>
+            </div>
+          )}
+        </div>
       </DialogContent>
     </Dialog>
   );

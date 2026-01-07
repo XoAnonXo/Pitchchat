@@ -7,9 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { isUnauthorizedError } from "@/lib/authUtils";
-import { apiRequest } from "@/lib/queryClient";
-import { Project, Document, Conversation } from "@shared/schema";
+import { apiRequest, getQueryFn } from "@/lib/queryClient";
+import type { Project, Document, Conversation, User } from "@shared/schema";
 import { motion } from "framer-motion";
+import { Logo } from "@/components/Logo";
 import { BlobMorphBackground } from "@/components/backgrounds";
 import {
   MessageSquare,
@@ -49,6 +50,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+
+type DashboardBootstrap = {
+  user: User;
+  projects: Project[];
+  analytics: {
+    totalQuestions: number;
+    activeLinks: number;
+    monthlyCost: number;
+  };
+  conversations: Conversation[];
+};
 
 // Feature cards for empty state - matching auth page style (doubled for fuller background)
 const emptyStateCards = [
@@ -275,6 +287,13 @@ export default function Dashboard() {
   const [showNewProjectModal, setShowNewProjectModal] = useState(false);
   const [newProjectName, setNewProjectName] = useState("");
   const [newProjectDescription, setNewProjectDescription] = useState("");
+  const [bootstrapHydrated, setBootstrapHydrated] = useState(false);
+  const [skipProjectsSkeleton] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+    return sessionStorage.getItem("pc_onboarding") === "1";
+  });
 
   // Redirect to login if not authenticated
   useEffect(() => {
@@ -291,11 +310,41 @@ export default function Dashboard() {
     }
   }, [user, authLoading, toast]);
 
-  // Fetch projects
-  const { data: projects = [], isLoading: projectsLoading } = useQuery<Project[]>({
-    queryKey: ["/api/projects"],
+  const bootstrapQuery = useQuery<DashboardBootstrap | null>({
+    queryKey: ["/api/bootstrap"],
+    queryFn: getQueryFn({ on401: "returnNull" }),
     enabled: !!user,
   });
+
+  useEffect(() => {
+    if (!bootstrapQuery.data) {
+      return;
+    }
+
+    queryClient.setQueryData(["/api/auth/user"], bootstrapQuery.data.user);
+    queryClient.setQueryData(["/api/projects"], bootstrapQuery.data.projects);
+    queryClient.setQueryData(["/api/analytics"], bootstrapQuery.data.analytics);
+    queryClient.setQueryData(["/api/conversations"], bootstrapQuery.data.conversations);
+    setBootstrapHydrated(true);
+  }, [bootstrapQuery.data, queryClient]);
+
+  const bootstrapFailed = bootstrapQuery.isError;
+  const bootstrapLoading = bootstrapQuery.isLoading || bootstrapQuery.isFetching;
+
+  // Fetch projects (fallback when bootstrap fails)
+  const { data: projects = [], isLoading: projectsLoading } = useQuery<Project[]>({
+    queryKey: ["/api/projects"],
+    enabled: !!user && bootstrapFailed,
+  });
+
+  useEffect(() => {
+    const onboardingReady =
+      bootstrapHydrated || (bootstrapFailed && !projectsLoading);
+
+    if (skipProjectsSkeleton && onboardingReady && typeof window !== "undefined") {
+      sessionStorage.removeItem("pc_onboarding");
+    }
+  }, [bootstrapFailed, bootstrapHydrated, projectsLoading, skipProjectsSkeleton]);
 
   // Fetch analytics
   const { data: analytics } = useQuery<{
@@ -304,13 +353,13 @@ export default function Dashboard() {
     monthlyCost: number;
   }>({
     queryKey: ["/api/analytics"],
-    enabled: !!user,
+    enabled: !!user && bootstrapFailed,
   });
 
   // Fetch conversations to check for contact notifications
   const { data: conversations = [] } = useQuery<Conversation[]>({
     queryKey: ["/api/conversations"],
-    enabled: !!user,
+    enabled: !!user && bootstrapFailed,
   });
 
   // Check if there are any conversations with contact details
@@ -339,7 +388,20 @@ export default function Dashboard() {
       return res.json();
     },
     onSuccess: (newProject) => {
-      queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
+      queryClient.setQueryData<Project[]>(["/api/projects"], (current = []) => [
+        newProject,
+        ...current,
+      ]);
+      queryClient.setQueryData<DashboardBootstrap | undefined>(
+        ["/api/bootstrap"],
+        (current) =>
+          current
+            ? {
+                ...current,
+                projects: [newProject, ...current.projects],
+              }
+            : current,
+      );
       setSelectedProjectId(newProject.id);
       toast({
         title: "Success",
@@ -382,7 +444,7 @@ export default function Dashboard() {
     }
   };
 
-  if (authLoading || !user) {
+  if (authLoading && !skipProjectsSkeleton) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <StartupLoadingSkeleton type="dashboard" />
@@ -390,7 +452,17 @@ export default function Dashboard() {
     );
   }
 
-  if (projectsLoading) {
+  if (!authLoading && !user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <StartupLoadingSkeleton type="dashboard" />
+      </div>
+    );
+  }
+
+  const showProjectsSkeleton = (projectsLoading || bootstrapLoading) && !skipProjectsSkeleton;
+
+  if (showProjectsSkeleton) {
     return (
       <div className="min-h-screen bg-white p-4 sm:p-6 lg:p-8">
         <StartupLoadingSkeleton type="dashboard" />
@@ -410,7 +482,7 @@ export default function Dashboard() {
         <div className="h-20 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
             <div className="w-9 h-9 bg-black rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-base">PC</span>
+              <Logo size="md" variant="white" className="p-1" />
             </div>
             <span className="font-bold text-lg text-black tracking-tight">PitchChat</span>
           </div>
@@ -478,7 +550,7 @@ export default function Dashboard() {
               <div className="overflow-hidden">
                 <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user.email?.split('@')[0]}</p>
                 <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
-                  {user?.subscriptionStatus === 'active' ? 'Pro' : 'Free'}
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free Plan'}
                 </p>
               </div>
             </div>
@@ -534,7 +606,17 @@ export default function Dashboard() {
                   </Button>
                 </Link>
               )}
-              <Button size="sm" onClick={() => setShowShareModal(true)} className="bg-black hover:bg-black/90 text-white h-9 text-xs font-semibold rounded-xl shadow-[0_12px_28px_rgba(0,0,0,0.22)]">
+              <Button 
+                size="sm" 
+                onClick={() => {
+                  if (selectedProject) {
+                    setShowShareModal(true);
+                  } else {
+                    handleCreateProject();
+                  }
+                }} 
+                className="bg-black hover:bg-black/90 text-white h-9 text-xs font-semibold rounded-xl shadow-[0_12px_28px_rgba(0,0,0,0.22)]"
+              >
                 <Plus className="w-3.5 h-3.5 mr-1.5" />
                 Create Link
               </Button>
@@ -638,9 +720,11 @@ export default function Dashboard() {
                     <p className="text-2xl font-bold text-black tracking-tight">{analytics.activeLinks}</p>
                   </div>
                   <div className="p-5 bg-white border border-black/8 rounded-2xl shadow-sm">
-                    <p className="text-[10px] font-semibold text-black/45 uppercase tracking-widest mb-1.5">Total Tokens</p>
+                    <p className="text-[10px] font-semibold text-black/45 uppercase tracking-widest mb-1.5">Lead Rate</p>
                     <p className="text-2xl font-bold text-black tracking-tight">
-                      {documents.reduce((sum, d) => sum + (d.tokens || 0), 0).toLocaleString()}
+                      {conversations.length > 0 
+                        ? ((conversations.filter(c => c.contactProvidedAt).length / conversations.length) * 100).toFixed(0)
+                        : 0}%
                     </p>
                   </div>
                   <div className="p-5 bg-white border border-black/8 rounded-2xl shadow-sm">

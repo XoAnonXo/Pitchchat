@@ -6,14 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { Loader2, Sparkles, BarChart3, Link2, MessageSquare, FileText, Upload, Users, ArrowRight } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import { useLocation, Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { motion, AnimatePresence, useMotionValue, PanInfo } from "framer-motion";
 import { BlobMorphBackground } from "@/components/backgrounds";
+import type { User } from "@shared/schema";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -358,9 +360,14 @@ function FeatureCarousel() {
 export default function AuthPage() {
   usePageTitle('Sign In');
   const [, setLocation] = useLocation();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
   const { isLoading, isAuthenticated } = useAuth();
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
+
+  useEffect(() => {
+    void import("@/pages/dashboard");
+  }, []);
 
   // Redirect if already authenticated
   if (!isLoading && isAuthenticated) {
@@ -385,13 +392,45 @@ export default function AuthPage() {
     },
   });
 
+  const primeBootstrapCache = (user: User) => {
+    queryClient.setQueryData(["/api/bootstrap"], {
+      user,
+      projects: [],
+      analytics: {
+        totalQuestions: 0,
+        activeLinks: 0,
+        monthlyCost: 0,
+      },
+      conversations: [],
+    });
+    queryClient.setQueryData(["/api/projects"], []);
+    queryClient.setQueryData(["/api/analytics"], {
+      totalQuestions: 0,
+      activeLinks: 0,
+      monthlyCost: 0,
+    });
+    queryClient.setQueryData(["/api/conversations"], []);
+  };
+
+  const handleAuthSuccess = (user: User, isNewSignup: boolean) => {
+    queryClient.setQueryData(["/api/auth/user"], user);
+    if (isNewSignup && typeof window !== "undefined") {
+      sessionStorage.setItem("pc_onboarding", "1");
+      primeBootstrapCache(user);
+    } else {
+      primeBootstrapCache(user);
+      void queryClient.invalidateQueries({ queryKey: ["/api/bootstrap"] });
+    }
+    setLocation("/");
+  };
+
   const loginMutation = useMutation({
     mutationFn: async (data: LoginForm) => {
       const res = await apiRequest("POST", "/api/auth/login", data);
       return res.json();
     },
-    onSuccess: () => {
-      window.location.href = "/";
+    onSuccess: (user: User) => {
+      handleAuthSuccess(user, false);
     },
     onError: (error: Error) => {
       toast({
@@ -408,8 +447,8 @@ export default function AuthPage() {
       const res = await apiRequest("POST", "/api/auth/register", data);
       return res.json();
     },
-    onSuccess: () => {
-      window.location.href = "/";
+    onSuccess: (user: User) => {
+      handleAuthSuccess(user, true);
     },
     onError: (error: Error) => {
       toast({
@@ -454,7 +493,7 @@ export default function AuthPage() {
             transition={{ duration: 0.6 }}
           >
             <div className="w-10 h-10 rounded-xl border border-black/10 bg-white flex items-center justify-center shadow-[0_1px_0_rgba(0,0,0,0.06)]">
-              <span className="font-inter-tight text-[15px] font-extrabold tracking-tight text-black">PC</span>
+              <Logo size="lg" className="p-1.5" />
             </div>
             <span className="font-inter-tight text-[15px] font-semibold tracking-tight text-black">PitchChat</span>
           </motion.div>
@@ -489,7 +528,7 @@ export default function AuthPage() {
           {/* Mobile logo */}
           <div className="lg:hidden flex items-center justify-center gap-3 mb-12">
             <div className="w-12 h-12 rounded-xl bg-black flex items-center justify-center">
-              <span className="font-bold text-white">PC</span>
+              <Logo size="lg" variant="white" className="p-1.5" />
             </div>
             <span className="text-black font-semibold text-xl tracking-tight">PitchChat</span>
           </div>

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { 
   Search, 
+  Activity,
   Calendar, 
   MessageSquare,
   User,
@@ -41,6 +42,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { formatDistanceToNow, format } from "date-fns";
+import { Logo } from "@/components/Logo";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Conversation, Message } from "@shared/schema";
@@ -140,7 +142,7 @@ export default function ConversationsPage() {
         <div className="h-20 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
             <div className="w-9 h-9 bg-black rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-base">PC</span>
+              <Logo size="md" variant="white" className="p-1" />
             </div>
             <span className="font-bold text-lg text-black tracking-tight">PitchChat</span>
           </div>
@@ -205,7 +207,7 @@ export default function ConversationsPage() {
               <div className="overflow-hidden">
                 <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
                 <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
-                  {user?.subscriptionStatus === 'active' ? 'Pro' : 'Free'}
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free Plan'}
                 </p>
               </div>
             </div>
@@ -275,11 +277,11 @@ export default function ConversationsPage() {
             <Card className="bg-[#EAE3D1] border-0 rounded-3xl shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-0.5">
               <CardContent className="p-6 flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold text-black/50 uppercase tracking-widest mb-1.5">Tokens</p>
-                  <p className="text-3xl font-bold text-black tracking-tight">{totalTokens.toLocaleString()}</p>
+                  <p className="text-[11px] font-semibold text-black/50 uppercase tracking-widest mb-1.5">Lead Capture</p>
+                  <p className="text-3xl font-bold text-black tracking-tight">{conversations.filter(c => c.contactProvidedAt).length}</p>
                 </div>
                 <div className="w-12 h-12 bg-white/60 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                  <Hash className="w-6 h-6 text-black/70" />
+                  <Users className="w-6 h-6 text-black/70" />
                 </div>
               </CardContent>
             </Card>
@@ -287,11 +289,15 @@ export default function ConversationsPage() {
             <Card className="bg-[#F5E6E0] border-0 rounded-3xl shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-0.5">
               <CardContent className="p-6 flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold text-black/50 uppercase tracking-widest mb-1.5">Cost</p>
-                  <p className="text-3xl font-bold text-black tracking-tight">${totalCost.toFixed(2)}</p>
+                  <p className="text-[11px] font-semibold text-black/50 uppercase tracking-widest mb-1.5">Engagement</p>
+                  <p className="text-3xl font-bold text-black tracking-tight">
+                    {conversations.length > 0 
+                      ? (conversations.reduce((acc, c) => acc + (c as any).messages?.length || 0, 0) / conversations.length).toFixed(1)
+                      : 0}
+                  </p>
                 </div>
                 <div className="w-12 h-12 bg-white/60 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                  <DollarSign className="w-6 h-6 text-black/70" />
+                  <Activity className="w-6 h-6 text-black/70" />
                 </div>
               </CardContent>
             </Card>
@@ -380,14 +386,6 @@ export default function ConversationsPage() {
                             <div className="flex items-center gap-1.5">
                               <Clock className="w-3 h-3" />
                               {conversation.startedAt ? formatDistanceToNow(new Date(conversation.startedAt)) : 'Just now'} ago
-                            </div>
-                            <div className="flex items-center gap-1.5">
-                              <Hash className="w-3 h-3" />
-                              {conversation.totalTokens?.toLocaleString()} tokens
-                            </div>
-                            <div className="flex items-center gap-1.5">
-                              <DollarSign className="w-3 h-3" />
-                              ${conversation.costUsd?.toFixed(4)}
                             </div>
                           </div>
                         </div>

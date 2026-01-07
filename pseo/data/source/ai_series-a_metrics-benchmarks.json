@@ -1,0 +1,31 @@
+{
+  "industry": "ai",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/ai/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "AI Series A fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for AI Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "2-5 months",
+      "note": "Projected target range; update with real data. AI Series A."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "35-55%",
+      "note": "Projected target range; update with real data. AI Series A."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "70-90%",
+      "note": "Projected target range; update with real data. AI Series A."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Low-Moderate; infra 15-30% of revenue",
+      "note": "Projected target range; update with real data. AI Series A."
+    }
+  ]
+}

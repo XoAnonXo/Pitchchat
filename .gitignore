@@ -18,6 +18,21 @@ start.log
 # Screenshots (for testing)
 screenshot*.png
 
+# Data
+data.db
+uploads/*
+!uploads/.gitkeep
+
 # Temporary files
 pid.txt
 cookies.txt
+test-results/
+.claude/
+.cursor/
+audit_prompt.md
+prompt.md
+email-preview.html
+lighthouserc.cjs
+bundle-size.config.json
+testAllEmails.ts
+testAllEmailsSimple.ts

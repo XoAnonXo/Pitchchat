@@ -35,6 +35,7 @@ import {
 } from "@shared/schema";
 import { db } from "./db";
 import { eq, desc, and, isNull, or, sql, inArray } from "drizzle-orm";
+import { timeAsync } from "./utils/timing";
 
 export interface IStorage {
   // User operations
@@ -96,6 +97,15 @@ export interface IStorage {
     activeLinks: number;
     monthlyCost: number;
   }>;
+  getUserBootstrap(userId: string): Promise<{
+    projects: Project[];
+    analytics: {
+      totalQuestions: number;
+      activeLinks: number;
+      monthlyCost: number;
+    };
+    conversations: any[];
+  }>;
   
   // User notification operations
   getUserIdFromConversation(conversationId: string): Promise<string | undefined>;
@@ -133,8 +143,10 @@ export interface IStorage {
 export class DatabaseStorage implements IStorage {
   // User operations
   async getUser(id: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user;
+    return timeAsync("storage.getUser", async () => {
+      const [user] = await db.select().from(users).where(eq(users.id, id));
+      return user;
+    });
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
@@ -172,11 +184,13 @@ export class DatabaseStorage implements IStorage {
 
   // Project operations
   async getUserProjects(userId: string): Promise<Project[]> {
-    return await db
-      .select()
-      .from(projects)
-      .where(eq(projects.userId, userId))
-      .orderBy(desc(projects.updatedAt));
+    return timeAsync("storage.getUserProjects", async () => {
+      return await db
+        .select()
+        .from(projects)
+        .where(eq(projects.userId, userId))
+        .orderBy(desc(projects.updatedAt));
+    });
   }
 
   async getProject(id: string): Promise<Project | undefined> {
@@ -443,88 +457,138 @@ export class DatabaseStorage implements IStorage {
   }
 
   // Get all conversations for a user's projects
+  private async getUserConversationsForProjectIds(projectIds: string[]): Promise<any[]> {
+    return timeAsync("storage.getUserConversationsForProjectIds", async () => {
+      if (projectIds.length === 0) {
+        return [];
+      }
+
+      const conversationsWithDetails = await db
+        .select({
+          id: conversations.id,
+          investorEmail: conversations.investorEmail,
+          startedAt: conversations.startedAt,
+          totalTokens: conversations.totalTokens,
+          costUsd: conversations.costUsd,
+          isActive: conversations.isActive,
+          linkId: conversations.linkId,
+          linkName: links.name,
+          projectId: links.projectId,
+          projectName: projects.name,
+          // Contact details
+          contactName: conversations.contactName,
+          contactPhone: conversations.contactPhone,
+          contactCompany: conversations.contactCompany,
+          contactWebsite: conversations.contactWebsite,
+          contactProvidedAt: conversations.contactProvidedAt,
+        })
+        .from(conversations)
+        .innerJoin(links, eq(conversations.linkId, links.id))
+        .innerJoin(projects, eq(links.projectId, projects.id))
+        .where(inArray(links.projectId, projectIds))
+        .orderBy(desc(conversations.startedAt));
+
+      return conversationsWithDetails;
+    });
+  }
+
   async getUserConversations(userId: string): Promise<any[]> {
-    const userProjects = await this.getUserProjects(userId);
-    const projectIds = userProjects.map(p => p.id);
-
-    if (projectIds.length === 0) {
-      return [];
-    }
-
-    const conversationsWithDetails = await db
-      .select({
-        id: conversations.id,
-        investorEmail: conversations.investorEmail,
-        startedAt: conversations.startedAt,
-        totalTokens: conversations.totalTokens,
-        costUsd: conversations.costUsd,
-        isActive: conversations.isActive,
-        linkId: conversations.linkId,
-        linkName: links.name,
-        projectId: links.projectId,
-        projectName: projects.name,
-        // Contact details
-        contactName: conversations.contactName,
-        contactPhone: conversations.contactPhone,
-        contactCompany: conversations.contactCompany,
-        contactWebsite: conversations.contactWebsite,
-        contactProvidedAt: conversations.contactProvidedAt,
-      })
-      .from(conversations)
-      .innerJoin(links, eq(conversations.linkId, links.id))
-      .innerJoin(projects, eq(links.projectId, projects.id))
-      .where(or(...projectIds.map(id => eq(links.projectId, id))))
-      .orderBy(desc(conversations.startedAt));
-
-    return conversationsWithDetails;
+    return timeAsync("storage.getUserConversations", async () => {
+      const userProjects = await this.getUserProjects(userId);
+      const projectIds = userProjects.map(p => p.id);
+      return await this.getUserConversationsForProjectIds(projectIds);
+    });
   }
 
   // Analytics
+  private async getUserAnalyticsForProjectIds(projectIds: string[]): Promise<{
+    totalQuestions: number;
+    activeLinks: number;
+    monthlyCost: number;
+  }> {
+    return timeAsync("storage.getUserAnalyticsForProjectIds", async () => {
+      if (projectIds.length === 0) {
+        return { totalQuestions: 0, activeLinks: 0, monthlyCost: 0 };
+      }
+
+      const [activeLinksRow] = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(links)
+        .where(
+          and(
+            eq(links.status, "active"),
+            inArray(links.projectId, projectIds),
+          ),
+        );
+
+      const [totalQuestionsRow] = await db
+        .select({ count: sql<number>`count(*)` })
+        .from(messages)
+        .innerJoin(conversations, eq(messages.conversationId, conversations.id))
+        .innerJoin(links, eq(conversations.linkId, links.id))
+        .where(
+          and(
+            eq(messages.role, "user"),
+            inArray(links.projectId, projectIds),
+          ),
+        );
+
+      const activeLinksCount = Number(activeLinksRow?.count ?? 0);
+      const totalQuestionsCount = Number(totalQuestionsRow?.count ?? 0);
+      const monthlyCost = totalQuestionsCount * 0.001;
+
+      return {
+        totalQuestions: totalQuestionsCount,
+        activeLinks: activeLinksCount,
+        monthlyCost: Math.round(monthlyCost * 100) / 100,
+      };
+    });
+  }
+
   async getUserAnalytics(userId: string): Promise<{
     totalQuestions: number;
     activeLinks: number;
     monthlyCost: number;
   }> {
-    // Get user's projects
-    const userProjects = await this.getUserProjects(userId);
-    const projectIds = userProjects.map(p => p.id);
+    return timeAsync("storage.getUserAnalytics", async () => {
+      const userProjects = await this.getUserProjects(userId);
+      const projectIds = userProjects.map(p => p.id);
+      return await this.getUserAnalyticsForProjectIds(projectIds);
+    });
+  }
 
-    if (projectIds.length === 0) {
-      return { totalQuestions: 0, activeLinks: 0, monthlyCost: 0 };
-    }
-
-    // Count active links
-    const activeLinks = await db
-      .select()
-      .from(links)
-      .where(
-        and(
-          eq(links.status, "active"),
-          or(...projectIds.map(id => eq(links.projectId, id)))
-        )
-      );
-
-    // Count total questions (messages with role 'user')
-    const totalQuestions = await db
-      .select()
-      .from(messages)
-      .innerJoin(conversations, eq(messages.conversationId, conversations.id))
-      .innerJoin(links, eq(conversations.linkId, links.id))
-      .where(
-        and(
-          eq(messages.role, "user"),
-          or(...projectIds.map(id => eq(links.projectId, id)))
-        )
-      );
-
-    // Calculate monthly cost (simplified - in production, you'd sum actual costs)
-    const monthlyCost = totalQuestions.length * 0.001; // $0.001 per question estimate
-
-    return {
-      totalQuestions: totalQuestions.length,
-      activeLinks: activeLinks.length,
-      monthlyCost: Math.round(monthlyCost * 100) / 100,
+  async getUserBootstrap(userId: string): Promise<{
+    projects: Project[];
+    analytics: {
+      totalQuestions: number;
+      activeLinks: number;
+      monthlyCost: number;
     };
+    conversations: any[];
+  }> {
+    return timeAsync("storage.getUserBootstrap", async () => {
+      const userProjects = await this.getUserProjects(userId);
+      const projectIds = userProjects.map(p => p.id);
+
+      if (projectIds.length === 0) {
+        return {
+          projects: userProjects,
+          analytics: { totalQuestions: 0, activeLinks: 0, monthlyCost: 0 },
+          conversations: [],
+        };
+      }
+
+      const [analytics, conversations] = await Promise.all([
+        this.getUserAnalyticsForProjectIds(projectIds),
+        this.getUserConversationsForProjectIds(projectIds),
+      ]);
+
+      return {
+        projects: userProjects,
+        analytics,
+        conversations,
+      };
+    });
   }
 
   // Comprehensive Analytics

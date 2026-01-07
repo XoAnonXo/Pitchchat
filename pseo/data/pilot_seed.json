@@ -1,0 +1,1419 @@
+{
+  "generatedAt": "2026-01-06T12:11:08.755Z",
+  "items": [
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/aerospace/seed/investor-questions/",
+      "title": "Investor Questions for Aerospace Seed",
+      "summary": "Key investor questions seed aerospace founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/aerospace/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/aerospace/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/aerospace/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/aerospace/seed/investor-update/",
+      "title": "Investor Update for Aerospace Seed"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/aerospace/series-a/investor-questions/",
+      "title": "Investor Questions for Aerospace Series A",
+      "summary": "Key investor questions series-a aerospace founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/aerospace/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/aerospace/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/aerospace/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Aerospace Series A"
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/aerospace/series-a/investor-update/",
+      "title": "Investor Update for Aerospace Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/hardware/seed/investor-questions/",
+      "title": "Investor Questions for Hardware Seed",
+      "summary": "Key investor questions seed hardware founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/hardware/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/hardware/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/hardware/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/hardware/seed/investor-update/",
+      "title": "Investor Update for Hardware Seed"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/hardware/series-a/investor-questions/",
+      "title": "Investor Questions for Hardware Series A",
+      "summary": "Key investor questions series-a hardware founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/hardware/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/hardware/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/hardware/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Hardware Series A"
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/hardware/series-a/investor-update/",
+      "title": "Investor Update for Hardware Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/robotics/seed/investor-questions/",
+      "title": "Investor Questions for Robotics Seed",
+      "summary": "Key investor questions seed robotics founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/robotics/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/robotics/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/robotics/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/robotics/seed/investor-update/",
+      "title": "Investor Update for Robotics Seed"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/robotics/series-a/investor-questions/",
+      "title": "Investor Questions for Robotics Series A",
+      "summary": "Key investor questions series-a robotics founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/robotics/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/robotics/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/robotics/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Robotics Series A"
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/robotics/series-a/investor-update/",
+      "title": "Investor Update for Robotics Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/chemistry/seed/investor-questions/",
+      "title": "Investor Questions for Chemistry Seed",
+      "summary": "Key investor questions seed chemistry founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/chemistry/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/chemistry/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/chemistry/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/chemistry/seed/investor-update/",
+      "title": "Investor Update for Chemistry Seed"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/chemistry/series-a/investor-questions/",
+      "title": "Investor Questions for Chemistry Series A",
+      "summary": "Key investor questions series-a chemistry founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/chemistry/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/chemistry/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/chemistry/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Chemistry Series A"
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/chemistry/series-a/investor-update/",
+      "title": "Investor Update for Chemistry Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/finance/seed/investor-questions/",
+      "title": "Investor Questions for Finance Seed",
+      "summary": "Key investor questions seed finance founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/finance/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/finance/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/finance/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/finance/seed/investor-update/",
+      "title": "Investor Update for Finance Seed"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/finance/series-a/investor-questions/",
+      "title": "Investor Questions for Finance Series A",
+      "summary": "Key investor questions series-a finance founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/finance/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/finance/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/finance/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Finance Series A"
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/finance/series-a/investor-update/",
+      "title": "Investor Update for Finance Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/blockchain/seed/investor-questions/",
+      "title": "Investor Questions for Blockchain Seed",
+      "summary": "Key investor questions seed blockchain founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/blockchain/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/blockchain/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/blockchain/seed/diligence-checklist/",
+      "title": "Diligence Checklist for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/blockchain/seed/investor-update/",
+      "title": "Investor Update for Blockchain Seed"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/blockchain/series-a/investor-questions/",
+      "title": "Investor Questions for Blockchain Series A",
+      "summary": "Key investor questions series-a blockchain founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/blockchain/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/blockchain/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/blockchain/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for Blockchain Series A"
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/blockchain/series-a/investor-update/",
+      "title": "Investor Update for Blockchain Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/ai/seed/investor-questions/",
+      "title": "Investor Questions for AI Seed",
+      "summary": "Key investor questions seed ai founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/ai/seed/pitch-deck/",
+      "title": "Pitch Deck Outline for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/ai/seed/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/ai/seed/diligence-checklist/",
+      "title": "Diligence Checklist for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/ai/seed/investor-update/",
+      "title": "Investor Update for AI Seed"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/ai/series-a/investor-questions/",
+      "title": "Investor Questions for AI Series A",
+      "summary": "Key investor questions series-a ai founders should prepare for.",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Investors want a clear, painful problem and a timing advantage. Anchor the answer in a market shift, regulation, or platform change."
+        },
+        {
+          "category": "Market",
+          "question": "Who is the primary buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you dominate, and the path from pilot to paid account."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes this defensible beyond execution speed?",
+          "answer": "Highlight proprietary data, workflow lock-in, regulatory approvals, or supply chain advantages."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will unit economics improve as you scale?",
+          "answer": "Explain how margins improve with learning curves, automation, or better procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "Document pilot to paid conversion timeline",
+          "note": "Seed and Series A investors expect evidence of repeatability."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "Track pilots that convert to paid agreements",
+          "note": "Show the leading indicator that validates the go-to-market motion."
+        },
+        {
+          "label": "Gross margin plan",
+          "value": "Explain margin expansion levers",
+          "note": "Investors look for improving margins at scale."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Outline capital needs per unit of growth",
+          "note": "Highlight how automation or scale reduces capital burden."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a path to land-and-expand with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how funds unlock measurable de-risking."
+        }
+      ],
+      "ctaText": "Create your PitchChat room"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/ai/series-a/pitch-deck/",
+      "title": "Pitch Deck Outline for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/ai/series-a/metrics-benchmarks/",
+      "title": "Metrics Benchmarks for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/ai/series-a/diligence-checklist/",
+      "title": "Diligence Checklist for AI Series A"
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/ai/series-a/investor-update/",
+      "title": "Investor Update for AI Series A"
+    }
+  ]
+}

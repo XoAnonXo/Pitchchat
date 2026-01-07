@@ -1,0 +1,32 @@
+{
+  "industry": "ai",
+  "stage": "seed",
+  "pageType": "investor-questions",
+  "sourceId": "anon-001",
+  "summary": "Anonymized investor Q&A from multiple seed fundraising conversations.",
+  "questions": [
+    {
+      "category": "Problem",
+      "question": "What specific pain point is urgent enough to buy now?",
+      "answer": "Describe the high-cost workflow and why existing tools fail."
+    },
+    {
+      "category": "Buyer",
+      "question": "Who signs the contract and what budget owns this?",
+      "answer": "Identify the title, budget line, and internal champion."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Pilot conversion rate",
+      "value": "25-35%",
+      "note": "Based on anonymized pilot cohorts."
+    }
+  ],
+  "objections": [
+    {
+      "objection": "Why does this require a new vendor?",
+      "response": "Show measurable savings and a short implementation plan."
+    }
+  ]
+}

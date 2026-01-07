@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
 import {
   ArrowRight,
   BarChart3,
@@ -8,7 +9,6 @@ import {
   Lock,
   MessageSquare,
   Shield,
-  Sparkles,
   Upload,
   UserCheck,
   Zap,
@@ -44,11 +44,7 @@ export default function Landing() {
             onClick={() => scrollToId("top")}
             className="group flex items-center gap-3"
           >
-            <span className="grid h-10 w-10 place-items-center rounded-xl border border-black/10 bg-white shadow-[0_1px_0_rgba(0,0,0,0.06)]">
-              <span className="font-inter-tight text-[15px] font-extrabold tracking-tight">
-                PC
-              </span>
-            </span>
+            <Logo size="lg" className="rounded-xl border border-black/10 bg-white p-1.5 shadow-[0_1px_0_rgba(0,0,0,0.06)]" />
             <span className="font-inter-tight text-[15px] font-semibold tracking-tight">
               PitchChat
             </span>
@@ -104,7 +100,7 @@ export default function Landing() {
 
           <div className="section-card-inner py-16 px-8 md:px-12 text-center relative z-10">
             <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/70">
-              <Sparkles className="h-4 w-4" />
+              <Logo size="sm" className="h-4 w-4" />
               Pitch, with AI
             </div>
 
@@ -194,9 +190,7 @@ export default function Landing() {
               <div className="rounded-[32px] border border-black/10 bg-white shadow-lg overflow-hidden card-typeless animate-fade-slide-up transition-all duration-300 hover:-translate-y-1">
                 <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="grid h-9 w-9 place-items-center rounded-2xl bg-black text-white">
-                      <Sparkles className="h-4 w-4" />
-                    </div>
+                    <Logo size="md" className="h-9 w-9 rounded-2xl bg-black p-1.5" variant="white" />
                     <div>
                       <p className="font-inter-tight text-sm font-bold leading-none">
                         AI Pitch Room
@@ -654,7 +648,7 @@ export default function Landing() {
                   </div>
                 </div>
                 <p className="mt-4 text-[18px] leading-[1.6] text-black/60">
-                  Gate by email, domain, or verification. Revoke instantly.
+                  Gate by email or verification. Revoke instantly.
                 </p>
               </div>
 
@@ -707,10 +701,8 @@ export default function Landing() {
         <footer className="border-t border-black/[0.08] bg-white mt-6">
           <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
-              <div className="grid h-8 w-8 place-items-center rounded-xl bg-black text-white">
-                <span className="font-inter-tight text-xs font-extrabold tracking-tight">
-                  PC
-                </span>
+              <div className="h-8 w-8 rounded-xl bg-black flex items-center justify-center">
+                <Logo size="sm" variant="white" className="p-1" />
               </div>
               <span className="font-inter-tight text-sm font-bold tracking-tight text-black">
                 PitchChat

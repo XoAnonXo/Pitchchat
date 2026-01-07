@@ -61,6 +61,7 @@ import {
   Database
 } from "lucide-react";
 import { format } from "date-fns";
+import { Logo } from "@/components/Logo";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Conversation, Project } from "@shared/schema";
@@ -255,7 +256,7 @@ export default function AnalyticsPage() {
         <div className="h-20 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
             <div className="w-9 h-9 bg-black rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-base">PC</span>
+              <Logo size="md" variant="white" className="p-1" />
             </div>
             <span className="font-bold text-lg text-black tracking-tight">PitchChat</span>
           </div>
@@ -320,7 +321,7 @@ export default function AnalyticsPage() {
               <div className="overflow-hidden">
                 <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
                 <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
-                  {user?.subscriptionStatus === 'active' ? 'Pro' : 'Free'}
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free Plan'}
                 </p>
               </div>
             </div>
@@ -700,13 +701,13 @@ export default function AnalyticsPage() {
                               <div>
                                 <p className="text-sm font-semibold text-black">{visitor.email}</p>
                                 <p className="text-[10px] text-black/40 font-medium uppercase tracking-wide">
-                                  {visitor.conversations} chats • {visitor.totalTokens.toLocaleString()} tokens
+                                  {visitor.conversations} chats
                                 </p>
                               </div>
                             </div>
                             <div className="text-right">
-                              <p className={`text-sm font-bold ${index === 0 ? 'text-black' : 'text-black/80'}`}>${visitor.totalCost.toFixed(2)}</p>
-                              <p className="text-[10px] text-black/40 font-medium uppercase">Cost</p>
+                              <p className={`text-sm font-bold ${index === 0 ? 'text-black' : 'text-black/80'}`}>{visitor.totalTokens > 1000 ? 'High' : 'Low'}</p>
+                              <p className="text-[10px] text-black/40 font-medium uppercase">Engagement</p>
                             </div>
                           </div>
                         );

@@ -1,0 +1,22 @@
+{
+  "industries": [
+    { "slug": "aerospace", "label": "Aerospace" },
+    { "slug": "hardware", "label": "Hardware" },
+    { "slug": "robotics", "label": "Robotics" },
+    { "slug": "chemistry", "label": "Chemistry" },
+    { "slug": "finance", "label": "Finance" },
+    { "slug": "blockchain", "label": "Blockchain" },
+    { "slug": "ai", "label": "AI" }
+  ],
+  "stages": [
+    { "slug": "seed", "label": "Seed" },
+    { "slug": "series-a", "label": "Series A" }
+  ],
+  "pageTypes": [
+    { "slug": "investor-questions", "label": "Investor Questions" },
+    { "slug": "pitch-deck", "label": "Pitch Deck Outline" },
+    { "slug": "metrics-benchmarks", "label": "Metrics Benchmarks" },
+    { "slug": "diligence-checklist", "label": "Diligence Checklist" },
+    { "slug": "investor-update", "label": "Investor Update" }
+  ]
+}

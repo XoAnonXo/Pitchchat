@@ -1,0 +1,9 @@
+{
+  "aerospace": ["hardware", "robotics", "ai"],
+  "hardware": ["robotics", "aerospace", "chemistry"],
+  "robotics": ["hardware", "ai", "aerospace"],
+  "chemistry": ["hardware", "finance", "ai"],
+  "finance": ["blockchain", "ai", "chemistry"],
+  "blockchain": ["finance", "ai", "hardware"],
+  "ai": ["robotics", "finance", "blockchain"]
+}

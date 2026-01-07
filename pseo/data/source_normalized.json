@@ -1,0 +1,4090 @@
+{
+  "generatedAt": "2026-01-06T17:43:16.306Z",
+  "items": [
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/aerospace/seed/diligence-checklist/",
+      "title": "Aerospace Seed diligence checklist",
+      "summary": "Projected diligence checklist for Aerospace founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Certification evidence and safety documentation (Seed)",
+          "rationale": "Confirms regulatory progress and risk mitigation."
+        },
+        {
+          "item": "Seed readiness summary for Aerospace",
+          "rationale": "Signals you can close a Seed round in Aerospace."
+        }
+      ]
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/aerospace/seed/investor-questions/",
+      "title": "Investor questions for Aerospace Seed startups",
+      "summary": "Projected investor questions and preparation guidance for Aerospace founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Regulatory",
+          "question": "Which certifications or safety milestones unlock commercialization? (Aerospace Seed)",
+          "answer": "List the required certifications and the path to achieve them within the runway. Focus on Aerospace at the Seed stage."
+        },
+        {
+          "category": "Procurement",
+          "question": "How will you navigate long procurement cycles? (Aerospace Seed)",
+          "answer": "Describe pilots, integration strategy, and stakeholder alignment tactics. Focus on Aerospace at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Regulatory approvals will delay revenue. (Aerospace Seed)",
+          "response": "Show a staged certification plan and interim revenue channels. Tie it to Aerospace Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/aerospace/seed/investor-update/",
+      "title": "Aerospace Seed investor update template",
+      "summary": "Projected update format for Aerospace founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Regulatory milestones (Seed)",
+          "content": "Share certification progress and upcoming approvals."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for Aerospace founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/aerospace/seed/metrics-benchmarks/",
+      "title": "Aerospace Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Aerospace Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Aerospace Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/aerospace/seed/pitch-deck/",
+      "title": "Pitch deck outline for Aerospace Seed startups",
+      "summary": "Projected deck structure for Aerospace founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Certification roadmap",
+          "goal": "Explain safety and certification milestones.",
+          "guidance": "Show the path to regulatory approval and commercialization."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for Aerospace Seed."
+        },
+        {
+          "title": "Aerospace go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for Aerospace.",
+          "guidance": "Show a focused wedge that fits Aerospace buyers at the Seed stage."
+        },
+        {
+          "title": "Aerospace proof points",
+          "goal": "Show evidence tailored to Aerospace.",
+          "guidance": "Use data or pilots specific to Aerospace to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/aerospace/series-a/diligence-checklist/",
+      "title": "Aerospace Series A diligence checklist",
+      "summary": "Projected diligence checklist for Aerospace founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Certification evidence and safety documentation (Series A)",
+          "rationale": "Confirms regulatory progress and risk mitigation."
+        },
+        {
+          "item": "Series A readiness summary for Aerospace",
+          "rationale": "Signals you can close a Series A round in Aerospace."
+        }
+      ]
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/aerospace/series-a/investor-questions/",
+      "title": "Investor questions for Aerospace Series A startups",
+      "summary": "Projected investor questions and preparation guidance for Aerospace founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Regulatory",
+          "question": "Which certifications or safety milestones unlock commercialization? (Aerospace Series A)",
+          "answer": "List the required certifications and the path to achieve them within the runway. Focus on Aerospace at the Series A stage."
+        },
+        {
+          "category": "Procurement",
+          "question": "How will you navigate long procurement cycles? (Aerospace Series A)",
+          "answer": "Describe pilots, integration strategy, and stakeholder alignment tactics. Focus on Aerospace at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Regulatory approvals will delay revenue. (Aerospace Series A)",
+          "response": "Show a staged certification plan and interim revenue channels. Tie it to Aerospace Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/aerospace/series-a/investor-update/",
+      "title": "Aerospace Series A investor update template",
+      "summary": "Projected update format for Aerospace founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Regulatory milestones (Series A)",
+          "content": "Share certification progress and upcoming approvals."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for Aerospace founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/aerospace/series-a/metrics-benchmarks/",
+      "title": "Aerospace Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Aerospace Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Aerospace Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "aerospace",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/aerospace/series-a/pitch-deck/",
+      "title": "Pitch deck outline for Aerospace Series A startups",
+      "summary": "Projected deck structure for Aerospace founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Certification roadmap",
+          "goal": "Explain safety and certification milestones.",
+          "guidance": "Show the path to regulatory approval and commercialization."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for Aerospace Series A."
+        },
+        {
+          "title": "Aerospace go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for Aerospace.",
+          "guidance": "Show a focused wedge that fits Aerospace buyers at the Series A stage."
+        },
+        {
+          "title": "Aerospace proof points",
+          "goal": "Show evidence tailored to Aerospace.",
+          "guidance": "Use data or pilots specific to Aerospace to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/ai/seed/diligence-checklist/",
+      "title": "AI Seed diligence checklist",
+      "summary": "Projected diligence checklist for AI founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Data provenance and model evaluation results (Seed)",
+          "rationale": "Supports model reliability and defensibility."
+        },
+        {
+          "item": "Seed readiness summary for AI",
+          "rationale": "Signals you can close a Seed round in AI."
+        }
+      ]
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/ai/seed/investor-questions/",
+      "title": "Investor questions for AI Seed startups",
+      "summary": "Projected investor questions and preparation guidance for AI founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Data",
+          "question": "What data advantage will compound over time? (AI Seed)",
+          "answer": "Explain data sources, collection strategy, and quality controls. Focus on AI at the Seed stage."
+        },
+        {
+          "category": "Model",
+          "question": "How will model performance improve as you scale? (AI Seed)",
+          "answer": "Outline evaluation metrics, feedback loops, and cost controls. Focus on AI at the Seed stage."
+        },
+        {
+          "category": "Costs",
+          "question": "How will inference costs decline with scale? (AI Seed)",
+          "answer": "Show optimization plans and unit cost targets tied to growth. Focus on AI at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "1-4 months",
+          "note": "Projected target range; update with real data. AI Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-50%",
+          "note": "Projected target range; update with real data. AI Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "65-85%",
+          "note": "Projected target range; update with real data. AI Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Low-Moderate; infra 20-40% of revenue",
+          "note": "Projected target range; update with real data. AI Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Model moat is weak without proprietary data. (AI Seed)",
+          "response": "Explain data strategy and feedback loops that deepen the moat. Tie it to AI Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/ai/seed/investor-update/",
+      "title": "AI Seed investor update template",
+      "summary": "Projected update format for AI founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Model performance (Seed)",
+          "content": "Share evaluation results and cost efficiency gains."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for AI founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/ai/seed/metrics-benchmarks/",
+      "title": "AI Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for AI Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "1-4 months",
+          "note": "Projected target range; update with real data. AI Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-50%",
+          "note": "Projected target range; update with real data. AI Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "65-85%",
+          "note": "Projected target range; update with real data. AI Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Low-Moderate; infra 20-40% of revenue",
+          "note": "Projected target range; update with real data. AI Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/ai/seed/pitch-deck/",
+      "title": "Pitch deck outline for AI Seed startups",
+      "summary": "Projected deck structure for AI founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Data and model strategy",
+          "goal": "Explain data advantage and model improvements.",
+          "guidance": "Show evaluation metrics and cost control plan."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for AI Seed."
+        },
+        {
+          "title": "AI go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for AI.",
+          "guidance": "Show a focused wedge that fits AI buyers at the Seed stage."
+        },
+        {
+          "title": "AI proof points",
+          "goal": "Show evidence tailored to AI.",
+          "guidance": "Use data or pilots specific to AI to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/ai/series-a/diligence-checklist/",
+      "title": "AI Series A diligence checklist",
+      "summary": "Projected diligence checklist for AI founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Data provenance and model evaluation results (Series A)",
+          "rationale": "Supports model reliability and defensibility."
+        },
+        {
+          "item": "Series A readiness summary for AI",
+          "rationale": "Signals you can close a Series A round in AI."
+        }
+      ]
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/ai/series-a/investor-questions/",
+      "title": "Investor questions for AI Series A startups",
+      "summary": "Projected investor questions and preparation guidance for AI founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Data",
+          "question": "What data advantage will compound over time? (AI Series A)",
+          "answer": "Explain data sources, collection strategy, and quality controls. Focus on AI at the Series A stage."
+        },
+        {
+          "category": "Model",
+          "question": "How will model performance improve as you scale? (AI Series A)",
+          "answer": "Outline evaluation metrics, feedback loops, and cost controls. Focus on AI at the Series A stage."
+        },
+        {
+          "category": "Costs",
+          "question": "How will inference costs decline with scale? (AI Series A)",
+          "answer": "Show optimization plans and unit cost targets tied to growth. Focus on AI at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "2-5 months",
+          "note": "Projected target range; update with real data. AI Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "35-55%",
+          "note": "Projected target range; update with real data. AI Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "70-90%",
+          "note": "Projected target range; update with real data. AI Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Low-Moderate; infra 15-30% of revenue",
+          "note": "Projected target range; update with real data. AI Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Model moat is weak without proprietary data. (AI Series A)",
+          "response": "Explain data strategy and feedback loops that deepen the moat. Tie it to AI Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/ai/series-a/investor-update/",
+      "title": "AI Series A investor update template",
+      "summary": "Projected update format for AI founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Model performance (Series A)",
+          "content": "Share evaluation results and cost efficiency gains."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for AI founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/ai/series-a/metrics-benchmarks/",
+      "title": "AI Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for AI Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "2-5 months",
+          "note": "Projected target range; update with real data. AI Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "35-55%",
+          "note": "Projected target range; update with real data. AI Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "70-90%",
+          "note": "Projected target range; update with real data. AI Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Low-Moderate; infra 15-30% of revenue",
+          "note": "Projected target range; update with real data. AI Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "ai",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/ai/series-a/pitch-deck/",
+      "title": "Pitch deck outline for AI Series A startups",
+      "summary": "Projected deck structure for AI founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Data and model strategy",
+          "goal": "Explain data advantage and model improvements.",
+          "guidance": "Show evaluation metrics and cost control plan."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for AI Series A."
+        },
+        {
+          "title": "AI go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for AI.",
+          "guidance": "Show a focused wedge that fits AI buyers at the Series A stage."
+        },
+        {
+          "title": "AI proof points",
+          "goal": "Show evidence tailored to AI.",
+          "guidance": "Use data or pilots specific to AI to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/blockchain/seed/diligence-checklist/",
+      "title": "Blockchain Seed diligence checklist",
+      "summary": "Projected diligence checklist for Blockchain founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Security audits and governance policies (Seed)",
+          "rationale": "Mitigates protocol risk and regulatory exposure."
+        },
+        {
+          "item": "Seed readiness summary for Blockchain",
+          "rationale": "Signals you can close a Seed round in Blockchain."
+        }
+      ]
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/blockchain/seed/investor-questions/",
+      "title": "Investor questions for Blockchain Seed startups",
+      "summary": "Projected investor questions and preparation guidance for Blockchain founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Risk",
+          "question": "How do you manage regulatory uncertainty? (Blockchain Seed)",
+          "answer": "Describe legal posture, jurisdiction strategy, and risk mitigation. Focus on Blockchain at the Seed stage."
+        },
+        {
+          "category": "Security",
+          "question": "How do you prove protocol or product security? (Blockchain Seed)",
+          "answer": "Share audit plans and monitoring systems. Focus on Blockchain at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "2-6 months",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-40%",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "60-80%",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; audits 3-6 mo",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Regulatory uncertainty creates long-term risk. (Blockchain Seed)",
+          "response": "Define jurisdiction strategy and compliance safeguards. Tie it to Blockchain Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/blockchain/seed/investor-update/",
+      "title": "Blockchain Seed investor update template",
+      "summary": "Projected update format for Blockchain founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Security updates (Seed)",
+          "content": "Share audit results and protocol health metrics."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for Blockchain founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/blockchain/seed/metrics-benchmarks/",
+      "title": "Blockchain Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Blockchain Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "2-6 months",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-40%",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "60-80%",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; audits 3-6 mo",
+          "note": "Projected target range; update with real data. Blockchain Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/blockchain/seed/pitch-deck/",
+      "title": "Pitch deck outline for Blockchain Seed startups",
+      "summary": "Projected deck structure for Blockchain founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Protocol security",
+          "goal": "Show security and governance readiness.",
+          "guidance": "Detail audits, monitoring, and token economics."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for Blockchain Seed."
+        },
+        {
+          "title": "Blockchain go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for Blockchain.",
+          "guidance": "Show a focused wedge that fits Blockchain buyers at the Seed stage."
+        },
+        {
+          "title": "Blockchain proof points",
+          "goal": "Show evidence tailored to Blockchain.",
+          "guidance": "Use data or pilots specific to Blockchain to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/blockchain/series-a/diligence-checklist/",
+      "title": "Blockchain Series A diligence checklist",
+      "summary": "Projected diligence checklist for Blockchain founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Security audits and governance policies (Series A)",
+          "rationale": "Mitigates protocol risk and regulatory exposure."
+        },
+        {
+          "item": "Series A readiness summary for Blockchain",
+          "rationale": "Signals you can close a Series A round in Blockchain."
+        }
+      ]
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/blockchain/series-a/investor-questions/",
+      "title": "Investor questions for Blockchain Series A startups",
+      "summary": "Projected investor questions and preparation guidance for Blockchain founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Risk",
+          "question": "How do you manage regulatory uncertainty? (Blockchain Series A)",
+          "answer": "Describe legal posture, jurisdiction strategy, and risk mitigation. Focus on Blockchain at the Series A stage."
+        },
+        {
+          "category": "Security",
+          "question": "How do you prove protocol or product security? (Blockchain Series A)",
+          "answer": "Share audit plans and monitoring systems. Focus on Blockchain at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "2-5 months",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-50%",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "65-85%",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; audits 3-6 mo",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Regulatory uncertainty creates long-term risk. (Blockchain Series A)",
+          "response": "Define jurisdiction strategy and compliance safeguards. Tie it to Blockchain Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/blockchain/series-a/investor-update/",
+      "title": "Blockchain Series A investor update template",
+      "summary": "Projected update format for Blockchain founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Security updates (Series A)",
+          "content": "Share audit results and protocol health metrics."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for Blockchain founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/blockchain/series-a/metrics-benchmarks/",
+      "title": "Blockchain Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Blockchain Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "2-5 months",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-50%",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "65-85%",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; audits 3-6 mo",
+          "note": "Projected target range; update with real data. Blockchain Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "blockchain",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/blockchain/series-a/pitch-deck/",
+      "title": "Pitch deck outline for Blockchain Series A startups",
+      "summary": "Projected deck structure for Blockchain founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Protocol security",
+          "goal": "Show security and governance readiness.",
+          "guidance": "Detail audits, monitoring, and token economics."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for Blockchain Series A."
+        },
+        {
+          "title": "Blockchain go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for Blockchain.",
+          "guidance": "Show a focused wedge that fits Blockchain buyers at the Series A stage."
+        },
+        {
+          "title": "Blockchain proof points",
+          "goal": "Show evidence tailored to Blockchain.",
+          "guidance": "Use data or pilots specific to Blockchain to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/chemistry/seed/diligence-checklist/",
+      "title": "Chemistry Seed diligence checklist",
+      "summary": "Projected diligence checklist for Chemistry founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Pilot plant scale-up plan and yields (Seed)",
+          "rationale": "Validates the path from lab to production."
+        },
+        {
+          "item": "Seed readiness summary for Chemistry",
+          "rationale": "Signals you can close a Seed round in Chemistry."
+        }
+      ]
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/chemistry/seed/investor-questions/",
+      "title": "Investor questions for Chemistry Seed startups",
+      "summary": "Projected investor questions and preparation guidance for Chemistry founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Scale-up",
+          "question": "What is the path from lab results to production scale? (Chemistry Seed)",
+          "answer": "Define pilot plant milestones and yield targets. Focus on Chemistry at the Seed stage."
+        },
+        {
+          "category": "Regulatory",
+          "question": "What approvals or compliance steps are required? (Chemistry Seed)",
+          "answer": "List approvals and expected timelines for each phase. Focus on Chemistry at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Scale-up from lab to production is risky. (Chemistry Seed)",
+          "response": "Define pilot plant milestones and yield improvement plans. Tie it to Chemistry Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/chemistry/seed/investor-update/",
+      "title": "Chemistry Seed investor update template",
+      "summary": "Projected update format for Chemistry founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Scale-up progress (Seed)",
+          "content": "Detail yield improvements and pilot plant milestones."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for Chemistry founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/chemistry/seed/metrics-benchmarks/",
+      "title": "Chemistry Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Chemistry Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Chemistry Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/chemistry/seed/pitch-deck/",
+      "title": "Pitch deck outline for Chemistry Seed startups",
+      "summary": "Projected deck structure for Chemistry founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Scale-up strategy",
+          "goal": "Demonstrate lab-to-production plan.",
+          "guidance": "Show yield targets and pilot plant milestones."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for Chemistry Seed."
+        },
+        {
+          "title": "Chemistry go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for Chemistry.",
+          "guidance": "Show a focused wedge that fits Chemistry buyers at the Seed stage."
+        },
+        {
+          "title": "Chemistry proof points",
+          "goal": "Show evidence tailored to Chemistry.",
+          "guidance": "Use data or pilots specific to Chemistry to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/chemistry/series-a/diligence-checklist/",
+      "title": "Chemistry Series A diligence checklist",
+      "summary": "Projected diligence checklist for Chemistry founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Pilot plant scale-up plan and yields (Series A)",
+          "rationale": "Validates the path from lab to production."
+        },
+        {
+          "item": "Series A readiness summary for Chemistry",
+          "rationale": "Signals you can close a Series A round in Chemistry."
+        }
+      ]
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/chemistry/series-a/investor-questions/",
+      "title": "Investor questions for Chemistry Series A startups",
+      "summary": "Projected investor questions and preparation guidance for Chemistry founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Scale-up",
+          "question": "What is the path from lab results to production scale? (Chemistry Series A)",
+          "answer": "Define pilot plant milestones and yield targets. Focus on Chemistry at the Series A stage."
+        },
+        {
+          "category": "Regulatory",
+          "question": "What approvals or compliance steps are required? (Chemistry Series A)",
+          "answer": "List approvals and expected timelines for each phase. Focus on Chemistry at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Scale-up from lab to production is risky. (Chemistry Series A)",
+          "response": "Define pilot plant milestones and yield improvement plans. Tie it to Chemistry Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/chemistry/series-a/investor-update/",
+      "title": "Chemistry Series A investor update template",
+      "summary": "Projected update format for Chemistry founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Scale-up progress (Series A)",
+          "content": "Detail yield improvements and pilot plant milestones."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for Chemistry founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/chemistry/series-a/metrics-benchmarks/",
+      "title": "Chemistry Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Chemistry Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Chemistry Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "chemistry",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/chemistry/series-a/pitch-deck/",
+      "title": "Pitch deck outline for Chemistry Series A startups",
+      "summary": "Projected deck structure for Chemistry founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Scale-up strategy",
+          "goal": "Demonstrate lab-to-production plan.",
+          "guidance": "Show yield targets and pilot plant milestones."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for Chemistry Series A."
+        },
+        {
+          "title": "Chemistry go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for Chemistry.",
+          "guidance": "Show a focused wedge that fits Chemistry buyers at the Series A stage."
+        },
+        {
+          "title": "Chemistry proof points",
+          "goal": "Show evidence tailored to Chemistry.",
+          "guidance": "Use data or pilots specific to Chemistry to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/finance/seed/diligence-checklist/",
+      "title": "Finance Seed diligence checklist",
+      "summary": "Projected diligence checklist for Finance founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Compliance audits and licensing status (Seed)",
+          "rationale": "Demonstrates regulatory readiness for launch."
+        },
+        {
+          "item": "Seed readiness summary for Finance",
+          "rationale": "Signals you can close a Seed round in Finance."
+        }
+      ]
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/finance/seed/investor-questions/",
+      "title": "Investor questions for Finance Seed startups",
+      "summary": "Projected investor questions and preparation guidance for Finance founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Compliance",
+          "question": "How will you meet regulatory requirements without slowing growth? (Finance Seed)",
+          "answer": "Detail compliance roadmap, audits, and risk controls. Focus on Finance at the Seed stage."
+        },
+        {
+          "category": "Distribution",
+          "question": "What is the go-to-market wedge in a regulated environment? (Finance Seed)",
+          "answer": "Explain a focused entry segment and partner strategy. Focus on Finance at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Finance Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "25-40%",
+          "note": "Projected target range; update with real data. Finance Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "50-70%",
+          "note": "Projected target range; update with real data. Finance Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; compliance 6-12 mo",
+          "note": "Projected target range; update with real data. Finance Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Compliance overhead will slow growth. (Finance Seed)",
+          "response": "Show compliance automation and partner-led distribution. Tie it to Finance Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/finance/seed/investor-update/",
+      "title": "Finance Seed investor update template",
+      "summary": "Projected update format for Finance founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Compliance updates (Seed)",
+          "content": "Share regulatory audits and licensing status."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for Finance founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/finance/seed/metrics-benchmarks/",
+      "title": "Finance Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Finance Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Finance Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "25-40%",
+          "note": "Projected target range; update with real data. Finance Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "50-70%",
+          "note": "Projected target range; update with real data. Finance Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; compliance 6-12 mo",
+          "note": "Projected target range; update with real data. Finance Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/finance/seed/pitch-deck/",
+      "title": "Pitch deck outline for Finance Seed startups",
+      "summary": "Projected deck structure for Finance founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Compliance strategy",
+          "goal": "Show regulatory readiness.",
+          "guidance": "Outline licensing, audits, and risk controls."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for Finance Seed."
+        },
+        {
+          "title": "Finance go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for Finance.",
+          "guidance": "Show a focused wedge that fits Finance buyers at the Seed stage."
+        },
+        {
+          "title": "Finance proof points",
+          "goal": "Show evidence tailored to Finance.",
+          "guidance": "Use data or pilots specific to Finance to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/finance/series-a/diligence-checklist/",
+      "title": "Finance Series A diligence checklist",
+      "summary": "Projected diligence checklist for Finance founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Compliance audits and licensing status (Series A)",
+          "rationale": "Demonstrates regulatory readiness for launch."
+        },
+        {
+          "item": "Series A readiness summary for Finance",
+          "rationale": "Signals you can close a Series A round in Finance."
+        }
+      ]
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/finance/series-a/investor-questions/",
+      "title": "Investor questions for Finance Series A startups",
+      "summary": "Projected investor questions and preparation guidance for Finance founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Compliance",
+          "question": "How will you meet regulatory requirements without slowing growth? (Finance Series A)",
+          "answer": "Detail compliance roadmap, audits, and risk controls. Focus on Finance at the Series A stage."
+        },
+        {
+          "category": "Distribution",
+          "question": "What is the go-to-market wedge in a regulated environment? (Finance Series A)",
+          "answer": "Explain a focused entry segment and partner strategy. Focus on Finance at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "3-6 months",
+          "note": "Projected target range; update with real data. Finance Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "35-50%",
+          "note": "Projected target range; update with real data. Finance Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "60-75%",
+          "note": "Projected target range; update with real data. Finance Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; compliance 6-9 mo",
+          "note": "Projected target range; update with real data. Finance Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Compliance overhead will slow growth. (Finance Series A)",
+          "response": "Show compliance automation and partner-led distribution. Tie it to Finance Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/finance/series-a/investor-update/",
+      "title": "Finance Series A investor update template",
+      "summary": "Projected update format for Finance founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Compliance updates (Series A)",
+          "content": "Share regulatory audits and licensing status."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for Finance founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/finance/series-a/metrics-benchmarks/",
+      "title": "Finance Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Finance Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "3-6 months",
+          "note": "Projected target range; update with real data. Finance Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "35-50%",
+          "note": "Projected target range; update with real data. Finance Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "60-75%",
+          "note": "Projected target range; update with real data. Finance Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate; compliance 6-9 mo",
+          "note": "Projected target range; update with real data. Finance Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "finance",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/finance/series-a/pitch-deck/",
+      "title": "Pitch deck outline for Finance Series A startups",
+      "summary": "Projected deck structure for Finance founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Compliance strategy",
+          "goal": "Show regulatory readiness.",
+          "guidance": "Outline licensing, audits, and risk controls."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for Finance Series A."
+        },
+        {
+          "title": "Finance go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for Finance.",
+          "guidance": "Show a focused wedge that fits Finance buyers at the Series A stage."
+        },
+        {
+          "title": "Finance proof points",
+          "goal": "Show evidence tailored to Finance.",
+          "guidance": "Use data or pilots specific to Finance to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/hardware/seed/diligence-checklist/",
+      "title": "Hardware Seed diligence checklist",
+      "summary": "Projected diligence checklist for Hardware founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Manufacturing partners and BOM cost model (Seed)",
+          "rationale": "Shows readiness to scale production margins."
+        },
+        {
+          "item": "Seed readiness summary for Hardware",
+          "rationale": "Signals you can close a Seed round in Hardware."
+        }
+      ]
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/hardware/seed/investor-questions/",
+      "title": "Investor questions for Hardware Seed startups",
+      "summary": "Projected investor questions and preparation guidance for Hardware founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Manufacturing",
+          "question": "How will you scale manufacturing and manage supply chain risk? (Hardware Seed)",
+          "answer": "Outline partners, tooling plans, and cost-down milestones. Focus on Hardware at the Seed stage."
+        },
+        {
+          "category": "Margins",
+          "question": "How do margins improve after initial production? (Hardware Seed)",
+          "answer": "Show unit cost curves and economies of scale targets. Focus on Hardware at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Hardware margins are too low to scale. (Hardware Seed)",
+          "response": "Show cost-down plans and service revenue expansion. Tie it to Hardware Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/hardware/seed/investor-update/",
+      "title": "Hardware Seed investor update template",
+      "summary": "Projected update format for Hardware founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Manufacturing readiness (Seed)",
+          "content": "Summarize production milestones and cost improvements."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for Hardware founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/hardware/seed/metrics-benchmarks/",
+      "title": "Hardware Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Hardware Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Hardware Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/hardware/seed/pitch-deck/",
+      "title": "Pitch deck outline for Hardware Seed startups",
+      "summary": "Projected deck structure for Hardware founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Manufacturing plan",
+          "goal": "Describe production and supply chain readiness.",
+          "guidance": "Highlight partners, tooling, and cost targets."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for Hardware Seed."
+        },
+        {
+          "title": "Hardware go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for Hardware.",
+          "guidance": "Show a focused wedge that fits Hardware buyers at the Seed stage."
+        },
+        {
+          "title": "Hardware proof points",
+          "goal": "Show evidence tailored to Hardware.",
+          "guidance": "Use data or pilots specific to Hardware to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/hardware/series-a/diligence-checklist/",
+      "title": "Hardware Series A diligence checklist",
+      "summary": "Projected diligence checklist for Hardware founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Manufacturing partners and BOM cost model (Series A)",
+          "rationale": "Shows readiness to scale production margins."
+        },
+        {
+          "item": "Series A readiness summary for Hardware",
+          "rationale": "Signals you can close a Series A round in Hardware."
+        }
+      ]
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/hardware/series-a/investor-questions/",
+      "title": "Investor questions for Hardware Series A startups",
+      "summary": "Projected investor questions and preparation guidance for Hardware founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Manufacturing",
+          "question": "How will you scale manufacturing and manage supply chain risk? (Hardware Series A)",
+          "answer": "Outline partners, tooling plans, and cost-down milestones. Focus on Hardware at the Series A stage."
+        },
+        {
+          "category": "Margins",
+          "question": "How do margins improve after initial production? (Hardware Series A)",
+          "answer": "Show unit cost curves and economies of scale targets. Focus on Hardware at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Hardware margins are too low to scale. (Hardware Series A)",
+          "response": "Show cost-down plans and service revenue expansion. Tie it to Hardware Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/hardware/series-a/investor-update/",
+      "title": "Hardware Series A investor update template",
+      "summary": "Projected update format for Hardware founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Manufacturing readiness (Series A)",
+          "content": "Summarize production milestones and cost improvements."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for Hardware founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/hardware/series-a/metrics-benchmarks/",
+      "title": "Hardware Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Hardware Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Hardware Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "hardware",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/hardware/series-a/pitch-deck/",
+      "title": "Pitch deck outline for Hardware Series A startups",
+      "summary": "Projected deck structure for Hardware founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Manufacturing plan",
+          "goal": "Describe production and supply chain readiness.",
+          "guidance": "Highlight partners, tooling, and cost targets."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for Hardware Series A."
+        },
+        {
+          "title": "Hardware go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for Hardware.",
+          "guidance": "Show a focused wedge that fits Hardware buyers at the Series A stage."
+        },
+        {
+          "title": "Hardware proof points",
+          "goal": "Show evidence tailored to Hardware.",
+          "guidance": "Use data or pilots specific to Hardware to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/robotics/seed/diligence-checklist/",
+      "title": "Robotics Seed diligence checklist",
+      "summary": "Projected diligence checklist for Robotics founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Field reliability results and support plan (Seed)",
+          "rationale": "Proves uptime targets and deployment readiness."
+        },
+        {
+          "item": "Seed readiness summary for Robotics",
+          "rationale": "Signals you can close a Seed round in Robotics."
+        }
+      ]
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/robotics/seed/investor-questions/",
+      "title": "Investor questions for Robotics Seed startups",
+      "summary": "Projected investor questions and preparation guidance for Robotics founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Validation",
+          "question": "What proof shows the market will pay for this?",
+          "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+        },
+        {
+          "category": "Risk",
+          "question": "What is the single biggest technical or regulatory risk?",
+          "answer": "Explain the plan to de-risk it within the seed runway."
+        },
+        {
+          "category": "Capital",
+          "question": "How will the seed round extend runway to key proof points?",
+          "answer": "Tie the round to milestones that unlock Series A readiness."
+        },
+        {
+          "category": "Reliability",
+          "question": "How will you prove reliability at scale? (Robotics Seed)",
+          "answer": "Share field test data, uptime goals, and support strategy. Focus on Robotics at the Seed stage."
+        },
+        {
+          "category": "Deployment",
+          "question": "What is the deployment playbook for new environments? (Robotics Seed)",
+          "answer": "Explain integration steps and time-to-value benchmarks. Focus on Robotics at the Seed stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Reliability in real-world environments is unproven. (Robotics Seed)",
+          "response": "Highlight field trials and uptime targets with supporting data. Tie it to Robotics Seed milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/robotics/seed/investor-update/",
+      "title": "Robotics Seed investor update template",
+      "summary": "Projected update format for Robotics founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Field reliability (Seed)",
+          "content": "Report uptime, deployment progress, and support insights."
+        },
+        {
+          "section": "Seed milestones",
+          "content": "Summarize the milestone progress expected for Robotics founders at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/robotics/seed/metrics-benchmarks/",
+      "title": "Robotics Seed fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Robotics Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "6-12 months",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "20-35%",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "40-60%",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "High; 18-24 mo runway",
+          "note": "Projected target range; update with real data. Robotics Seed."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "seed",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/robotics/seed/pitch-deck/",
+      "title": "Pitch deck outline for Robotics Seed startups",
+      "summary": "Projected deck structure for Robotics founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Reliability validation",
+          "goal": "Prove system reliability in the field.",
+          "guidance": "Share testing, uptime goals, and support strategy."
+        },
+        {
+          "title": "Seed milestones",
+          "goal": "Highlight proof points for Seed.",
+          "guidance": "Detail the specific milestones investors expect for Robotics Seed."
+        },
+        {
+          "title": "Robotics go-to-market wedge (Seed)",
+          "goal": "Explain your entry point for Robotics.",
+          "guidance": "Show a focused wedge that fits Robotics buyers at the Seed stage."
+        },
+        {
+          "title": "Robotics proof points",
+          "goal": "Show evidence tailored to Robotics.",
+          "guidance": "Use data or pilots specific to Robotics to prove momentum at Seed."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "diligence-checklist",
+      "slug": "/investor-questions/robotics/series-a/diligence-checklist/",
+      "title": "Robotics Series A diligence checklist",
+      "summary": "Projected diligence checklist for Robotics founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [],
+      "items": [
+        {
+          "item": "Current cap table and option pool plan",
+          "rationale": "Investors validate ownership, dilution, and incentives."
+        },
+        {
+          "item": "Customer pipeline with next steps",
+          "rationale": "Proves commercial momentum and a clear path to revenue."
+        },
+        {
+          "item": "Product roadmap and milestone plan",
+          "rationale": "Shows the path to de-risk the core technical thesis."
+        },
+        {
+          "item": "Security or compliance posture",
+          "rationale": "Critical for regulated or enterprise-heavy markets."
+        },
+        {
+          "item": "Field reliability results and support plan (Series A)",
+          "rationale": "Proves uptime targets and deployment readiness."
+        },
+        {
+          "item": "Series A readiness summary for Robotics",
+          "rationale": "Signals you can close a Series A round in Robotics."
+        }
+      ]
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "investor-questions",
+      "slug": "/investor-questions/robotics/series-a/investor-questions/",
+      "title": "Investor questions for Robotics Series A startups",
+      "summary": "Projected investor questions and preparation guidance for Robotics founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [
+        {
+          "category": "Problem",
+          "question": "What is the wedge problem and why does it matter now?",
+          "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+        },
+        {
+          "category": "Buyer",
+          "question": "Who is the buyer and how do you reach them efficiently?",
+          "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+        },
+        {
+          "category": "Moat",
+          "question": "What makes the business defensible beyond speed?",
+          "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+        },
+        {
+          "category": "Traction",
+          "question": "What early signals prove pull from the market?",
+          "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+        },
+        {
+          "category": "Economics",
+          "question": "How will margins improve as you scale?",
+          "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+        },
+        {
+          "category": "Roadmap",
+          "question": "What milestones unlock the next round?",
+          "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+        },
+        {
+          "category": "Scale",
+          "question": "What growth motion will scale after Series A?",
+          "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+        },
+        {
+          "category": "Retention",
+          "question": "What retention or expansion signals prove durability?",
+          "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+        },
+        {
+          "category": "Efficiency",
+          "question": "How will capital efficiency improve post-Series A?",
+          "answer": "Explain how margins and payback improve as operations scale."
+        },
+        {
+          "category": "Reliability",
+          "question": "How will you prove reliability at scale? (Robotics Series A)",
+          "answer": "Share field test data, uptime goals, and support strategy. Focus on Robotics at the Series A stage."
+        },
+        {
+          "category": "Deployment",
+          "question": "What is the deployment playbook for new environments? (Robotics Series A)",
+          "answer": "Explain integration steps and time-to-value benchmarks. Focus on Robotics at the Series A stage."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        }
+      ],
+      "objections": [
+        {
+          "objection": "Adoption cycles are too long for this market.",
+          "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+        },
+        {
+          "objection": "The product requires heavy upfront investment.",
+          "response": "Detail staged milestones and how capital de-risks the core thesis."
+        },
+        {
+          "objection": "Reliability in real-world environments is unproven. (Robotics Series A)",
+          "response": "Highlight field trials and uptime targets with supporting data. Tie it to Robotics Series A milestones."
+        }
+      ],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "investor-update",
+      "slug": "/investor-questions/robotics/series-a/investor-update/",
+      "title": "Robotics Series A investor update template",
+      "summary": "Projected update format for Robotics founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "section": "Highlights",
+          "content": "Summarize the most meaningful wins since the last update."
+        },
+        {
+          "section": "Key metrics",
+          "content": "Share the handful of metrics that show momentum and retention."
+        },
+        {
+          "section": "Product",
+          "content": "List major product milestones and what they unlock next."
+        },
+        {
+          "section": "Go-to-market",
+          "content": "Explain pipeline progress and conversion velocity."
+        },
+        {
+          "section": "Help needed",
+          "content": "Ask for specific customer intros or domain expertise."
+        },
+        {
+          "section": "Field reliability (Series A)",
+          "content": "Report uptime, deployment progress, and support insights."
+        },
+        {
+          "section": "Series A milestones",
+          "content": "Summarize the milestone progress expected for Robotics founders at Series A."
+        }
+      ],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "metrics-benchmarks",
+      "slug": "/investor-questions/robotics/series-a/metrics-benchmarks/",
+      "title": "Robotics Series A fundraising metrics benchmarks",
+      "summary": "Projected fundraising benchmarks for Robotics Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [
+        {
+          "label": "Sales cycle length",
+          "value": "4-9 months",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        },
+        {
+          "label": "Pilot conversion rate",
+          "value": "30-45%",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        },
+        {
+          "label": "Gross margin trajectory",
+          "value": "55-70%",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        },
+        {
+          "label": "Capital intensity",
+          "value": "Moderate-High; 18-30 mo runway",
+          "note": "Projected target range; update with real data. Robotics Series A."
+        }
+      ],
+      "objections": [],
+      "sections": [],
+      "items": []
+    },
+    {
+      "industry": "robotics",
+      "stage": "series-a",
+      "pageType": "pitch-deck",
+      "slug": "/investor-questions/robotics/series-a/pitch-deck/",
+      "title": "Pitch deck outline for Robotics Series A startups",
+      "summary": "Projected deck structure for Robotics founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+      "ctaText": "Create your PitchChat room",
+      "questions": [],
+      "metrics": [],
+      "objections": [],
+      "sections": [
+        {
+          "title": "Problem",
+          "goal": "Show the pain and why now matters.",
+          "guidance": "Quantify the problem with a clear market shift or constraint."
+        },
+        {
+          "title": "Solution",
+          "goal": "Explain the product in one sentence.",
+          "guidance": "Focus on the core workflow and the wedge you own."
+        },
+        {
+          "title": "Market",
+          "goal": "Define the reachable initial market.",
+          "guidance": "Start with the first buyer segment and a realistic wedge."
+        },
+        {
+          "title": "Traction",
+          "goal": "Prove early demand signals.",
+          "guidance": "Highlight pilots, LOIs, or early revenue."
+        },
+        {
+          "title": "Business model",
+          "goal": "Explain how money is made.",
+          "guidance": "Show pricing logic tied to value delivered."
+        },
+        {
+          "title": "Moat",
+          "goal": "Defensibility beyond execution speed.",
+          "guidance": "Data, IP, approvals, or operational scale."
+        },
+        {
+          "title": "Team",
+          "goal": "Why this team can win.",
+          "guidance": "Emphasize domain expertise and execution history."
+        },
+        {
+          "title": "Reliability validation",
+          "goal": "Prove system reliability in the field.",
+          "guidance": "Share testing, uptime goals, and support strategy."
+        },
+        {
+          "title": "Series A milestones",
+          "goal": "Highlight proof points for Series A.",
+          "guidance": "Detail the specific milestones investors expect for Robotics Series A."
+        },
+        {
+          "title": "Robotics go-to-market wedge (Series A)",
+          "goal": "Explain your entry point for Robotics.",
+          "guidance": "Show a focused wedge that fits Robotics buyers at the Series A stage."
+        },
+        {
+          "title": "Robotics proof points",
+          "goal": "Show evidence tailored to Robotics.",
+          "guidance": "Use data or pilots specific to Robotics to prove momentum at Series A."
+        }
+      ],
+      "items": []
+    }
+  ],
+  "errors": []
+}

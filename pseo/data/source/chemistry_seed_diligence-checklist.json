@@ -1,0 +1,35 @@
+{
+  "industry": "chemistry",
+  "stage": "seed",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/chemistry/seed/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Chemistry Seed diligence checklist",
+  "summary": "Projected diligence checklist for Chemistry founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "items": [
+    {
+      "item": "Current cap table and option pool plan",
+      "rationale": "Investors validate ownership, dilution, and incentives."
+    },
+    {
+      "item": "Customer pipeline with next steps",
+      "rationale": "Proves commercial momentum and a clear path to revenue."
+    },
+    {
+      "item": "Product roadmap and milestone plan",
+      "rationale": "Shows the path to de-risk the core technical thesis."
+    },
+    {
+      "item": "Security or compliance posture",
+      "rationale": "Critical for regulated or enterprise-heavy markets."
+    },
+    {
+      "item": "Pilot plant scale-up plan and yields (Seed)",
+      "rationale": "Validates the path from lab to production."
+    },
+    {
+      "item": "Seed readiness summary for Chemistry",
+      "rationale": "Signals you can close a Seed round in Chemistry."
+    }
+  ]
+}

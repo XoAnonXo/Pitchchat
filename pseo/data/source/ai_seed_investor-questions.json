@@ -1,0 +1,107 @@
+{
+  "industry": "ai",
+  "stage": "seed",
+  "pageType": "investor-questions",
+  "slug": "/investor-questions/ai/seed/investor-questions/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Investor questions for AI Seed startups",
+  "summary": "Projected investor questions and preparation guidance for AI founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+  "questions": [
+    {
+      "category": "Problem",
+      "question": "What is the wedge problem and why does it matter now?",
+      "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+    },
+    {
+      "category": "Buyer",
+      "question": "Who is the buyer and how do you reach them efficiently?",
+      "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+    },
+    {
+      "category": "Moat",
+      "question": "What makes the business defensible beyond speed?",
+      "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+    },
+    {
+      "category": "Traction",
+      "question": "What early signals prove pull from the market?",
+      "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+    },
+    {
+      "category": "Economics",
+      "question": "How will margins improve as you scale?",
+      "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+    },
+    {
+      "category": "Roadmap",
+      "question": "What milestones unlock the next round?",
+      "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+    },
+    {
+      "category": "Validation",
+      "question": "What proof shows the market will pay for this?",
+      "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+    },
+    {
+      "category": "Risk",
+      "question": "What is the single biggest technical or regulatory risk?",
+      "answer": "Explain the plan to de-risk it within the seed runway."
+    },
+    {
+      "category": "Capital",
+      "question": "How will the seed round extend runway to key proof points?",
+      "answer": "Tie the round to milestones that unlock Series A readiness."
+    },
+    {
+      "category": "Data",
+      "question": "What data advantage will compound over time? (AI Seed)",
+      "answer": "Explain data sources, collection strategy, and quality controls. Focus on AI at the Seed stage."
+    },
+    {
+      "category": "Model",
+      "question": "How will model performance improve as you scale? (AI Seed)",
+      "answer": "Outline evaluation metrics, feedback loops, and cost controls. Focus on AI at the Seed stage."
+    },
+    {
+      "category": "Costs",
+      "question": "How will inference costs decline with scale? (AI Seed)",
+      "answer": "Show optimization plans and unit cost targets tied to growth. Focus on AI at the Seed stage."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "1-4 months",
+      "note": "Projected target range; update with real data. AI Seed."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "30-50%",
+      "note": "Projected target range; update with real data. AI Seed."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "65-85%",
+      "note": "Projected target range; update with real data. AI Seed."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Low-Moderate; infra 20-40% of revenue",
+      "note": "Projected target range; update with real data. AI Seed."
+    }
+  ],
+  "objections": [
+    {
+      "objection": "Adoption cycles are too long for this market.",
+      "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+    },
+    {
+      "objection": "The product requires heavy upfront investment.",
+      "response": "Detail staged milestones and how capital de-risks the core thesis."
+    },
+    {
+      "objection": "Model moat is weak without proprietary data. (AI Seed)",
+      "response": "Explain data strategy and feedback loops that deepen the moat. Tie it to AI Seed milestones."
+    }
+  ]
+}

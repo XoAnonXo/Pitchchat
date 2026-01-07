@@ -146,14 +146,6 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
                 <p className="text-xs text-black/45">
                   {new Date(message.timestamp).toLocaleTimeString()}
                 </p>
-                {message.tokenCount && (
-                  <>
-                    <span className="text-xs text-black/45">•</span>
-                    <Badge variant="outline" className="text-xs border-black/10 text-black/60">
-                      {message.tokenCount} tokens
-                    </Badge>
-                  </>
-                )}
               </div>
             </div>
 

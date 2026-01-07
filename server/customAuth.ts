@@ -4,12 +4,15 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { Express, RequestHandler } from "express";
 import session from "express-session";
 import connectPg from "connect-pg-simple";
+import createMemoryStore from "memorystore";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
+import { performance } from "perf_hooks";
 import { promisify } from "util";
 import { storage } from "./storage";
 import { User as SelectUser } from "@shared/schema";
 import { pool } from "./db";
 import { sendWelcomeEmail } from "./brevo";
+import { isTimingEnabled, logDuration } from "./utils/timing";
 
 declare global {
   namespace Express {
@@ -18,28 +21,96 @@ declare global {
 }
 
 const scryptAsync = promisify(scrypt);
+const stripeSyncOnAuth = process.env.STRIPE_SYNC_ON_AUTH === "1";
+const stripeSyncTtlSecondsRaw = process.env.STRIPE_SYNC_TTL_SECONDS;
+const stripeSyncTtlSecondsValue = Number(stripeSyncTtlSecondsRaw ?? "900");
+const stripeSyncTtlSeconds =
+  Number.isFinite(stripeSyncTtlSecondsValue) && stripeSyncTtlSecondsValue >= 0
+    ? stripeSyncTtlSecondsValue
+    : 900;
+const stripeSyncTtlMs = stripeSyncTtlSeconds > 0 ? stripeSyncTtlSeconds * 1000 : 0;
+const stripeSyncTimestamps = new Map<string, number>();
 
 export async function hashPassword(password: string) {
+  const start = performance.now();
   const salt = randomBytes(16).toString("hex");
   const buf = (await scryptAsync(password, salt, 64)) as Buffer;
+  logDuration("auth.hashPassword", start);
   return `${buf.toString("hex")}.${salt}`;
 }
 
 export async function comparePasswords(supplied: string, stored: string) {
+  const start = performance.now();
   const [hashed, salt] = stored.split(".");
   const hashedBuf = Buffer.from(hashed, "hex");
   const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-  return timingSafeEqual(hashedBuf, suppliedBuf);
+  const isMatch = timingSafeEqual(hashedBuf, suppliedBuf);
+  logDuration("auth.comparePasswords", start);
+  return isMatch;
 }
 
 export function setupAuth(app: Express) {
   // Session configuration
   const PostgresSessionStore = connectPg(session);
-  const sessionStore = new PostgresSessionStore({
-    pool,
-    createTableIfMissing: true,
-    tableName: "sessions",
-  });
+  const sessionStoreMode =
+    process.env.SESSION_STORE ??
+    (process.env.NODE_ENV === "production" ? "postgres" : "memory");
+  const useMemoryStore = sessionStoreMode === "memory";
+  const disableTouch =
+    process.env.SESSION_DISABLE_TOUCH === "1" || process.env.NODE_ENV !== "production";
+  const pruneIntervalRaw = process.env.SESSION_PRUNE_INTERVAL_SECONDS;
+  let pruneSessionInterval: number | false | undefined = undefined;
+  if (pruneIntervalRaw === "false") {
+    pruneSessionInterval = false;
+  } else if (pruneIntervalRaw) {
+    const parsed = Number(pruneIntervalRaw);
+    if (!Number.isNaN(parsed)) {
+      pruneSessionInterval = parsed;
+    }
+  }
+
+  const MemoryStore = createMemoryStore(session);
+  const sessionStore = useMemoryStore
+    ? new MemoryStore({
+        checkPeriod: 24 * 60 * 60 * 1000,
+      })
+    : new PostgresSessionStore({
+        pool,
+        createTableIfMissing: true,
+        tableName: "sessions",
+        disableTouch,
+        ...(pruneSessionInterval !== undefined ? { pruneSessionInterval } : {}),
+      });
+
+  if (isTimingEnabled()) {
+    const originalGet = sessionStore.get.bind(sessionStore);
+    const originalSet = sessionStore.set.bind(sessionStore);
+    const originalDestroy = sessionStore.destroy.bind(sessionStore);
+
+    sessionStore.get = (sid, callback) => {
+      const start = performance.now();
+      return originalGet(sid, (error, session) => {
+        logDuration("session.get", start);
+        if (callback) callback(error, session);
+      });
+    };
+
+    sessionStore.set = (sid, session, callback) => {
+      const start = performance.now();
+      return originalSet(sid, session, (error) => {
+        logDuration("session.set", start);
+        if (callback) callback(error);
+      });
+    };
+
+    sessionStore.destroy = (sid, callback) => {
+      const start = performance.now();
+      return originalDestroy(sid, (error) => {
+        logDuration("session.destroy", start);
+        if (callback) callback(error);
+      });
+    };
+  }
 
   const sessionSettings: session.SessionOptions = {
     secret: process.env.SESSION_SECRET || "your-secret-key-here",
@@ -88,11 +159,14 @@ export function setupAuth(app: Express) {
 
   passport.serializeUser((user, done) => done(null, user.id));
   passport.deserializeUser(async (id: string, done) => {
+    const start = performance.now();
     try {
       const user = await storage.getUser(id);
       done(null, user);
     } catch (error) {
       done(error);
+    } finally {
+      logDuration("auth.deserializeUser", start);
     }
   });
 
@@ -216,37 +290,49 @@ export function setupAuth(app: Express) {
       return res.status(401).json({ message: "Not authenticated" });
     }
     
-    // Sync subscription status with Stripe if customer exists
+    // Sync subscription status with Stripe if explicitly enabled
     const user = req.user as any;
-    if (user?.stripeCustomerId && process.env.STRIPE_SECRET_KEY) {
-      try {
-        const Stripe = await import("stripe");
-        const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY, {
-          apiVersion: "2025-08-27.basil",
-        });
-        
-        const subscriptions = await stripe.subscriptions.list({
-          customer: user.stripeCustomerId,
-          status: 'active',
-          limit: 1
-        });
-        
-        if (subscriptions.data.length > 0) {
-          const sub = subscriptions.data[0] as any;
-          await storage.updateUserSubscription(user.id, {
-            stripeSubscriptionId: sub.id,
-            subscriptionStatus: sub.status,
-            subscriptionCurrentPeriodEnd: new Date(sub.current_period_end * 1000),
-            subscriptionIsAnnual: sub.items.data[0]?.price?.id === 'price_1Ruu7zFbfaTMQEZOUT3v0FeI'
+    const shouldSyncStripe =
+      stripeSyncOnAuth && user?.stripeCustomerId && process.env.STRIPE_SECRET_KEY;
+    if (shouldSyncStripe) {
+      const now = Date.now();
+      const lastSync = stripeSyncTimestamps.get(user.id) ?? 0;
+      if (!stripeSyncTtlMs || now - lastSync >= stripeSyncTtlMs) {
+        stripeSyncTimestamps.set(user.id, now);
+        const stripeSyncStart = performance.now();
+        try {
+          const Stripe = await import("stripe");
+          const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY, {
+            apiVersion: "2025-08-27.basil",
           });
-          // Update user object with latest subscription info
-          user.stripeSubscriptionId = sub.id;
-          user.subscriptionStatus = sub.status;
-          user.subscriptionCurrentPeriodEnd = new Date(sub.current_period_end * 1000);
-          user.subscriptionIsAnnual = sub.items.data[0]?.price?.id === 'price_1Ruu7zFbfaTMQEZOUT3v0FeI';
+
+          const subscriptions = await stripe.subscriptions.list({
+            customer: user.stripeCustomerId,
+            status: "active",
+            limit: 1,
+          });
+
+          if (subscriptions.data.length > 0) {
+            const sub = subscriptions.data[0] as any;
+            await storage.updateUserSubscription(user.id, {
+              stripeSubscriptionId: sub.id,
+              subscriptionStatus: sub.status,
+              subscriptionCurrentPeriodEnd: new Date(sub.current_period_end * 1000),
+              subscriptionIsAnnual:
+                sub.items.data[0]?.price?.id === "price_1Ruu7zFbfaTMQEZOUT3v0FeI",
+            });
+            // Update user object with latest subscription info
+            user.stripeSubscriptionId = sub.id;
+            user.subscriptionStatus = sub.status;
+            user.subscriptionCurrentPeriodEnd = new Date(sub.current_period_end * 1000);
+            user.subscriptionIsAnnual =
+              sub.items.data[0]?.price?.id === "price_1Ruu7zFbfaTMQEZOUT3v0FeI";
+          }
+        } catch (error: any) {
+          console.log("Subscription sync skipped:", error.message);
+        } finally {
+          logDuration("auth.stripeSync", stripeSyncStart);
         }
-      } catch (error: any) {
-        console.log('Subscription sync skipped:', error.message);
       }
     }
     

@@ -1,0 +1,66 @@
+{
+  "industry": "hardware",
+  "stage": "seed",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/hardware/seed/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Pitch deck outline for Hardware Seed startups",
+  "summary": "Projected deck structure for Hardware founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "sections": [
+    {
+      "title": "Problem",
+      "goal": "Show the pain and why now matters.",
+      "guidance": "Quantify the problem with a clear market shift or constraint."
+    },
+    {
+      "title": "Solution",
+      "goal": "Explain the product in one sentence.",
+      "guidance": "Focus on the core workflow and the wedge you own."
+    },
+    {
+      "title": "Market",
+      "goal": "Define the reachable initial market.",
+      "guidance": "Start with the first buyer segment and a realistic wedge."
+    },
+    {
+      "title": "Traction",
+      "goal": "Prove early demand signals.",
+      "guidance": "Highlight pilots, LOIs, or early revenue."
+    },
+    {
+      "title": "Business model",
+      "goal": "Explain how money is made.",
+      "guidance": "Show pricing logic tied to value delivered."
+    },
+    {
+      "title": "Moat",
+      "goal": "Defensibility beyond execution speed.",
+      "guidance": "Data, IP, approvals, or operational scale."
+    },
+    {
+      "title": "Team",
+      "goal": "Why this team can win.",
+      "guidance": "Emphasize domain expertise and execution history."
+    },
+    {
+      "title": "Manufacturing plan",
+      "goal": "Describe production and supply chain readiness.",
+      "guidance": "Highlight partners, tooling, and cost targets."
+    },
+    {
+      "title": "Seed milestones",
+      "goal": "Highlight proof points for Seed.",
+      "guidance": "Detail the specific milestones investors expect for Hardware Seed."
+    },
+    {
+      "title": "Hardware go-to-market wedge (Seed)",
+      "goal": "Explain your entry point for Hardware.",
+      "guidance": "Show a focused wedge that fits Hardware buyers at the Seed stage."
+    },
+    {
+      "title": "Hardware proof points",
+      "goal": "Show evidence tailored to Hardware.",
+      "guidance": "Use data or pilots specific to Hardware to prove momentum at Seed."
+    }
+  ]
+}

@@ -18,6 +18,7 @@ import {
   FileText, 
   Search, 
   Database, 
+  Brain,
   Trash2, 
   Download,
   MoreHorizontal,
@@ -50,6 +51,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
+import { Logo } from "@/components/Logo";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { formatDistanceToNow } from "date-fns";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
@@ -222,7 +224,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
         <div className="h-20 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
             <div className="w-9 h-9 bg-black rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-base">PC</span>
+              <Logo size="md" variant="white" className="p-1" />
             </div>
             <span className="font-bold text-lg text-black tracking-tight">PitchChat</span>
           </div>
@@ -285,7 +287,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
               <div className="overflow-hidden">
                 <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
                 <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
-                  {user?.subscriptionStatus === 'active' ? 'Pro' : 'Free'}
+                  {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free Plan'}
                 </p>
               </div>
             </div>
@@ -348,11 +350,15 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
             <Card className="bg-[#E8E4F3] border-0 rounded-3xl shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-black/8 hover:-translate-y-0.5">
               <CardContent className="p-6 flex items-center justify-between">
                 <div>
-                  <p className="text-[11px] font-semibold text-black/50 uppercase tracking-widest mb-1.5">Tokens</p>
-                  <p className="text-3xl font-bold text-black tracking-tight">{totalTokens.toLocaleString()}</p>
+                  <p className="text-[11px] font-semibold text-black/50 uppercase tracking-widest mb-1.5">Processed</p>
+                  <p className="text-3xl font-bold text-black tracking-tight">
+                    {documents.length > 0
+                      ? Math.round((documents.filter((d) => d.status === 'completed').length / documents.length) * 100)
+                      : 0}%
+                  </p>
                 </div>
                 <div className="w-12 h-12 bg-white/60 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                  <Database className="w-6 h-6 text-black/70" />
+                  <Brain className="w-6 h-6 text-black/70" />
                 </div>
               </CardContent>
             </Card>
@@ -429,7 +435,6 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                       <tr>
                         <th className="px-6 py-4 text-left text-[10px] font-bold text-black/40 uppercase tracking-wider">Document Name</th>
                         <th className="px-6 py-4 text-center text-[10px] font-bold text-black/40 uppercase tracking-wider">Status</th>
-                        <th className="px-6 py-4 text-center text-[10px] font-bold text-black/40 uppercase tracking-wider">Tokens</th>
                         <th className="px-6 py-4 text-right text-[10px] font-bold text-black/40 uppercase tracking-wider">Added</th>
                         <th className="px-6 py-4 text-right text-[10px] font-bold text-black/40 uppercase tracking-wider"></th>
                       </tr>
@@ -450,9 +455,6 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-center">
                             {getStatusBadge(doc.status)}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-center text-sm font-semibold text-black/60 tabular-nums">
-                            {doc.tokens?.toLocaleString() || 0}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-right text-xs font-medium text-black/40">
                             {doc.createdAt ? formatDistanceToNow(new Date(doc.createdAt)) : 'Just now'} ago
@@ -542,8 +544,8 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                   <p className="text-sm font-bold text-black">{selectedDocument.pageCount || 'N/A'}</p>
                 </div>
                 <div className="p-4 bg-white border border-black/8 rounded-2xl">
-                  <p className="text-[10px] text-black/40 font-semibold uppercase tracking-wider mb-1">Tokens</p>
-                  <p className="text-sm font-bold text-black">{selectedDocument.tokens?.toLocaleString() || '0'}</p>
+                  <p className="text-[10px] text-black/40 font-semibold uppercase tracking-wider mb-1">Mime Type</p>
+                  <p className="text-sm font-bold text-black truncate max-w-full">{selectedDocument.mimeType}</p>
                 </div>
                 <div className="p-4 bg-white border border-black/8 rounded-2xl">
                   <p className="text-[10px] text-black/40 font-semibold uppercase tracking-wider mb-1">Uploaded</p>

@@ -1,0 +1,39 @@
+{
+  "industry": "robotics",
+  "stage": "series-a",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/robotics/series-a/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Robotics Series A investor update template",
+  "summary": "Projected update format for Robotics founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "sections": [
+    {
+      "section": "Highlights",
+      "content": "Summarize the most meaningful wins since the last update."
+    },
+    {
+      "section": "Key metrics",
+      "content": "Share the handful of metrics that show momentum and retention."
+    },
+    {
+      "section": "Product",
+      "content": "List major product milestones and what they unlock next."
+    },
+    {
+      "section": "Go-to-market",
+      "content": "Explain pipeline progress and conversion velocity."
+    },
+    {
+      "section": "Help needed",
+      "content": "Ask for specific customer intros or domain expertise."
+    },
+    {
+      "section": "Field reliability (Series A)",
+      "content": "Report uptime, deployment progress, and support insights."
+    },
+    {
+      "section": "Series A milestones",
+      "content": "Summarize the milestone progress expected for Robotics founders at Series A."
+    }
+  ]
+}

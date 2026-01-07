@@ -7,7 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, FileText, Download, Phone, BarChart3, Users, TrendingUp, Eye, Mail, MousePointerClick } from "lucide-react";
+import { MessageSquare, Send, Clock, ExternalLink, Sparkles, ArrowRight, ArrowLeft, FileText, Download, Phone, BarChart3, Users, TrendingUp, Eye, Mail, MousePointerClick } from "lucide-react";
+import { Logo } from "@/components/Logo";
 import DocumentDownloadDialog from "@/components/DocumentDownloadDialog";
 import ContactTeamDialog from "@/components/ContactTeamDialog";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -340,7 +341,7 @@ interface ChatLinkInfo {
 
 export default function InvestorChat() {
   usePageTitle('Investor Chat');
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { toast } = useToast();
   const [message, setMessage] = useState("");
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
@@ -527,7 +528,7 @@ export default function InvestorChat() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center shadow-lg shadow-black/5">
-              <Sparkles className="w-6 h-6 text-white" />
+              <Logo size="lg" className="p-1" variant="white" />
             </div>
             <div className="flex-1 text-left">
               <div className="flex items-center gap-2">
@@ -543,6 +544,17 @@ export default function InvestorChat() {
           </div>
           
           <div className="flex items-center gap-2">
+            {isDemo && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setLocation("/")}
+                className="text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg h-9 text-xs font-semibold"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 mr-1.5" />
+                Back to landing
+              </Button>
+            )}
             {emailSubmitted && conversationId && (
               <Button
                 variant="ghost"
@@ -589,7 +601,7 @@ export default function InvestorChat() {
                       value={investorEmail}
                       onChange={(e) => setInvestorEmail(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="flex-1 h-12 rounded-xl border-gray-200 focus:border-black focus:ring-0 transition-all text-sm"
+                      className="flex-1 h-12 rounded-xl border-gray-200 focus:border-black focus:ring-0 transition-all text-sm text-black"
                     />
                     <Button 
                       onClick={handleEmailSubmit}
@@ -609,7 +621,7 @@ export default function InvestorChat() {
                 {messages.length === 0 && (
                   <div className="py-20 text-center">
                     <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-gray-100">
-                      <Sparkles className="w-8 h-8 text-black" />
+                      <Logo size="xl" className="p-2" />
                     </div>
                     <h3 className="text-xl font-bold text-black font-inter-tight mb-2">Hey, thanks for stopping by!</h3>
                     <p className="text-gray-500 max-w-sm mx-auto leading-relaxed">
@@ -710,7 +722,7 @@ export default function InvestorChat() {
                   <div className="absolute inset-0 bg-white/95 backdrop-blur-sm flex items-center justify-center z-10 rounded-b-[2.5rem]">
                     <div className="text-center p-6 max-w-sm">
                       <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center mx-auto mb-4 border border-amber-200">
-                        <Sparkles className="w-6 h-6 text-amber-600" />
+                        <Logo size="md" className="p-1.5" />
                       </div>
                       <h3 className="text-lg font-bold text-black font-inter-tight mb-2">Demo limit reached</h3>
                       <p className="text-sm text-gray-500 mb-4">
@@ -732,7 +744,7 @@ export default function InvestorChat() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="flex-1 h-14 pl-6 pr-16 rounded-2xl border-gray-100 bg-gray-50/50 focus:border-black focus:ring-0 transition-all text-sm font-medium placeholder:text-gray-400"
+                    className="flex-1 h-14 pl-6 pr-16 rounded-2xl border-gray-100 bg-gray-50/50 focus:border-black focus:ring-0 transition-all text-sm font-medium placeholder:text-gray-400 text-black"
                     disabled={sendMessageMutation.isPending || demoLimitReached}
                   />
                   <Button

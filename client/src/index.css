@@ -268,7 +268,7 @@
 
   /* Inputs - rounded like landing */
   .input-mono {
-    @apply w-full px-4 py-3 transition-all duration-200;
+    @apply w-full px-4 py-3 transition-all duration-200 text-foreground;
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
     font-size: 14px;
     background-color: rgba(0,0,0,0.03);

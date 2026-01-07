@@ -1,0 +1,44 @@
+{
+  "name": "pseo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "db:generate": "drizzle-kit generate --config drizzle.config.ts",
+    "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
+    "pseo:matrix": "node scripts/generate_pilot_matrix.mjs",
+    "pseo:ingest": "node scripts/ingest_pilot.mjs",
+    "pseo:ingest-source": "node scripts/ingest_source.mjs",
+    "pseo:migrate": "node scripts/migrate_pseo.mjs",
+    "pseo:seed": "node scripts/seed_pseo_db.mjs",
+    "pseo:validate-sitemaps": "node scripts/validate_sitemaps.mjs",
+    "pseo:generate-projected": "node scripts/generate_projected_source.mjs",
+    "pseo:quality-check": "node scripts/quality_check.mjs",
+    "pseo:prune-report": "node scripts/prune_report.mjs",
+    "pseo:cta-report": "node scripts/cta_report.mjs",
+    "pseo:enrich-raw": "node scripts/enrich_raw_source.mjs",
+    "pseo:monitoring-summary": "node scripts/monitoring_summary.mjs"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.44.5",
+    "next": "16.1.1",
+    "pg": "^8.13.3",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

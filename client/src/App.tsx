@@ -1,11 +1,11 @@
 import { Switch, Route } from "wouter";
-import { lazy, Suspense } from "react";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense, useEffect } from "react";
+import { getQueryFn, queryClient } from "./lib/queryClient";
+import { QueryClientProvider, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useAuth } from "@/hooks/useAuth";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
+import type { Conversation, Project, User } from "@shared/schema";
 
 // Lazy load all page components for code splitting
 const Landing = lazy(() => import("@/pages/landing"));
@@ -21,8 +21,48 @@ const ForgotPasswordPage = lazy(() => import("@/pages/forgot-password"));
 const ResetPasswordPage = lazy(() => import("@/pages/reset-password"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
+type DashboardBootstrap = {
+  user: User;
+  projects: Project[];
+  analytics: {
+    totalQuestions: number;
+    activeLinks: number;
+    monthlyCost: number;
+  };
+  conversations: Conversation[];
+};
+
 function Router() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const reactQueryClient = useQueryClient();
+  const bootstrapQuery = useQuery<DashboardBootstrap | null>({
+    queryKey: ["/api/bootstrap"],
+    queryFn: getQueryFn({ on401: "returnNull" }),
+  });
+
+  const authFallbackQuery = useQuery<User | null>({
+    queryKey: ["/api/auth/user"],
+    queryFn: getQueryFn({ on401: "returnNull" }),
+    enabled: bootstrapQuery.isError,
+  });
+
+  useEffect(() => {
+    if (bootstrapQuery.data === null) {
+      reactQueryClient.setQueryData(["/api/auth/user"], null);
+      return;
+    }
+
+    if (!bootstrapQuery.data) {
+      return;
+    }
+
+    reactQueryClient.setQueryData(["/api/auth/user"], bootstrapQuery.data.user);
+    reactQueryClient.setQueryData(["/api/projects"], bootstrapQuery.data.projects);
+    reactQueryClient.setQueryData(["/api/analytics"], bootstrapQuery.data.analytics);
+    reactQueryClient.setQueryData(["/api/conversations"], bootstrapQuery.data.conversations);
+  }, [bootstrapQuery.data, reactQueryClient]);
+
+  const isAuthenticated = !!bootstrapQuery.data?.user || !!authFallbackQuery.data;
+  const isLoading = bootstrapQuery.isLoading || (bootstrapQuery.isError && authFallbackQuery.isLoading);
 
   return (
     <Suspense fallback={<StartupLoadingSkeleton type="dashboard" />}>

@@ -1,0 +1,31 @@
+{
+  "industry": "finance",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/finance/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Finance Series A fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for Finance Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "3-6 months",
+      "note": "Projected target range; update with real data. Finance Series A."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "35-50%",
+      "note": "Projected target range; update with real data. Finance Series A."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "60-75%",
+      "note": "Projected target range; update with real data. Finance Series A."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Moderate; compliance 6-9 mo",
+      "note": "Projected target range; update with real data. Finance Series A."
+    }
+  ]
+}
