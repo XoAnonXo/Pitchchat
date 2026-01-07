@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { lazy, Suspense, useEffect } from "react";
 import { getQueryFn, queryClient } from "./lib/queryClient";
 import { QueryClientProvider, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -74,6 +74,13 @@ function Router() {
             <Route path="/forgot-password" component={ForgotPasswordPage} />
             <Route path="/reset-password/:token" component={ResetPasswordPage} />
             <Route path="/chat/:slug" component={InvestorChat} />
+            {/* Avoid client-side 404s when deep-linking to app pages while logged out */}
+            <Route path="/dashboard" component={() => <Redirect to="/auth" />} />
+            <Route path="/documents/:projectId" component={() => <Redirect to="/auth" />} />
+            <Route path="/links/:projectId" component={() => <Redirect to="/auth" />} />
+            <Route path="/conversations" component={() => <Redirect to="/auth" />} />
+            <Route path="/analytics" component={() => <Redirect to="/auth" />} />
+            <Route path="/settings" component={() => <Redirect to="/auth" />} />
           </>
         ) : (
           <>

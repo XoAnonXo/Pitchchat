@@ -536,7 +536,7 @@ export default function Dashboard() {
         <div className="absolute bottom-0 w-full p-4 border-t border-black/[0.08]">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 overflow-hidden">
-              {user.profileImageUrl ? (
+              {user && user.profileImageUrl ? (
                 <img
                   src={user.profileImageUrl}
                   alt="Profile"
@@ -548,7 +548,7 @@ export default function Dashboard() {
                 </div>
               )}
               <div className="overflow-hidden">
-                <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user.email?.split('@')[0]}</p>
+                <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0] ?? "Account"}</p>
                 <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
                   {user?.subscriptionStatus === 'active' ? 'Premium' : 'Free Plan'}
                 </p>

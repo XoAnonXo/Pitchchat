@@ -302,7 +302,7 @@ export function setupAuth(app: Express) {
         const stripeSyncStart = performance.now();
         try {
           const Stripe = await import("stripe");
-          const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY, {
+          const stripe = new Stripe.default(shouldSyncStripe, {
             apiVersion: "2025-08-27.basil",
           });
 

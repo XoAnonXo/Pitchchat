@@ -54,7 +54,7 @@ export default function DocumentsList({ projectId, hideDelete = false }: Documen
           variant: "destructive",
         });
         setTimeout(() => {
-          window.location.href = "/api/login";
+          window.location.href = "/auth";
         }, 500);
         return;
       }
