@@ -78,6 +78,7 @@ function Router() {
         ) : (
           <>
             <Route path="/" component={Dashboard} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/documents/:projectId" component={({ params }) => <DocumentsPage projectId={params.projectId} />} />
             <Route path="/links/:projectId" component={({ params }) => <LinksPage projectId={params.projectId} />} />
             <Route path="/conversations" component={ConversationsPage} />
