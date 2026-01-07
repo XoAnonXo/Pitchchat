@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
-
 /**
  * BlobMorphBackground - Hero background animation component
  *
@@ -35,39 +33,6 @@ const blobColors = {
 };
 
 export default function BlobMorphBackground() {
-  const blob1Ref = useRef<SVGPathElement>(null);
-  const blob2Ref = useRef<SVGPathElement>(null);
-  const blob3Ref = useRef<SVGPathElement>(null);
-
-  useEffect(() => {
-    const blobs = [
-      { ref: blob1Ref, paths: blobPaths.blob1, duration: 25000 },
-      { ref: blob2Ref, paths: blobPaths.blob2, duration: 30000 },
-      { ref: blob3Ref, paths: blobPaths.blob3, duration: 35000 },
-    ];
-
-    const animations: Animation[] = [];
-
-    blobs.forEach(({ ref, paths, duration }) => {
-      if (ref.current) {
-        const keyframes = paths.map((d) => ({ d }));
-        // Add first path at end for seamless loop
-        keyframes.push({ d: paths[0] });
-
-        const animation = ref.current.animate(keyframes, {
-          duration,
-          iterations: Infinity,
-          easing: "ease-in-out",
-        });
-        animations.push(animation);
-      }
-    });
-
-    return () => {
-      animations.forEach((anim) => anim.cancel());
-    };
-  }, []);
-
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Large blur filter for soft, diffused effect */}
@@ -86,12 +51,17 @@ export default function BlobMorphBackground() {
         preserveAspectRatio="xMidYMid slice"
         style={{ filter: "url(#blob-blur)" }}
       >
-        <path
-          ref={blob1Ref}
-          d={blobPaths.blob1[0]}
-          fill={blobColors.blue}
-          transform="scale(1.2)"
-        />
+        <path d={blobPaths.blob1[0]} fill={blobColors.blue} transform="scale(1.2)">
+          <animate
+            attributeName="d"
+            dur="25s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keyTimes="0;0.33;0.66;1"
+            keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+            values={`${blobPaths.blob1[0]};${blobPaths.blob1[1]};${blobPaths.blob1[2]};${blobPaths.blob1[0]}`}
+          />
+        </path>
       </svg>
 
       {/* Blob 2 - Bottom Right - Lavender */}
@@ -101,12 +71,17 @@ export default function BlobMorphBackground() {
         preserveAspectRatio="xMidYMid slice"
         style={{ filter: "url(#blob-blur)" }}
       >
-        <path
-          ref={blob2Ref}
-          d={blobPaths.blob2[0]}
-          fill={blobColors.lavender}
-          transform="scale(1.3)"
-        />
+        <path d={blobPaths.blob2[0]} fill={blobColors.lavender} transform="scale(1.3)">
+          <animate
+            attributeName="d"
+            dur="30s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keyTimes="0;0.33;0.66;1"
+            keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+            values={`${blobPaths.blob2[0]};${blobPaths.blob2[1]};${blobPaths.blob2[2]};${blobPaths.blob2[0]}`}
+          />
+        </path>
       </svg>
 
       {/* Blob 3 - Center Right - Cream */}
@@ -116,12 +91,17 @@ export default function BlobMorphBackground() {
         preserveAspectRatio="xMidYMid slice"
         style={{ filter: "url(#blob-blur)" }}
       >
-        <path
-          ref={blob3Ref}
-          d={blobPaths.blob3[0]}
-          fill={blobColors.cream}
-          transform="scale(1.1)"
-        />
+        <path d={blobPaths.blob3[0]} fill={blobColors.cream} transform="scale(1.1)">
+          <animate
+            attributeName="d"
+            dur="35s"
+            repeatCount="indefinite"
+            calcMode="spline"
+            keyTimes="0;0.33;0.66;1"
+            keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+            values={`${blobPaths.blob3[0]};${blobPaths.blob3[1]};${blobPaths.blob3[2]};${blobPaths.blob3[0]}`}
+          />
+        </path>
       </svg>
 
       {/* Subtle gradient overlay for depth */}
