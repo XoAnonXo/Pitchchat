@@ -164,12 +164,12 @@ export default function FileUpload({ projectId }: FileUploadProps) {
 
   return (
     <div className="w-full">
-      {/* File Upload Dropzone */}
+      {/* File Upload Dropzone - Monochrome like landing */}
       <div
         className={`relative overflow-hidden rounded-2xl transition-all duration-300 cursor-pointer ${
-          dragActive 
-            ? 'bg-gray-100 border-4 border-black scale-[1.02] shadow-2xl' 
-            : 'bg-white border-2 border-dashed border-gray-300 hover:border-black hover:bg-gray-50 hover:shadow-lg'
+          dragActive
+            ? 'bg-black/[0.04] border-4 border-black scale-[1.02] shadow-2xl'
+            : 'bg-white border-2 border-dashed border-black/20 hover:border-black hover:bg-black/[0.02] hover:shadow-lg'
         }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
@@ -179,27 +179,27 @@ export default function FileUpload({ projectId }: FileUploadProps) {
       >
         <div className="p-12 text-center relative z-10">
           <div className={`mx-auto h-20 w-20 rounded-2xl flex items-center justify-center mb-6 transition-all ${
-            dragActive ? 'bg-black text-white rotate-12 shadow-xl' : 'bg-gray-100 text-black'
+            dragActive ? 'bg-black text-white rotate-12 shadow-xl' : 'bg-black/[0.04] text-black'
           }`}>
             <Upload className="h-10 w-10" />
           </div>
-          
-          <h3 className="text-2xl font-bold text-gray-900 mb-2">
+
+          <h3 className="text-2xl font-bold text-black mb-2">
             {dragActive ? 'Drop to upload' : 'Upload your documents'}
           </h3>
-          <p className="text-lg text-gray-600 mb-6">
+          <p className="text-lg text-black/60 mb-6">
             Drag & drop files here, or click to browse
           </p>
-          
+
           <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
-            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">PDF</span>
-            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">XLS/XLSX</span>
-            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">DOCX</span>
-            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">PPTX</span>
-            <span className="bg-gray-100 text-black px-4 py-2 rounded-full font-medium">TXT</span>
-            <span className="text-gray-500">up to 500MB</span>
+            <span className="bg-black/[0.04] text-black px-4 py-2 rounded-full font-medium">PDF</span>
+            <span className="bg-black/[0.04] text-black px-4 py-2 rounded-full font-medium">XLS/XLSX</span>
+            <span className="bg-black/[0.04] text-black px-4 py-2 rounded-full font-medium">DOCX</span>
+            <span className="bg-black/[0.04] text-black px-4 py-2 rounded-full font-medium">PPTX</span>
+            <span className="bg-black/[0.04] text-black px-4 py-2 rounded-full font-medium">TXT</span>
+            <span className="text-black/45">up to 500MB</span>
           </div>
-          
+
           <input
             id="file-input"
             type="file"
@@ -209,34 +209,34 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             multiple
           />
         </div>
-        
+
 
       </div>
 
       {/* Selected Files */}
       {selectedFiles.length > 0 && (
-        <div className="mt-6 bg-white rounded-2xl p-6 border border-gray-200 shadow-card">
-          <h4 className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">Selected Files</h4>
+        <div className="mt-6 bg-white rounded-2xl p-6 border border-black/10 shadow-[0_18px_60px_rgba(0,0,0,0.08)]">
+          <h4 className="text-sm font-semibold text-black/60 uppercase tracking-wider mb-4">Selected Files</h4>
           <div className="space-y-3">
             {selectedFiles.map(({ file, id }, index) => {
               const isUploading = uploadingFileIndex === index;
               return (
                 <div key={id} className={`flex items-center justify-between p-4 rounded-xl transition-all ${
-                  isUploading 
-                    ? 'bg-gray-100 border-2 border-black shadow-md' 
-                    : 'bg-gray-50 hover:bg-gray-100'
+                  isUploading
+                    ? 'bg-black/[0.04] border-2 border-black shadow-md'
+                    : 'bg-black/[0.02] hover:bg-black/[0.04]'
                 }`}>
                   <div className="flex items-center space-x-4">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                      isUploading 
-                        ? 'bg-black text-white animate-pulse' 
-                        : 'bg-gray-100'
+                      isUploading
+                        ? 'bg-black text-white animate-pulse'
+                        : 'bg-black/[0.04]'
                     }`}>
                       <FileText className={`w-6 h-6 ${isUploading ? 'text-white' : 'text-black'}`} />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-gray-900">{file.name}</p>
-                      <p className="text-xs text-gray-500">
+                      <p className="text-sm font-semibold text-black">{file.name}</p>
+                      <p className="text-xs text-black/45">
                         {isUploading ? 'Uploading...' : formatFileSize(file.size)}
                       </p>
                     </div>
@@ -244,7 +244,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
                   {!uploadingFileIndex && (
                     <button
                       onClick={() => removeFile(id)}
-                      className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
+                      className="p-2 text-black/45 hover:text-black hover:bg-black/[0.04] rounded-lg transition-all"
                     >
                       <X className="w-4 h-4" />
                     </button>
@@ -256,10 +256,10 @@ export default function FileUpload({ projectId }: FileUploadProps) {
               );
             })}
           </div>
-          <Button 
+          <Button
             onClick={uploadFiles}
             disabled={uploadMutation.isPending || uploadingFileIndex !== null}
-            className="w-full mt-6 bg-black hover:bg-gray-800 text-white h-12 text-base font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all"
+            className="w-full mt-6 bg-black hover:bg-black/90 text-white h-12 text-base font-semibold rounded-xl shadow-[0_12px_28px_rgba(0,0,0,0.22)] transition-all"
           >
             {uploadingFileIndex !== null ? (
               <div className="flex items-center justify-center space-x-2">

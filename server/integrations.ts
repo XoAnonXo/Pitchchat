@@ -55,7 +55,7 @@ export class IntegrationManager {
               title: `${repo.name} - README`,
               content: content,
               source: `GitHub: ${repo.full_name}`,
-              url: readme.html_url,
+              url: readme.html_url || undefined,
               type: 'markdown',
               metadata: {
                 repository: repo.name,
@@ -91,7 +91,7 @@ export class IntegrationManager {
                     title: `${repo.name} - ${file.name}`,
                     content: content,
                     source: `GitHub: ${repo.full_name}`,
-                    url: fileData.html_url,
+                    url: fileData.html_url || undefined,
                     type: 'markdown',
                     metadata: {
                       repository: repo.name,
@@ -147,16 +147,17 @@ export class IntegrationManager {
             }
 
             const title = this.extractNotionPageTitle(page);
+            const pageAny = page as any;
             documents.push({
               title: title,
               content: content,
               source: `Notion: ${title}`,
-              url: page.url,
+              url: pageAny.url || undefined,
               type: 'notion-page',
               metadata: {
                 pageId: page.id,
-                createdTime: page.created_time,
-                lastEditedTime: page.last_edited_time
+                createdTime: pageAny.created_time,
+                lastEditedTime: pageAny.last_edited_time
               }
             });
           } catch (error) {
@@ -355,14 +356,15 @@ export class IntegrationManager {
       console.log(`Dropbox import completed. Found ${documents.length} documents.`);
     } catch (error) {
       console.error('Dropbox import error:', error);
-      
+
       // Provide more specific error messages
-      if (error.error && error.error.error_summary) {
-        throw new Error(`Dropbox API Error: ${error.error.error_summary}`);
-      } else if (error.status === 401) {
+      const errorAny = error as any;
+      if (errorAny?.error?.error_summary) {
+        throw new Error(`Dropbox API Error: ${errorAny.error.error_summary}`);
+      } else if (errorAny?.status === 401) {
         throw new Error('Invalid Dropbox access token. Please check your token and try again.');
       } else {
-        throw new Error(`Failed to import from Dropbox: ${error.message || error}`);
+        throw new Error(`Failed to import from Dropbox: ${error instanceof Error ? error.message : String(error)}`);
       }
     }
 
@@ -380,12 +382,12 @@ export class IntegrationManager {
     const documents: ImportedDocument[] = [];
 
     try {
-      // Get projects
-      const projects = await client.projects.getProjects();
-      
+      // Get projects (use findAll method which exists in Asana SDK)
+      const projects = await (client.projects as any).findAll();
+
       for (const project of projects.data.slice(0, 5)) {
-        // Get tasks from project
-        const tasks = await client.tasks.getTasksForProject(project.gid);
+        // Get tasks from project (use findByProject method)
+        const tasks = await (client.tasks as any).findByProject(project.gid);
         
         let projectContent = `Project: ${project.name}\n\n`;
         
@@ -433,8 +435,8 @@ export class IntegrationManager {
     const documents: ImportedDocument[] = [];
 
     try {
-      // Get projects
-      const projects = await client.projects.getAllProjects();
+      // Get projects (use getProject method with search or cast to any)
+      const projects = await (client.projects as any).getAllProjects();
       
       for (const project of projects.slice(0, 3)) {
         // Get issues from project
@@ -569,7 +571,7 @@ export class IntegrationManager {
       }
     } catch (error) {
       console.error('Figma import error:', error);
-      throw new Error(`Failed to import from Figma: ${error.message}`);
+      throw new Error(`Failed to import from Figma: ${error instanceof Error ? error.message : String(error)}`);
     }
     
     return documents;
@@ -589,7 +591,7 @@ export class IntegrationManager {
       
       // Test the connection by getting channel info
       const channelInfo = await slack.conversations.info({
-        channel: config.credentials.channelId
+        channel: config.credentials.channelId!
       });
       
       if (!channelInfo.ok || !channelInfo.channel) {
@@ -601,7 +603,7 @@ export class IntegrationManager {
       // Get channel history
       console.log('Fetching channel messages...');
       const history = await slack.conversations.history({
-        channel: config.credentials.channelId,
+        channel: config.credentials.channelId!,
         limit: 200 // Get last 200 messages
       });
       
@@ -635,14 +637,14 @@ export class IntegrationManager {
             userName = userCache.get(message.user) || 'Unknown User';
           }
           
-          const timestamp = new Date(parseFloat(message.ts) * 1000).toLocaleString();
+          const timestamp = new Date(parseFloat(message.ts || '0') * 1000).toLocaleString();
           content += `[${timestamp}] ${userName}: ${message.text}\n`;
           
           // Include thread replies if any
           if (message.thread_ts && message.reply_count) {
             try {
               const replies = await slack.conversations.replies({
-                channel: config.credentials.channelId,
+                channel: config.credentials.channelId!,
                 ts: message.thread_ts,
                 limit: 100
               });
@@ -652,7 +654,7 @@ export class IntegrationManager {
                 for (const reply of replies.messages.slice(1)) { // Skip the parent message
                   if (reply.text && reply.user) {
                     const replyUserName = userCache.get(reply.user) || 'Unknown User';
-                    const replyTimestamp = new Date(parseFloat(reply.ts) * 1000).toLocaleString();
+                    const replyTimestamp = new Date(parseFloat(reply.ts || '0') * 1000).toLocaleString();
                     content += `    [${replyTimestamp}] ${replyUserName}: ${reply.text}\n`;
                   }
                 }
@@ -684,7 +686,7 @@ export class IntegrationManager {
       
     } catch (error) {
       console.error('Slack import error:', error);
-      throw new Error(`Failed to import from Slack: ${error.message}`);
+      throw new Error(`Failed to import from Slack: ${error instanceof Error ? error.message : String(error)}`);
     }
     
     return documents;

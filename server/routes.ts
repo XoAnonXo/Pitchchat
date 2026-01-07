@@ -11,7 +11,7 @@ import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
-import { sendBrevoEmail, sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevoSimple";
+import { sendBrevoEmail, sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevo";
 import Stripe from "stripe";
 
 
@@ -55,7 +55,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
         
         if (subscriptions.data.length > 0) {
-          const sub = subscriptions.data[0];
+          const sub = subscriptions.data[0] as any;
           await storage.updateUserSubscription(user.id, {
             stripeSubscriptionId: sub.id,
             subscriptionStatus: sub.status,
@@ -65,7 +65,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         } else if (user.subscriptionStatus === 'active') {
           // No active subscription found, update status
           await storage.updateUserSubscription(user.id, {
-            subscriptionStatus: null
+            subscriptionStatus: undefined
           });
         }
       }
@@ -632,9 +632,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         const link = await storage.getLink(conversation.linkId);
         if (link) {
           const project = await storage.getProject(link.projectId);
-          if (project) {
+          if (project && conversation.investorEmail) {
             const user = await storage.getUser(project.userId);
-            
+
             // Send email to investor confirming their contact details were shared
             await sendInvestorContactEmail(
               conversation.investorEmail,
@@ -647,7 +647,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
                 website: website || undefined,
               }
             );
-            
+
             // Send email to founder if they have email alerts enabled
             if (user?.emailAlerts) {
               await sendFounderContactAlert(
@@ -702,7 +702,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Stripe subscription endpoints
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2024-12-18.acacia",
+    apiVersion: "2025-08-27.basil",
   });
   
   // Define price IDs for subscription plans
@@ -792,9 +792,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         subscriptionStatus: 'canceled',
       });
 
-      res.json({ 
+      res.json({
         message: "Subscription will be canceled at the end of the billing period",
-        endsAt: new Date(subscription.current_period_end * 1000),
+        endsAt: new Date((subscription as any).current_period_end * 1000),
       });
     } catch (error) {
       console.error("Error canceling subscription:", error);
@@ -835,7 +835,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           
           if (userId && session.subscription) {
             // Fetch subscription details
-            const subscription = await stripe.subscriptions.retrieve(session.subscription);
+            const subscription = await stripe.subscriptions.retrieve(session.subscription) as any;
             const isAnnual = subscription.metadata.isAnnual === 'true';
 
             // Update user subscription
@@ -852,9 +852,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
         case 'invoice.payment_succeeded': {
           const invoice = event.data.object as any;
           if (invoice.subscription && invoice.billing_reason === 'subscription_cycle') {
-            const subscription = await stripe.subscriptions.retrieve(invoice.subscription);
+            const subscription = await stripe.subscriptions.retrieve(invoice.subscription) as any;
             const userId = subscription.metadata.userId;
-            
+
             if (userId) {
               // Update subscription period end
               await storage.updateUserSubscription(userId, {
@@ -876,7 +876,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           if (userId) {
             await storage.updateUserSubscription(userId, {
               subscriptionStatus: subscription.status,
-              subscriptionCurrentPeriodEnd: subscription.current_period_end ? new Date(subscription.current_period_end * 1000) : null,
+              subscriptionCurrentPeriodEnd: subscription.current_period_end ? new Date(subscription.current_period_end * 1000) : undefined,
             });
           }
           break;
@@ -953,7 +953,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Get analytics for the past week
       const analytics = await storage.getDetailedAnalytics(userId);
-      const projects = await storage.getProjects(userId);
+      const projects = await storage.getUserProjects(userId);
       
       // Generate weekly report
       const emailHtml = `
@@ -970,7 +970,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           </div>
           
           <h3>Top Performing Projects</h3>
-          ${analytics.projectBreakdown.slice(0, 3).map(project => `
+          ${analytics.projectBreakdown.slice(0, 3).map((project: { projectName: string; conversations: number; totalTokens: number; totalCost: number }) => `
             <div style="border-bottom: 1px solid #eee; padding: 15px 0;">
               <h4 style="margin: 0;">${project.projectName}</h4>
               <p style="color: #666; margin: 5px 0;">
@@ -978,9 +978,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
               </p>
             </div>
           `).join('')}
-          
+
           <h3>Most Engaged Visitors</h3>
-          ${analytics.visitorEngagement.topVisitors.slice(0, 3).map(visitor => `
+          ${analytics.visitorEngagement.topVisitors.slice(0, 3).map((visitor: { email: string; conversations: number; totalTokens: number }) => `
             <p style="margin: 10px 0;">
               <strong>${visitor.email}</strong><br>
               ${visitor.conversations} conversations • ${visitor.totalTokens.toLocaleString()} tokens
@@ -1179,7 +1179,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Error sending test emails:", error);
-      res.status(500).json({ message: "Failed to send test emails", error: error.message });
+      res.status(500).json({ message: "Failed to send test emails", error: error instanceof Error ? error.message : String(error) });
     }
   });
 
@@ -1212,7 +1212,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
         ...user,
         email: email || user.email,
         firstName: name || user.firstName,
-        updatedAt: new Date(),
       });
 
       res.json({ success: true });
@@ -1263,8 +1262,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           ...project,
           documents: documents.map(doc => ({
             id: doc.id,
-            fileName: doc.fileName,
-            fileType: doc.fileType,
+            fileName: doc.filename,
+            fileType: doc.mimeType,
             fileSize: doc.fileSize,
             createdAt: doc.createdAt,
             status: doc.status,
@@ -1280,7 +1279,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
           email: user?.email,
           firstName: user?.firstName,
           lastName: user?.lastName,
-          credits: user?.credits,
           createdAt: user?.createdAt,
         },
         projects: projectData,
@@ -1499,7 +1497,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'dropbox':
             documents = await integrationManager.importFromDropbox({
               type: 'dropbox',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1507,7 +1505,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'github':
             documents = await integrationManager.importFromGitHub({
               type: 'github',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1515,7 +1513,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'notion':
             documents = await integrationManager.importFromNotion({
               type: 'notion',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1523,7 +1521,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'google-drive':
             documents = await integrationManager.importFromGoogleDrive({
               type: 'google-drive',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1531,7 +1529,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'asana':
             documents = await integrationManager.importFromAsana({
               type: 'asana',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1539,7 +1537,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'jira':
             documents = await integrationManager.importFromJira({
               type: 'jira',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1547,7 +1545,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'figma':
             documents = await integrationManager.importFromFigma({
               type: 'figma',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1555,7 +1553,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           case 'slack':
             documents = await integrationManager.importFromSlack({
               type: 'slack',
-              credentials: integration.credentials,
+              credentials: integration.credentials as Record<string, string>,
               userId,
               projectId
             });
@@ -1580,8 +1578,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       } catch (error) {
         console.error(`${integrationId} sync error:`, error);
-        res.status(500).json({ 
-          message: error.message || `Failed to sync ${integrationId}`,
+        res.status(500).json({
+          message: error instanceof Error ? error.message : `Failed to sync ${integrationId}`,
           success: false
         });
       }
@@ -1644,8 +1642,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Dropbox integration error:", error);
-      res.status(500).json({ 
-        message: error.message || "Failed to import from Dropbox",
+      res.status(500).json({
+        message: error instanceof Error ? error.message : "Failed to import from Dropbox",
         success: false
       });
     }
@@ -1767,7 +1765,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Slack integration error:", error);
-      res.status(500).json({ message: error.message || "Failed to connect to Slack" });
+      res.status(500).json({ message: error instanceof Error ? error.message : "Failed to connect to Slack" });
     }
   });
 
@@ -1824,8 +1822,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error) {
       console.error("Figma integration error:", error);
-      res.status(500).json({ 
-        message: error.message || "Failed to import from Figma",
+      res.status(500).json({
+        message: error instanceof Error ? error.message : "Failed to import from Figma",
         success: false
       });
     }

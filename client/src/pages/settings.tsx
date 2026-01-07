@@ -306,21 +306,21 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-[#FAFAFA] flex">
       <aside className={`
-        fixed top-0 left-0 h-full w-64 bg-white border-r border-gray-100 z-50
+        fixed top-0 left-0 h-full w-64 bg-white border-r border-black/[0.08] z-50
         transform transition-transform duration-300 ease-in-out
         ${mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>
         <div className="h-20 px-6 flex items-center justify-between">
           <div className="flex items-center space-x-2.5">
-            <div className="w-9 h-9 bg-black rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-base font-inter-tight">PC</span>
+            <div className="w-9 h-9 bg-black rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-base">PC</span>
             </div>
-            <span className="font-bold text-lg text-black font-inter-tight tracking-tight">PitchChat</span>
+            <span className="font-bold text-lg text-black tracking-tight">PitchChat</span>
           </div>
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden h-8 w-8"
+            className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
           >
             <X className="h-4 w-4" />
@@ -328,59 +328,59 @@ export default function SettingsPage() {
         </div>
 
         <nav className="px-3 py-2 space-y-0.5">
-          <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+          <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-black/60 hover:text-black hover:bg-black/[0.04] rounded-xl transition-all duration-200">
             <Home className="w-4 h-4" />
             <span className="font-medium text-sm">Dashboard</span>
           </Link>
-          <Link href="/documents" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+          <Link href="/" className="flex items-center space-x-3 px-3 py-2 text-black/60 hover:text-black hover:bg-black/[0.04] rounded-xl transition-all duration-200">
             <FolderOpen className="w-4 h-4" />
             <span className="font-medium text-sm">Documents</span>
           </Link>
-          <Link href="/conversations" className="flex items-center justify-between px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+          <Link href="/conversations" className="flex items-center justify-between px-3 py-2 text-black/60 hover:text-black hover:bg-black/[0.04] rounded-xl transition-all duration-200">
             <div className="flex items-center space-x-3">
               <MessageSquare className="w-4 h-4" />
               <span className="font-medium text-sm">Conversations</span>
             </div>
             {hasContactNotifications && (
-              <Badge className="h-2 w-2 p-0 rounded-full bg-blue-600 border-none" />
+              <Badge className="h-2 w-2 p-0 rounded-full bg-black border-none" />
             )}
           </Link>
-          <Link href="/analytics" className="flex items-center space-x-3 px-3 py-2 text-gray-500 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-200">
+          <Link href="/analytics" className="flex items-center space-x-3 px-3 py-2 text-black/60 hover:text-black hover:bg-black/[0.04] rounded-xl transition-all duration-200">
             <BarChart3 className="w-4 h-4" />
             <span className="font-medium text-sm">Analytics</span>
           </Link>
-          <Link href="/settings" className="flex items-center space-x-3 px-3 py-2 bg-gray-50 text-black rounded-lg transition-all duration-200">
+          <Link href="/settings" className="flex items-center space-x-3 px-3 py-2 bg-black text-white rounded-xl transition-all duration-200">
             <Settings className="w-4 h-4" />
             <span className="font-semibold text-sm">Settings</span>
           </Link>
         </nav>
 
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-100">
+        <div className="absolute bottom-0 w-full p-4 border-t border-black/[0.08]">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3 overflow-hidden">
               {user?.profileImageUrl ? (
-                <img 
-                  src={user.profileImageUrl} 
-                  alt="Profile" 
-                  className="w-8 h-8 rounded-full object-cover border border-gray-100"
+                <img
+                  src={user.profileImageUrl}
+                  alt="Profile"
+                  className="w-8 h-8 rounded-xl object-cover border border-black/10"
                 />
               ) : (
-                <div className="w-8 h-8 bg-gray-50 rounded-full flex items-center justify-center border border-gray-100">
-                  <Users className="w-4 h-4 text-gray-400" />
+                <div className="w-8 h-8 bg-black/[0.04] rounded-xl flex items-center justify-center border border-black/10">
+                  <Users className="w-4 h-4 text-black/60" />
                 </div>
               )}
               <div className="overflow-hidden">
                 <p className="text-xs font-semibold text-black truncate max-w-[100px]">{user?.email?.split('@')[0]}</p>
-                <p className="text-[10px] text-green-600 font-medium uppercase tracking-wider">
+                <p className="text-[10px] text-black/45 font-medium uppercase tracking-wider">
                   {user?.tokens || 0} tokens
                 </p>
               </div>
             </div>
-            <Button 
-              variant="ghost" 
+            <Button
+              variant="ghost"
               size="icon"
               onClick={() => window.location.href = "/api/auth/logout"}
-              className="h-8 w-8 text-gray-400 hover:text-black"
+              className="h-8 w-8 text-black/45 hover:text-black"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -389,20 +389,20 @@ export default function SettingsPage() {
       </aside>
 
       <div className="flex-1 lg:ml-64 flex flex-col">
-        <header className="bg-white border-b border-gray-100 sticky top-0 z-30 h-20 flex items-center shrink-0">
+        <header className="bg-white border-b border-black/[0.08] sticky top-0 z-30 h-20 flex items-center shrink-0">
           <div className="px-6 lg:px-8 w-full flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden h-9 w-9"
+                className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
               >
                 <Menu className="h-5 w-5" />
               </Button>
               <div>
-                <h2 className="text-xl font-bold text-black font-inter-tight tracking-tight leading-none">Settings</h2>
-                <p className="text-[11px] text-gray-400 font-medium uppercase tracking-wider mt-1.5">
+                <h2 className="text-xl font-bold text-black tracking-tight leading-none">Settings</h2>
+                <p className="text-[11px] text-black/45 font-medium uppercase tracking-wider mt-1.5">
                   Account and preferences
                 </p>
               </div>
@@ -411,15 +411,15 @@ export default function SettingsPage() {
         </header>
 
         <div className="p-6 lg:p-8 max-w-4xl space-y-8">
-          <Card className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
-            <CardHeader className="border-b border-gray-50 px-8 py-6">
+          <Card className="bg-white rounded-3xl border border-black/8 shadow-lg shadow-black/5 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/8">
+            <CardHeader className="border-b border-black/[0.06] px-8 py-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
-                  <User className="w-5 h-5 text-black" />
+                <div className="w-12 h-12 bg-[#DAE8FB] rounded-2xl flex items-center justify-center">
+                  <User className="w-6 h-6 text-black/70" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-bold text-black font-inter-tight">Profile</CardTitle>
-                  <CardDescription className="text-xs uppercase font-bold tracking-wider">Personal Information</CardDescription>
+                  <CardTitle className="text-lg font-bold text-black tracking-tight">Profile</CardTitle>
+                  <CardDescription className="text-[11px] uppercase font-semibold tracking-widest text-black/45">Personal Information</CardDescription>
                 </div>
               </div>
             </CardHeader>
@@ -428,56 +428,56 @@ export default function SettingsPage() {
                 <div className="flex items-center space-x-6">
                   <div className="relative group">
                     {settings.profileImageUrl ? (
-                      <img 
-                        src={settings.profileImageUrl} 
-                        alt="Profile" 
-                        className="w-20 h-20 rounded-2xl object-cover border border-gray-100 shadow-sm group-hover:scale-105 transition-transform"
+                      <img
+                        src={settings.profileImageUrl}
+                        alt="Profile"
+                        className="w-20 h-20 rounded-2xl object-cover border border-black/10 shadow-sm group-hover:scale-105 transition-transform"
                       />
                     ) : (
-                      <div className="w-20 h-20 bg-gray-50 rounded-2xl flex items-center justify-center border border-gray-100 group-hover:scale-105 transition-transform">
-                        <User className="w-8 h-8 text-gray-300" />
+                      <div className="w-20 h-20 bg-black/[0.04] rounded-2xl flex items-center justify-center border border-black/10 group-hover:scale-105 transition-transform">
+                        <User className="w-8 h-8 text-black/30" />
                       </div>
                     )}
                     <Button
                       type="button"
                       size="sm"
-                      className="absolute -bottom-2 -right-2 rounded-xl bg-black hover:bg-gray-800 h-8 w-8 p-0 border-2 border-white shadow-lg"
+                      className="absolute -bottom-2 -right-2 rounded-xl bg-black hover:bg-black/90 h-8 w-8 p-0 border-2 border-white shadow-lg"
                     >
                       <Upload className="w-3.5 h-3.5" />
                     </Button>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold text-black font-inter-tight truncate">{settings.name}</h3>
-                    <p className="text-sm text-gray-400 font-medium truncate">{settings.email}</p>
+                    <h3 className="text-xl font-bold text-black truncate">{settings.name}</h3>
+                    <p className="text-sm text-black/45 font-medium truncate">{settings.email}</p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Full Name</Label>
+                    <Label htmlFor="name" className="text-[10px] font-bold uppercase tracking-widest text-black/45 ml-1">Full Name</Label>
                     <Input
                       id="name"
                       name="name"
                       defaultValue={settings.name}
-                      className="h-11 rounded-xl border-gray-200 bg-gray-50/50 focus:border-black focus:ring-0 transition-all font-medium text-sm"
+                      className="h-11 rounded-xl border-black/10 bg-black/[0.03] focus:border-black focus:ring-0 transition-all font-medium text-sm"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Email Address</Label>
+                    <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-widest text-black/45 ml-1">Email Address</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       defaultValue={settings.email}
-                      className="h-11 rounded-xl border-gray-200 bg-gray-50/50 focus:border-black focus:ring-0 transition-all font-medium text-sm"
+                      className="h-11 rounded-xl border-black/10 bg-black/[0.03] focus:border-black focus:ring-0 transition-all font-medium text-sm"
                     />
                   </div>
                 </div>
 
                 <div className="flex justify-end">
-                  <Button 
+                  <Button
                     type="submit"
-                    className="bg-black hover:bg-gray-800 text-white rounded-xl px-8 h-11 font-bold text-sm shadow-lg shadow-black/10"
+                    className="bg-black hover:bg-black/90 text-white rounded-xl px-8 h-11 font-bold text-sm shadow-[0_12px_28px_rgba(0,0,0,0.22)]"
                     disabled={updateProfileMutation.isPending}
                   >
                     Update Profile
@@ -487,23 +487,23 @@ export default function SettingsPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
-            <CardHeader className="border-b border-gray-50 px-8 py-6">
+          <Card className="bg-white rounded-3xl border border-black/8 shadow-lg shadow-black/5 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/8">
+            <CardHeader className="border-b border-black/[0.06] px-8 py-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
-                  <Bell className="w-5 h-5 text-black" />
+                <div className="w-12 h-12 bg-[#E8E4F3] rounded-2xl flex items-center justify-center">
+                  <Bell className="w-6 h-6 text-black/70" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-bold text-black font-inter-tight">Notifications</CardTitle>
-                  <CardDescription className="text-xs uppercase font-bold tracking-wider">Alert Preferences</CardDescription>
+                  <CardTitle className="text-lg font-bold text-black tracking-tight">Notifications</CardTitle>
+                  <CardDescription className="text-[11px] uppercase font-semibold tracking-widest text-black/45">Alert Preferences</CardDescription>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="p-8 space-y-6">
               <div className="flex items-center justify-between group">
                 <div className="space-y-1">
-                  <p className="font-bold text-black text-sm group-hover:text-blue-600 transition-colors">Email Alerts</p>
-                  <p className="text-xs text-gray-400 font-medium">Get notified when investors engage with your pitch links.</p>
+                  <p className="font-bold text-black text-sm">Email Alerts</p>
+                  <p className="text-xs text-black/45 font-medium">Get notified when investors engage with your pitch links.</p>
                 </div>
                 <Switch
                   checked={settings.notifications.emailAlerts}
@@ -511,12 +511,12 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <Separator className="opacity-50" />
+              <Separator className="bg-black/[0.08]" />
 
               <div className="flex items-center justify-between group">
                 <div className="space-y-1">
-                  <p className="font-bold text-black text-sm group-hover:text-blue-600 transition-colors">Weekly Reports</p>
-                  <p className="text-xs text-gray-400 font-medium">Receive weekly analytics and link performance summaries.</p>
+                  <p className="font-bold text-black text-sm">Weekly Reports</p>
+                  <p className="text-xs text-black/45 font-medium">Receive weekly analytics and link performance summaries.</p>
                 </div>
                 <Switch
                   checked={settings.notifications.weeklyReports}
@@ -524,12 +524,12 @@ export default function SettingsPage() {
                 />
               </div>
 
-              <Separator className="opacity-50" />
+              <Separator className="bg-black/[0.08]" />
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="space-y-1">
                   <p className="font-bold text-black text-sm">System Connectivity</p>
-                  <p className="text-xs text-gray-400 font-medium">Test if email services are properly configured.</p>
+                  <p className="text-xs text-black/45 font-medium">Test if email services are properly configured.</p>
                 </div>
                 <div className="flex gap-2">
                   <Button
@@ -546,7 +546,7 @@ export default function SettingsPage() {
                       }
                     }}
                     variant="outline"
-                    className="border-gray-200 text-gray-600 text-[10px] font-bold uppercase tracking-wider h-9"
+                    className="border-black/10 text-black/60 text-[10px] font-bold uppercase tracking-wider h-9 rounded-xl"
                   >
                     Test Mailer
                   </Button>
@@ -555,59 +555,59 @@ export default function SettingsPage() {
             </CardContent>
           </Card>
 
-          <Card className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden hover:shadow-soft transition-all duration-300">
-            <CardHeader className="border-b border-gray-50 px-8 py-6">
+          <Card className="bg-white rounded-3xl border border-black/8 shadow-lg shadow-black/5 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/8">
+            <CardHeader className="border-b border-black/[0.06] px-8 py-6">
               <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
-                  <Shield className="w-5 h-5 text-black" />
+                <div className="w-12 h-12 bg-[#EAE3D1] rounded-2xl flex items-center justify-center">
+                  <Shield className="w-6 h-6 text-black/70" />
                 </div>
                 <div>
-                  <CardTitle className="text-lg font-bold text-black font-inter-tight">Security & Export</CardTitle>
-                  <CardDescription className="text-xs uppercase font-bold tracking-wider">Account Control</CardDescription>
+                  <CardTitle className="text-lg font-bold text-black tracking-tight">Security & Export</CardTitle>
+                  <CardDescription className="text-[11px] uppercase font-semibold tracking-widest text-black/45">Account Control</CardDescription>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="p-8 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Button 
-                  variant="outline" 
-                  className="h-12 justify-start rounded-xl border-gray-200 font-bold text-sm text-gray-700"
+                <Button
+                  variant="outline"
+                  className="h-12 justify-start rounded-xl border-black/10 font-bold text-sm text-black/60"
                   onClick={handleExportData}
                   disabled={exportDataMutation.isPending}
                 >
-                  <Download className="w-4 h-4 mr-3 text-gray-400" />
+                  <Download className="w-4 h-4 mr-3 text-black/45" />
                   Export Account Data
                 </Button>
 
                 <Dialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen}>
                   <DialogTrigger asChild>
-                    <Button variant="outline" className="h-12 justify-start rounded-xl border-gray-200 font-bold text-sm text-gray-700">
-                      <Lock className="w-4 h-4 mr-3 text-gray-400" />
+                    <Button variant="outline" className="h-12 justify-start rounded-xl border-black/10 font-bold text-sm text-black/60">
+                      <Lock className="w-4 h-4 mr-3 text-black/45" />
                       Rotate Password
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="rounded-3xl border-none shadow-2xl p-0 overflow-hidden">
+                  <DialogContent className="rounded-3xl border border-black/8 shadow-[0_24px_80px_rgba(0,0,0,0.18)] p-0 overflow-hidden">
                     <form onSubmit={handleChangePassword}>
                       <DialogHeader className="bg-black text-white p-8">
-                        <DialogTitle className="text-xl font-bold font-inter-tight">Rotate Password</DialogTitle>
-                        <DialogDescription className="text-white/60 font-medium">Update your credentials to maintain security.</DialogDescription>
+                        <DialogTitle className="text-xl font-bold tracking-tight">Rotate Password</DialogTitle>
+                        <DialogDescription className="text-white/50 font-medium">Update your credentials to maintain security.</DialogDescription>
                       </DialogHeader>
                       <div className="p-8 space-y-5">
                         <div className="space-y-1.5">
-                          <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Current Password</Label>
-                          <Input name="currentPassword" type="password" required className="rounded-xl h-11 border-gray-200 bg-gray-50/50" />
+                          <Label className="text-[10px] font-bold uppercase tracking-widest text-black/45 ml-1">Current Password</Label>
+                          <Input name="currentPassword" type="password" required className="rounded-xl h-11 border-black/10 bg-black/[0.03]" />
                         </div>
                         <div className="space-y-1.5">
-                          <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">New Password</Label>
-                          <Input name="newPassword" type="password" required minLength={8} className="rounded-xl h-11 border-gray-200 bg-gray-50/50" />
+                          <Label className="text-[10px] font-bold uppercase tracking-widest text-black/45 ml-1">New Password</Label>
+                          <Input name="newPassword" type="password" required minLength={8} className="rounded-xl h-11 border-black/10 bg-black/[0.03]" />
                         </div>
                         <div className="space-y-1.5">
-                          <Label className="text-[10px] font-bold uppercase tracking-widest text-gray-400 ml-1">Confirm New</Label>
-                          <Input name="confirmPassword" type="password" required minLength={8} className="rounded-xl h-11 border-gray-200 bg-gray-50/50" />
+                          <Label className="text-[10px] font-bold uppercase tracking-widest text-black/45 ml-1">Confirm New</Label>
+                          <Input name="confirmPassword" type="password" required minLength={8} className="rounded-xl h-11 border-black/10 bg-black/[0.03]" />
                         </div>
                       </div>
                       <DialogFooter className="p-8 pt-0">
-                        <Button type="submit" className="bg-black text-white rounded-xl px-8 h-11 font-bold w-full" disabled={changePasswordMutation.isPending}>
+                        <Button type="submit" className="bg-black hover:bg-black/90 text-white rounded-xl px-8 h-11 font-bold w-full" disabled={changePasswordMutation.isPending}>
                           Update Password
                         </Button>
                       </DialogFooter>
@@ -616,38 +616,37 @@ export default function SettingsPage() {
                 </Dialog>
               </div>
 
-              <div className="pt-6 border-t border-gray-50">
-                <div className="p-6 rounded-2xl bg-red-50 border border-red-100 flex items-start gap-4">
-                  <AlertCircle className="w-5 h-5 text-red-500 mt-0.5 shrink-0" />
+              <div className="pt-6 border-t border-black/[0.08]">
+                <div className="p-6 rounded-2xl bg-black/[0.02] border border-black/10 flex items-start gap-4">
+                  <AlertCircle className="w-5 h-5 text-black/60 mt-0.5 shrink-0" />
                   <div className="flex-1">
-                    <p className="font-bold text-red-900 text-sm">Danger Zone</p>
-                    <p className="text-xs text-red-700 mt-1 mb-4 font-medium leading-relaxed">Permanently delete your account and all associated pitch rooms, documents, and analytics. This action is irreversible.</p>
+                    <p className="font-bold text-black text-sm">Danger Zone</p>
+                    <p className="text-xs text-black/60 mt-1 mb-4 font-medium leading-relaxed">Permanently delete your account and all associated pitch rooms, documents, and analytics. This action is irreversible.</p>
                     <Dialog open={deleteAccountOpen} onOpenChange={setDeleteAccountOpen}>
                       <DialogTrigger asChild>
-                        <Button variant="outline" className="h-9 px-4 rounded-lg border-red-200 text-red-600 bg-white hover:bg-red-600 hover:text-white font-bold text-[10px] uppercase tracking-widest transition-all">
+                        <Button variant="outline" className="h-9 px-4 rounded-xl border-black/20 text-black/60 bg-white hover:bg-black hover:text-white font-bold text-[10px] uppercase tracking-widest transition-all">
                           Delete Account
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="rounded-3xl border-none shadow-2xl p-0 overflow-hidden max-w-sm">
-                        <DialogHeader className="bg-red-600 text-white p-8">
-                          <DialogTitle className="text-xl font-bold font-inter-tight">Are you sure?</DialogTitle>
-                          <DialogDescription className="text-white/80 font-medium">This will destroy everything. No recovery possible.</DialogDescription>
+                      <DialogContent className="rounded-3xl border border-black/8 shadow-[0_24px_80px_rgba(0,0,0,0.18)] p-0 overflow-hidden max-w-sm">
+                        <DialogHeader className="bg-black text-white p-8">
+                          <DialogTitle className="text-xl font-bold tracking-tight">Are you sure?</DialogTitle>
+                          <DialogDescription className="text-white/50 font-medium">This will destroy everything. No recovery possible.</DialogDescription>
                         </DialogHeader>
                         <div className="p-8 space-y-4">
-                          <p className="text-xs text-gray-500 font-medium leading-relaxed">
+                          <p className="text-xs text-black/60 font-medium leading-relaxed">
                             To confirm, please type <span className="font-bold text-black select-all">{user?.email}</span> below:
                           </p>
                           <Input
                             value={confirmDelete}
                             onChange={(e) => setConfirmDelete(e.target.value)}
                             placeholder="Type your email"
-                            className="h-11 rounded-xl border-gray-200 bg-gray-50/50"
+                            className="h-11 rounded-xl border-black/10 bg-black/[0.03]"
                           />
                         </div>
                         <DialogFooter className="p-8 pt-0">
-                          <Button 
-                            variant="destructive" 
-                            className="w-full h-11 rounded-xl font-bold"
+                          <Button
+                            className="w-full h-11 rounded-xl font-bold bg-black hover:bg-black/90 text-white"
                             onClick={handleDeleteAccount}
                             disabled={confirmDelete !== user?.email || deleteAccountMutation.isPending}
                           >

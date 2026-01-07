@@ -63,17 +63,19 @@ export async function chatWithAI(
 
     const systemMessage: ChatMessage = {
       role: "system",
-      content: `You are an AI assistant helping investors understand a startup's pitch. Use the provided context to answer questions accurately. If the information isn't in the context, say so clearly.
+      content: `You are a knowledgeable team member at this startup, speaking directly with a potential investor. You know the business inside and out - the product, the market, the numbers, and the vision. Your job is to represent the company with confidence and enthusiasm while remaining professional and credible.
 
-Context from documents:
+Company information:
 ${contextText}
 
-Guidelines:
-- Answer based primarily on the provided context
-- Be concise but comprehensive
-- Include relevant citations when referencing specific information
-- If asked about information not in the context, acknowledge the limitation
-- Maintain a professional, investor-focused tone`
+Communication style:
+- Speak as "we" - you're part of the team
+- Be confident and positive about the company's strengths and opportunities
+- Give direct, substantive answers that showcase the business
+- Use specific numbers and facts when available
+- Keep responses concise but impactful
+- Never say "based on the context" or reference documents - just share the information naturally
+- If asked something outside your knowledge, pivot to related strengths or offer to connect them with the right team member`
     };
 
     const allMessages = [systemMessage, ...messages];
@@ -138,10 +140,10 @@ async function chatWithClaude(messages: ChatMessage[], model: AIModel): Promise<
 
 async function chatWithGemini(messages: ChatMessage[], model: AIModel): Promise<ChatResponse> {
   const geminiModel = model === 'gemini-pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
-  
+
   const systemMessage = messages.find(m => m.role === 'system');
   const userMessages = messages.filter(m => m.role !== 'system');
-  
+
   const prompt = userMessages.map(m => `${m.role}: ${m.content}`).join('\n');
 
   const response = await gemini.models.generateContent({
@@ -156,4 +158,70 @@ async function chatWithGemini(messages: ChatMessage[], model: AIModel): Promise<
   const tokenCount = Math.ceil(content.length / 4); // Rough estimate
 
   return { content, tokenCount };
+}
+
+// Streaming support for ChatGPT-style live responses
+export async function* streamChatWithAI(
+  messages: ChatMessage[],
+  context: Array<{
+    content: string;
+    source: string;
+    page?: number;
+  }> = [],
+  model: AIModel = 'gpt-4o'
+): AsyncGenerator<{ type: 'text' | 'done'; content: string; tokenCount?: number }> {
+  const contextText = context.map(c =>
+    `Source: ${c.source}${c.page ? `, page ${c.page}` : ""}\nContent: ${c.content}`
+  ).join("\n\n");
+
+  const systemMessage: ChatMessage = {
+    role: "system",
+    content: `You are a knowledgeable team member at this startup, speaking directly with a potential investor. You know the business inside and out - the product, the market, the numbers, and the vision. Your job is to represent the company with confidence and enthusiasm while remaining professional and credible.
+
+Company information:
+${contextText}
+
+Communication style:
+- Speak as "we" - you're part of the team
+- Be confident and positive about the company's strengths and opportunities
+- Give direct, substantive answers that showcase the business
+- Use specific numbers and facts when available
+- Keep responses concise but impactful
+- Never say "based on the context" or reference documents - just share the information naturally
+- If asked something outside your knowledge, pivot to related strengths or offer to connect them with the right team member`
+  };
+
+  const allMessages = [systemMessage, ...messages];
+
+  // Use OpenAI streaming for now (most reliable)
+  const stream = await openai.chat.completions.create({
+    model: model.startsWith('gpt-') ? model : 'gpt-4o',
+    messages: allMessages,
+    temperature: 0.3,
+    max_tokens: 1000,
+    stream: true,
+  });
+
+  let fullContent = '';
+  let tokenCount = 0;
+
+  for await (const chunk of stream) {
+    const delta = chunk.choices[0]?.delta?.content || '';
+    if (delta) {
+      fullContent += delta;
+      yield { type: 'text', content: delta };
+    }
+
+    // Get token count from final chunk
+    if (chunk.usage) {
+      tokenCount = chunk.usage.total_tokens;
+    }
+  }
+
+  // Estimate token count if not provided
+  if (!tokenCount) {
+    tokenCount = Math.ceil(fullContent.length / 4);
+  }
+
+  yield { type: 'done', content: fullContent, tokenCount };
 }

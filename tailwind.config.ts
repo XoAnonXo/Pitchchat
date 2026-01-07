@@ -5,10 +5,22 @@ export default {
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        /* Inter Tight - exact match to Typeless.com */
+        "inter-tight": ["'Inter Tight'", "system-ui", "sans-serif"],
+        serif: ["'Inter Tight'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+        sans: ["'Inter Tight'", "-apple-system", "BlinkMacSystemFont", "system-ui", "sans-serif"],
+      },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        lg: "6px",
+        md: "4px",
+        sm: "2px",
+        "2xl": "16px",
+        "3xl": "24px",
+        "4xl": "32px",
+        /* Typeless uses sharp corners - 0px */
+        "typeless": "0px",
+        "typeless-sm": "8px",
       },
       colors: {
         background: "var(--background)",
@@ -61,6 +73,14 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        section: {
+          /* Exact Typeless.com colors */
+          blue: "#DAE8FB", /* Typeless accent blue */
+          lavender: "#E8E4F3", /* Soft lavender */
+          cream: "#EAE3D1", /* Typeless primary cream */
+          gray: "#F5F5F5", /* Light gray */
+          white: "#FFFFFF",
+        },
       },
       keyframes: {
         "accordion-down": {
@@ -83,6 +103,12 @@ export default {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      transitionDuration: {
+        DEFAULT: "200ms", /* Cosmic Night - smooth 200ms transitions */
+      },
+      boxShadow: {
+        none: "none", /* Cosmic Night - no shadows */
       },
     },
   },

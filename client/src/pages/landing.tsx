@@ -16,8 +16,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Redirect } from "wouter";
-
-
+import { BlobMorphBackground } from "@/components/backgrounds";
 
 function scrollToId(id: string) {
   const el = document.getElementById(id);
@@ -37,11 +36,7 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-white text-black selection:bg-black selection:text-white">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(0,0,0,0.06),transparent_55%),radial-gradient(circle_at_80%_35%,rgba(0,0,0,0.05),transparent_60%),radial-gradient(circle_at_55%_85%,rgba(0,0,0,0.04),transparent_65%)]" />
-        <div className="absolute inset-0 opacity-[0.05] [background-image:linear-gradient(to_right,rgba(0,0,0,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.12)_1px,transparent_1px)] [background-size:56px_56px]" />
-      </div>
-
+      {/* Navigation */}
       <nav className="fixed top-0 z-50 w-full border-b border-black/[0.08] bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4 sm:px-6">
           <button
@@ -102,76 +97,101 @@ export default function Landing() {
         </div>
       </nav>
 
-      <main id="top" className="pt-28">
-        <header className="mx-auto max-w-6xl px-4 sm:px-6">
-          <div className="grid grid-cols-1 gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/70">
-                <Sparkles className="h-4 w-4" />
-                Pitch, don&apos;t type
-              </div>
+      <main id="top" className="pt-28 space-y-6 px-4 sm:px-6 lg:px-8">
+        {/* Hero Section - Typeless centered style */}
+        <section className="section-card-typeless bg-section-gray rounded-[32px] animate-fade-in-up relative overflow-hidden">
+          <BlobMorphBackground />
 
-              <h1 className="mt-6 font-inter-tight text-[44px] font-semibold leading-[0.98] tracking-[-0.04em] text-black sm:text-[62px] md:text-[74px]">
-                Pitch, don&apos;t type.
-                <br />
-                <span className="text-black/60">Turn your deck into a room.</span>
-              </h1>
+          <div className="section-card-inner py-16 px-8 md:px-12 text-center relative z-10">
+            <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/70">
+              <Sparkles className="h-4 w-4" />
+              Pitch, with AI
+            </div>
 
-              <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-black/60 sm:text-[16px]">
-                PitchChat turns your documents into an interactive AI pitch room that
-                answers investor questions, captures leads, and tracks intent—without
-                the back-and-forth.
-              </p>
+            <h1 className="mt-8 font-inter-tight text-[48px] font-semibold leading-[1.0] tracking-[-0.03em] text-black sm:text-[72px] md:text-[88px]">
+              Pitch with your agent.
+              <br />
+              <span className="text-black/50">Turn your deck into a room.</span>
+            </h1>
 
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button
-                  size="lg"
-                  className="group h-12 rounded-2xl bg-black px-7 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] transition-transform hover:-translate-y-0.5 hover:bg-black/90"
-                  onClick={goAuth}
-                >
-                  Create your room
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </Button>
+            <p className="mt-8 mx-auto max-w-2xl text-[18px] leading-[1.6] text-black/60 sm:text-[18px]">
+              PitchChat turns your documents into an interactive AI pitch room that
+              answers investor questions, captures leads, and tracks intent—without
+              the back-and-forth.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <Button
+                size="lg"
+                className="group h-14 rounded-full bg-black px-8 py-4 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:bg-black/90"
+                onClick={goAuth}
+              >
+                Create your room
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Button>
+              <a href="/chat/demo">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="h-12 rounded-2xl border-black/10 bg-white px-7 text-sm font-semibold text-black/80 hover:bg-black/[0.03]"
-                  onClick={() => scrollToId("demo")}
+                  className="h-14 rounded-full border-black/10 bg-white px-8 py-4 text-sm font-semibold text-black/80 transition-all duration-300 hover:-translate-y-1 hover:bg-black/[0.03]"
                 >
                   See a live room
                 </Button>
-              </div>
+              </a>
+            </div>
+          </div>
+        </section>
 
-              <div className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-black/10 bg-white/75 px-4 py-3">
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
-                    Lead capture
-                  </div>
-                  <div className="mt-2 font-inter-tight text-lg font-semibold tracking-tight">
-                    Warm follow-ups
-                  </div>
+        {/* Stats Section - White cards on light background */}
+        <section className="section-card-typeless bg-white rounded-[32px] animate-fade-in-up animation-delay-100">
+          <div className="section-card-inner py-12 px-8 md:px-12">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="rounded-3xl border border-black/10 bg-section-gray px-6 py-5 card-typeless transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
+                  Lead capture
                 </div>
-                <div className="rounded-2xl border border-black/10 bg-white/75 px-4 py-3">
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
-                    Analytics
-                  </div>
-                  <div className="mt-2 font-inter-tight text-lg font-semibold tracking-tight">
-                    What they cared about
-                  </div>
+                <div className="mt-2 font-inter-tight text-lg font-semibold tracking-tight">
+                  Warm follow-ups
                 </div>
-                <div className="rounded-2xl border border-black/10 bg-white/75 px-4 py-3">
-                  <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
-                    Answers
-                  </div>
-                  <div className="mt-2 font-inter-tight text-lg font-semibold tracking-tight">
-                    24/7 investor-ready
-                  </div>
+              </div>
+              <div className="rounded-3xl border border-black/10 bg-section-gray px-6 py-5 card-typeless transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
+                  Analytics
+                </div>
+                <div className="mt-2 font-inter-tight text-lg font-semibold tracking-tight">
+                  What they cared about
+                </div>
+              </div>
+              <div className="rounded-3xl border border-black/10 bg-section-gray px-6 py-5 card-typeless transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
+                  Answers
+                </div>
+                <div className="mt-2 font-inter-tight text-lg font-semibold tracking-tight">
+                  24/7 investor-ready
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div id="demo" className="relative">
-              <div className="overflow-hidden rounded-[28px] border border-black/10 bg-white shadow-[0_24px_80px_rgba(0,0,0,0.14)]">
+        {/* Demo Section - Light blue */}
+        <section id="demo" className="section-card-typeless bg-section-blue rounded-[32px] animate-fade-in-up animation-delay-200">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="zigzag-left">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/50">
+                  Live Preview
+                </div>
+                <h3 className="mt-3 font-inter-tight text-3xl font-semibold tracking-tight sm:text-4xl">
+                  See it in action
+                </h3>
+                <p className="mt-4 text-[14px] leading-relaxed text-black/60 max-w-md sm:text-[15px]">
+                  Experience how investors interact with your pitch room. Questions get instant, grounded answers with citations.
+                </p>
+              </div>
+
+              {/* Simplified Demo Panel */}
+              <div className="rounded-[32px] border border-black/10 bg-white shadow-lg overflow-hidden card-typeless animate-fade-slide-up transition-all duration-300 hover:-translate-y-1">
                 <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
                   <div className="flex items-center gap-3">
                     <div className="grid h-9 w-9 place-items-center rounded-2xl bg-black text-white">
@@ -196,340 +216,495 @@ export default function Landing() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-5">
-                  <aside className="hidden border-r border-black/10 md:col-span-2 md:block">
-                    <div className="p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-black/45">
-                        Intent signals
-                      </p>
-                      <div className="mt-4 space-y-3">
-                        {[
-                          {
-                            title: "Asked about CAC/LTV",
-                            meta: "2m ago · investor@fund.com",
-                          },
-                          {
-                            title: "Opened financial model",
-                            meta: "8m ago · 3 pages",
-                          },
-                          {
-                            title: "Concern: churn",
-                            meta: "flagged by questions",
-                          },
-                        ].map((row) => (
-                          <div
-                            key={row.title}
-                            className="rounded-2xl border border-black/10 bg-white px-4 py-3"
-                          >
-                            <p className="text-xs font-semibold text-black">
-                              {row.title}
-                            </p>
-                            <p className="mt-1 text-[11px] font-medium text-black/50">
-                              {row.meta}
-                            </p>
-                          </div>
-                        ))}
+                <div className="p-5">
+                  <div className="space-y-3">
+                    <div className="flex justify-end">
+                      <div className="max-w-[85%] rounded-[22px] rounded-tr-sm bg-black px-4 py-3 text-white">
+                        <p className="text-sm font-medium leading-relaxed">
+                          What&apos;s your go-to-market plan for mid-market?
+                        </p>
                       </div>
                     </div>
-                  </aside>
-
-                  <section className="md:col-span-3">
-                    <div className="p-5">
-                      <p className="text-[11px] font-semibold uppercase tracking-wider text-black/45">
-                        Conversation
-                      </p>
-                      <div className="mt-4 space-y-3">
-                        <div className="flex justify-end">
-                          <div className="max-w-[85%] rounded-[22px] rounded-tr-sm bg-black px-4 py-3 text-white">
-                            <p className="text-sm font-medium leading-relaxed">
-                              What&apos;s your go-to-market plan for mid-market?
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex justify-start">
-                          <div className="max-w-[85%] rounded-[22px] rounded-tl-sm border border-black/10 bg-white px-4 py-3 text-black">
-                            <p className="text-sm font-medium leading-relaxed text-black/80">
-                              The deck outlines a land-and-expand motion via security
-                              teams. Pilots convert to annual contracts after two
-                              integration milestones.
-                            </p>
-                            <div className="mt-3 flex flex-wrap gap-2">
-                              <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-black/60">
-                                deck.pdf
-                              </span>
-                              <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-black/60">
-                                gtm · p. 7
-                              </span>
-                            </div>
-                          </div>
+                    <div className="flex justify-start">
+                      <div className="max-w-[85%] rounded-[22px] rounded-tl-sm border border-black/10 bg-white px-4 py-3 text-black">
+                        <p className="text-sm font-medium leading-relaxed text-black/80">
+                          The deck outlines a land-and-expand motion via security
+                          teams. Pilots convert to annual contracts after two
+                          integration milestones.
+                        </p>
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                            deck.pdf
+                          </span>
+                          <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                            gtm · p. 7
+                          </span>
                         </div>
                       </div>
-
-                      <div className="mt-5 flex items-center gap-2 rounded-2xl border border-black/10 bg-black/[0.03] px-3 py-3">
-                        <div className="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-white">
-                          <MessageSquare className="h-4 w-4 text-black" />
-                        </div>
-                        <div className="flex-1">
-                          <p className="text-xs font-semibold text-black/55">
-                            Ask about revenue, churn, pricing…
-                            <span className="ml-1 text-black/35">press Enter</span>
-                          </p>
-                        </div>
-                        <div className="grid h-9 w-9 place-items-center rounded-xl bg-black text-white">
-                          <ArrowRight className="h-4 w-4" />
-                        </div>
-                      </div>
-                    </div>
-                  </section>
-                </div>
-              </div>
-
-              <div className="pointer-events-none absolute -inset-x-8 -bottom-10 -z-10 h-56 bg-[radial-gradient(circle_at_50%_30%,rgba(0,0,0,0.18),transparent_70%)] blur-2xl" />
-            </div>
-          </div>
-        </header>
-
-        <section id="features" className="mx-auto mt-24 max-w-6xl px-4 sm:px-6">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-black/50">
-                Features
-              </div>
-              <h2 className="mt-3 font-inter-tight text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">
-                Everything investors ask.
-              </h2>
-            </div>
-            <div className="hidden text-sm text-black/60 md:block">
-              Minimal UI. Maximum signal.
-            </div>
-          </div>
-
-          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
-            {[
-              {
-                icon: <Upload className="h-4 w-4" />,
-                title: "Upload once",
-                desc: "Drop your deck, memo, and data room PDFs. PitchChat indexes and keeps everything organized.",
-              },
-              {
-                icon: <MessageSquare className="h-4 w-4" />,
-                title: "Answer instantly",
-                desc: "Investors ask questions. The room responds with grounded answers and citations.",
-              },
-              {
-                icon: <UserCheck className="h-4 w-4" />,
-                title: "Capture leads",
-                desc: "Gate chat behind email—convert anonymous viewers into warm follow-ups.",
-              },
-              {
-                icon: <Eye className="h-4 w-4" />,
-                title: "Track intent",
-                desc: "See what people asked, what they revisited, and where they hesitated.",
-              },
-            ].map((f) => (
-              <div
-                key={f.title}
-                className="rounded-[26px] border border-black/10 bg-white p-6 shadow-[0_18px_60px_rgba(0,0,0,0.08)]"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
-                      PitchChat
-                    </div>
-                    <div className="mt-2 font-inter-tight text-xl font-semibold tracking-tight">
-                      {f.title}
                     </div>
                   </div>
-                  <span className="grid h-10 w-10 place-items-center rounded-2xl border border-black/10 bg-white text-black/70">
-                    {f.icon}
-                  </span>
+
+                  <div className="mt-5 flex items-center gap-2 rounded-2xl border border-black/10 bg-black/[0.03] px-3 py-3">
+                    <div className="grid h-9 w-9 place-items-center rounded-xl border border-black/10 bg-white">
+                      <MessageSquare className="h-4 w-4 text-black" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs font-semibold text-black/55">
+                        Ask about revenue, churn, pricing…
+                        <span className="ml-1 text-black/35">press Enter</span>
+                      </p>
+                    </div>
+                    <div className="grid h-9 w-9 place-items-center rounded-xl bg-black text-white">
+                      <ArrowRight className="h-4 w-4" />
+                    </div>
+                  </div>
                 </div>
-                <p className="mt-4 text-[14px] leading-relaxed text-black/60">
-                  {f.desc}
-                </p>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        <section id="workflow" className="mx-auto mt-24 max-w-6xl px-4 sm:px-6">
-          <div className="grid grid-cols-1 gap-10 border-y border-black/[0.08] py-16 lg:grid-cols-2 lg:items-start">
-            <div>
+        {/* Features Section Header */}
+        <section id="features" className="section-card-typeless bg-white rounded-[32px] animate-fade-in-up">
+          <div className="section-card-inner py-16 px-8 md:px-12 text-center">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-black/50">
+              Features
+            </div>
+            <h2 className="mt-4 font-inter-tight text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+              Everything investors ask.
+            </h2>
+            <p className="mt-4 text-[18px] text-black/60">
+              Minimal UI. Maximum signal.
+            </p>
+          </div>
+        </section>
+
+        {/* Feature 1: Upload - Light Blue, Zigzag Left */}
+        <section className="section-card-typeless bg-section-blue rounded-[32px] transition-all duration-300 hover:-translate-y-1 animate-fade-in-up">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="zigzag-left">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
+                  PitchChat
+                </div>
+                <h3 className="mt-2 font-inter-tight text-[28px] font-semibold tracking-[-0.02em] sm:text-[32px]">
+                  Upload once
+                </h3>
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60 max-w-md">
+                  Drop your deck, memo, and data room PDFs. PitchChat indexes and keeps everything organized.
+                </p>
+              </div>
+
+              {/* Upload Preview Mockup */}
+              <div className="rounded-[32px] border border-black/10 bg-white shadow-lg overflow-hidden">
+                <div className="p-5">
+                  {/* Drop zone */}
+                  <div className="rounded-2xl border-2 border-dashed border-black/20 bg-black/[0.02] p-6 text-center">
+                    <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-black/[0.06]">
+                      <Upload className="h-5 w-5 text-black/40" />
+                    </div>
+                    <p className="mt-3 text-sm font-semibold text-black/60">Drop files here</p>
+                    <p className="mt-1 text-[11px] text-black/40">PDF, DOCX, PPTX up to 50MB</p>
+                  </div>
+
+                  {/* Uploaded files list */}
+                  <div className="mt-4 space-y-2">
+                    <div className="flex items-center gap-3 rounded-xl bg-black/[0.03] px-4 py-3">
+                      <div className="grid h-9 w-9 place-items-center rounded-xl bg-red-500/10">
+                        <FileText className="h-4 w-4 text-red-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-black/80 truncate">Series_A_Deck.pdf</p>
+                        <p className="text-[10px] text-black/45">2.4 MB · Indexed</p>
+                      </div>
+                      <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-xl bg-black/[0.03] px-4 py-3">
+                      <div className="grid h-9 w-9 place-items-center rounded-xl bg-blue-500/10">
+                        <FileText className="h-4 w-4 text-blue-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-black/80 truncate">Financial_Model.xlsx</p>
+                        <p className="text-[10px] text-black/45">1.8 MB · Indexing...</p>
+                      </div>
+                      <div className="h-4 w-4 animate-spin rounded-full border-2 border-black/20 border-t-black/60"></div>
+                    </div>
+                    <div className="flex items-center gap-3 rounded-xl bg-black/[0.03] px-4 py-3">
+                      <div className="grid h-9 w-9 place-items-center rounded-xl bg-orange-500/10">
+                        <FileText className="h-4 w-4 text-orange-600" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-semibold text-black/80 truncate">Data_Room_Memo.pdf</p>
+                        <p className="text-[10px] text-black/45">890 KB · Indexed</p>
+                      </div>
+                      <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature 2: Answer - Lavender, Zigzag Right */}
+        <section className="section-card-typeless bg-section-lavender rounded-[32px] transition-all duration-300 hover:-translate-y-1 animate-fade-in-up animation-delay-100">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="zigzag-right">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
+                  PitchChat
+                </div>
+                <h3 className="mt-2 font-inter-tight text-[28px] font-semibold tracking-[-0.02em] sm:text-[32px]">
+                  Answer instantly
+                </h3>
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60 max-w-md">
+                  Investors ask questions. The room responds with grounded answers and citations.
+                </p>
+              </div>
+
+              {/* Answer Preview Mockup */}
+              <div className="rounded-[32px] border border-black/10 bg-white shadow-lg overflow-hidden">
+                <div className="p-5 space-y-3">
+                  {/* Question */}
+                  <div className="flex justify-end">
+                    <div className="max-w-[85%] rounded-[20px] rounded-tr-sm bg-black px-4 py-3 text-white">
+                      <p className="text-sm font-medium leading-relaxed">
+                        What&apos;s your current ARR and growth rate?
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Answer with citations */}
+                  <div className="flex justify-start">
+                    <div className="max-w-[85%] rounded-[20px] rounded-tl-sm border border-black/10 bg-white px-4 py-3">
+                      <p className="text-sm font-medium leading-relaxed text-black/80">
+                        We&apos;re at $2.4M ARR with 180% YoY growth. Net revenue retention is 135% driven by expansion in enterprise accounts.
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-black/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                          <FileText className="h-3 w-3" />
+                          metrics.pdf
+                        </span>
+                        <span className="rounded-full bg-black/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-black/60">
+                          p. 12
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Typing indicator */}
+                  <div className="flex justify-start">
+                    <div className="rounded-[20px] rounded-tl-sm border border-black/10 bg-black/[0.02] px-4 py-3">
+                      <div className="flex gap-1">
+                        <div className="h-2 w-2 animate-bounce rounded-full bg-black/30" style={{ animationDelay: "0ms" }}></div>
+                        <div className="h-2 w-2 animate-bounce rounded-full bg-black/30" style={{ animationDelay: "150ms" }}></div>
+                        <div className="h-2 w-2 animate-bounce rounded-full bg-black/30" style={{ animationDelay: "300ms" }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature 3: Capture - Cream, Zigzag Left */}
+        <section className="section-card-typeless bg-section-cream rounded-[32px] transition-all duration-300 hover:-translate-y-1 animate-fade-in-up animation-delay-200">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="zigzag-left">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
+                  PitchChat
+                </div>
+                <h3 className="mt-2 font-inter-tight text-[28px] font-semibold tracking-[-0.02em] sm:text-[32px]">
+                  Capture leads
+                </h3>
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60 max-w-md">
+                  Gate chat behind email—convert anonymous viewers into warm follow-ups.
+                </p>
+              </div>
+
+              {/* Capture Leads Preview Mockup */}
+              <div className="rounded-[32px] border border-black/10 bg-white shadow-lg overflow-hidden">
+                <div className="p-6">
+                  {/* Gate overlay card */}
+                  <div className="rounded-2xl bg-gradient-to-b from-black/[0.02] to-black/[0.06] p-6 text-center">
+                    <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-black">
+                      <Lock className="h-6 w-6 text-white" />
+                    </div>
+                    <h4 className="mt-4 font-inter-tight text-lg font-semibold text-black">
+                      Enter your email to continue
+                    </h4>
+                    <p className="mt-2 text-sm text-black/55">
+                      Get instant access to ask questions about this pitch
+                    </p>
+
+                    {/* Email input */}
+                    <div className="mt-5 flex gap-2">
+                      <div className="flex-1 rounded-xl border border-black/10 bg-white px-4 py-3 text-left">
+                        <span className="text-sm text-black/40">name@venture.com</span>
+                      </div>
+                      <button className="rounded-xl bg-black px-5 py-3 text-sm font-semibold text-white">
+                        Continue
+                      </button>
+                    </div>
+
+                    <p className="mt-4 text-[11px] text-black/40">
+                      Your email helps founders follow up with interested investors
+                    </p>
+                  </div>
+
+                  {/* Captured leads indicator */}
+                  <div className="mt-4 flex items-center justify-between rounded-xl bg-emerald-500/10 px-4 py-3">
+                    <div className="flex items-center gap-2">
+                      <UserCheck className="h-4 w-4 text-emerald-600" />
+                      <span className="text-sm font-semibold text-emerald-700">12 leads captured</span>
+                    </div>
+                    <span className="text-xs text-emerald-600/70">This week</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Feature 4: Track - Gray, Zigzag Right */}
+        <section className="section-card-typeless bg-section-gray rounded-[32px] transition-all duration-300 hover:-translate-y-1 animate-fade-in-up animation-delay-300">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="zigzag-right">
+              <div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
+                  PitchChat
+                </div>
+                <h3 className="mt-2 font-inter-tight text-[28px] font-semibold tracking-[-0.02em] sm:text-[32px]">
+                  Track intent
+                </h3>
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60 max-w-md">
+                  See what people asked, what they revisited, and where they hesitated.
+                </p>
+              </div>
+
+              {/* Track Intent Preview Mockup */}
+              <div className="rounded-[32px] border border-black/10 bg-white shadow-lg overflow-hidden">
+                <div className="p-5">
+                  {/* Header stats */}
+                  <div className="grid grid-cols-3 gap-3 mb-4">
+                    <div className="rounded-xl bg-black/[0.03] p-3 text-center">
+                      <div className="font-inter-tight text-2xl font-bold text-black">47</div>
+                      <div className="text-[10px] font-semibold text-black/45 uppercase tracking-wider">Views</div>
+                    </div>
+                    <div className="rounded-xl bg-black/[0.03] p-3 text-center">
+                      <div className="font-inter-tight text-2xl font-bold text-black">23</div>
+                      <div className="text-[10px] font-semibold text-black/45 uppercase tracking-wider">Questions</div>
+                    </div>
+                    <div className="rounded-xl bg-emerald-500/10 p-3 text-center">
+                      <div className="font-inter-tight text-2xl font-bold text-emerald-600">8.2m</div>
+                      <div className="text-[10px] font-semibold text-emerald-600/70 uppercase tracking-wider">Avg. Time</div>
+                    </div>
+                  </div>
+
+                  {/* Top questions */}
+                  <div className="rounded-xl border border-black/10 bg-black/[0.02] p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <BarChart3 className="h-4 w-4 text-black/50" />
+                      <span className="text-xs font-semibold uppercase tracking-wider text-black/50">Top Questions</span>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3">
+                        <div className="h-2 flex-1 rounded-full bg-black/10 overflow-hidden">
+                          <div className="h-full w-[85%] rounded-full bg-black"></div>
+                        </div>
+                        <span className="text-xs font-semibold text-black/60 whitespace-nowrap">Revenue</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="h-2 flex-1 rounded-full bg-black/10 overflow-hidden">
+                          <div className="h-full w-[65%] rounded-full bg-black/70"></div>
+                        </div>
+                        <span className="text-xs font-semibold text-black/60 whitespace-nowrap">Team</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="h-2 flex-1 rounded-full bg-black/10 overflow-hidden">
+                          <div className="h-full w-[45%] rounded-full bg-black/50"></div>
+                        </div>
+                        <span className="text-xs font-semibold text-black/60 whitespace-nowrap">Market</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Recent activity */}
+                  <div className="mt-3 flex items-center gap-2 text-xs text-black/50">
+                    <Eye className="h-3 w-3" />
+                    <span>partner@sequoia.com viewed 12m ago</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Workflow/Comparison Section */}
+        <section id="workflow" className="section-card-typeless bg-white rounded-[32px] animate-fade-in-up">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="text-center mb-12">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-black/50">
                 Workflow
               </div>
-              <h2 className="mt-3 font-inter-tight text-4xl font-semibold tracking-[-0.03em] sm:text-5xl">
+              <h2 className="mt-4 font-inter-tight text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
                 A room beats a PDF.
               </h2>
-              <p className="mt-5 max-w-xl text-[14px] leading-relaxed text-black/60 sm:text-[15px]">
+              <p className="mt-4 max-w-2xl mx-auto text-[18px] leading-[1.6] text-black/60">
                 Investors don&apos;t want another attachment. They want answers. PitchChat
                 gives them a place to explore your story—while you collect signal.
               </p>
             </div>
 
-            <div className="rounded-[28px] border border-black/10 bg-white p-6">
-              <div className="grid grid-cols-1 gap-3">
-                {[
-                  {
-                    label: "Static PDF",
-                    stat: "0",
-                    statLabel: "insights",
-                    body: "Sent to 50 investors. Two replies. Silence.",
-                    muted: true,
-                  },
-                  {
-                    label: "PitchChat",
-                    stat: "4x",
-                    statLabel: "faster follow-up",
-                    body: "Questions reveal intent. You know what to address before the call.",
-                    muted: false,
-                  },
-                ].map((row) => (
-                  <div
-                    key={row.label}
-                    className={`rounded-[26px] border p-6 ${
-                      row.muted
-                        ? "border-black/10 bg-black/[0.02]"
-                        : "border-black bg-black text-white"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-6">
-                      <div>
-                        <div
-                          className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${
-                            row.muted ? "text-black/45" : "text-white/60"
-                          }`}
-                        >
-                          {row.label}
-                        </div>
-                        <div className="mt-3 flex items-baseline gap-2">
-                          <div
-                            className={`font-inter-tight text-5xl font-semibold tracking-tight ${
-                              row.muted ? "text-black/30" : "text-white"
-                            }`}
-                          >
-                            {row.stat}
-                          </div>
-                          <div
-                            className={`text-sm font-semibold ${
-                              row.muted ? "text-black/45" : "text-white/60"
-                            }`}
-                          >
-                            {row.statLabel}
-                          </div>
-                        </div>
+            {/* Dark vs Light Comparison Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {/* Static PDF - Light muted card */}
+              <div className="rounded-[32px] bg-black/[0.03] p-8 border border-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-black/45">
+                      Static PDF
+                    </div>
+                    <div className="mt-4 flex items-baseline gap-2">
+                      <div className="font-inter-tight text-6xl font-bold text-black/25">
+                        0
                       </div>
-                      <div
-                        className={`grid h-10 w-10 place-items-center rounded-2xl ${
-                          row.muted
-                            ? "border border-black/10 bg-white text-black/60"
-                            : "bg-white/10 text-white"
-                        }`}
-                      >
-                        {row.muted ? (
-                          <FileText className="h-4 w-4" />
-                        ) : (
-                          <Zap className="h-4 w-4" />
-                        )}
+                      <div className="text-sm font-semibold text-black/45">
+                        insights
                       </div>
                     </div>
-                    <p
-                      className={`mt-4 text-[14px] leading-relaxed ${
-                        row.muted ? "text-black/55" : "text-white/80"
-                      }`}
-                    >
-                      {row.body}
-                    </p>
                   </div>
-                ))}
+                  <div className="grid h-10 w-10 place-items-center rounded-2xl border border-black/10 bg-white text-black/60">
+                    <FileText className="h-4 w-4" />
+                  </div>
+                </div>
+                <p className="mt-4 text-[14px] leading-relaxed text-black/55">
+                  Sent to 50 investors. Two replies. Silence.
+                </p>
+              </div>
+
+              {/* PitchChat - Dark prominent card */}
+              <div className="rounded-[32px] bg-black p-8 text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/60">
+                      PitchChat
+                    </div>
+                    <div className="mt-4 flex items-baseline gap-2">
+                      <div className="font-inter-tight text-6xl font-bold">
+                        4x
+                      </div>
+                      <div className="text-sm font-semibold text-white/60">
+                        faster follow-up
+                      </div>
+                    </div>
+                  </div>
+                  <div className="grid h-10 w-10 place-items-center rounded-2xl bg-white/10 text-white">
+                    <Zap className="h-4 w-4" />
+                  </div>
+                </div>
+                <p className="mt-4 text-[14px] leading-relaxed text-white/80">
+                  Questions reveal intent. You know what to address before the call.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="security" className="mx-auto mt-24 max-w-6xl px-4 pb-24 sm:px-6">
-          <div className="rounded-[32px] border border-black/10 bg-white p-8 sm:p-12">
-            <div className="flex flex-col gap-3">
+        {/* Security Section - Lavender */}
+        <section id="security" className="section-card-typeless bg-section-lavender rounded-[32px] animate-fade-in-up">
+          <div className="section-card-inner py-16 px-8 md:px-12">
+            <div className="text-center mb-12">
               <div className="text-xs font-semibold uppercase tracking-[0.18em] text-black/50">
                 Security
               </div>
-              <h2 className="font-inter-tight text-3xl font-semibold tracking-tight sm:text-4xl">
+              <h2 className="mt-4 font-inter-tight text-[36px] font-semibold tracking-[-0.03em] sm:text-[48px]">
                 Secure by design.
               </h2>
-              <p className="max-w-2xl text-[14px] leading-relaxed text-black/60 sm:text-[15px]">
+              <p className="mt-4 max-w-2xl mx-auto text-[18px] leading-[1.6] text-black/60">
                 Your deck is sensitive. Control access, track sharing, and keep your
                 data isolated.
               </p>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-3">
-              {[
-                {
-                  icon: <Shield className="h-5 w-5" />,
-                  title: "Encryption",
-                  desc: "Documents are encrypted at rest and in transit.",
-                },
-                {
-                  icon: <Lock className="h-5 w-5" />,
-                  title: "Access control",
-                  desc: "Gate by email, domain, or verification. Revoke instantly.",
-                },
-                {
-                  icon: <Globe className="h-5 w-5" />,
-                  title: "Shareable links",
-                  desc: "One link for investors. Full telemetry for you.",
-                },
-              ].map((s) => (
-                <div
-                  key={s.title}
-                  className="rounded-[26px] border border-black/10 bg-black/[0.02] p-6"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-10 w-10 place-items-center rounded-2xl border border-black/10 bg-white text-black">
-                      {s.icon}
-                    </div>
-                    <div className="font-inter-tight text-lg font-semibold tracking-tight">
-                      {s.title}
-                    </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="rounded-[24px] bg-white p-8 card-typeless transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-black/10 bg-section-gray text-black">
+                    <Shield className="h-6 w-6" />
                   </div>
-                  <p className="mt-4 text-[14px] leading-relaxed text-black/60">
-                    {s.desc}
-                  </p>
+                  <div className="font-inter-tight text-[20px] font-semibold tracking-[-0.02em]">
+                    Encryption
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-10 rounded-[32px] border border-black/10 bg-white/80 p-8 sm:p-10">
-            <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
-              <div className="max-w-xl">
-                <h2 className="font-inter-tight text-2xl font-semibold tracking-tight sm:text-3xl">
-                  Ready to fundraise smarter?
-                </h2>
-                <p className="mt-2 text-sm font-medium leading-relaxed text-black/60">
-                  Create a room in minutes. Share one link. Get real investor signal.
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60">
+                  Documents are encrypted at rest and in transit.
                 </p>
               </div>
-              <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                <Button
-                  onClick={goAuth}
-                  className="h-12 rounded-2xl bg-black px-6 text-sm font-semibold text-white hover:bg-black/90"
-                >
-                  Start free
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => scrollToId("demo")}
-                  className="h-12 rounded-2xl border-black/10 bg-white px-6 text-sm font-semibold text-black/80 hover:bg-black/[0.03]"
-                >
-                  See live room
-                </Button>
+
+              <div className="rounded-[24px] bg-white p-8 card-typeless transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-black/10 bg-section-gray text-black">
+                    <Lock className="h-6 w-6" />
+                  </div>
+                  <div className="font-inter-tight text-[20px] font-semibold tracking-[-0.02em]">
+                    Access control
+                  </div>
+                </div>
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60">
+                  Gate by email, domain, or verification. Revoke instantly.
+                </p>
+              </div>
+
+              <div className="rounded-[24px] bg-white p-8 card-typeless transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-black/10 bg-section-gray text-black">
+                    <Globe className="h-6 w-6" />
+                  </div>
+                  <div className="font-inter-tight text-[20px] font-semibold tracking-[-0.02em]">
+                    Shareable links
+                  </div>
+                </div>
+                <p className="mt-4 text-[18px] leading-[1.6] text-black/60">
+                  One link for investors. Full telemetry for you.
+                </p>
               </div>
             </div>
           </div>
         </section>
 
-        <footer className="border-t border-black/[0.08] bg-white/80">
+        {/* CTA Section - Cream */}
+        <section className="section-card-typeless bg-section-cream rounded-[32px] animate-fade-in-up">
+          <div className="section-card-inner py-16 px-8 md:px-12 text-center">
+            <h2 className="font-inter-tight text-[32px] font-semibold tracking-[-0.03em] sm:text-[48px]">
+              Ready to fundraise smarter?
+            </h2>
+            <p className="mt-4 text-[18px] leading-[1.6] text-black/60 max-w-lg mx-auto">
+              Create a room in minutes. Share one link. Get real investor signal.
+            </p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <Button
+                onClick={goAuth}
+                className="h-14 rounded-full bg-black px-8 py-4 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(0,0,0,0.22)] transition-all duration-300 hover:-translate-y-1 hover:bg-black/90"
+              >
+                Start free
+              </Button>
+              <a href="/chat/demo">
+                <Button
+                  variant="outline"
+                  className="h-14 rounded-full border-black/10 bg-white px-8 py-4 text-sm font-semibold text-black/80 transition-all duration-300 hover:-translate-y-1 hover:bg-black/[0.03]"
+                >
+                  See live room
+                </Button>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="border-t border-black/[0.08] bg-white mt-6">
           <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-3">
               <div className="grid h-8 w-8 place-items-center rounded-xl bg-black text-white">
