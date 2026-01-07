@@ -9,6 +9,7 @@ import { promisify } from "util";
 import { storage } from "./storage";
 import { User as SelectUser } from "@shared/schema";
 import { pool } from "./db";
+import { sendWelcomeEmail } from "./brevo";
 
 declare global {
   namespace Express {
@@ -119,7 +120,6 @@ export function setupAuth(app: Express) {
           // Create new user from Google profile
           user = await storage.createUser({
             email: profile.emails?.[0]?.value || "",
-            username: profile.emails?.[0]?.value?.split("@")[0] || profile.displayName || "user",
             password: await hashPassword(randomBytes(32).toString("hex")), // Random password for OAuth users
             firstName: profile.name?.givenName || null,
             lastName: profile.name?.familyName || null,
@@ -176,8 +176,7 @@ export function setupAuth(app: Express) {
       });
 
       // Send welcome email
-      const { sendWelcomeEmail } = require("./brevo");
-      sendWelcomeEmail(user.email, user.firstName).catch(err => 
+      sendWelcomeEmail(user.email, user.firstName ?? undefined).catch((err: unknown) =>
         console.error('Failed to send welcome email:', err)
       );
 
@@ -223,7 +222,7 @@ export function setupAuth(app: Express) {
       try {
         const Stripe = await import("stripe");
         const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY, {
-          apiVersion: "2024-12-18.acacia",
+          apiVersion: "2025-08-27.basil",
         });
         
         const subscriptions = await stripe.subscriptions.list({
@@ -233,7 +232,7 @@ export function setupAuth(app: Express) {
         });
         
         if (subscriptions.data.length > 0) {
-          const sub = subscriptions.data[0];
+          const sub = subscriptions.data[0] as any;
           await storage.updateUserSubscription(user.id, {
             stripeSubscriptionId: sub.id,
             subscriptionStatus: sub.status,
@@ -331,7 +330,7 @@ export function setupAuth(app: Express) {
       const user = await storage.getUser(resetToken.userId);
       if (user && user.email) {
         const { sendPasswordChangedEmail } = require("./brevo");
-        sendPasswordChangedEmail(user.email).catch(err => 
+        sendPasswordChangedEmail(user.email).catch((err: unknown) =>
           console.error('Failed to send password changed email:', err)
         );
       }

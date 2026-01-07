@@ -1,0 +1,289 @@
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
+import { storage } from '../storage';
+import { hashPassword } from '../customAuth';
+
+/**
+ * Storage Integration Tests
+ * These tests run against the actual database to verify CRUD operations
+ * NO MOCKS - using real database connections
+ */
+describe('Storage Module - Integration Tests', () => {
+  // Test user data
+  const testUserData = {
+    id: `test-user-${Date.now()}`,
+    email: `test-${Date.now()}@example.com`,
+    password: '',
+    firstName: 'Test',
+    lastName: 'User',
+    subscriptionStatus: 'free' as const,
+    stripeCustomerId: null,
+    stripeSubscriptionId: null,
+    emailAlerts: true,
+    weeklyReports: true,
+    profileImageUrl: null,
+    createdAt: new Date(),
+  };
+
+  let createdUserId: string;
+  let createdProjectId: string;
+  let createdLinkId: string;
+
+  beforeAll(async () => {
+    // Hash password for test user
+    testUserData.password = await hashPassword('testPassword123');
+  });
+
+  describe('User Operations', () => {
+    it('should create a new user with upsertUser', async () => {
+      const user = await storage.upsertUser(testUserData);
+
+      expect(user).toBeDefined();
+      expect(user.id).toBe(testUserData.id);
+      expect(user.email).toBe(testUserData.email);
+      expect(user.firstName).toBe(testUserData.firstName);
+      createdUserId = user.id;
+    });
+
+    it('should get user by ID', async () => {
+      const user = await storage.getUser(createdUserId);
+
+      expect(user).toBeDefined();
+      expect(user?.id).toBe(createdUserId);
+      expect(user?.email).toBe(testUserData.email);
+    });
+
+    it('should get user by email', async () => {
+      const user = await storage.getUserByEmail(testUserData.email);
+
+      expect(user).toBeDefined();
+      expect(user?.email).toBe(testUserData.email);
+    });
+
+    it('should return undefined for non-existent user', async () => {
+      const user = await storage.getUser('non-existent-user-id');
+      expect(user).toBeUndefined();
+    });
+
+    it('should return undefined for non-existent email', async () => {
+      const user = await storage.getUserByEmail('nonexistent@example.com');
+      expect(user).toBeUndefined();
+    });
+
+    it('should update user with upsertUser', async () => {
+      const updatedData = {
+        ...testUserData,
+        firstName: 'Updated',
+        lastName: 'Name',
+      };
+
+      const user = await storage.upsertUser(updatedData);
+
+      expect(user.firstName).toBe('Updated');
+      expect(user.lastName).toBe('Name');
+    });
+  });
+
+  describe('Project Operations', () => {
+    it('should create a new project', async () => {
+      const projectData = {
+        name: `Test Project ${Date.now()}`,
+        description: 'A test project for integration testing',
+        userId: createdUserId,
+        status: 'active' as const,
+      };
+
+      const project = await storage.createProject(projectData);
+
+      expect(project).toBeDefined();
+      expect(project.name).toBe(projectData.name);
+      expect(project.description).toBe(projectData.description);
+      expect(project.userId).toBe(createdUserId);
+      createdProjectId = project.id;
+    });
+
+    it('should get project by ID', async () => {
+      const project = await storage.getProject(createdProjectId);
+
+      expect(project).toBeDefined();
+      expect(project?.id).toBe(createdProjectId);
+    });
+
+    it('should get user projects', async () => {
+      const projects = await storage.getUserProjects(createdUserId);
+
+      expect(Array.isArray(projects)).toBe(true);
+      expect(projects.length).toBeGreaterThanOrEqual(1);
+      expect(projects.some(p => p.id === createdProjectId)).toBe(true);
+    });
+
+    it('should return undefined for non-existent project', async () => {
+      const project = await storage.getProject('non-existent-project-id');
+      expect(project).toBeUndefined();
+    });
+
+    it('should return empty array for user with no projects', async () => {
+      const projects = await storage.getUserProjects('non-existent-user-id');
+      expect(projects).toEqual([]);
+    });
+
+    it('should update project', async () => {
+      const updates = {
+        name: 'Updated Project Name',
+        description: 'Updated description',
+      };
+
+      const project = await storage.updateProject(createdProjectId, updates);
+
+      expect(project.name).toBe(updates.name);
+      expect(project.description).toBe(updates.description);
+    });
+  });
+
+  describe('Link Operations', () => {
+    it('should create a new link', async () => {
+      const linkData = {
+        projectId: createdProjectId,
+        name: `Test Link ${Date.now()}`,
+        slug: `test-slug-${Date.now()}`,
+        isActive: true,
+        requireEmail: true,
+        allowDownload: false,
+        customMessage: 'Welcome to our pitch!',
+        expiresAt: null,
+      };
+
+      const link = await storage.createLink(linkData);
+
+      expect(link).toBeDefined();
+      expect(link.name).toBe(linkData.name);
+      expect(link.slug).toBe(linkData.slug);
+      expect(link.projectId).toBe(createdProjectId);
+      createdLinkId = link.id;
+    });
+
+    it('should get link by slug', async () => {
+      const allLinks = await storage.getProjectLinks(createdProjectId);
+      const testLink = allLinks.find(l => l.id === createdLinkId);
+
+      if (testLink) {
+        const link = await storage.getLink(testLink.slug);
+        expect(link).toBeDefined();
+        expect(link?.id).toBe(createdLinkId);
+      }
+    });
+
+    it('should get link by ID', async () => {
+      const link = await storage.getLinkById(createdLinkId);
+
+      expect(link).toBeDefined();
+      expect(link?.id).toBe(createdLinkId);
+    });
+
+    it('should get project links', async () => {
+      const links = await storage.getProjectLinks(createdProjectId);
+
+      expect(Array.isArray(links)).toBe(true);
+      expect(links.length).toBeGreaterThanOrEqual(1);
+      expect(links.some(l => l.id === createdLinkId)).toBe(true);
+    });
+
+    it('should return undefined for non-existent link slug', async () => {
+      const link = await storage.getLink('non-existent-slug');
+      expect(link).toBeUndefined();
+    });
+
+    it('should return empty array for project with no links', async () => {
+      const links = await storage.getProjectLinks('non-existent-project-id');
+      expect(links).toEqual([]);
+    });
+
+    it('should update link', async () => {
+      const updates = {
+        name: 'Updated Link Name',
+        isActive: false,
+        requireEmail: false,
+      };
+
+      const link = await storage.updateLink(createdLinkId, updates);
+
+      expect(link.name).toBe(updates.name);
+      expect(link.isActive).toBe(updates.isActive);
+      expect(link.requireEmail).toBe(updates.requireEmail);
+    });
+
+    it('should count user links', async () => {
+      const count = await storage.getUserLinksCount(createdUserId);
+
+      expect(typeof count).toBe('number');
+      expect(count).toBeGreaterThanOrEqual(1);
+    });
+  });
+
+  describe('Analytics Operations', () => {
+    it('should get user analytics', async () => {
+      const analytics = await storage.getUserAnalytics(createdUserId);
+
+      expect(analytics).toBeDefined();
+      expect(typeof analytics.totalQuestions).toBe('number');
+      expect(typeof analytics.activeLinks).toBe('number');
+      expect(typeof analytics.monthlyCost).toBe('number');
+    });
+
+    it('should get detailed analytics', async () => {
+      const analytics = await storage.getDetailedAnalytics(createdUserId);
+
+      expect(analytics).toBeDefined();
+      expect(analytics.overview).toBeDefined();
+      expect(analytics.projectBreakdown).toBeDefined();
+      expect(analytics.linkPerformance).toBeDefined();
+    });
+
+    it('should return zero analytics for new user', async () => {
+      const analytics = await storage.getUserAnalytics('non-existent-user-id');
+
+      expect(analytics.totalQuestions).toBe(0);
+      expect(analytics.activeLinks).toBe(0);
+      expect(analytics.monthlyCost).toBe(0);
+    });
+  });
+
+  describe('Notification Operations', () => {
+    it('should update user notifications', async () => {
+      await storage.updateUserNotifications(createdUserId, {
+        emailAlerts: false,
+        weeklyReports: false,
+      });
+
+      const user = await storage.getUser(createdUserId);
+      expect(user?.emailAlerts).toBe(false);
+      expect(user?.weeklyReports).toBe(false);
+    });
+
+    it('should re-enable user notifications', async () => {
+      await storage.updateUserNotifications(createdUserId, {
+        emailAlerts: true,
+        weeklyReports: true,
+      });
+
+      const user = await storage.getUser(createdUserId);
+      expect(user?.emailAlerts).toBe(true);
+      expect(user?.weeklyReports).toBe(true);
+    });
+  });
+
+  describe('Cleanup Operations', () => {
+    it('should delete link', async () => {
+      await storage.deleteLink(createdLinkId);
+
+      const link = await storage.getLinkById(createdLinkId);
+      expect(link).toBeUndefined();
+    });
+
+    it('should delete project', async () => {
+      await storage.deleteProject(createdProjectId);
+
+      const project = await storage.getProject(createdProjectId);
+      expect(project).toBeUndefined();
+    });
+  });
+});

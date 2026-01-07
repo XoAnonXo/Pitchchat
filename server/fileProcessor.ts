@@ -5,6 +5,7 @@ import { storage } from "./storage";
 import { generateEmbedding, summarizeDocument } from "./openai";
 import type { InsertDocument, InsertChunk } from "@shared/schema";
 import { calculatePlatformCost } from "./pricing";
+import { sendDocumentProcessed } from "./brevo";
 
 const UPLOAD_DIR = process.env.UPLOAD_DIR || "./uploads";
 
@@ -91,6 +92,25 @@ export async function processDocument(documentId: string): Promise<void> {
       pageCount: estimatePageCount(content),
       // Store cost for tracking (optional, but useful for analytics)
     });
+
+    // Send document processed notification email
+    try {
+      const project = await storage.getProject(document.projectId);
+      if (project) {
+        const user = await storage.getUser(project.userId);
+        if (user?.email) {
+          sendDocumentProcessed(user.email, {
+            fileName: document.originalName,
+            projectName: project.name,
+            pagesProcessed: estimatePageCount(content),
+            tokensUsed: totalTokens,
+            projectId: document.projectId,
+          }).catch(err => console.error('Failed to send document processed email:', err));
+        }
+      }
+    } catch (emailError) {
+      console.error('Error sending document processed email:', emailError);
+    }
 
   } catch (error) {
     console.error("Error processing document:", error);

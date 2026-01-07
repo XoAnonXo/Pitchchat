@@ -41,7 +41,7 @@ export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
   getUserByEmail(email: string): Promise<User | undefined>;
   getUserByGoogleId(googleId: string): Promise<User | undefined>;
-  createUser(user: Partial<InsertUser>): Promise<User>;
+  createUser(user: Partial<UpsertUser> & { email: string }): Promise<User>;
   upsertUser(user: UpsertUser): Promise<User>;
   
   // Project operations
@@ -66,6 +66,7 @@ export interface IStorage {
   // Link operations
   getProjectLinks(projectId: string): Promise<Link[]>;
   getLink(slug: string): Promise<Link | undefined>;
+  getLinkById(id: string): Promise<Link | undefined>;
   createLink(link: InsertLink): Promise<Link>;
   updateLink(id: string, updates: Partial<InsertLink>): Promise<Link>;
   deleteLink(id: string): Promise<void>;
@@ -146,10 +147,10 @@ export class DatabaseStorage implements IStorage {
     return user;
   }
 
-  async createUser(userData: Partial<InsertUser>): Promise<User> {
+  async createUser(userData: Partial<UpsertUser> & { email: string }): Promise<User> {
     const [user] = await db
       .insert(users)
-      .values(userData)
+      .values(userData as any)
       .returning();
     return user;
   }
@@ -203,31 +204,44 @@ export class DatabaseStorage implements IStorage {
 
   // Document operations
   async getProjectDocuments(projectId: string): Promise<Document[]> {
+    // Optimized: Single query with aggregated token counts instead of N+1 queries
     const docs = await db
       .select()
       .from(documents)
       .where(eq(documents.projectId, projectId))
       .orderBy(desc(documents.createdAt));
-    
-    // Add token count and chunks info from chunks table
-    const docsWithTokens = await Promise.all(
-      docs.map(async (doc) => {
-        const docChunks = await db
-          .select()
-          .from(chunks)
-          .where(eq(chunks.documentId, doc.id));
-        
-        const totalTokens = docChunks.reduce((sum, chunk) => sum + (chunk.tokenCount || 0), 0);
-        
-        return {
-          ...doc,
-          tokens: totalTokens || doc.tokens || 0,
-          chunks: docChunks
-        };
+
+    if (docs.length === 0) {
+      return [];
+    }
+
+    // Get all document IDs
+    const docIds = docs.map(d => d.id);
+
+    // Single query to get token counts for all documents
+    // Cast to integer to avoid bigint string serialization issues
+    const chunkStats = await db
+      .select({
+        documentId: chunks.documentId,
+        totalTokens: sql<string>`COALESCE(SUM(${chunks.tokenCount})::integer, 0)`.as('totalTokens'),
+        chunkCount: sql<string>`COUNT(*)::integer`.as('chunkCount'),
       })
-    );
-    
-    return docsWithTokens;
+      .from(chunks)
+      .where(inArray(chunks.documentId, docIds))
+      .groupBy(chunks.documentId);
+
+    // Create a map for quick lookup - parse strings to numbers
+    const statsMap = new Map(chunkStats.map(s => [s.documentId, {
+      ...s,
+      totalTokens: parseInt(String(s.totalTokens), 10) || 0
+    }]));
+
+    // Merge stats with documents
+    return docs.map(doc => ({
+      ...doc,
+      tokens: statsMap.get(doc.id)?.totalTokens || doc.tokens || 0,
+      chunks: [] // Don't load full chunk data - not needed for list view
+    }));
   }
 
   async getDocument(id: string): Promise<Document | undefined> {
@@ -323,6 +337,11 @@ export class DatabaseStorage implements IStorage {
 
   async getLink(slug: string): Promise<Link | undefined> {
     const [link] = await db.select().from(links).where(eq(links.slug, slug));
+    return link;
+  }
+
+  async getLinkById(id: string): Promise<Link | undefined> {
+    const [link] = await db.select().from(links).where(eq(links.id, id));
     return link;
   }
 
@@ -590,11 +609,13 @@ export class DatabaseStorage implements IStorage {
       const dayEnd = new Date(date.setHours(23, 59, 59, 999));
 
       const dayConversations = allConversations.filter(c => {
+        if (!c.startedAt) return false;
         const startedAt = new Date(c.startedAt);
         return startedAt >= dayStart && startedAt <= dayEnd;
       });
 
       const dayMessages = allMessages.filter(m => {
+        if (!m.timestamp) return false;
         const timestamp = new Date(m.timestamp);
         return timestamp >= dayStart && timestamp <= dayEnd;
       });
@@ -879,6 +900,53 @@ export class DatabaseStorage implements IStorage {
         updatedAt: new Date(),
       })
       .where(eq(users.id, userId));
+  }
+
+  async deleteUserData(userId: string): Promise<void> {
+    // Get all user projects
+    const userProjects = await this.getUserProjects(userId);
+
+    // Delete all project-related data
+    for (const project of userProjects) {
+      // Get all documents and delete them
+      const projectDocs = await this.getProjectDocuments(project.id);
+      for (const doc of projectDocs) {
+        // Delete chunks first
+        await db.delete(chunks).where(eq(chunks.documentId, doc.id));
+        // Delete document
+        await db.delete(documents).where(eq(documents.id, doc.id));
+      }
+
+      // Get all links and their conversations
+      const projectLinks = await this.getProjectLinks(project.id);
+      for (const link of projectLinks) {
+        // Get all conversations for this link
+        const linkConversations = await this.getLinkConversations(link.id);
+        for (const conv of linkConversations) {
+          // Delete messages
+          await db.delete(messages).where(eq(messages.conversationId, conv.id));
+          // Delete conversation
+          await db.delete(conversations).where(eq(conversations.id, conv.id));
+        }
+        // Delete link
+        await db.delete(links).where(eq(links.id, link.id));
+      }
+
+      // Delete integrations
+      await db.delete(integrations).where(eq(integrations.projectId, project.id));
+
+      // Delete project
+      await db.delete(projects).where(eq(projects.id, project.id));
+    }
+
+    // Delete token usage records
+    await db.delete(tokenUsage).where(eq(tokenUsage.userId, userId));
+
+    // Delete password reset tokens
+    await db.delete(passwordResetTokens).where(eq(passwordResetTokens.userId, userId));
+
+    // Delete the user
+    await db.delete(users).where(eq(users.id, userId));
   }
 }
 
