@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { CookieConsent } from "@/components/CookieConsent";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -35,6 +36,24 @@ export default function RootLayout({
       >
         {gaId ? (
           <>
+            {/* Google Consent Mode v2 - default to denied */}
+            <Script
+              id="gtag-consent-default"
+              strategy="beforeInteractive"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('consent', 'default', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied',
+                    'ad_user_data': 'denied',
+                    'ad_personalization': 'denied',
+                    'wait_for_update': 500
+                  });
+                `,
+              }}
+            />
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
               strategy="afterInteractive"
@@ -54,6 +73,7 @@ export default function RootLayout({
           </>
         ) : null}
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
