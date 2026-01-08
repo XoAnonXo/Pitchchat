@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "@/db/client";
+import { getDb } from "@/db/client";
 import {
   pseoBenchmarks,
   pseoChecklistItems,
@@ -31,6 +31,11 @@ export type PseoPageData = {
 
 export async function getPseoPageBySlug(slug: string): Promise<PseoPageData | null> {
   try {
+    const db = getDb();
+    if (!db) {
+      return null;
+    }
+
     const page = await db
       .select()
       .from(pseoPages)
@@ -132,7 +137,7 @@ export async function getPseoPageBySlug(slug: string): Promise<PseoPageData | nu
       investorUpdates,
       objections,
     };
-  } catch (error) {
+  } catch {
     return null;
   }
 }

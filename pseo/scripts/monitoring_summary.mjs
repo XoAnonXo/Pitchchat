@@ -46,7 +46,7 @@ async function readJsonIfExists(filePath) {
   try {
     const raw = await fs.readFile(filePath, "utf8");
     return JSON.parse(raw);
-  } catch (error) {
+  } catch {
     return null;
   }
 }

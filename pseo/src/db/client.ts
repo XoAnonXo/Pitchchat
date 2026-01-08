@@ -1,13 +1,32 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-const connectionString =
-  process.env.PSEO_DATABASE_URL ?? process.env.DATABASE_URL ?? "";
+let pool: Pool | null = null;
+let dbInstance: ReturnType<typeof drizzle> | null = null;
 
-if (!connectionString) {
-  throw new Error("PSEO_DATABASE_URL or DATABASE_URL must be set");
+function getConnectionString() {
+  return process.env.PSEO_DATABASE_URL ?? process.env.DATABASE_URL ?? "";
 }
 
-const pool = new Pool({ connectionString });
+/**
+ * Lazily initializes the pSEO database connection.
+ *
+ * IMPORTANT: The pSEO app has a seed-data fallback and can run without a DB.
+ * In those cases this returns `null` and callers should degrade gracefully.
+ */
+export function getDb() {
+  const connectionString = getConnectionString();
+  if (!connectionString) {
+    return null;
+  }
 
-export const db = drizzle(pool);
+  if (!pool) {
+    pool = new Pool({ connectionString });
+  }
+
+  if (!dbInstance) {
+    dbInstance = drizzle(pool);
+  }
+
+  return dbInstance;
+}

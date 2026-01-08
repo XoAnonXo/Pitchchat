@@ -21,7 +21,8 @@ type PageParams = {
   pageType: string;
 };
 
-function formatSlug(value: string) {
+function formatSlug(value?: string) {
+  if (!value) return "";
   return value
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
@@ -144,7 +145,11 @@ export default async function InvestorQuestionsPage({
           data={{
             title: dbPage.title,
             summary: dbPage.summary ?? "",
-            sections: dbPage.deckSections,
+            sections: dbPage.deckSections.map((section) => ({
+              title: section.title,
+              guidance: section.guidance ?? undefined,
+              goal: section.goal ?? undefined,
+            })),
             ctaText: dbPage.ctaText ?? "Create your PitchChat room",
             context,
           }}
@@ -186,7 +191,10 @@ export default async function InvestorQuestionsPage({
           data={{
             title: dbPage.title,
             summary: dbPage.summary ?? "",
-            items: dbPage.checklistItems,
+            items: dbPage.checklistItems.map((item) => ({
+              item: item.item,
+              rationale: item.rationale ?? undefined,
+            })),
             ctaText: dbPage.ctaText ?? "Create your PitchChat room",
             context,
           }}

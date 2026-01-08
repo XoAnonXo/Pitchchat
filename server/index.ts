@@ -3,7 +3,9 @@ import express, { type Request, Response, NextFunction } from "express";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, serveStatic, log, runWithRequestContext } from "./vite";
+import { registerPseoProxy } from "./pseoProxy";
+import { randomUUID } from "crypto";
 
 const app = express();
 
@@ -63,8 +65,23 @@ app.use(compression({
   threshold: 1024, // Only compress responses larger than 1KB
 }));
 
-app.use(express.json());
+app.use(express.json({
+  verify: (req: any, _res, buf) => {
+    const url = req.originalUrl || req.url || "";
+    if (url.startsWith("/api/stripe/webhook") || url.startsWith("/api/subscriptions/webhook")) {
+      req.rawBody = buf;
+    }
+  },
+}));
 app.use(express.urlencoded({ extended: false }));
+
+app.use((req, res, next) => {
+  const headerId = req.header("x-request-id");
+  const requestId = headerId && headerId.trim() !== "" ? headerId : randomUUID();
+  res.setHeader("x-request-id", requestId);
+  (req as Request & { requestId?: string }).requestId = requestId;
+  runWithRequestContext(requestId, () => next());
+});
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -81,7 +98,18 @@ app.use((req, res, next) => {
     const duration = Date.now() - start;
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
-      if (capturedJsonResponse) {
+      const sensitivePrefixes = [
+        "/api/auth",
+        "/api/user",
+        "/api/email",
+        "/api/stripe",
+        "/api/subscriptions",
+        "/api/bootstrap",
+      ];
+      const shouldLogBody =
+        capturedJsonResponse &&
+        !sensitivePrefixes.some((prefix) => path.startsWith(prefix));
+      if (shouldLogBody) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
@@ -99,12 +127,18 @@ app.use((req, res, next) => {
 (async () => {
   const server = await registerRoutes(app);
 
+  // Reverse proxy for the standalone `pseo/` Next.js app (Option #1)
+  // Enable by setting `PSEO_ORIGIN`, e.g.:
+  // - local dev: http://localhost:3000
+  // - prod: https://<your-pseo-deployment>
+  registerPseoProxy(app);
+
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
     const message = err.message || "Internal Server Error";
 
+    log(`error ${status}: ${message}`);
     res.status(status).json({ message });
-    throw err;
   });
 
   // importantly only setup vite in development and after

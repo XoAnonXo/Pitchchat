@@ -74,7 +74,10 @@ export function PseoCtaButton({ label, context, href }: PseoCtaButtonProps) {
   const altLabel = DEFAULT_ALT_LABEL;
 
   useEffect(() => {
+    // We intentionally resolve the CTA variant on the client after mount because it
+    // depends on URL params/localStorage. This avoids SSR hydration mismatches.
     const assigned = resolveVariant();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setVariant(assigned);
     setVariantLabel(assigned === "B" ? altLabel : label);
     setVariantReady(true);

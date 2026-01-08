@@ -24,7 +24,7 @@ async function loadSeedData() {
   try {
     const raw = await fs.readFile(normalizedSourcePath, "utf8");
     return JSON.parse(raw);
-  } catch (error) {
+  } catch {
     const raw = await fs.readFile(fallbackSeedPath, "utf8");
     return JSON.parse(raw);
   }

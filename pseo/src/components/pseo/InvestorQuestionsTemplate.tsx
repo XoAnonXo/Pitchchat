@@ -37,9 +37,11 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
   const pageUrl = buildPseoPageUrl(data.context);
   const industryLabel = labelForIndustry(data.context.industry);
   const stageLabel = labelForStage(data.context.stage);
+  const metrics = data.metrics ?? [];
+  const objections = data.objections ?? [];
   const questionsCount = data.questions.length;
-  const objectionsCount = data.objections?.length ?? 0;
-  const metricsCount = data.metrics?.length ?? 0;
+  const objectionsCount = objections.length;
+  const metricsCount = metrics.length;
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -147,7 +149,7 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
                 </tr>
               </thead>
               <tbody>
-                {data.metrics.map((metric, index) => (
+                {metrics.map((metric, index) => (
                   <tr key={`${metric.label}-${index}`} className="border-t border-neutral-100">
                     <td className="px-5 py-4 font-medium text-neutral-900">{metric.label}</td>
                     <td className="px-5 py-4 text-neutral-700">{metric.value}</td>
@@ -172,7 +174,7 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
         <section className="mt-12">
           <h2 className="text-xl font-semibold text-neutral-900">Common objections to prepare for</h2>
           <div className="mt-4 space-y-4">
-            {data.objections.map((item, index) => (
+            {objections.map((item, index) => (
               <div key={`${item.objection}-${index}`} className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
                 <p className="text-sm font-semibold text-neutral-900">{item.objection}</p>
                 <p className="mt-2 text-sm text-neutral-700">{item.response}</p>

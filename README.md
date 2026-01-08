@@ -45,10 +45,13 @@ Ensure the following variables are set in your environment:
 | `GOOGLE_CLIENT_SECRET` | Google OAuth Client Secret |
 | `PRODUCTION_URL` | Base URL for the production app |
 | `REPLIT_DOMAINS` | (Optional) Allowed domains for Replit auth |
+| `PSEO_ORIGIN` | (Optional) Enables reverse proxy to the standalone `pseo/` Next.js app (e.g. `http://localhost:3000` in dev or your deployed pSEO origin in prod) |
 
 ## 📦 Scripts
 
 - `npm run dev`: Start development server with Vite and tsx.
+- `npm run dev:pseo`: Start the standalone pSEO Next.js app (under `pseo/`).
+- `npm run dev:with-pseo`: Start the main app with pSEO reverse proxy enabled (expects pSEO on `http://localhost:3000`).
 - `npm run build`: Build for production.
 - `npm run check`: Run TypeScript type checking (`tsc`).
 - `npm run db:push`: Push local schema changes to the database.
