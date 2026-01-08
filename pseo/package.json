@@ -23,6 +23,7 @@
     "pseo:monitoring-summary": "node scripts/monitoring_summary.mjs"
   },
   "dependencies": {
+    "@types/pg": "^8.16.0",
     "drizzle-orm": "^0.44.5",
     "next": "16.1.1",
     "pg": "^8.13.3",
