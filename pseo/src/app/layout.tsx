@@ -3,6 +3,11 @@ import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { CookieConsent } from "@/components/CookieConsent";
+import { PseoFooter } from "@/components/pseo/PseoFooter";
+import { PseoHeader } from "@/components/pseo/PseoHeader";
+import { PseoOrganizationSchema } from "@/components/pseo/PseoOrganizationSchema";
+import { PseoScrollTracker } from "@/components/pseo/PseoScrollTracker";
+import { PseoTimeTracker } from "@/components/pseo/PseoTimeTracker";
 import { getSiteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -31,6 +36,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <PseoOrganizationSchema />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -72,8 +80,14 @@ export default function RootLayout({
             />
           </>
         ) : null}
-        {children}
+        <PseoHeader />
+        <div id="main-content" className="min-h-screen">
+          {children}
+        </div>
+        <PseoFooter />
         <CookieConsent />
+        <PseoScrollTracker />
+        <PseoTimeTracker />
       </body>
     </html>
   );

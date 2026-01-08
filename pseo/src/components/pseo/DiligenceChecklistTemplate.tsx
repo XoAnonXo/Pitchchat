@@ -1,3 +1,4 @@
+import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
@@ -28,10 +29,17 @@ export function DiligenceChecklistTemplate({
   const industryLabel = labelForIndustry(data.context.industry);
   const stageLabel = labelForStage(data.context.stage);
   const itemsCount = data.items.length;
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { label: "Investor Questions", href: "/investor-questions/" },
+    { label: industryLabel, href: `/investor-questions/industries/${data.context.industry}/` },
+    { label: stageLabel, href: `/investor-questions/stages/${data.context.stage}/` },
+    { label: data.title },
+  ];
   if (itemsCount === 0) {
     return (
       <main className="mx-auto max-w-4xl px-6 py-16">
         <PseoPageTracker context={data.context} />
+        <PseoBreadcrumbs items={breadcrumbItems} />
         <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
           Pitchchat diligence checklist
         </p>
@@ -64,6 +72,7 @@ export function DiligenceChecklistTemplate({
     <main className="mx-auto max-w-4xl px-6 py-16">
       <PseoJsonLd schema={howToSchema} />
       <PseoPageTracker context={data.context} />
+      <PseoBreadcrumbs items={breadcrumbItems} />
       <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
         Pitchchat diligence checklist
       </p>

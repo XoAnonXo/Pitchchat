@@ -1,13 +1,20 @@
+"use client";
+
 import Link from "next/link";
 
 import pilotConfig from "@/data/pilot-config.json";
 import industryNeighbors from "@/data/industry-neighbors.json";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { trackLinkClick } from "@/lib/analytics";
 import {
   buildIndustryHubPath,
   buildPseoPagePath,
   buildStageHubPath,
 } from "@/lib/pseoRoutes";
+
+function handleLinkClick(href: string) {
+  trackLinkClick(href, "related_content", window.location.pathname);
+}
 
 type PseoLinkContext = {
   industry: string;
@@ -116,7 +123,7 @@ export function PseoInternalLinks({ context }: { context: PseoLinkContext }) {
           <ul className="mt-3 space-y-2 text-sm text-neutral-700">
             {pageTypeLinks.map((link) => (
               <li key={link.href}>
-                <Link className="hover:text-neutral-900" href={link.href}>
+                <Link className="hover:text-neutral-900" href={link.href} onClick={() => handleLinkClick(link.href)}>
                   {link.label}
                 </Link>
               </li>
@@ -129,7 +136,7 @@ export function PseoInternalLinks({ context }: { context: PseoLinkContext }) {
           <ul className="mt-3 space-y-2 text-sm text-neutral-700">
             {industryLinks.map((link) => (
               <li key={link.href}>
-                <Link className="hover:text-neutral-900" href={link.href}>
+                <Link className="hover:text-neutral-900" href={link.href} onClick={() => handleLinkClick(link.href)}>
                   {link.label}
                 </Link>
               </li>
@@ -142,18 +149,18 @@ export function PseoInternalLinks({ context }: { context: PseoLinkContext }) {
           <ul className="mt-3 space-y-2 text-sm text-neutral-700">
             {stageLinks.map((link) => (
               <li key={link.href}>
-                <Link className="hover:text-neutral-900" href={link.href}>
+                <Link className="hover:text-neutral-900" href={link.href} onClick={() => handleLinkClick(link.href)}>
                   {link.label}
                 </Link>
               </li>
             ))}
           </ul>
           <div className="mt-4 text-xs text-neutral-500">
-            <Link className="hover:text-neutral-700" href={buildIndustryHubPath(industry)}>
+            <Link className="hover:text-neutral-700" href={buildIndustryHubPath(industry)} onClick={() => handleLinkClick(buildIndustryHubPath(industry))}>
               Browse {labelForIndustry(industry)} hubs
             </Link>
             {" · "}
-            <Link className="hover:text-neutral-700" href={buildStageHubPath(stage)}>
+            <Link className="hover:text-neutral-700" href={buildStageHubPath(stage)} onClick={() => handleLinkClick(buildStageHubPath(stage))}>
               Browse {labelForStage(stage)} hubs
             </Link>
           </div>
@@ -164,7 +171,7 @@ export function PseoInternalLinks({ context }: { context: PseoLinkContext }) {
           <ul className="mt-3 space-y-2 text-sm text-neutral-700">
             {comboLinks.map((link) => (
               <li key={link.href}>
-                <Link className="hover:text-neutral-900" href={link.href}>
+                <Link className="hover:text-neutral-900" href={link.href} onClick={() => handleLinkClick(link.href)}>
                   {link.label}
                 </Link>
               </li>
@@ -173,7 +180,7 @@ export function PseoInternalLinks({ context }: { context: PseoLinkContext }) {
           <div className="mt-4 text-xs text-neutral-500">
             {hubLinks.map((link, index) => (
               <span key={link.href}>
-                <Link className="hover:text-neutral-700" href={link.href}>
+                <Link className="hover:text-neutral-700" href={link.href} onClick={() => handleLinkClick(link.href)}>
                   {link.label}
                 </Link>
                 {index < hubLinks.length - 1 ? " · " : null}

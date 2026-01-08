@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { PseoBreadcrumbSchema } from "@/components/pseo/PseoBreadcrumbSchema";
 import pilotConfig from "@/data/pilot-config.json";
 import { labelForStage } from "@/data/labelUtils";
 
@@ -48,8 +49,15 @@ export default function InvestorQuestionsStagePage({
 }) {
   const stageLabel = labelForStage(params.stage);
 
+  const breadcrumbItems = [
+    { name: "Investor Questions", path: "/investor-questions" },
+    { name: `${stageLabel} Stage`, path: `/investor-questions/stages/${params.stage}` },
+  ];
+
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
+    <>
+      <PseoBreadcrumbSchema items={breadcrumbItems} />
+      <main className="mx-auto max-w-4xl px-6 py-16">
       <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
         Stage hub
       </p>
@@ -82,6 +90,7 @@ export default function InvestorQuestionsStagePage({
           </div>
         ))}
       </div>
-    </main>
+      </main>
+    </>
   );
 }

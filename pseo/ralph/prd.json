@@ -1,0 +1,124 @@
+{
+  "title": "PRD-04: Enhanced Analytics Tracking",
+  "description": "Implement scroll depth tracking, time on page tracking, and internal link click tracking for pSEO pages",
+  "stories": [
+    {
+      "id": "1",
+      "title": "Add trackEvent function and event types to analytics.ts",
+      "description": "Update analytics.ts to add a generic trackEvent function that works alongside existing trackPseoEvent, plus new event type definitions for scroll_depth, time_on_page, and internal_link_click",
+      "acceptance_criteria": [
+        "trackEvent function exists that accepts event name and params",
+        "Function works with gtag or dataLayer",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "2",
+      "title": "Add debounced trackLinkClick function to analytics.ts",
+      "description": "Add a trackLinkClick helper function with 500ms debounce to prevent duplicate click events from rapid clicks",
+      "acceptance_criteria": [
+        "trackLinkClick function exists with debounce logic",
+        "Uses Map to track click timestamps per link",
+        "Calls trackEvent with internal_link_click event",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "3",
+      "title": "Create PseoScrollTracker component",
+      "description": "Create new component that tracks scroll depth at 25%, 50%, 75%, 100% milestones with throttled scroll handler and requestAnimationFrame for performance",
+      "acceptance_criteria": [
+        "Component file created at src/components/pseo/PseoScrollTracker.tsx",
+        "Tracks milestones only once per page view",
+        "Uses throttle and requestAnimationFrame",
+        "Renders null (invisible tracker)",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "4",
+      "title": "Create PseoTimeTracker component",
+      "description": "Create new component that tracks time on page at 30s, 60s, 120s, 300s milestones with Page Visibility API integration to only count active time",
+      "acceptance_criteria": [
+        "Component file created at src/components/pseo/PseoTimeTracker.tsx",
+        "Uses Page Visibility API to pause when tab is hidden",
+        "Persists state to sessionStorage",
+        "Tracks milestones only once per page view",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "5",
+      "title": "Update PseoInternalLinks with click tracking",
+      "description": "Add onClick handlers to all Link components in PseoInternalLinks.tsx that call trackLinkClick with destination URL and link_type='related_content'",
+      "acceptance_criteria": [
+        "Import trackLinkClick from analytics",
+        "All Link components have onClick handlers",
+        "Click tracking includes destination_url, link_type, source_page",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "6",
+      "title": "Update PseoBreadcrumbs with click tracking",
+      "description": "Add onClick handlers to breadcrumb Link components that call trackLinkClick with link_type='breadcrumb'",
+      "acceptance_criteria": [
+        "Import trackLinkClick from analytics",
+        "Breadcrumb links have onClick handlers",
+        "Click tracking includes link_type='breadcrumb'",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "7",
+      "title": "Update PseoFooter with click tracking",
+      "description": "Add onClick handlers to footer Link components that call trackLinkClick with link_type='footer'",
+      "acceptance_criteria": [
+        "Import trackLinkClick from analytics",
+        "Footer links have onClick handlers",
+        "Click tracking includes link_type='footer'",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "8",
+      "title": "Update layout.tsx to include scroll and time trackers",
+      "description": "Import and render PseoScrollTracker and PseoTimeTracker components in the app layout",
+      "acceptance_criteria": [
+        "Both tracker components imported in layout.tsx",
+        "Components rendered inside body",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "9",
+      "title": "Verify build passes with all analytics changes",
+      "description": "Run npm run build to verify all changes compile correctly and the static site generates without errors",
+      "acceptance_criteria": [
+        "npm run build completes successfully",
+        "No TypeScript errors",
+        "All 91+ pages generated"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "10",
+      "title": "Export analytics types and functions",
+      "description": "Ensure all new analytics types and functions are properly exported from analytics.ts for use by other components",
+      "acceptance_criteria": [
+        "trackEvent is exported",
+        "trackLinkClick is exported",
+        "Typecheck passes"
+      ],
+      "status": "pending"
+    }
+  ]
+}

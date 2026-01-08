@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { PseoBreadcrumbSchema } from "@/components/pseo/PseoBreadcrumbSchema";
 import pilotConfig from "@/data/pilot-config.json";
 import { labelForIndustry } from "@/data/labelUtils";
 
@@ -48,8 +49,15 @@ export default function InvestorQuestionsIndustryPage({
 }) {
   const industryLabel = labelForIndustry(params.industry);
 
+  const breadcrumbItems = [
+    { name: "Investor Questions", path: "/investor-questions" },
+    { name: industryLabel, path: `/investor-questions/industries/${params.industry}` },
+  ];
+
   return (
-    <main className="mx-auto max-w-4xl px-6 py-16">
+    <>
+      <PseoBreadcrumbSchema items={breadcrumbItems} />
+      <main className="mx-auto max-w-4xl px-6 py-16">
       <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
         Industry hub
       </p>
@@ -82,6 +90,7 @@ export default function InvestorQuestionsIndustryPage({
           </div>
         ))}
       </div>
-    </main>
+      </main>
+    </>
   );
 }
