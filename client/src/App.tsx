@@ -5,6 +5,7 @@ import { QueryClientProvider, useQuery, useQueryClient } from "@tanstack/react-q
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
+import { CookieConsent } from "@/components/CookieConsent";
 import type { Conversation, Project, User } from "@shared/schema";
 
 // Lazy load all page components for code splitting
@@ -106,6 +107,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Router />
+        <CookieConsent />
       </TooltipProvider>
     </QueryClientProvider>
   );
