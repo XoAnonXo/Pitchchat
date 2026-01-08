@@ -797,11 +797,12 @@ export default function InvestorChat() {
         />
       )}
 
-      {conversationId && (
+      {conversationId && slug && (
         <ContactTeamDialog
           isOpen={showContactDialog}
           onClose={() => setShowContactDialog(false)}
           conversationId={conversationId}
+          linkSlug={slug}
         />
       )}
     </div>

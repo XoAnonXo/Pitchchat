@@ -20,6 +20,8 @@ const LinksPage = lazy(() => import("@/pages/links"));
 const AuthPage = lazy(() => import("@/pages/auth"));
 const ForgotPasswordPage = lazy(() => import("@/pages/forgot-password"));
 const ResetPasswordPage = lazy(() => import("@/pages/reset-password"));
+const TermsPage = lazy(() => import("@/pages/terms"));
+const PrivacyPage = lazy(() => import("@/pages/privacy"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 
 type DashboardBootstrap = {
@@ -70,6 +72,8 @@ function Router() {
       <Switch>
         {isLoading || !isAuthenticated ? (
           <>
+            <Route path="/terms" component={TermsPage} />
+            <Route path="/privacy" component={PrivacyPage} />
             <Route path="/" component={Landing} />
             <Route path="/auth" component={AuthPage} />
             <Route path="/forgot-password" component={ForgotPasswordPage} />
@@ -85,6 +89,8 @@ function Router() {
           </>
         ) : (
           <>
+            <Route path="/terms" component={TermsPage} />
+            <Route path="/privacy" component={PrivacyPage} />
             <Route path="/" component={Dashboard} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/documents/:projectId" component={({ params }) => <DocumentsPage projectId={params.projectId} />} />

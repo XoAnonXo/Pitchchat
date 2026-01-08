@@ -1,8 +1,18 @@
 import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
 import { isAuthenticated } from '../customAuth';
 import { storage } from '../storage';
 
 const router = Router();
+
+// Rate limiting for contact submissions (10 per minute per IP)
+const contactLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { message: 'Too many contact submissions, please try again later' },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 /**
  * Get all conversations for the authenticated user
@@ -47,10 +57,26 @@ router.get('/:conversationId/messages', isAuthenticated, async (req: any, res) =
  * Submit contact details for a conversation (investor side)
  * POST /api/conversations/:conversationId/contact
  */
-router.post('/:conversationId/contact', async (req, res) => {
+router.post('/:conversationId/contact', contactLimiter, async (req, res) => {
   try {
     const { conversationId } = req.params;
-    const { name, phone, company, website } = req.body;
+    const { name, phone, company, website, linkSlug, linkToken } = req.body;
+    const linkIdentifier = linkSlug || linkToken;
+
+    if (!linkIdentifier) {
+      console.warn('Contact submission missing link identifier', { conversationId });
+      return res.status(400).json({ message: 'Link slug is required' });
+    }
+
+    const [conversation, link] = await Promise.all([
+      storage.getConversationById(conversationId),
+      storage.getLink(linkIdentifier),
+    ]);
+
+    if (!conversation || !link || conversation.linkId !== link.id) {
+      console.warn('Contact submission link mismatch', { conversationId, linkSlug: linkIdentifier });
+      return res.status(404).json({ message: 'Conversation not found for link' });
+    }
 
     // Update conversation with contact details
     await storage.updateConversationContactDetails(conversationId, {
@@ -62,38 +88,32 @@ router.post('/:conversationId/contact', async (req, res) => {
     });
 
     // Get the conversation to find the project owner
-    const conversation = await storage.getConversationById(conversationId);
-    if (conversation) {
-      const link = await storage.getLink(conversation.linkId);
-      if (link) {
-        const project = await storage.getProject(link.projectId);
-        if (project) {
-          const user = await storage.getUser(project.userId);
+    const project = await storage.getProject(link.projectId);
+    if (project) {
+      const user = await storage.getUser(project.userId);
 
-          // Import email functions dynamically to avoid circular deps
-          const { sendInvestorContactEmail, sendFounderContactAlert } = await import('../brevo');
+      // Import email functions dynamically to avoid circular deps
+      const { sendInvestorContactEmail, sendFounderContactAlert } = await import('../brevo');
 
-          // Send email to investor confirming their contact details were shared
-          if (conversation.investorEmail) {
-            await sendInvestorContactEmail(conversation.investorEmail, project.name, link.slug, {
-              name: name || undefined,
-              phone: phone || undefined,
-              company: company || undefined,
-              website: website || undefined,
-            });
-          }
+      // Send email to investor confirming their contact details were shared
+      if (conversation.investorEmail) {
+        await sendInvestorContactEmail(conversation.investorEmail, project.name, link.slug, {
+          name: name || undefined,
+          phone: phone || undefined,
+          company: company || undefined,
+          website: website || undefined,
+        });
+      }
 
-          // Send email to founder if they have email alerts enabled
-          if (user?.emailAlerts) {
-            await sendFounderContactAlert(user.email!, project.name, conversationId, {
-              email: conversation.investorEmail || 'unknown',
-              name: name || undefined,
-              phone: phone || undefined,
-              company: company || undefined,
-              website: website || undefined,
-            });
-          }
-        }
+      // Send email to founder if they have email alerts enabled
+      if (user?.emailAlerts) {
+        await sendFounderContactAlert(user.email!, project.name, conversationId, {
+          email: conversation.investorEmail || 'unknown',
+          name: name || undefined,
+          phone: phone || undefined,
+          company: company || undefined,
+          website: website || undefined,
+        });
       }
     }
 

@@ -55,6 +55,7 @@ import {
   ArrowLeft
 } from "lucide-react";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { logout } from "@/lib/authUtils";
 import { Logo } from "@/components/Logo";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Conversation } from "@shared/schema";
@@ -152,7 +153,7 @@ export default function SettingsPage() {
       return apiRequest('DELETE', '/api/user/delete');
     },
     onSuccess: () => {
-      window.location.href = '/api/auth/logout';
+      void logout();
     },
   });
 
@@ -378,7 +379,7 @@ export default function SettingsPage() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => window.location.href = "/api/auth/logout"}
+              onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
             >
               <LogOut className="h-4 w-4" />

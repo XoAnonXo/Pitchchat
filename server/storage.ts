@@ -34,8 +34,10 @@ import {
   type InsertTokenUsage,
 } from "@shared/schema";
 import { db } from "./db";
+import crypto from "crypto";
 import { eq, desc, and, isNull, or, sql, inArray } from "drizzle-orm";
 import { timeAsync } from "./utils/timing";
+import { deleteUploadedFile } from "./utils/uploads";
 
 export interface IStorage {
   // User operations
@@ -131,6 +133,7 @@ export interface IStorage {
   createTokenPurchase(purchase: InsertTokenPurchase): Promise<TokenPurchase>;
   createTokenUsage(usage: InsertTokenUsage): Promise<TokenUsage>;
   getUserTokenUsage(userId: string): Promise<TokenUsage[]>;
+  getUserTokenPurchases(userId: string): Promise<TokenPurchase[]>;
   updateUserSubscription(userId: string, subscription: {
     stripeCustomerId?: string;
     stripeSubscriptionId?: string;
@@ -863,7 +866,7 @@ export class DatabaseStorage implements IStorage {
   // Password reset token operations
   async createPasswordResetToken(userId: string): Promise<string> {
     // Generate a secure random token
-    const token = `prt_${Math.random().toString(36).substr(2, 9)}${Math.random().toString(36).substr(2, 9)}`;
+    const token = `prt_${crypto.randomBytes(32).toString("hex")}`;
     
     // Set expiration to 1 hour from now
     const expiresAt = new Date();
@@ -950,6 +953,14 @@ export class DatabaseStorage implements IStorage {
       .orderBy(desc(tokenUsage.createdAt));
   }
 
+  async getUserTokenPurchases(userId: string): Promise<TokenPurchase[]> {
+    return await db
+      .select()
+      .from(tokenPurchases)
+      .where(eq(tokenPurchases.userId, userId))
+      .orderBy(desc(tokenPurchases.createdAt));
+  }
+
   async updateUserSubscription(userId: string, subscription: {
     stripeCustomerId?: string;
     stripeSubscriptionId?: string;
@@ -975,6 +986,7 @@ export class DatabaseStorage implements IStorage {
       // Get all documents and delete them
       const projectDocs = await this.getProjectDocuments(project.id);
       for (const doc of projectDocs) {
+        await deleteUploadedFile(doc.filename);
         // Delete chunks first
         await db.delete(chunks).where(eq(chunks.documentId, doc.id));
         // Delete document

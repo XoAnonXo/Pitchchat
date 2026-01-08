@@ -51,6 +51,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useAuth } from "@/hooks/useAuth";
+import { logout } from "@/lib/authUtils";
 import { Logo } from "@/components/Logo";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { formatDistanceToNow } from "date-fns";
@@ -294,7 +295,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => window.location.href = "/api/auth/logout"}
+              onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
             >
               <LogOut className="h-4 w-4" />

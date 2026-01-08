@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { useAuth } from "@/hooks/useAuth";
+import { logout } from "@/lib/authUtils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -214,7 +215,7 @@ export default function ConversationsPage() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => window.location.href = "/api/auth/logout"}
+              onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
             >
               <LogOut className="h-4 w-4" />

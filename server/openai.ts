@@ -1,9 +1,18 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = new OpenAI({ 
-  apiKey: process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY_ENV_VAR || "default_key" 
-});
+const apiKey = process.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY_ENV_VAR;
+const openai = apiKey ? new OpenAI({ apiKey }) : null;
+const getOpenAIClient = (): OpenAI => {
+  if (!openai) {
+    throw new Error("OPENAI_API_KEY is not configured");
+  }
+  return openai;
+};
+
+export const assertOpenAIAvailable = (): void => {
+  getOpenAIClient();
+};
 
 export interface ChatMessage {
   role: "user" | "assistant" | "system";
@@ -21,8 +30,10 @@ export interface ChatResponse {
 }
 
 export async function generateEmbedding(text: string): Promise<number[]> {
+  const client = getOpenAIClient();
+
   try {
-    const response = await openai.embeddings.create({
+    const response = await client.embeddings.create({
       model: "text-embedding-3-large",
       input: text,
     });
@@ -42,6 +53,8 @@ export async function chatWithAI(
     page?: number;
   }> = []
 ): Promise<ChatResponse> {
+  const client = getOpenAIClient();
+
   try {
     // Prepare context from retrieved chunks
     const contextText = context.map(c => 
@@ -66,7 +79,7 @@ Guidelines:
 
     const allMessages = [systemMessage, ...messages];
 
-    const response = await openai.chat.completions.create({
+    const response = await client.chat.completions.create({
       model: "gpt-4o",
       messages: allMessages,
       temperature: 0.3,
@@ -97,8 +110,9 @@ Guidelines:
 }
 
 export async function summarizeDocument(text: string, filename: string): Promise<string> {
+  const client = getOpenAIClient();
   try {
-    const response = await openai.chat.completions.create({
+    const response = await client.chat.completions.create({
       model: "gpt-4o",
       messages: [
         {

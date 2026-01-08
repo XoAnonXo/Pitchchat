@@ -6,18 +6,30 @@ import fs from "fs";
 import path from "path";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./customAuth";
-import { saveUploadedFile, processDocument, deleteUploadedFile } from "./fileProcessor";
-import { chatWithAI, generateEmbedding, AIModel } from "./aiModels";
+import { processDocument } from "./fileProcessor";
+import { deleteUploadedFile } from "./utils/uploads";
+import { chatWithAI, generateEmbedding, AIModel, AI_MODEL_ALLOWLIST, AI_MODEL_CATALOG } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
 import { calculatePlatformCost, calculateMessageCostInCents, dollarsToCredits } from "./pricing";
 import { sendBrevoEmail, sendInvestorEngagementAlert, sendWeeklyReport, sendInvestorContactEmail, sendFounderContactAlert } from "./brevo";
 import Stripe from "stripe";
+import { sanitizeUser } from "./utils/sanitize";
 
+
+const uploadDir = process.env.UPLOAD_DIR || "./uploads";
 
 // Configure multer for file uploads
 const upload = multer({
-  storage: multer.memoryStorage(),
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      fs.mkdir(uploadDir, { recursive: true }, (err) => cb(err, uploadDir));
+    },
+    filename: (_req, file, cb) => {
+      const safeName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, "_");
+      cb(null, `${Date.now()}-${safeName}`);
+    },
+  }),
   limits: {
     fileSize: 500 * 1024 * 1024, // 500MB limit
   },
@@ -87,7 +99,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const userId = req.user.id;
       const bootstrap = await storage.getUserBootstrap(userId);
       res.json({
-        user: req.user,
+        user: sanitizeUser(req.user),
         ...bootstrap,
       });
     } catch (error) {
@@ -187,12 +199,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         });
       }
 
-      // Save file
-      const filename = await saveUploadedFile(
-        req.file.buffer,
-        req.file.originalname,
-        req.file.mimetype
-      );
+      const filename = req.file.filename;
 
       // Create document record
       const documentData = insertDocumentSchema.parse({
@@ -289,6 +296,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const project = await storage.getProject(req.params.projectId);
       if (!project || project.userId !== userId) {
         return res.status(404).json({ message: "Project not found" });
+      }
+
+      if (typeof model !== "string") {
+        return res.status(400).json({ message: "Model must be a string" });
+      }
+
+      if (!AI_MODEL_ALLOWLIST.includes(model as AIModel)) {
+        return res.status(400).json({ message: "Unsupported model" });
       }
 
       // Get relevant chunks (simplified search for MVP)
@@ -479,7 +494,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Stream the file to the client
-      const filePath = path.join(process.cwd(), "uploads", document.filename);
+      const filePath = path.join(uploadDir, document.filename);
       
       if (!fs.existsSync(filePath)) {
         return res.status(404).json({ message: "File not found on server" });
@@ -614,6 +629,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "Chat link not found or expired" });
       }
 
+      if (link.expiresAt && new Date() > link.expiresAt) {
+        return res.status(404).json({ message: "Chat link has expired" });
+      }
+
       const conversation = await storage.getConversation(req.params.conversationId);
       if (!conversation || conversation.linkId !== link.id) {
         return res.status(404).json({ message: "Conversation not found" });
@@ -729,6 +748,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
     return stripeClient;
   };
+  const getBaseUrl = (req: any) => {
+    const configuredBaseUrl = process.env.PRODUCTION_URL || process.env.PUBLIC_BASE_URL;
+    if (configuredBaseUrl) {
+      return configuredBaseUrl.replace(/\/$/, "");
+    }
+
+    const allowedHosts = (process.env.REPLIT_DOMAINS ?? "")
+      .split(",")
+      .map((host) => host.trim())
+      .filter(Boolean);
+    const host = req.get("host");
+    const protocol = req.get("x-forwarded-proto") || "https";
+
+    if (host && allowedHosts.includes(host)) {
+      return `${protocol}://${host}`;
+    }
+
+    return "http://localhost:5000";
+  };
   
   // Define price IDs for subscription plans
   const STRIPE_PRICE_IDS = {
@@ -767,9 +805,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Get the correct domain from request headers
-      const protocol = req.get('x-forwarded-proto') || 'https';
-      const host = req.get('host') || process.env.REPLIT_DOMAINS?.split(',')[0] || 'localhost:5000';
-      const baseUrl = `${protocol}://${host}`;
+      const baseUrl = getBaseUrl(req);
       
       console.log('Creating checkout with redirect URLs:', {
         success: `${baseUrl}/?subscription=success`,
@@ -849,16 +885,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     // If webhook secret is not configured, skip verification (development mode)
     if (!process.env.STRIPE_WEBHOOK_SECRET) {
+      if (process.env.NODE_ENV === "production") {
+        return res.status(500).json({ message: "Stripe webhook secret not configured" });
+      }
+
       console.log('Warning: STRIPE_WEBHOOK_SECRET not configured, skipping webhook verification');
       event = req.body;
-      // In production, you should always verify webhooks
       res.json({ received: true, warning: 'Webhook not verified' });
       return;
     }
 
     try {
+      const rawBody = (req as any).rawBody ?? req.body;
+      if (!rawBody && process.env.NODE_ENV === "production") {
+        return res.status(400).json({ message: "Missing raw webhook body" });
+      }
+
       event = stripe.webhooks.constructEvent(
-        req.body,
+        rawBody,
         sig,
         process.env.STRIPE_WEBHOOK_SECRET
       );
@@ -944,6 +988,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Email Alert Routes
   app.post("/api/email/investor-engagement", async (req, res) => {
     try {
+      const internalKey = req.headers["x-internal-key"];
+      const expectedKey = process.env.INTERNAL_API_KEY;
+      if (!expectedKey || internalKey !== expectedKey) {
+        return res.status(401).json({ message: "Unauthorized - internal API key required" });
+      }
+
       const { conversationId, projectName, investorEmail, messageCount } = req.body;
       
       // This would be called internally when a new conversation starts
@@ -991,6 +1041,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Weekly Report Route
   app.post("/api/email/weekly-report", async (req, res) => {
     try {
+      const internalKey = req.headers["x-internal-key"];
+      const expectedKey = process.env.INTERNAL_API_KEY;
+      if (!expectedKey || internalKey !== expectedKey) {
+        return res.status(401).json({ message: "Unauthorized - internal API key required" });
+      }
+
       const { userId } = req.body;
       
       const user = await storage.getUserById(userId);
@@ -1074,7 +1130,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       console.log("=== SIMPLE EMAIL TEST ===");
       console.log("Sending to:", user.email);
       console.log("BREVO_API_KEY exists:", !!process.env.BREVO_API_KEY);
-      console.log("API Key first 10 chars:", process.env.BREVO_API_KEY?.substring(0, 10) + "...");
 
       const testHtml = `
         <html>
@@ -1102,10 +1157,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     } catch (error: any) {
       console.error("Simple email test error:", error);
-      res.status(500).json({ 
-        message: "Failed to send test email", 
+      res.status(500).json({
+        message: "Failed to send test email",
         error: error.message,
-        stack: error.stack 
       });
     }
   });
@@ -1878,19 +1932,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Get available AI models
   app.get("/api/ai-models", async (req, res) => {
-    const models = [
-      { id: 'gpt-4o', name: 'GPT-4 Omni', provider: 'OpenAI' },
-      { id: 'gpt-4', name: 'GPT-4', provider: 'OpenAI' },
-      { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', provider: 'OpenAI' },
-      { id: 'o3-mini', name: 'O3 Mini', provider: 'OpenAI' },
-      { id: 'claude-sonnet-4', name: 'Claude Sonnet 4', provider: 'Anthropic' },
-      { id: 'claude-3-sonnet', name: 'Claude 3 Sonnet', provider: 'Anthropic' },
-      { id: 'claude-3-haiku', name: 'Claude 3 Haiku', provider: 'Anthropic' },
-      { id: 'claude-3-opus', name: 'Claude 3 Opus', provider: 'Anthropic' },
-      { id: 'gemini-pro', name: 'Gemini Pro', provider: 'Google' },
-      { id: 'gemini-flash', name: 'Gemini Flash', provider: 'Google' },
-    ];
-    res.json(models);
+    res.json(AI_MODEL_CATALOG);
   });
 
   const httpServer = createServer(app);

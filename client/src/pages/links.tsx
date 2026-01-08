@@ -4,6 +4,7 @@ import { Link, useLocation } from "wouter";
 import { Logo } from "@/components/Logo";
 import { formatDistanceToNow, format } from "date-fns";
 import { useAuth } from "@/hooks/useAuth";
+import { logout } from "@/lib/authUtils";
 import { useToast } from "@/hooks/use-toast";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { StartupLoadingSkeleton } from "@/components/StartupLoadingSkeleton";
@@ -173,7 +174,7 @@ export default function LinksPage({ projectId }: LinksPageProps) {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => window.location.href = "/api/auth/logout"}
+              onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
             >
               <LogOut className="h-4 w-4" />

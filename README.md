@@ -55,6 +55,7 @@ Ensure the following variables are set in your environment:
 - `npm run build`: Build for production.
 - `npm run check`: Run TypeScript type checking (`tsc`).
 - `npm run db:push`: Push local schema changes to the database.
+- `tsx scripts/cleanup-orphaned-uploads.ts --dry-run`: Report orphaned upload files (omit `--dry-run` to delete; requires `DATABASE_URL`).
 
 ## 📄 Setup Guides
 

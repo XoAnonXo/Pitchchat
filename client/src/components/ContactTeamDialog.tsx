@@ -11,9 +11,10 @@ interface ContactTeamDialogProps {
   isOpen: boolean;
   onClose: () => void;
   conversationId: string;
+  linkSlug: string;
 }
 
-export default function ContactTeamDialog({ isOpen, onClose, conversationId }: ContactTeamDialogProps) {
+export default function ContactTeamDialog({ isOpen, onClose, conversationId, linkSlug }: ContactTeamDialogProps) {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -77,7 +78,7 @@ export default function ContactTeamDialog({ isOpen, onClose, conversationId }: C
       const res = await fetch(`/api/conversations/${conversationId}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, linkSlug }),
         credentials: 'include',
       });
       

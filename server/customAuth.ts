@@ -13,6 +13,7 @@ import { User as SelectUser } from "@shared/schema";
 import { pool } from "./db";
 import { sendWelcomeEmail } from "./brevo";
 import { isTimingEnabled, logDuration } from "./utils/timing";
+import { sanitizeUser } from "./utils/sanitize";
 
 declare global {
   namespace Express {
@@ -112,14 +113,20 @@ export function setupAuth(app: Express) {
     };
   }
 
+  const sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret && process.env.NODE_ENV === "production") {
+    throw new Error("SESSION_SECRET is required in production");
+  }
+
   const sessionSettings: session.SessionOptions = {
-    secret: process.env.SESSION_SECRET || "your-secret-key-here",
+    secret: sessionSecret || "dev-session-secret",
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 1 week
     },
   };
@@ -255,9 +262,16 @@ export function setupAuth(app: Express) {
       );
 
       // Log them in
-      req.login(user, (err) => {
-        if (err) return next(err);
-        res.status(201).json(user);
+      req.session.regenerate((regenerateErr) => {
+        if (regenerateErr) {
+          console.error("Session regeneration error on register:", regenerateErr);
+          return next(regenerateErr);
+        }
+
+        req.login(user, (err) => {
+          if (err) return next(err);
+          res.status(201).json(sanitizeUser(user));
+        });
       });
     } catch (error) {
       console.error("Registration error:", error);
@@ -271,14 +285,21 @@ export function setupAuth(app: Express) {
       if (!user) {
         return res.status(401).json({ message: info?.message || "Login failed" });
       }
-      req.login(user, (err) => {
-        if (err) return next(err);
-        res.json(user);
+      req.session.regenerate((regenerateErr) => {
+        if (regenerateErr) {
+          console.error("Session regeneration error on login:", regenerateErr);
+          return next(regenerateErr);
+        }
+
+        req.login(user, (err) => {
+          if (err) return next(err);
+          res.json(sanitizeUser(user));
+        });
       });
     })(req, res, next);
   });
 
-  app.get("/api/auth/logout", (req, res, next) => {
+  app.post("/api/auth/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
       res.redirect("/auth");
@@ -302,7 +323,7 @@ export function setupAuth(app: Express) {
         const stripeSyncStart = performance.now();
         try {
           const Stripe = await import("stripe");
-          const stripe = new Stripe.default(shouldSyncStripe, {
+          const stripe = new Stripe.default(process.env.STRIPE_SECRET_KEY as string, {
             apiVersion: "2025-08-27.basil",
           });
 
@@ -336,7 +357,7 @@ export function setupAuth(app: Express) {
       }
     }
     
-    res.json(user);
+    res.json(sanitizeUser(user));
   });
 
   // Google OAuth routes

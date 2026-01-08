@@ -27,7 +27,9 @@ interface ChatInterfaceProps {
   model?: string;
 }
 
-export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInterfaceProps) {
+type ModelStatus = "ready" | "loading" | "unavailable";
+
+export default function ChatInterface({ projectId, model }: ChatInterfaceProps) {
   const { toast } = useToast();
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -39,6 +41,16 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const modelStatus: ModelStatus = model
+    ? model === "loading"
+      ? "loading"
+      : "ready"
+    : "unavailable";
+  const resolvedModel = modelStatus === "ready" ? model : "gpt-4o";
+  const modelNotice =
+    modelStatus === "loading"
+      ? "Loading models. Using the default model until the list is ready."
+      : "Models are unavailable. Using the default model for now.";
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
@@ -47,7 +59,7 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
 
   const chatMutation = useMutation({
     mutationFn: async (message: string) => {
-      const res = await apiRequest("POST", `/api/projects/${projectId}/chat`, { message, model });
+      const res = await apiRequest("POST", `/api/projects/${projectId}/chat`, { message, model: resolvedModel });
       return res.json();
     },
     onSuccess: (response) => {
@@ -105,6 +117,16 @@ export default function ChatInterface({ projectId, model = 'gpt-4o' }: ChatInter
 
   return (
     <div className="h-full flex-1 flex flex-col min-h-0">
+      {modelStatus !== "ready" && (
+        <div className="px-6 pt-6">
+          <div className="flex items-start gap-3 rounded-2xl border border-black/10 bg-black/[0.03] px-4 py-3 text-xs text-black/70">
+            <Badge variant="outline" className="border-black/20 text-black/70">
+              Model
+            </Badge>
+            <span>{modelNotice}</span>
+          </div>
+        </div>
+      )}
       {/* Messages Area - Monochrome like landing */}
       <div className="flex-1 overflow-y-auto p-6 space-y-4 min-h-[400px]">
         {messages.map((message) => (

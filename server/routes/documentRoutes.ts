@@ -4,14 +4,25 @@ import fs from 'fs';
 import path from 'path';
 import { isAuthenticated } from '../customAuth';
 import { storage } from '../storage';
-import { saveUploadedFile, processDocument, deleteUploadedFile } from '../fileProcessor';
+import { processDocument } from '../fileProcessor';
+import { deleteUploadedFile } from '../utils/uploads';
 import { insertDocumentSchema } from '@shared/schema';
 
 const router = Router();
 
+const uploadDir = process.env.UPLOAD_DIR || './uploads';
+
 // Configure multer for file uploads
 const upload = multer({
-  storage: multer.memoryStorage(),
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => {
+      fs.mkdir(uploadDir, { recursive: true }, (err) => cb(err, uploadDir));
+    },
+    filename: (_req, file, cb) => {
+      const safeName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, '_');
+      cb(null, `${Date.now()}-${safeName}`);
+    },
+  }),
   limits: {
     fileSize: 500 * 1024 * 1024, // 500MB limit
   },
@@ -97,12 +108,7 @@ router.post('/projects/:projectId/documents', isAuthenticated, upload.single('fi
       });
     }
 
-    // Save file
-    const filename = await saveUploadedFile(
-      req.file.buffer,
-      req.file.originalname,
-      req.file.mimetype
-    );
+    const filename = req.file.filename;
 
     // Create document record
     const documentData = insertDocumentSchema.parse({
@@ -178,7 +184,7 @@ router.get('/projects/:projectId/documents/:documentId/download', isAuthenticate
       return res.status(404).json({ message: 'Document not found' });
     }
 
-    const filePath = path.join(process.cwd(), 'uploads', document.filename);
+    const filePath = path.join(uploadDir, document.filename);
 
     if (!fs.existsSync(filePath)) {
       return res.status(404).json({ message: 'File not found on disk' });

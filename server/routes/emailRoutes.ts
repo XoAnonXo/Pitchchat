@@ -8,6 +8,7 @@ import {
   sendFounderContactAlert,
   sendWeeklyReport,
 } from '../brevo';
+import { redactLogPayload } from '../utils/redact';
 
 const router = Router();
 
@@ -18,6 +19,7 @@ const router = Router();
  */
 router.post('/investor-engagement', async (req, res) => {
   try {
+    console.log('Email request:', redactLogPayload({ body: req.body, headers: req.headers }));
     // Check for internal API key (for server-to-server calls)
     const internalKey = req.headers['x-internal-key'];
     const expectedKey = process.env.INTERNAL_API_KEY;
@@ -68,6 +70,7 @@ router.post('/investor-engagement', async (req, res) => {
  */
 router.post('/weekly-report', async (req, res) => {
   try {
+    console.log('Email request:', redactLogPayload({ body: req.body, headers: req.headers }));
     // Check for internal API key (for cron job calls)
     const internalKey = req.headers['x-internal-key'];
     const expectedKey = process.env.INTERNAL_API_KEY;
@@ -112,6 +115,7 @@ router.post('/weekly-report', async (req, res) => {
  */
 router.post('/test-simple', isAuthenticated, async (req: any, res) => {
   try {
+    console.log('Email request:', redactLogPayload({ body: req.body, userId: req.user?.id }));
     const userId = req.user.id;
     const user = await storage.getUser(userId);
 
@@ -122,7 +126,6 @@ router.post('/test-simple', isAuthenticated, async (req: any, res) => {
     console.log('=== SIMPLE EMAIL TEST ===');
     console.log('Sending to:', user.email);
     console.log('BREVO_API_KEY exists:', !!process.env.BREVO_API_KEY);
-    console.log('API Key first 10 chars:', process.env.BREVO_API_KEY?.substring(0, 10) + '...');
 
     const testHtml = `
       <html>
@@ -149,12 +152,9 @@ router.post('/test-simple', isAuthenticated, async (req: any, res) => {
       timestamp: new Date().toISOString(),
     });
   } catch (error: unknown) {
-    const err = error as Error;
     console.error('Simple email test error:', error);
     res.status(500).json({
       message: 'Failed to send test email',
-      error: err.message,
-      stack: err.stack,
     });
   }
 });
@@ -165,6 +165,7 @@ router.post('/test-simple', isAuthenticated, async (req: any, res) => {
  */
 router.post('/test-all', isAuthenticated, async (req: any, res) => {
   try {
+    console.log('Email request:', redactLogPayload({ body: req.body, userId: req.user?.id }));
     const userId = req.user.id;
     const user = await storage.getUser(userId);
 
@@ -262,9 +263,8 @@ router.post('/test-all', isAuthenticated, async (req: any, res) => {
       totalSent: emailsSent.length,
     });
   } catch (error: unknown) {
-    const err = error as Error;
     console.error('Error sending test emails:', error);
-    res.status(500).json({ message: 'Failed to send test emails', error: err.message });
+    res.status(500).json({ message: 'Failed to send test emails' });
   }
 });
 

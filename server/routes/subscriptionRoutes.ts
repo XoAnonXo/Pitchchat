@@ -20,6 +20,25 @@ const getStripeClient = () => {
   }
   return stripeClient;
 };
+const getBaseUrl = (req: any) => {
+  const configuredBaseUrl = process.env.PRODUCTION_URL || process.env.PUBLIC_BASE_URL;
+  if (configuredBaseUrl) {
+    return configuredBaseUrl.replace(/\/$/, '');
+  }
+
+  const allowedHosts = (process.env.REPLIT_DOMAINS ?? '')
+    .split(',')
+    .map((host) => host.trim())
+    .filter(Boolean);
+  const host = req.get('host');
+  const protocol = req.get('x-forwarded-proto') || 'https';
+
+  if (host && allowedHosts.includes(host)) {
+    return `${protocol}://${host}`;
+  }
+
+  return 'http://localhost:5000';
+};
 
 /**
  * Create a Stripe checkout session for subscription
@@ -54,9 +73,7 @@ router.post('/create-checkout', isAuthenticated, async (req: any, res) => {
     }
 
     // Get the correct domain from request headers
-    const protocol = req.get('x-forwarded-proto') || 'https';
-    const host = req.get('host') || process.env.REPLIT_DOMAINS?.split(',')[0] || 'localhost:5000';
-    const baseUrl = `${protocol}://${host}`;
+    const baseUrl = getBaseUrl(req);
 
     console.log('Creating checkout with redirect URLs:', {
       success: `${baseUrl}/?subscription=success`,
@@ -148,6 +165,10 @@ router.post('/webhook', async (req, res) => {
 
   // If webhook secret is not configured, skip verification (development mode)
   if (!process.env.STRIPE_WEBHOOK_SECRET) {
+    if (process.env.NODE_ENV === 'production') {
+      return res.status(500).json({ message: 'Stripe webhook secret not configured' });
+    }
+
     console.log('Warning: STRIPE_WEBHOOK_SECRET not configured, skipping webhook verification');
     event = req.body;
     res.json({ received: true, warning: 'Webhook not verified' });
@@ -155,7 +176,12 @@ router.post('/webhook', async (req, res) => {
   }
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    const rawBody = (req as any).rawBody ?? req.body;
+    if (!rawBody && process.env.NODE_ENV === 'production') {
+      return res.status(400).json({ message: 'Missing raw webhook body' });
+    }
+
+    event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err: any) {
     console.error('Webhook signature verification failed:', err.message);
     return res.status(400).send(`Webhook Error: ${err.message}`);

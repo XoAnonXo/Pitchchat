@@ -99,19 +99,51 @@ router.get('/export', isAuthenticated, async (req: any, res) => {
     const user = await storage.getUser(userId);
     const projects = await storage.getUserProjects(userId);
 
+    const tokenUsage = await storage.getUserTokenUsage(userId);
+    const tokenPurchases = await storage.getUserTokenPurchases(userId);
+
     // Get all project-related data
     const projectData = await Promise.all(
       projects.map(async (project) => {
         const documents = await storage.getProjectDocuments(project.id);
         const links = await storage.getProjectLinks(project.id);
+        const integrations = await storage.getProjectIntegrations(project.id);
 
-        // Get conversations for each link
+        // Get conversations and messages for each link
         const linkData = await Promise.all(
           links.map(async (link) => {
             const conversations = await storage.getLinkConversations(link.id);
+            const conversationsWithMessages = await Promise.all(
+              conversations.map(async (conversation) => {
+                const conversationMessages = await storage.getConversationMessages(conversation.id);
+                return {
+                  id: conversation.id,
+                  investorEmail: conversation.investorEmail,
+                  startedAt: conversation.startedAt,
+                  totalTokens: conversation.totalTokens,
+                  costUsd: conversation.costUsd,
+                  isActive: conversation.isActive,
+                  contactName: conversation.contactName,
+                  contactPhone: conversation.contactPhone,
+                  contactCompany: conversation.contactCompany,
+                  contactWebsite: conversation.contactWebsite,
+                  contactProvidedAt: conversation.contactProvidedAt,
+                  messages: conversationMessages.map((message) => ({
+                    id: message.id,
+                    conversationId: message.conversationId,
+                    role: message.role,
+                    content: message.content,
+                    tokenCount: message.tokenCount,
+                    citations: message.citations,
+                    timestamp: message.timestamp,
+                  })),
+                };
+              })
+            );
             return {
               ...link,
               conversationCount: conversations.length,
+              conversations: conversationsWithMessages,
             };
           })
         );
@@ -127,11 +159,25 @@ router.get('/export', isAuthenticated, async (req: any, res) => {
             status: doc.status,
           })),
           links: linkData,
+          integrations: integrations.map((integration) => ({
+            id: integration.id,
+            platform: integration.platform,
+            status: integration.status,
+            lastSyncedAt: integration.lastSyncedAt,
+            createdAt: integration.createdAt,
+            updatedAt: integration.updatedAt,
+            hasCredentials: Boolean(integration.credentials),
+          })),
         };
       })
     );
 
     const exportData = {
+      format: {
+        version: '1.0',
+        note:
+          'Projects include links with conversations. Conversations include investorEmail and contact fields (contactName, contactPhone, contactCompany, contactWebsite, contactProvidedAt) plus messages. Integrations include metadata with credentials redacted. Token usage and purchases included; payment intent IDs are redacted.',
+      },
       exportDate: new Date().toISOString(),
       user: {
         id: user?.id,
@@ -141,6 +187,23 @@ router.get('/export', isAuthenticated, async (req: any, res) => {
         createdAt: user?.createdAt,
       },
       projects: projectData,
+      tokenUsage: tokenUsage.map((usage) => ({
+        id: usage.id,
+        conversationId: usage.conversationId,
+        tokensUsed: usage.tokensUsed,
+        action: usage.action,
+        model: usage.model,
+        createdAt: usage.createdAt,
+      })),
+      tokenPurchases: tokenPurchases.map((purchase) => ({
+        id: purchase.id,
+        type: purchase.type,
+        amount: purchase.amount,
+        tokens: purchase.tokens,
+        status: purchase.status,
+        stripePaymentIntentId: purchase.stripePaymentIntentId ? 'redacted' : null,
+        createdAt: purchase.createdAt,
+      })),
       totalProjects: projects.length,
       totalLinks: projectData.reduce((acc, p) => acc + p.links.length, 0),
       totalDocuments: projectData.reduce((acc, p) => acc + p.documents.length, 0),

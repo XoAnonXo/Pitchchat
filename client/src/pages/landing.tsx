@@ -719,11 +719,20 @@ export default function Landing() {
               <button type="button" onClick={() => scrollToId("security")} className="hover:text-black">
                 Security
               </button>
+              <a href="/terms" className="hover:text-black">
+                Terms
+              </a>
+              <a href="/privacy" className="hover:text-black">
+                Privacy
+              </a>
             </div>
 
-            <p className="text-xs font-semibold text-black/40">
-              © {new Date().getFullYear()} PitchChat
-            </p>
+            <div className="text-xs font-semibold text-black/40 space-y-2">
+              <p>© {new Date().getFullYear()} PitchChat</p>
+              <p className="text-[11px] font-medium text-black/40 max-w-xs">
+                VFSOFT BG EOOD · Sofia · BULGARIA, Sofia, Triaditsa district, VITOSHA, 48, GROUND FLOOR · EIK 206728740
+              </p>
+            </div>
           </div>
         </footer>
       </main>

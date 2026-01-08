@@ -2,12 +2,11 @@ import fs from "fs/promises";
 import path from "path";
 import XLSX from "xlsx";
 import { storage } from "./storage";
-import { generateEmbedding, summarizeDocument } from "./openai";
+import { assertOpenAIAvailable, generateEmbedding, summarizeDocument } from "./openai";
 import type { InsertDocument, InsertChunk } from "@shared/schema";
 import { calculatePlatformCost } from "./pricing";
 import { sendDocumentProcessed } from "./brevo";
-
-const UPLOAD_DIR = process.env.UPLOAD_DIR || "./uploads";
+import { deleteUploadedFile, UPLOAD_DIR } from "./utils/uploads";
 
 // Ensure upload directory exists
 async function ensureUploadDir() {
@@ -37,6 +36,18 @@ export async function processDocument(documentId: string): Promise<void> {
     const document = await storage.getDocument(documentId);
     if (!document) {
       throw new Error("Document not found");
+    }
+
+    try {
+      assertOpenAIAvailable();
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "OpenAI client unavailable";
+      console.error("OpenAI unavailable for document processing:", message);
+      await storage.updateDocument(documentId, {
+        status: "failed",
+      });
+      return;
     }
 
     // Update status to processing
@@ -260,12 +271,4 @@ function estimatePageCount(text: string): number {
   return Math.ceil(wordCount / 500);
 }
 
-export async function deleteUploadedFile(filename: string): Promise<void> {
-  try {
-    const filepath = path.join(UPLOAD_DIR, filename);
-    await fs.unlink(filepath);
-  } catch (error) {
-    console.error("Error deleting file:", error);
-    // Don't throw - file might already be deleted
-  }
-}
+export { deleteUploadedFile };

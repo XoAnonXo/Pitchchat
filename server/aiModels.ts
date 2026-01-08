@@ -32,7 +32,38 @@ export interface ChatResponse {
   }>;
 }
 
-export type AIModel = 'gpt-4o' | 'gpt-4' | 'gpt-3.5-turbo' | 'o3-mini' | 'claude-3-sonnet' | 'claude-3-haiku' | 'claude-3-opus' | 'claude-sonnet-4' | 'gemini-pro' | 'gemini-flash';
+export const AI_MODEL_ALLOWLIST = [
+  'gpt-4o',
+  'gpt-4',
+  'gpt-3.5-turbo',
+  'o3-mini',
+  'claude-3-sonnet',
+  'claude-3-haiku',
+  'claude-3-opus',
+  'claude-sonnet-4',
+  'gemini-pro',
+  'gemini-flash',
+] as const;
+
+export type AIModel = (typeof AI_MODEL_ALLOWLIST)[number];
+
+const AI_MODEL_DETAILS: Record<AIModel, { name: string; provider: string }> = {
+  "gpt-4o": { name: "GPT-4o", provider: "OpenAI" },
+  "gpt-4": { name: "GPT-4", provider: "OpenAI" },
+  "gpt-3.5-turbo": { name: "GPT-3.5 Turbo", provider: "OpenAI" },
+  "o3-mini": { name: "O3 Mini", provider: "OpenAI" },
+  "claude-3-sonnet": { name: "Claude 3 Sonnet", provider: "Anthropic" },
+  "claude-3-haiku": { name: "Claude 3 Haiku", provider: "Anthropic" },
+  "claude-3-opus": { name: "Claude 3 Opus", provider: "Anthropic" },
+  "claude-sonnet-4": { name: "Claude Sonnet 4", provider: "Anthropic" },
+  "gemini-pro": { name: "Gemini Pro", provider: "Google" },
+  "gemini-flash": { name: "Gemini Flash", provider: "Google" },
+};
+
+export const AI_MODEL_CATALOG = AI_MODEL_ALLOWLIST.map((id) => ({
+  id,
+  ...AI_MODEL_DETAILS[id],
+}));
 
 export async function generateEmbedding(text: string): Promise<number[]> {
   try {
