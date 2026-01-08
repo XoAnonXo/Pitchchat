@@ -1,5 +1,6 @@
 import type { DiligenceChecklistPageData } from "@/components/pseo/DiligenceChecklistTemplate";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { getDiligenceChecklistContent } from "@/data/content/contentMatrix";
 
 const baseItems = [
   {
@@ -27,6 +28,24 @@ export function getDiligenceChecklistSeed(
   const industryLabel = labelForIndustry(industry);
   const stageLabel = labelForStage(stage);
 
+  // Try to get industry/stage-specific content
+  const specificContent = getDiligenceChecklistContent(industry, stage);
+
+  if (specificContent) {
+    return {
+      title: `${industryLabel} ${stageLabel} Due Diligence Checklist: ${specificContent.items.length} Essential Items`,
+      summary: specificContent.summary,
+      items: specificContent.items,
+      ctaText: "Practice with Pitchchat AI",
+      context: {
+        industry,
+        stage,
+        pageType: "diligence-checklist",
+      },
+    };
+  }
+
+  // Fallback to base content
   return {
     title: `${industryLabel} ${stageLabel} diligence checklist`,
     summary: `A diligence readiness list for ${industryLabel} founders raising a ${stageLabel} round.`,

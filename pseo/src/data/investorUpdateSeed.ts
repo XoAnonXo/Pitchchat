@@ -1,5 +1,6 @@
 import type { InvestorUpdatePageData } from "@/components/pseo/InvestorUpdateTemplate";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { getInvestorUpdateContent } from "@/data/content/contentMatrix";
 
 const baseSections = [
   {
@@ -31,6 +32,24 @@ export function getInvestorUpdateSeed(
   const industryLabel = labelForIndustry(industry);
   const stageLabel = labelForStage(stage);
 
+  // Try to get industry/stage-specific content
+  const specificContent = getInvestorUpdateContent(industry, stage);
+
+  if (specificContent) {
+    return {
+      title: `${industryLabel} ${stageLabel} Investor Update Template: ${specificContent.sections.length} Key Sections`,
+      summary: specificContent.summary,
+      sections: specificContent.sections,
+      ctaText: "Practice with Pitchchat AI",
+      context: {
+        industry,
+        stage,
+        pageType: "investor-update",
+      },
+    };
+  }
+
+  // Fallback to base content
   return {
     title: `${industryLabel} ${stageLabel} investor update template`,
     summary: `A clear investor update format for ${industryLabel} founders raising a ${stageLabel} round.`,

@@ -1,5 +1,6 @@
 import type { PitchDeckPageData } from "@/components/pseo/PitchDeckTemplate";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { getPitchDeckContent } from "@/data/content/contentMatrix";
 
 const baseSections = [
   {
@@ -46,6 +47,24 @@ export function getPitchDeckSeed(
   const industryLabel = labelForIndustry(industry);
   const stageLabel = labelForStage(stage);
 
+  // Try to get industry/stage-specific content
+  const specificContent = getPitchDeckContent(industry, stage);
+
+  if (specificContent) {
+    return {
+      title: `${industryLabel} ${stageLabel} Pitch Deck: ${specificContent.sections.length}-Slide Structure`,
+      summary: specificContent.summary,
+      sections: specificContent.sections,
+      ctaText: "Practice with Pitchchat AI",
+      context: {
+        industry,
+        stage,
+        pageType: "pitch-deck",
+      },
+    };
+  }
+
+  // Fallback to base content
   return {
     title: `Pitch deck outline for ${industryLabel} ${stageLabel} startups`,
     summary: `A high-signal deck structure for ${industryLabel} founders raising a ${stageLabel} round.`,

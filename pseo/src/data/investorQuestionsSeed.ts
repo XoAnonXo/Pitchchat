@@ -1,5 +1,6 @@
 import type { InvestorQuestionsPageData } from "@/components/pseo/InvestorQuestionsTemplate";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { getInvestorQuestionsContent } from "@/data/content/contentMatrix";
 
 const baseQuestions = [
   {
@@ -83,6 +84,26 @@ export function getInvestorQuestionsSeed(
   const industryLabel = labelForIndustry(industry);
   const stageLabel = labelForStage(stage);
 
+  // Try to get industry/stage-specific content
+  const specificContent = getInvestorQuestionsContent(industry, stage);
+
+  if (specificContent) {
+    return {
+      title: `Top ${specificContent.questions.length} Investor Questions for ${industryLabel} ${stageLabel} Startups`,
+      summary: specificContent.summary,
+      questions: specificContent.questions,
+      metrics: specificContent.metrics,
+      objections: specificContent.objections,
+      ctaText: "Practice with Pitchchat AI",
+      context: {
+        industry,
+        stage,
+        pageType: "investor-questions",
+      },
+    };
+  }
+
+  // Fallback to base content
   return {
     title: `Investor questions for ${industryLabel} ${stageLabel} startups`,
     summary: `Founders raising a ${stageLabel} round in ${industryLabel} should be ready to answer these investor questions with clarity and evidence.`,

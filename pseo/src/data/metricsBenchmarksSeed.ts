@@ -1,5 +1,6 @@
 import type { MetricsBenchmarksPageData } from "@/components/pseo/MetricsBenchmarksTemplate";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { getMetricsBenchmarksContent } from "@/data/content/contentMatrix";
 
 const baseMetrics = [
   {
@@ -31,6 +32,24 @@ export function getMetricsBenchmarksSeed(
   const industryLabel = labelForIndustry(industry);
   const stageLabel = labelForStage(stage);
 
+  // Try to get industry/stage-specific content
+  const specificContent = getMetricsBenchmarksContent(industry, stage);
+
+  if (specificContent) {
+    return {
+      title: `${industryLabel} ${stageLabel} Fundraising Metrics: ${specificContent.metrics.length} Key Benchmarks`,
+      summary: specificContent.summary,
+      metrics: specificContent.metrics,
+      ctaText: "Practice with Pitchchat AI",
+      context: {
+        industry,
+        stage,
+        pageType: "metrics-benchmarks",
+      },
+    };
+  }
+
+  // Fallback to base content
   return {
     title: `${industryLabel} ${stageLabel} fundraising metrics benchmarks`,
     summary: `Metrics investors expect to see from ${industryLabel} founders raising a ${stageLabel} round.`,
