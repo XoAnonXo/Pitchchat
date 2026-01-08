@@ -33,13 +33,24 @@
   - `InvestorQuestionsTemplate` now safely handles optional `metrics`/`objections`
   - DB is lazily initialized (`getDb()`); pSEO can build with seed fallback if DB env isn’t set
   - Guarded `formatSlug()` against undefined params (prevents prerender crash)
+- Committed + pushed pSEO/Railway proxy changes to `main` (commit `7ffd2d5`).
+- Added `@types/pg` to `pseo` dependencies and pushed to `main` so Railway builds (commit `add4794`).
+- Fixed Next.js 15+ params Promise issue: `params` must be awaited in page components.
+- Browser verification complete:
+  - ✅ pSEO pages render correctly with seed data (AI Seed, Blockchain Series A, etc.)
+  - ✅ sitemap.xml proxied correctly with pitchchat.ai URLs
+  - ✅ robots.txt proxied correctly with all sitemaps
+  - ✅ Reverse proxy working through main app at port 5170
+  - ✅ Main app homepage still works correctly
+  - ✅ Navigation between pSEO pages works
 
 ### Now:
-- Help wire up deployment/run steps for `PSEO_ORIGIN` (local + prod) and smoke test proxy behavior.
+- pSEO verification complete. All endpoints working.
 
 ### Next:
-- Smoke test locally (main app proxies to pseo dev server).
-- Document production setup checklist (deploy pseo service + set env vars + submit sitemaps).
+- Commit the Next.js 15+ params fix.
+- Deploy to Railway production.
+- Submit sitemaps to Google Search Console.
 
 ## Open questions (UNCONFIRMED if needed):
 - What is the intended pSEO output target? (static pages baked into build, server-rendered pages, or client-side routes)

@@ -50,17 +50,18 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: PageParams;
+  params: Promise<PageParams>;
 }): Promise<Metadata> {
-  const industryLabel = labelForIndustry(params.industry);
-  const stageLabel = labelForStage(params.stage);
+  const { industry, stage, pageType } = await params;
+  const industryLabel = labelForIndustry(industry);
+  const stageLabel = labelForStage(stage);
   const pageTypeLabel =
-    pilotConfig.pageTypes.find((type) => type.slug === params.pageType)?.label ??
-    formatSlug(params.pageType);
+    pilotConfig.pageTypes.find((type) => type.slug === pageType)?.label ??
+    formatSlug(pageType);
   const slugPath = buildPseoPagePath({
-    industry: params.industry,
-    stage: params.stage,
-    pageType: params.pageType,
+    industry,
+    stage,
+    pageType,
   });
 
   const dbPage = await getPseoPageBySlug(slugPath);
@@ -96,17 +97,18 @@ export async function generateMetadata({
 export default async function InvestorQuestionsPage({
   params,
 }: {
-  params: PageParams;
+  params: Promise<PageParams>;
 }) {
+  const { industry, stage, pageType } = await params;
   const context = {
-    industry: params.industry,
-    stage: params.stage,
-    pageType: params.pageType,
+    industry,
+    stage,
+    pageType,
   };
-  const slugPath = `/investor-questions/${params.industry}/${params.stage}/${params.pageType}/`;
+  const slugPath = `/investor-questions/${industry}/${stage}/${pageType}/`;
   const dbPage = await getPseoPageBySlug(slugPath);
 
-  if (params.pageType === "investor-questions") {
+  if (pageType === "investor-questions") {
     if (dbPage && dbPage.questions.length > 0) {
       return (
         <InvestorQuestionsTemplate
@@ -134,11 +136,11 @@ export default async function InvestorQuestionsPage({
       );
     }
 
-    const data = getInvestorQuestionsSeed(params.industry, params.stage);
+    const data = getInvestorQuestionsSeed(industry, stage);
     return <InvestorQuestionsTemplate data={data} />;
   }
 
-  if (params.pageType === "pitch-deck") {
+  if (pageType === "pitch-deck") {
     if (dbPage && dbPage.deckSections.length > 0) {
       return (
         <PitchDeckTemplate
@@ -157,11 +159,11 @@ export default async function InvestorQuestionsPage({
       );
     }
 
-    const data = getPitchDeckSeed(params.industry, params.stage);
+    const data = getPitchDeckSeed(industry, stage);
     return <PitchDeckTemplate data={data} />;
   }
 
-  if (params.pageType === "metrics-benchmarks") {
+  if (pageType === "metrics-benchmarks") {
     if (dbPage && dbPage.benchmarks.length > 0) {
       return (
         <MetricsBenchmarksTemplate
@@ -180,11 +182,11 @@ export default async function InvestorQuestionsPage({
       );
     }
 
-    const data = getMetricsBenchmarksSeed(params.industry, params.stage);
+    const data = getMetricsBenchmarksSeed(industry, stage);
     return <MetricsBenchmarksTemplate data={data} />;
   }
 
-  if (params.pageType === "diligence-checklist") {
+  if (pageType === "diligence-checklist") {
     if (dbPage && dbPage.checklistItems.length > 0) {
       return (
         <DiligenceChecklistTemplate
@@ -202,11 +204,11 @@ export default async function InvestorQuestionsPage({
       );
     }
 
-    const data = getDiligenceChecklistSeed(params.industry, params.stage);
+    const data = getDiligenceChecklistSeed(industry, stage);
     return <DiligenceChecklistTemplate data={data} />;
   }
 
-  if (params.pageType === "investor-update") {
+  if (pageType === "investor-update") {
     if (dbPage && dbPage.investorUpdates.length > 0) {
       return (
         <InvestorUpdateTemplate
@@ -221,13 +223,13 @@ export default async function InvestorQuestionsPage({
       );
     }
 
-    const data = getInvestorUpdateSeed(params.industry, params.stage);
+    const data = getInvestorUpdateSeed(industry, stage);
     return <InvestorUpdateTemplate data={data} />;
   }
 
-  const industry = formatSlug(params.industry);
-  const stage = formatSlug(params.stage);
-  const pageType = formatSlug(params.pageType);
+  const industryLabel = formatSlug(industry);
+  const stageLabel = formatSlug(stage);
+  const pageTypeLabel = formatSlug(pageType);
 
   return (
     <main className="mx-auto max-w-3xl px-6 py-16">
@@ -235,7 +237,7 @@ export default async function InvestorQuestionsPage({
         Pitchchat Programmatic SEO
       </p>
       <h1 className="mt-3 text-3xl font-semibold">
-        {pageType} for {industry} {stage} startups
+        {pageTypeLabel} for {industryLabel} {stageLabel} startups
       </h1>
       <p className="mt-4 text-base text-neutral-700">
         This template is being wired next. Data will render here once the
@@ -245,15 +247,15 @@ export default async function InvestorQuestionsPage({
         <dl className="grid gap-3 text-sm text-neutral-700">
           <div className="flex items-center justify-between">
             <dt className="font-medium text-neutral-500">Industry</dt>
-            <dd>{industry}</dd>
+            <dd>{industryLabel}</dd>
           </div>
           <div className="flex items-center justify-between">
             <dt className="font-medium text-neutral-500">Stage</dt>
-            <dd>{stage}</dd>
+            <dd>{stageLabel}</dd>
           </div>
           <div className="flex items-center justify-between">
             <dt className="font-medium text-neutral-500">Page type</dt>
-            <dd>{pageType}</dd>
+            <dd>{pageTypeLabel}</dd>
           </div>
         </dl>
       </div>
