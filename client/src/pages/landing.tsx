@@ -729,9 +729,6 @@ export default function Landing() {
 
             <div className="text-xs font-semibold text-black/40 space-y-2">
               <p>© {new Date().getFullYear()} PitchChat</p>
-              <p className="text-[11px] font-medium text-black/40 max-w-xs">
-                VFSOFT BG EOOD · Sofia · BULGARIA, Sofia, Triaditsa district, VITOSHA, 48, GROUND FLOOR · EIK 206728740
-              </p>
             </div>
           </div>
         </footer>
