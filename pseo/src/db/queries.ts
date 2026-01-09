@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { eq, and, gte } from "drizzle-orm";
 
 import { getDb } from "@/db/client";
 import {
@@ -13,6 +13,7 @@ import {
   pseoPages,
   pseoStages,
 } from "@/db/schema";
+import { MINIMUM_QUALITY_THRESHOLD } from "@/lib/qualityScore";
 
 export type PseoPageData = {
   pageType: string;
@@ -21,6 +22,9 @@ export type PseoPageData = {
   title: string;
   summary: string | null;
   ctaText: string | null;
+  isPublished: boolean;
+  dataQualityScore: number | null;
+  updatedAt: Date | null;
   questions: Array<{ category: string | null; question: string; answer: string }>;
   benchmarks: Array<{ metric: string; value: string; notes: string | null }>;
   deckSections: Array<{ title: string; guidance: string | null; goal: string | null }>;
@@ -130,6 +134,9 @@ export async function getPseoPageBySlug(slug: string): Promise<PseoPageData | nu
       title: pageRecord.title,
       summary: pageRecord.summary,
       ctaText: pageRecord.ctaText,
+      isPublished: pageRecord.isPublished,
+      dataQualityScore: pageRecord.dataQualityScore,
+      updatedAt: pageRecord.updatedAt,
       questions,
       benchmarks,
       deckSections,
@@ -139,5 +146,41 @@ export async function getPseoPageBySlug(slug: string): Promise<PseoPageData | nu
     };
   } catch {
     return null;
+  }
+}
+
+export type SitemapPageEntry = {
+  slug: string;
+  updatedAt: Date | null;
+};
+
+/**
+ * Get all published pSEO pages for sitemap generation.
+ * Returns slug and updatedAt for each published page.
+ * Only includes pages that are published AND meet the minimum quality threshold.
+ */
+export async function getPublishedPagesForSitemap(): Promise<SitemapPageEntry[]> {
+  try {
+    const db = getDb();
+    if (!db) {
+      return [];
+    }
+
+    const pages = await db
+      .select({
+        slug: pseoPages.slug,
+        updatedAt: pseoPages.updatedAt,
+      })
+      .from(pseoPages)
+      .where(
+        and(
+          eq(pseoPages.isPublished, true),
+          gte(pseoPages.dataQualityScore, MINIMUM_QUALITY_THRESHOLD)
+        )
+      );
+
+    return pages;
+  } catch {
+    return [];
   }
 }
