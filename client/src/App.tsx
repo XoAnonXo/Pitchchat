@@ -99,6 +99,9 @@ function Router() {
             <Route path="/analytics" component={AnalyticsPage} />
             <Route path="/settings" component={SettingsPage} />
             <Route path="/chat/:slug" component={InvestorChat} />
+            {/* Redirect to dashboard if already authenticated */}
+            <Route path="/auth" component={() => <Redirect to="/" />} />
+            <Route path="/forgot-password" component={() => <Redirect to="/" />} />
           </>
         )}
         <Route component={NotFound} />

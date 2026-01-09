@@ -114,16 +114,17 @@ export function getPricingBreakdown() {
 }
 
 // Subscription pricing for link-based model
+// Price IDs can be overridden via environment variables for different Stripe accounts
 export const SUBSCRIPTION_PRICING = {
   monthly: {
-    priceId: 'price_1Ruu6pFbfaTMQEZORAhCEGnp', // $29/month Stripe price ID
+    priceId: process.env.STRIPE_MONTHLY_PRICE_ID || 'price_1Ruu6pFbfaTMQEZORAhCEGnp', // $29/month Stripe price ID
     price: 2900, // $29 in cents
     links: 'unlimited', // Unlimited links
     label: "Monthly Plan",
     description: "Create unlimited pitch links",
   },
   annual: {
-    priceId: 'price_1Ruu7zFbfaTMQEZOUT3v0FeI', // $278.40/year Stripe price ID  
+    priceId: process.env.STRIPE_ANNUAL_PRICE_ID || 'price_1Ruu7zFbfaTMQEZOUT3v0FeI', // $278.40/year Stripe price ID  
     price: 27840, // $278.40 in cents (20% discount)
     links: 'unlimited', // Unlimited links
     label: "Annual Plan",

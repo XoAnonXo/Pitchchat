@@ -322,6 +322,7 @@ export default function SettingsPage() {
             size="icon"
             className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
+            aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -381,6 +382,7 @@ export default function SettingsPage() {
               size="icon"
               onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
+              aria-label="Log out"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -397,6 +399,7 @@ export default function SettingsPage() {
                 size="icon"
                 className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open sidebar"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -552,6 +555,114 @@ export default function SettingsPage() {
                   </Button>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white rounded-3xl border border-black/8 shadow-lg shadow-black/5 overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-black/8">
+            <CardHeader className="border-b border-black/[0.06] px-8 py-6">
+              <div className="flex items-center space-x-3">
+                <div className="w-12 h-12 bg-[#D4F5E9] rounded-2xl flex items-center justify-center">
+                  <CreditCard className="w-6 h-6 text-black/70" />
+                </div>
+                <div>
+                  <CardTitle className="text-lg font-bold text-black tracking-tight">Subscription</CardTitle>
+                  <CardDescription className="text-[11px] uppercase font-semibold tracking-widest text-black/45">Billing & Plan</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-8 space-y-6">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <p className="font-bold text-black text-sm">Current Plan</p>
+                  <p className="text-xs text-black/45 font-medium">
+                    {user?.subscriptionStatus === 'active' ? 'Premium Plan - Full access to all features' : 'Free Plan - Limited features'}
+                  </p>
+                </div>
+                <Badge 
+                  variant={user?.subscriptionStatus === 'active' ? 'default' : 'secondary'}
+                  className={user?.subscriptionStatus === 'active' 
+                    ? 'bg-emerald-500 text-white font-bold text-[10px] uppercase tracking-wider' 
+                    : 'bg-black/10 text-black/60 font-bold text-[10px] uppercase tracking-wider'
+                  }
+                >
+                  {user?.subscriptionStatus === 'active' ? 'Active' : 'Free'}
+                </Badge>
+              </div>
+
+              <Separator className="bg-black/[0.08]" />
+
+              {user?.subscriptionStatus === 'active' ? (
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="space-y-1">
+                      <p className="font-bold text-black text-sm">Manage Subscription</p>
+                      <p className="text-xs text-black/45 font-medium">Update billing info, view invoices, or cancel your plan.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Button
+                      variant="outline"
+                      className="h-11 rounded-xl border-black/10 font-bold text-sm text-black/60 flex-1"
+                      onClick={async () => {
+                        try {
+                          const res = await apiRequest('POST', '/api/subscriptions/portal');
+                          const data = await res.json();
+                          if (data.url) {
+                            window.location.href = data.url;
+                          }
+                        } catch (error: any) {
+                          toast({
+                            title: "Error",
+                            description: "Failed to open billing portal. Please try again.",
+                            variant: "destructive",
+                          });
+                        }
+                      }}
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Billing Portal
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="h-11 rounded-xl border-black/20 font-bold text-sm text-black/60 hover:bg-red-50 hover:text-red-600 hover:border-red-200"
+                      onClick={() => cancelMutation.mutate()}
+                      disabled={cancelMutation.isPending}
+                    >
+                      Cancel Plan
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <div className="space-y-1">
+                    <p className="font-bold text-black text-sm">Upgrade to Premium</p>
+                    <p className="text-xs text-black/45 font-medium">Unlock unlimited pitch rooms, advanced analytics, and priority support.</p>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <Button
+                      className="h-12 rounded-xl bg-black hover:bg-black/90 text-white font-bold text-sm shadow-lg"
+                      onClick={() => subscriptionMutation.mutate('monthly')}
+                      disabled={subscriptionMutation.isPending}
+                    >
+                      <div className="flex flex-col items-center">
+                        <span>Monthly</span>
+                        <span className="text-[10px] font-medium opacity-70">$29/month</span>
+                      </div>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="h-12 rounded-xl border-2 border-black font-bold text-sm text-black hover:bg-black hover:text-white transition-all"
+                      onClick={() => subscriptionMutation.mutate('annual')}
+                      disabled={subscriptionMutation.isPending}
+                    >
+                      <div className="flex flex-col items-center">
+                        <span>Annual</span>
+                        <span className="text-[10px] font-medium opacity-70">$290/year (save 17%)</span>
+                      </div>
+                    </Button>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
 

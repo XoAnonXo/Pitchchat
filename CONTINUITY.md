@@ -45,10 +45,10 @@
   - ✅ Navigation between pSEO pages works
 
 ### Now:
-- pSEO verification complete. All endpoints working.
+- Fixed investor chat scroll behavior
 
 ### Next:
-- Commit the Next.js 15+ params fix.
+- Commit the scroll fix
 - Deploy to Railway production.
 - Submit sitemaps to Google Search Console.
 

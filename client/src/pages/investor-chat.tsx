@@ -347,6 +347,12 @@ export default function InvestorChat() {
   const [showDownloadDialog, setShowDownloadDialog] = useState(false);
   const [showContactDialog, setShowContactDialog] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Track if user is near bottom of messages (for smart auto-scroll)
+  const [isNearBottom, setIsNearBottom] = useState(true);
+  const [prevMessageCount, setPrevMessageCount] = useState(0);
+  const isInitialLoad = useRef(true);
 
   // Track messages that have been fully typed (by message ID)
   const [typedMessageIds, setTypedMessageIds] = useState<Set<string>>(new Set());
@@ -438,9 +444,37 @@ export default function InvestorChat() {
     },
   });
 
+  // Handle scroll position tracking
+  const handleScroll = () => {
+    const container = messagesContainerRef.current;
+    if (!container) return;
+    
+    // Check if user is within 100px of the bottom
+    const threshold = 100;
+    const isNear = container.scrollHeight - container.scrollTop - container.clientHeight < threshold;
+    setIsNearBottom(isNear);
+  };
+
+  // Smart auto-scroll: only scroll when new messages arrive AND user was near bottom
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+    // Skip initial load - don't scroll to bottom when page first loads
+    if (isInitialLoad.current) {
+      if (messages.length > 0) {
+        isInitialLoad.current = false;
+        setPrevMessageCount(messages.length);
+      }
+      return;
+    }
+
+    // Only scroll if new messages were added (not on refetch with same count)
+    const hasNewMessages = messages.length > prevMessageCount;
+    setPrevMessageCount(messages.length);
+
+    // Auto-scroll only if user was near bottom when new message arrived
+    if (hasNewMessages && isNearBottom) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isNearBottom, prevMessageCount]);
 
   // Track demo message limit
   const userMessageCount = messages.filter(m => m.role === "user").length;
@@ -617,7 +651,10 @@ export default function InvestorChat() {
 
           {emailSubmitted && (
             <Card className={`flex flex-col rounded-[2.5rem] border border-gray-100 shadow-soft bg-white overflow-hidden ${isDemo ? 'h-[600px]' : 'flex-1 min-h-0'}`}>
-              <div className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-8 bg-gray-50/30 min-h-0">
+              <div 
+                ref={messagesContainerRef}
+                onScroll={handleScroll}
+                className="flex-1 overflow-y-auto p-6 sm:p-8 space-y-8 bg-gray-50/30 min-h-0">
                 {messages.length === 0 && (
                   <div className="py-20 text-center">
                     <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm border border-gray-100">

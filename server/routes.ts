@@ -3,11 +3,11 @@ import { createServer, type Server } from "http";
 import multer from "multer";
 import { nanoid } from "nanoid";
 import fs from "fs";
-import path from "path";
+import rateLimit from "express-rate-limit";
 import { storage } from "./storage";
 import { setupAuth, isAuthenticated } from "./customAuth";
 import { processDocument } from "./fileProcessor";
-import { deleteUploadedFile } from "./utils/uploads";
+import { deleteUploadedFile, resolveUploadPath, UPLOAD_DIR } from "./utils/uploads";
 import { chatWithAI, generateEmbedding, AIModel, AI_MODEL_ALLOWLIST, AI_MODEL_CATALOG } from "./aiModels";
 import { integrationManager } from "./integrations";
 import { insertProjectSchema, insertDocumentSchema, insertLinkSchema, insertMessageSchema } from "@shared/schema";
@@ -17,13 +17,35 @@ import Stripe from "stripe";
 import { sanitizeUser } from "./utils/sanitize";
 
 
-const uploadDir = process.env.UPLOAD_DIR || "./uploads";
+const MAX_MESSAGE_LENGTH = 5000;
+const MAX_CONTACT_FIELD_LENGTH = 200;
+const MAX_PHONE_LENGTH = 50;
+const MAX_WEBSITE_LENGTH = 200;
+const MAX_EMAIL_LENGTH = 320;
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const messageLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 20,
+  message: { message: "Too many messages, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const contactLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: { message: "Too many contact submissions, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Configure multer for file uploads
 const upload = multer({
   storage: multer.diskStorage({
     destination: (_req, _file, cb) => {
-      fs.mkdir(uploadDir, { recursive: true }, (err) => cb(err, uploadDir));
+      fs.mkdir(UPLOAD_DIR, { recursive: true }, (err) => cb(err, UPLOAD_DIR));
     },
     filename: (_req, file, cb) => {
       const safeName = file.originalname.replace(/[^a-zA-Z0-9.-]/g, "_");
@@ -267,11 +289,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!document || document.projectId !== projectId) {
         return res.status(404).json({ message: "Document not found" });
       }
-      
-      const fs = require('fs');
-      const path = require('path');
-      const filePath = path.join(process.cwd(), 'uploads', document.filename);
-      
+
+      let filePath: string;
+      try {
+        filePath = resolveUploadPath(document.filename);
+      } catch (error) {
+        return res.status(404).json({ message: "File not found on disk" });
+      }
+
       if (!fs.existsSync(filePath)) {
         return res.status(404).json({ message: "File not found on disk" });
       }
@@ -494,8 +519,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Stream the file to the client
-      const filePath = path.join(uploadDir, document.filename);
-      
+      let filePath: string;
+      try {
+        filePath = resolveUploadPath(document.filename);
+      } catch (error) {
+        return res.status(404).json({ message: "File not found on server" });
+      }
+
       if (!fs.existsSync(filePath)) {
         return res.status(404).json({ message: "File not found on server" });
       }
@@ -511,12 +541,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/chat/:slug/messages", async (req, res) => {
+  app.post("/api/chat/:slug/messages", messageLimiter, async (req, res) => {
     try {
       const { message, conversationId, investorEmail } = req.body;
       
       if (!message || typeof message !== "string") {
         return res.status(400).json({ message: "Message is required" });
+      }
+
+      if (message.length > MAX_MESSAGE_LENGTH) {
+        return res.status(400).json({ message: "Message exceeds maximum length" });
+      }
+
+      if (conversationId && (typeof conversationId !== "string" || !UUID_REGEX.test(conversationId))) {
+        return res.status(400).json({ message: "Invalid conversation ID format" });
+      }
+
+      if (investorEmail) {
+        if (typeof investorEmail !== "string" || investorEmail.length > MAX_EMAIL_LENGTH || !EMAIL_REGEX.test(investorEmail)) {
+          return res.status(400).json({ message: "Invalid email format" });
+        }
       }
 
       const link = await storage.getLink(req.params.slug);
@@ -604,10 +648,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const platformCost = calculatePlatformCost(totalTokens, 'gpt4o');
       
       // Update conversation totals
-      await storage.updateConversation(conversation.id, {
-        totalTokens: (conversation.totalTokens || 0) + totalTokens,
-        costUsd: (conversation.costUsd || 0) + platformCost, // Platform cost with 10x margin
-      });
+      await storage.incrementConversationTotals(conversation.id, totalTokens, platformCost);
 
 
 
@@ -647,11 +688,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Investor chat - Submit contact details
-  app.post("/api/conversations/:conversationId/contact", async (req, res) => {
+  app.post("/api/conversations/:conversationId/contact", contactLimiter, async (req, res) => {
     try {
       const { conversationId } = req.params;
-      const { name, phone, company, website } = req.body;
+      const { name, phone, company, website, linkSlug, linkToken } = req.body;
+      const linkIdentifier = linkSlug || linkToken;
 
+      if (!UUID_REGEX.test(conversationId)) {
+        return res.status(400).json({ message: "Invalid conversation ID format" });
+      }
+
+      if (!linkIdentifier || typeof linkIdentifier !== "string") {
+        return res.status(400).json({ message: "Link slug is required" });
+      }
+
+      if (linkIdentifier.length > MAX_CONTACT_FIELD_LENGTH) {
+        return res.status(400).json({ message: "Link identifier is too long" });
+      }
+
+      if (name && (typeof name !== "string" || name.length > MAX_CONTACT_FIELD_LENGTH)) {
+        return res.status(400).json({ message: "Invalid name" });
+      }
+
+      if (phone && (typeof phone !== "string" || phone.length > MAX_PHONE_LENGTH)) {
+        return res.status(400).json({ message: "Invalid phone" });
+      }
+
+      if (company && (typeof company !== "string" || company.length > MAX_CONTACT_FIELD_LENGTH)) {
+        return res.status(400).json({ message: "Invalid company" });
+      }
+
+      if (website && (typeof website !== "string" || website.length > MAX_WEBSITE_LENGTH)) {
+        return res.status(400).json({ message: "Invalid website" });
+      }
+
+      const [conversation, link] = await Promise.all([
+        storage.getConversationById(conversationId),
+        storage.getLink(linkIdentifier),
+      ]);
+
+      if (!conversation || !link || conversation.linkId !== link.id) {
+        return res.status(404).json({ message: "Conversation not found for link" });
+      }
+
+      // Get the conversation to find the project owner
       // Update conversation with contact details
       await storage.updateConversationContactDetails(conversationId, {
         contactName: name || null,
@@ -661,44 +741,37 @@ export async function registerRoutes(app: Express): Promise<Server> {
         contactProvidedAt: new Date(),
       });
 
-      // Get the conversation to find the project owner
-      const conversation = await storage.getConversationById(conversationId);
-      if (conversation) {
-        const link = await storage.getLink(conversation.linkId);
-        if (link) {
-          const project = await storage.getProject(link.projectId);
-          if (project && conversation.investorEmail) {
-            const user = await storage.getUser(project.userId);
+      const project = await storage.getProject(link.projectId);
+      if (project && conversation.investorEmail) {
+        const user = await storage.getUser(project.userId);
 
-            // Send email to investor confirming their contact details were shared
-            await sendInvestorContactEmail(
-              conversation.investorEmail,
-              project.name,
-              link.slug,
-              {
-                name: name || undefined,
-                phone: phone || undefined,
-                company: company || undefined,
-                website: website || undefined,
-              }
-            );
-
-            // Send email to founder if they have email alerts enabled
-            if (user?.emailAlerts) {
-              await sendFounderContactAlert(
-                user.email!,
-                project.name,
-                conversationId,
-                {
-                  email: conversation.investorEmail,
-                  name: name || undefined,
-                  phone: phone || undefined,
-                  company: company || undefined,
-                  website: website || undefined,
-                }
-              );
-            }
+        // Send email to investor confirming their contact details were shared
+        await sendInvestorContactEmail(
+          conversation.investorEmail,
+          project.name,
+          link.slug,
+          {
+            name: name || undefined,
+            phone: phone || undefined,
+            company: company || undefined,
+            website: website || undefined,
           }
+        );
+
+        // Send email to founder if they have email alerts enabled
+        if (user?.emailAlerts) {
+          await sendFounderContactAlert(
+            user.email!,
+            project.name,
+            conversationId,
+            {
+              email: conversation.investorEmail,
+              name: name || undefined,
+              phone: phone || undefined,
+              company: company || undefined,
+              website: website || undefined,
+            }
+          );
         }
       }
 
@@ -832,9 +905,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
 
       res.json({ url: session.url });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error creating checkout session:", error);
-      res.status(500).json({ message: "Failed to create checkout session" });
+      
+      // Provide more helpful error messages
+      let message = "Failed to create checkout session";
+      if (error?.message?.includes("No such price")) {
+        message = "Stripe price ID not found. Please check STRIPE_MONTHLY_PRICE_ID and STRIPE_ANNUAL_PRICE_ID environment variables.";
+      } else if (error?.message?.includes("Invalid API Key")) {
+        message = "Invalid Stripe API key. Please check STRIPE_SECRET_KEY environment variable.";
+      } else if (error?.type === "StripeInvalidRequestError") {
+        message = `Stripe configuration error: ${error.message}`;
+      }
+      
+      res.status(500).json({ message });
     }
   });
 
