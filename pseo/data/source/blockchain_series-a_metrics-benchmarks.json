@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/blockchain/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Blockchain Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Blockchain Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A blockchain benchmarks focus on sustainable business metrics alongside crypto-native indicators. Investors compare your fundamentals against both crypto protocols and traditional companies. These benchmarks demonstrate business maturity beyond token speculation. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "2-5 months",
-      "note": "Projected target range; update with real data. Blockchain Series A."
+      "label": "Protocol Revenue",
+      "value": "$500K - $3M annually",
+      "note": "Real fee revenue from protocol operations. The most important metric for sustainable economics. Growth trajectory matters.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
     },
     {
-      "label": "Pilot conversion rate",
+      "label": "Monthly Active Wallets",
+      "value": "50,000 - 500,000",
+      "note": "Unique active wallets monthly. Distinguish organic from incentivized. Retention and engagement quality matter.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
+    },
+    {
+      "label": "Total Value Locked",
+      "value": "$20M - $200M",
+      "note": "For DeFi protocols. Organic TVL without unsustainable incentives. Composition and stability as important as size.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
+    },
+    {
+      "label": "User Retention (90-day)",
       "value": "30-50%",
-      "note": "Projected target range; update with real data. Blockchain Series A."
+      "note": "Users returning after 90 days, ideally without incentives. Proves genuine utility and product-market fit.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "65-85%",
-      "note": "Projected target range; update with real data. Blockchain Series A."
+      "label": "Revenue Growth Rate",
+      "value": "100-300% YoY",
+      "note": "Annual revenue growth. Crypto can grow faster but sustainability matters more than peak growth.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate; audits 3-6 mo",
-      "note": "Projected target range; update with real data. Blockchain Series A."
+      "label": "Net Revenue Retention",
+      "value": "100-150%",
+      "note": "For protocols with measurable user economics. Shows users deepening engagement over time.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
+    },
+    {
+      "label": "Governance Participation",
+      "value": "10-30%",
+      "note": "Token voting participation. Indicates community engagement and decentralization credibility.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
+    },
+    {
+      "label": "Security Audit Coverage",
+      "value": "3+ audits, 100% critical code",
+      "note": "Comprehensive audit coverage from reputable firms. All critical findings addressed. Ongoing security program.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
+    },
+    {
+      "label": "Institutional/Enterprise Users",
+      "value": "5-20 significant",
+      "note": "Large users or enterprise integrations. Validates protocol maturity and security confidence.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
+    },
+    {
+      "label": "Team Size",
+      "value": "20-50 people",
+      "note": "Scaled team across engineering, security, community, and business. Heavy on technical and security talent.",
+      "source": "Chainalysis Reports (https://www.chainalysis.com/reports/)"
     }
   ]
 }

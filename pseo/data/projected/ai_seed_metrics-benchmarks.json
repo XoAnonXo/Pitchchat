@@ -1,0 +1,31 @@
+{
+  "industry": "ai",
+  "stage": "seed",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/ai/seed/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "AI Seed fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for AI Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "1-4 months",
+      "note": "Projected target range; update with real data. AI Seed."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "30-50%",
+      "note": "Projected target range; update with real data. AI Seed."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "65-85%",
+      "note": "Projected target range; update with real data. AI Seed."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Low-Moderate; infra 20-40% of revenue",
+      "note": "Projected target range; update with real data. AI Seed."
+    }
+  ]
+}

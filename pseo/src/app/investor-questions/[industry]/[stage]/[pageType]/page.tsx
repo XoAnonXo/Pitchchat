@@ -15,7 +15,7 @@ import { getInvestorQuestionsSeed } from "@/data/investorQuestionsSeed";
 import { getInvestorUpdateSeed } from "@/data/investorUpdateSeed";
 import { getMetricsBenchmarksSeed } from "@/data/metricsBenchmarksSeed";
 import { getPitchDeckSeed } from "@/data/pitchDeckSeed";
-import { getPseoPageBySlug } from "@/db/queries";
+import { getPublishedPagesForSitemap, getPseoPageBySlug } from "@/db/queries";
 import { buildPseoPagePath } from "@/lib/pseoRoutes";
 import { meetsQualityThreshold } from "@/lib/qualityScore";
 
@@ -24,6 +24,10 @@ type PageParams = {
   stage: string;
   pageType: string;
 };
+
+const allowSeedFallback =
+  process.env.PSEO_ALLOW_SEED_FALLBACK === "true" ||
+  process.env.NODE_ENV !== "production";
 
 function formatSlug(value?: string) {
   if (!value) return "";
@@ -81,9 +85,38 @@ function getBreadcrumbItems(
  * Build-time validation: Fail the build if any content files are missing.
  * This prevents the fallback from ever being reached in production.
  */
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const params: Array<{ industry: string; stage: string; pageType: string }> = [];
   const missingContent: string[] = [];
+
+  if (!allowSeedFallback) {
+    const pages = await getPublishedPagesForSitemap();
+    if (pages.length === 0) {
+      throw new Error(
+        "No published pSEO pages found. Seed the database or set PSEO_ALLOW_SEED_FALLBACK=true to use seed content."
+      );
+    }
+
+    const parsed = pages
+      .map((page) => {
+        const parts = page.slug.split("/").filter(Boolean);
+        if (parts.length < 4) {
+          return null;
+        }
+        return {
+          industry: parts[1],
+          stage: parts[2],
+          pageType: parts[3],
+        };
+      })
+      .filter(Boolean);
+
+    if (parsed.length === 0) {
+      throw new Error("No valid published pSEO slugs found for static params.");
+    }
+
+    return parsed;
+  }
 
   for (const industry of pilotConfig.industries) {
     for (const stage of pilotConfig.stages) {
@@ -194,6 +227,10 @@ export default async function InvestorQuestionsPage({
 
   // Gate unpublished or low-quality pages - return 404 if page exists in DB but not ready
   if (dbPage && (!dbPage.isPublished || !meetsQualityThreshold(dbPage.dataQualityScore))) {
+    notFound();
+  }
+
+  if (!dbPage && !allowSeedFallback) {
     notFound();
   }
 

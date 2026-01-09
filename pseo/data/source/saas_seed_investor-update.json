@@ -1,0 +1,50 @@
+{
+  "industry": "saas",
+  "stage": "seed",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/saas/seed/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "SaaS Seed investor update template",
+  "summary": "Monthly SaaS investor updates should focus on growth metrics, retention signals, and milestone progress. Be consistent in format so trends are visible. Lead with what matters most: MRR growth and retention. Be transparent about challenges—investors can help more when they understand problems early. Pitchchat helps founders share updates in a single room.",
+  "sections": [
+    {
+      "section": "Key Metrics Dashboard",
+      "content": "Lead with core SaaS metrics: MRR, growth rate, NRR, churn, CAC payback. Show month-over-month change and trend direction. Use consistent formatting so investors can track progress easily. Include sparklines or small charts if your email format supports them. This section should take 30 seconds to scan and understand business health."
+    },
+    {
+      "section": "Customer Highlights",
+      "content": "New customers with brief context on why they chose you. Notable expansion or upsells. Customer success stories or quotes. Any churn with honest assessment of reasons. Reference customers willing to speak with investors."
+    },
+    {
+      "section": "Product Updates",
+      "content": "Features shipped and their impact on metrics. Current sprint priorities. Roadmap progress against plan. Any technical challenges or infrastructure improvements. Customer feedback driving product decisions."
+    },
+    {
+      "section": "Go-to-Market Progress",
+      "content": "Pipeline and conversion trends. Channel experiments and results. Marketing initiatives and performance. Sales team performance and capacity. Partnership or distribution developments."
+    },
+    {
+      "section": "Team & Operations",
+      "content": "Key hires completed or in progress. Organizational changes. Culture and retention indicators. Operational improvements. Any departures and mitigation."
+    },
+    {
+      "section": "Financial Position",
+      "content": "Cash position and runway. Burn rate trend. Revenue vs. plan. Key expense changes. Path to next milestone."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Top 3 priorities for next month. Specific asks: introductions, expertise, advice. Decisions you're wrestling with where input helps. Clear, actionable requests make it easy for investors to help."
+    },
+    {
+      "section": "Looking Ahead",
+      "content": "Key milestones approaching. Risks you're monitoring. Strategic decisions on the horizon. Any changes to fundraising timeline or strategy."
+    }
+  ]
+}

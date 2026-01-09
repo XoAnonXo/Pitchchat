@@ -1,0 +1,124 @@
+{
+  "industry": "healthcare",
+  "stage": "seed",
+  "pageType": "investor-questions",
+  "slug": "/investor-questions/healthcare/seed/investor-questions/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Investor questions for Healthcare Seed startups",
+  "summary": "Healthcare seed-stage startups face intense scrutiny on regulatory pathways, clinical validation, and go-to-market complexity. Investors evaluate your understanding of healthcare economics, reimbursement dynamics, and the ability to navigate long sales cycles while building a sustainable business. The bar has risen—investors expect early evidence of provider or payer engagement, not just a promising technology. Pitchchat turns investor questions into an interactive pitch room founders can share.",
+  "questions": [
+    {
+      "category": "Regulatory",
+      "question": "What's your FDA regulatory pathway and timeline?",
+      "answer": "Present your regulatory strategy with specificity. For medical devices, explain whether you're pursuing 510(k), De Novo, or PMA pathway and why. For digital health, clarify if you're regulated as a device, exempt, or pursuing enforcement discretion. Show you understand predicate devices, clinical requirements, and timeline expectations. Include any pre-submission meetings with FDA and feedback received. The best answers show regulatory expertise: 'We're pursuing 510(k) with predicate XYZ. We've completed our pre-submission meeting where FDA agreed our bench testing approach is sufficient. We expect clearance in 12-14 months based on similar recent clearances.'"
+    },
+    {
+      "category": "Clinical Validation",
+      "question": "What clinical evidence do you have and what's your validation plan?",
+      "answer": "Healthcare investors require clinical evidence matching your claims. Present your evidence hierarchy: bench testing, feasibility studies, pilot trials, clinical studies. Explain study design, endpoints, and statistical power. If early, show your evidence generation roadmap with clear milestones. Reference comparable products and their evidence requirements. Be honest about what your data shows and doesn't show. Address how evidence requirements differ by customer type (health systems vs. payers vs. pharma)."
+    },
+    {
+      "category": "Reimbursement",
+      "question": "How do customers pay for this and what's the reimbursement strategy?",
+      "answer": "Healthcare economics are complex—show you understand them. Explain who pays: patient out-of-pocket, provider budget, payer reimbursement, employer/self-insured, or pharma. If seeking reimbursement, explain the CPT code strategy (existing, Category III, or new code application). Present your health economics analysis: cost savings, quality improvements, or outcome benefits that justify payment. Show early payer conversations or coverage decisions. Address the timing gap between product launch and reimbursement establishment."
+    },
+    {
+      "category": "Go-to-Market",
+      "question": "How do you sell into health systems and what's your sales cycle?",
+      "answer": "Healthcare sales are long and complex. Present your GTM motion realistically: who you sell to (clinical champion, administrator, C-suite), the buying process (committees, pilots, value analysis), and typical timeline (often 12-18 months). Show early traction: LOIs, pilots, design partnerships, or sales. Explain your land-and-expand strategy within health systems. Address how you'll build a scalable sales motion—direct vs. distribution vs. platform partnerships. Reference your team's healthcare sales experience."
+    },
+    {
+      "category": "Clinical Workflow",
+      "question": "How does your solution fit into existing clinical workflows?",
+      "answer": "Workflow integration determines adoption. Explain exactly where your product fits in the care journey: which setting (inpatient, outpatient, home), which moment, which user. Address EHR integration requirements and approach (FHIR APIs, Epic App Orchard, etc.). Show you understand the user's current workflow and how you minimize disruption. Present evidence of usability: user testing, pilot feedback, time-motion studies. Address training requirements and change management needs."
+    },
+    {
+      "category": "Competition",
+      "question": "How do you differentiate from existing solutions and incumbents?",
+      "answer": "Healthcare markets have entrenched incumbents and high switching costs. Present your competitive landscape honestly: existing products, legacy approaches, and emerging competitors. Explain your differentiation: clinical superiority, workflow advantage, cost efficiency, or patient experience. Show evidence: head-to-head data, customer feedback, win/loss analysis. Address the 'good enough' competitor—why switch from current solutions? Reference specific customer conversations about competitive positioning."
+    },
+    {
+      "category": "Patient Safety",
+      "question": "How do you ensure patient safety and manage clinical risk?",
+      "answer": "Safety is non-negotiable in healthcare. Explain your quality management system and risk management approach. For clinical products, describe your clinical risk analysis (per ISO 14971 if applicable). Present your adverse event monitoring plan. Address cybersecurity for connected devices or data-handling systems. Show you understand HIPAA requirements and your compliance approach. Reference any safety signals from testing or pilots and your mitigation strategies."
+    },
+    {
+      "category": "Team",
+      "question": "What healthcare experience does your team have?",
+      "answer": "Healthcare requires domain expertise. Present your team's healthcare credentials: clinical background, industry experience, regulatory expertise, commercial healthcare experience. Address the full stack needed: clinical, regulatory, commercial, technical. If gaps exist, explain your plan: advisors, key hires, partnerships. Show you have access to clinical expertise for product development and validation. Reference specific healthcare relationships the team brings."
+    },
+    {
+      "category": "Market Size",
+      "question": "How do you size the market opportunity?",
+      "answer": "Present bottom-up healthcare market sizing. Start with patient population or procedures, narrow to your specific indication or use case, apply realistic adoption and pricing assumptions. Reference comparable company market sizes. Address market dynamics: is this a growing or shifting market? Explain your entry point and expansion path. Avoid top-down TAM numbers without bottoms-up validation—healthcare investors will verify your math."
+    },
+    {
+      "category": "Milestones",
+      "question": "What does this round achieve and what triggers Series A?",
+      "answer": "Present concrete milestones this capital achieves: regulatory (submissions, clearances), clinical (study completion, data), commercial (pilots, first sales), and team (key hires). Show you understand healthcare Series A requirements: typically FDA clearance/submission, clinical evidence, early commercial traction or strong pilots. Explain the 18-24 month path and key de-risking events. Be realistic about timeline—healthcare development often takes longer than founders expect."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Regulatory Status",
+      "value": "Pre-submission to 510(k) filed",
+      "note": "Seed stage typically ranges from regulatory strategy defined to submission filed. Clearance is often a Series A milestone.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Clinical Evidence",
+      "value": "Feasibility to pilot data",
+      "note": "Early clinical validation through bench testing, feasibility studies, or small pilot programs with clinical partners.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Provider Partnerships",
+      "value": "2-5 design/pilot partners",
+      "note": "Health system partnerships for development, validation, or early pilots. LOIs or paid pilots are strong signals.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Customer Pipeline",
+      "value": "$500K-$2M in LOIs/pilots",
+      "note": "Letters of intent, pilot agreements, or contracted revenue. Shows commercial interest beyond clinical enthusiasm.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Team Healthcare Experience",
+      "value": "10+ years collective",
+      "note": "Combined team experience in healthcare—clinical, regulatory, commercial. Domain expertise is essential.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Reimbursement Progress",
+      "value": "Strategy defined, early payer conversations",
+      "note": "Clear reimbursement pathway identified with supporting health economics analysis.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    }
+  ],
+  "objections": [
+    {
+      "objection": "The regulatory pathway is too long and expensive for a seed-stage company.",
+      "response": "Address regulatory concerns with a realistic plan: 'Our 510(k) pathway has well-defined precedents—we've identified 15 cleared predicates with similar indications. Our clinical requirements are bench testing and a small usability study, not a randomized trial. Based on recent clearances in this category, we project 12-14 months and $400K in regulatory costs post-seed. We've de-risked through a pre-submission meeting where FDA confirmed our approach. The seed round funds us through submission with 6 months of buffer.'"
+    },
+    {
+      "objection": "Health system sales cycles are too long for your runway.",
+      "response": "Acknowledge and address: 'Health system sales average 12-18 months, which is why we're pursuing a two-track strategy. First, we're targeting innovative health systems with faster procurement—our three pilots closed in 4-6 months through innovation departments. Second, we're building a pathway through clinical champions who can start with department-level budgets. Our seed milestones focus on proving the pilot model and building pipeline, not achieving scale revenue. We expect 3-5 paying customers by Series A, with a larger pipeline that converts post-raise.'"
+    },
+    {
+      "objection": "How do you compete with EHR vendors who could add this feature?",
+      "response": "Address platform risk directly: 'EHR vendors optimize for breadth, not depth—our category requires clinical specialization they won't prioritize. Epic has 150 product priorities; we have one. Our clinical validation and workflow optimization represent 3 years of focused development. More importantly, health systems increasingly prefer best-of-breed for clinical applications. Our integration approach (FHIR-native, EHR-agnostic) positions us as a complement. We're also pursuing Epic App Orchard and Cerner partnerships that align rather than compete.'"
+    },
+    {
+      "objection": "Your reimbursement pathway is unclear.",
+      "response": "Present your reimbursement strategy: 'We have three payment pathways. Primary: existing CPT code 99XXX covers our service with average reimbursement of $X. We've validated with billing compliance review. Secondary: hospital cost savings—our health economics study shows $Y savings per patient, supporting capital budget purchase. Third: value-based contracts where we share in outcomes improvement. We've had preliminary conversations with 3 payers who've expressed interest pending clinical data. Our seed milestone is completing the health economics analysis to support these conversations.'"
+    }
+  ]
+}

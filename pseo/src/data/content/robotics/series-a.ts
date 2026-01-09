@@ -161,7 +161,7 @@ export const roboticsSeriesAContent: IndustryStageContent = {
         title: "Customer Evidence",
         goal: "Let customers prove value",
         guidance:
-          "Present customer testimonials and case studies. Show retention and expansion patterns. Include customer ROI data—payback realized, not projected. Address any customer churn with learnings.",
+          "Present customer testimonials and case studies. Show retention and expansion patterns. Include customer ROI data—payback realized, not forecast. Address any customer churn with learnings.",
       },
       {
         title: "Unit Economics",

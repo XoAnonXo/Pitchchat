@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/blockchain/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Blockchain Seed diligence checklist",
-  "summary": "Projected diligence checklist for Blockchain founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Blockchain seed diligence focuses on security, regulatory positioning, and sustainable economics. Investors conduct thorough technical and legal review given the industry's history of exploits and regulatory actions. Prepare comprehensive documentation in these areas. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Smart contract audit reports and remediation documentation",
+      "rationale": "All audit reports from reputable firms with evidence that critical and high findings have been addressed. Include any ongoing security processes and monitoring. Security is existential—documentation must be thorough."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Legal opinion on token classification and regulatory status",
+      "rationale": "Legal memo from qualified counsel addressing token classification (if applicable), securities law compliance, and regulatory positioning. Include analysis for key jurisdictions: US, EU, and operating locations."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Tokenomics documentation with sustainability analysis",
+      "rationale": "Complete tokenomics documentation: distribution, emission schedule, utility mechanisms, and economic modeling. Include scenarios showing sustainability under different adoption levels."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Technical architecture documentation",
+      "rationale": "System architecture, smart contract design, chain selection rationale, and technical roadmap. Include any formal verification or advanced security measures. Show technical depth and quality."
     },
     {
-      "item": "Security audits and governance policies (Seed)",
-      "rationale": "Mitigates protocol risk and regulatory exposure."
+      "item": "On-chain analytics and user metrics",
+      "rationale": "On-chain data showing real usage: active wallets, transaction patterns, TVL composition, retention analysis. Include methodology for filtering bots and wash activity. Transparency builds trust."
     },
     {
-      "item": "Seed readiness summary for Blockchain",
-      "rationale": "Signals you can close a Seed round in Blockchain."
+      "item": "Team background and crypto experience",
+      "rationale": "Detailed backgrounds highlighting crypto-native experience. Include any prior protocol involvement, DeFi experience, or security background. Reference checks for key team members."
+    },
+    {
+      "item": "Treasury and token management documentation",
+      "rationale": "Treasury composition, custody arrangements, and management policies. Include any token vesting schedules and lockup documentation. Multi-sig setup and key management procedures."
+    },
+    {
+      "item": "Community and governance documentation",
+      "rationale": "Community metrics, governance processes (if implemented), and decentralization roadmap. Show community engagement quality and governance participation rates."
+    },
+    {
+      "item": "Competitive analysis and market positioning",
+      "rationale": "Detailed competitive landscape analysis. Include technical benchmarking, market share analysis, and differentiation justification. Show deep understanding of the space."
+    },
+    {
+      "item": "Financial model and capital plan",
+      "rationale": "Financial projections including protocol revenue, operating costs, and runway analysis. Address both crypto and fiat treasury management. Show path to sustainable operations."
+    },
+    {
+      "item": "Insurance and risk management documentation",
+      "rationale": "Any smart contract insurance, D&O coverage, or other risk management measures. Include incident response plans and business continuity procedures."
+    },
+    {
+      "item": "Cap table and prior funding documentation",
+      "rationale": "Complete cap table including any token allocations to investors. Prior funding terms including SAFTs, SAFEs, or equity rounds. Address any complex token/equity structures."
     }
   ]
 }

@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/finance/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Finance Seed diligence checklist",
-  "summary": "Projected diligence checklist for Finance founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Fintech seed diligence focuses on regulatory positioning, unit economics, and risk management capability. Investors conduct thorough review of compliance infrastructure and banking relationships. Prepare comprehensive documentation—quality reflects operational maturity. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Regulatory licenses and compliance documentation",
+      "rationale": "Complete regulatory assessment: licenses required, current status, applications in progress. Compliance policies and procedures. Legal opinions on regulatory positioning. Compliance counsel relationships."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Banking partner agreements and relationship documentation",
+      "rationale": "Banking partner contracts and terms. Relationship history and stability indicators. Diversification or backup plans. BaaS provider agreements if applicable."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Unit economics analysis with cohort data",
+      "rationale": "Detailed CAC breakdown by channel. LTV analysis based on actual customer behavior. Cohort analysis showing economics evolution. Payback period calculation with supporting data."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Risk management framework and loss data",
+      "rationale": "Fraud prevention approach and vendor stack. Identity verification process. Loss rate data if available. Risk monitoring and early warning indicators. Credit underwriting if applicable."
     },
     {
-      "item": "Compliance audits and licensing status (Seed)",
-      "rationale": "Demonstrates regulatory readiness for launch."
+      "item": "Customer data and engagement metrics",
+      "rationale": "User metrics: actives, engagement patterns, retention. Transaction data: volume, frequency, value. Customer feedback and NPS data. Customer reference contacts."
     },
     {
-      "item": "Seed readiness summary for Finance",
-      "rationale": "Signals you can close a Seed round in Finance."
+      "item": "Technology architecture and security documentation",
+      "rationale": "System architecture overview. Security framework and certifications. Data protection approach. Vendor dependencies and risks. Scalability assessment."
+    },
+    {
+      "item": "Financial model with revenue breakdown",
+      "rationale": "Revenue model documentation with assumptions. Margin analysis by product/segment. Path to profitability analysis. Scenario modeling for different growth rates."
+    },
+    {
+      "item": "Competitive analysis",
+      "rationale": "Competitive landscape mapping. Differentiation documentation. Win/loss analysis if available. Market positioning strategy."
+    },
+    {
+      "item": "Team backgrounds with fintech experience",
+      "rationale": "Detailed team backgrounds highlighting financial services experience. Compliance expertise assessment. Key person dependencies. Advisory relationships."
+    },
+    {
+      "item": "Legal and corporate documentation",
+      "rationale": "Corporate structure optimized for regulated activity. Pending or threatened litigation. Customer agreements and terms of service. Privacy policy and data handling."
+    },
+    {
+      "item": "Insurance coverage",
+      "rationale": "Cyber insurance, E&O coverage, D&O insurance. Coverage limits and exclusions. Fidelity bond if applicable."
+    },
+    {
+      "item": "Cap table and prior funding",
+      "rationale": "Complete cap table. Prior funding terms. Any unusual provisions or structure issues."
     }
   ]
 }

@@ -1,0 +1,50 @@
+{
+  "industry": "fintech",
+  "stage": "seed",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/fintech/seed/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Fintech Seed investor update template",
+  "summary": "Fintech investor updates should emphasize growth metrics, unit economics, and risk performance. Investors need to see sustainable economics alongside growth. Be transparent about regulatory developments and partnership health—these are existential for fintech companies. Pitchchat helps founders share updates in a single room.",
+  "sections": [
+    {
+      "section": "Key Metrics Dashboard",
+      "content": "Lead with core fintech metrics: active users, transaction volume, revenue, unit economics. Show growth rates and trends. Include risk metrics: fraud rate, dispute rate, loss rates. Present cohort retention. Use consistent formatting for easy tracking. Fintech investors scrutinize economics—show them prominently."
+    },
+    {
+      "section": "Customer Growth & Quality",
+      "content": "New customer additions with channel breakdown. Customer quality metrics: engagement, transaction patterns, revenue per user. Activation and retention improvements. Notable customer segments or use cases. Customer feedback and satisfaction indicators."
+    },
+    {
+      "section": "Unit Economics Progress",
+      "content": "CAC trends by channel. Revenue per user evolution. Contribution margin progress. LTV:CAC improvements. Path to target economics. Be honest about what's working and what isn't."
+    },
+    {
+      "section": "Risk & Compliance",
+      "content": "Fraud and loss metrics. Dispute trends. Regulatory developments (licenses, examinations, policy changes). Compliance team and infrastructure updates. Any risk events and learnings. This section can't be skipped in fintech."
+    },
+    {
+      "section": "Partnership Health",
+      "content": "Banking partner relationship status. BaaS platform developments. Contract renewals or expansions. Any partnership risks or transitions. New partnership opportunities."
+    },
+    {
+      "section": "Product & Technology",
+      "content": "Feature releases and impact. Roadmap progress. Infrastructure improvements. Security enhancements. Technical debt management."
+    },
+    {
+      "section": "Team & Operations",
+      "content": "Key hires and recruiting. Compliance and risk team development. Operational improvements. Culture indicators. Any departures and context."
+    },
+    {
+      "section": "Financial Position & Asks",
+      "content": "Cash position and runway. Burn rate trends. Revenue vs. plan. Path to milestones. Specific asks: introductions, expertise, regulatory guidance. Fintech investors often have valuable network and expertise—leverage it."
+    }
+  ]
+}

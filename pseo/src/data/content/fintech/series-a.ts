@@ -9,7 +9,7 @@ export const fintechSeriesAContent: IndustryStageContent = {
         category: "Unit Economics",
         question: "What are your fully-loaded unit economics and path to profitability?",
         answer:
-          "Series A requires proven, not projected, unit economics. Present your current CAC by channel, fully-loaded (including attribution, creative, and overhead). Show LTV based on actual cohort behavior, not projections. Present contribution margin including all variable costs: processing, fraud, support, compliance. Show CAC payback period with actual data. Explain your path to profitability: what needs to improve and how. Reference how you compare to public fintech benchmarks. Be prepared for deep scrutiny—fintech economics have disappointed many investors.",
+          "Series A requires proven unit economics. Present your current CAC by channel, fully-loaded (including attribution, creative, and overhead). Show LTV based on actual cohort behavior, not assumptions. Present contribution margin including all variable costs: processing, fraud, support, compliance. Show CAC payback period with actual data. Explain your path to profitability: what needs to improve and how. Reference how you compare to public fintech benchmarks. Be prepared for deep scrutiny—fintech economics have disappointed many investors.",
       },
       {
         category: "Regulatory",
@@ -102,22 +102,22 @@ export const fintechSeriesAContent: IndustryStageContent = {
       {
         objection: "Your unit economics don't support venture returns.",
         response:
-          "Address with data and trajectory: 'Our current CAC payback is 16 months with 30% contribution margin. Here's our path to 12-month payback: reducing CAC through [specific initiatives], increasing ARPU through [cross-sell products], and improving margin through [operational leverage]. At scale, comparable fintechs achieve 60%+ contribution margins. Our cohort data shows improving economics with each vintage. We're building for sustainable unit economics, not growth at any cost.'",
+          "Address with data and trajectory: 'Our current CAC payback is 16 months with 30% contribution margin. Here's our path to 12-month payback: reducing CAC through channel mix shifts and conversion improvements, increasing ARPU through add-on modules and pricing tiers, and improving margin through automation and vendor pricing improvements. At scale, comparable fintechs achieve 60%+ contribution margins. Our cohort data shows improving economics with each vintage. We're building for sustainable unit economics, not growth at any cost.'",
       },
       {
         objection: "The regulatory environment creates too much uncertainty.",
         response:
-          "Acknowledge and address: 'Regulatory scrutiny has increased, which favors compliant operators like us. We've invested in compliance from day one—our infrastructure passes the scrutiny that's catching under-invested competitors. We hold direct licenses in [X states], giving us more control than pure BaaS-dependent companies. Recent regulatory actions have targeted specific practices we avoid. Our approach is to over-comply and treat regulatory requirements as product features, not obstacles.'",
+          "Acknowledge and address: 'Regulatory scrutiny has increased, which favors compliant operators like us. We've invested in compliance from day one—our infrastructure passes the scrutiny that's catching under-invested competitors. We hold direct licenses in 12 states, giving us more control than pure BaaS-dependent companies. Recent regulatory actions have targeted specific practices we avoid. Our approach is to over-comply and treat regulatory requirements as product features, not obstacles.'",
       },
       {
         objection: "Banking partnership concentration is existential risk.",
         response:
-          "Present your mitigation strategy: 'We recognize partner risk and have structured accordingly. We work with [primary bank] plus [backup BaaS provider]. Our technology is designed for portability—we can migrate to a new partner in 90 days. Our contracts extend through [year] with renewal rights. We've invested in direct relationships at our sponsor bank, not just through intermediaries. Longer-term, our scale creates optionality for deeper partnership structures or our own charter.'",
+          "Present your mitigation strategy: 'We recognize partner risk and have structured accordingly. We work with a top-20 sponsor bank plus a secondary BaaS provider. Our technology is designed for portability—we can migrate to a new partner in 90 days. Our contracts extend through 2027 with renewal rights. We've invested in direct relationships at our sponsor bank, not just through intermediaries. Longer-term, our scale creates optionality for deeper partnership structures or our own charter.'",
       },
       {
         objection: "Competition from embedded finance and big tech will compress your opportunity.",
         response:
-          "Address competitive dynamics: 'Embedded finance actually expands our opportunity by bringing more financial services digital-native. We compete on depth, not breadth—our [specific segment] customers need specialized capabilities that horizontal players won't prioritize. Our evidence: we win against [competitor] 70% of the time in our segment. Big tech faces regulatory and trust barriers that specialist fintechs avoid. Our path is category leadership in [segment], not competing against infinite balance sheets.'",
+          "Address competitive dynamics: 'Embedded finance actually expands our opportunity by bringing more financial services digital-native. We compete on depth, not breadth—our SMB payroll and treasury customers need specialized capabilities that horizontal players won't prioritize. Our evidence: we win against a top-5 neobank 70% of the time in our segment. Big tech faces regulatory and trust barriers that specialist fintechs avoid. Our path is category leadership in SMB payroll and treasury, not competing against infinite balance sheets.'",
       },
     ],
   },

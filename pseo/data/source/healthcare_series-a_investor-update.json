@@ -1,0 +1,50 @@
+{
+  "industry": "healthcare",
+  "stage": "series-a",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/healthcare/series-a/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Healthcare Series A investor update template",
+  "summary": "Series A healthcare updates should emphasize commercial momentum, key account progress, and operational scaling. Investors expect to see consistent growth with evidence of repeatable GTM motion. Be transparent about challenges in a complex market. Pitchchat helps founders share updates in a single room.",
+  "sections": [
+    {
+      "section": "Key Metrics Dashboard",
+      "content": "Lead with core commercial metrics: ARR, growth rate, NRR, pipeline. Show month-over-month and year-over-year trends. Include customer count and average deal size. Use consistent formatting for easy comparison. Healthcare metrics may be lumpy—show trailing averages alongside monthly figures."
+    },
+    {
+      "section": "Commercial Progress",
+      "content": "New customers and expansions with context. Pipeline development and major opportunities. Sales cycle improvements. Channel partner progress. Reimbursement wins or coverage expansions. Reference specific deals and their significance."
+    },
+    {
+      "section": "Customer Success & Outcomes",
+      "content": "Utilization and adoption metrics within accounts. Clinical outcomes or value delivered. Customer case studies or testimonials. Renewal and expansion pipeline. Implementation velocity improvements. Customer feedback themes."
+    },
+    {
+      "section": "Regulatory & Clinical",
+      "content": "Regulatory filings, clearances, or international progress. Clinical evidence generation: studies, publications, real-world data. Quality system developments. Adverse events or regulatory issues (be transparent). KOL engagement."
+    },
+    {
+      "section": "Product & Technology",
+      "content": "Product releases and roadmap progress. Customer-requested features delivered. Integration expansions. Technical infrastructure scaling. Security or compliance achievements."
+    },
+    {
+      "section": "Team & Operations",
+      "content": "Key hires and organizational changes. Sales capacity and productivity. Implementation and customer success scaling. Operational improvements. Culture and retention indicators."
+    },
+    {
+      "section": "Financial Position",
+      "content": "Revenue vs. plan. Cash position and runway. Burn rate and efficiency metrics. Path to Series B milestones. Any financing considerations or timeline updates."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Top priorities for next quarter. Specific asks: customer introductions, expertise, strategic guidance. Key decisions where board input is valuable. Healthcare investors often have valuable networks—leverage them."
+    }
+  ]
+}

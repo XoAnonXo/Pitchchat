@@ -28,6 +28,7 @@ version: "v1"
 - Re-run `pseo:enrich-raw`, `pseo:ingest-source`, `pseo:quality-check`, `pseo:seed`.
 
 ## Phase 4: Authority push (Week 2)
+- Generate a draft report with `npm run pseo:generate-report`.
 - Fill `pseo_status/pr/press_release_template.md` and publish.
 - Convert into a report using `pseo_status/pr/report_outline.md`.
 - Track mentions/citations.

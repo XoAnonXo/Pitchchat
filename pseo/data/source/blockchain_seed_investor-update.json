@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/blockchain/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Blockchain Seed investor update template",
-  "summary": "Projected update format for Blockchain founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Seed-stage blockchain investor updates should focus on organic growth metrics and sustainable economics. Given crypto market volatility, frame progress in terms of real utility rather than token price. Maintain transparency about challenges—crypto investors expect honest communication. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Key Metrics Dashboard",
+      "content": "Lead with core metrics: active wallets, transaction volume, protocol revenue, TVL if applicable. Show trajectory over time. Separate organic activity from incentivized where possible. Include security status—any incidents or concerns. This dashboard should convey protocol health at a glance."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Product & Development Progress",
+      "content": "Update on development milestones: features shipped, smart contract upgrades, integrations completed. Include security improvements and audit progress. Show technical roadmap status and any timeline adjustments with rationale."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "User Growth & Engagement",
+      "content": "Detail user metrics: new wallet growth, retention trends, user behavior patterns. Include community growth and engagement quality. Address any concerning trends. Show what's driving organic adoption."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Revenue & Economics",
+      "content": "Report on protocol revenue and fee generation. Show progress toward sustainable economics. Address token metrics if relevant but focus on fundamental value creation rather than price. Include treasury status and runway."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Security & Compliance",
+      "content": "Security status update: any incidents, audit progress, monitoring improvements. Compliance developments: regulatory changes affecting the protocol, legal updates, licensing progress. These are existential concerns—keep investors informed."
     },
     {
-      "section": "Security updates (Seed)",
-      "content": "Share audit results and protocol health metrics."
+      "section": "Market & Competition",
+      "content": "Update on competitive landscape: new entrants, competitor moves, market share trends. Include partnership progress and ecosystem development. Address market conditions and their impact on the protocol."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for Blockchain founders at Seed."
+      "section": "Team & Operations",
+      "content": "Team updates: key hires, departures, organizational changes. Include community team growth and governance development. Report on operational infrastructure improvements."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next period priorities and key milestones. Specific asks for investor support: introductions, technical expertise, strategic guidance. Flag any significant decisions requiring board input."
     }
   ]
 }

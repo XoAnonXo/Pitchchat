@@ -120,7 +120,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
 
   const openLink = () => {
     if (generatedLink) {
-      window.open(generatedLink, '_blank');
+      window.open(generatedLink, '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -209,9 +209,10 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
           ) : (
             <div className="space-y-6">
               <div>
-                <Label className="text-sm font-semibold text-black/80">Your Share Link</Label>
+                <Label htmlFor="generated-share-link" className="text-sm font-semibold text-black/80">Your Share Link</Label>
                 <div className="flex items-center gap-2 mt-2">
                   <Input 
+                    id="generated-share-link"
                     value={generatedLink} 
                     readOnly 
                     className="flex-1 h-12 bg-white border-black/10 rounded-2xl px-4 text-sm font-medium text-black/70"
@@ -221,6 +222,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
                     size="icon" 
                     onClick={copyToClipboard}
                     className="h-12 w-12 rounded-2xl border-black/10 hover:bg-black/[0.04] shrink-0"
+                    aria-label="Copy share link"
                   >
                     <Copy className="w-4 h-4" />
                   </Button>
@@ -229,6 +231,7 @@ export default function ShareLinkModal({ projectId, isOpen, onClose }: ShareLink
                     size="icon" 
                     onClick={openLink}
                     className="h-12 w-12 rounded-2xl border-black/10 hover:bg-black/[0.04] shrink-0"
+                    aria-label="Open share link in new tab"
                   >
                     <ExternalLink className="w-4 h-4" />
                   </Button>

@@ -491,6 +491,7 @@ export default function Dashboard() {
             size="icon"
             className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
+            aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -559,6 +560,7 @@ export default function Dashboard() {
               size="icon"
               onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
+              aria-label="Log out"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -571,6 +573,15 @@ export default function Dashboard() {
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setMobileSidebarOpen(false)}
+          role="button"
+          tabIndex={0}
+          aria-label="Close sidebar"
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setMobileSidebarOpen(false);
+            }
+          }}
         />
       )}
 
@@ -585,6 +596,7 @@ export default function Dashboard() {
                 size="icon"
                 className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open sidebar"
               >
                 <Menu className="h-5 w-5" />
               </Button>

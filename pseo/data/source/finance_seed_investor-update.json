@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/finance/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Finance Seed investor update template",
-  "summary": "Projected update format for Finance founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Seed-stage fintech investor updates should balance growth metrics with unit economics and regulatory progress. Given the scrutiny on fintech profitability, emphasize sustainable growth and improving economics. Keep investors informed on regulatory developments—these are material to the business. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Key Metrics Summary",
+      "content": "Lead with core metrics: active users, transaction volume, revenue, key unit economics. Show trajectory over time. Include regulatory status and any updates. This dashboard should convey business health at a glance."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Customer Growth & Engagement",
+      "content": "Detail user metrics: new users, active users, retention by cohort. Show engagement depth: transaction frequency, feature usage. Include customer feedback and NPS trends. Address any concerning patterns."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Unit Economics Progress",
+      "content": "Report on CAC and channel performance. Show LTV evolution based on cohort behavior. Present payback period trajectory. Include margin trends. Demonstrate improving economics, not just growth."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Product Development",
+      "content": "Update on product progress: features launched, improvements made, customer-driven changes. Include roadmap status and priorities. Address any technical challenges or infrastructure improvements."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Regulatory & Compliance",
+      "content": "Update on licensing progress and timeline. Report any regulatory developments affecting the business. Include compliance infrastructure improvements. Banking partner relationship status. This section is critical for fintech."
     },
     {
-      "section": "Compliance updates (Seed)",
-      "content": "Share regulatory audits and licensing status."
+      "section": "Risk & Operations",
+      "content": "Report on loss rates and fraud metrics. Include any risk events and response. Show operational improvements and scaling. Address any banking partner or infrastructure issues."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for Finance founders at Seed."
+      "section": "Team & Organization",
+      "content": "Key hires and team changes. Compliance team development. Any departures and mitigation. Culture and retention indicators."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next period priorities with specific targets. Areas where investor help is valuable: introductions, regulatory expertise, strategic advice. Flag any significant decisions needing input."
     }
   ]
 }

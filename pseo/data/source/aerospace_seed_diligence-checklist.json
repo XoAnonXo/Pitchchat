@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/aerospace/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Aerospace Seed diligence checklist",
-  "summary": "Projected diligence checklist for Aerospace founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Aerospace seed diligence focuses on technical credibility, regulatory awareness, and team capability. Investors conduct deep technical reviews and reference calls to validate claims. Prepare comprehensive documentation on your technology, team, and development plan. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Technical specifications and design documentation",
+      "rationale": "Investors will evaluate your engineering work. Prepare system architecture documents, key specifications, performance analysis, and test results. Be ready for technical deep-dives with engineering advisors."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Technology readiness assessment with evidence",
+      "rationale": "Document your TRL/MRL claims with supporting evidence: test data, analysis results, prototype demonstrations. Use NASA/DoD TRL definitions precisely. Investors will verify claims."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Development roadmap with risk assessment",
+      "rationale": "Detailed development plan including key milestones, dependencies, and risks. Show critical path analysis and risk mitigation strategies. Include contingency planning for major risks."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Regulatory pathway analysis",
+      "rationale": "Document required certifications, licenses, and approvals. Include timeline estimates and cost assumptions. Show any preliminary regulatory engagement or guidance received."
     },
     {
-      "item": "Certification evidence and safety documentation (Seed)",
-      "rationale": "Confirms regulatory progress and risk mitigation."
+      "item": "IP landscape and freedom to operate analysis",
+      "rationale": "Patent applications filed, trade secrets documented, and initial freedom-to-operate analysis. Aerospace IP can be complex—show you've mapped the landscape."
     },
     {
-      "item": "Seed readiness summary for Aerospace",
-      "rationale": "Signals you can close a Seed round in Aerospace."
+      "item": "Team backgrounds with aerospace experience verification",
+      "rationale": "Detailed resumes highlighting aerospace experience. Be prepared for reference calls to verify claims. Address any employment agreement issues from prior positions."
+    },
+    {
+      "item": "Capital plan and funding strategy",
+      "rationale": "Detailed use of funds, burn rate assumptions, and total capital path estimate. Include non-dilutive funding applications and status. Show capital efficiency thinking."
+    },
+    {
+      "item": "Customer/partner pipeline documentation",
+      "rationale": "Evidence of market interest: LOIs, pilot agreements, government program connections. Include customer interview contacts for reference calls."
+    },
+    {
+      "item": "Competitive analysis with technical differentiation",
+      "rationale": "Detailed competitive landscape including well-funded startups and incumbents. Technical comparison on key performance parameters. Market positioning analysis."
+    },
+    {
+      "item": "ITAR/export control classification",
+      "rationale": "For defense-related technology, ITAR classification affects funding sources and investor pool. Document your classification status and compliance approach."
+    },
+    {
+      "item": "Manufacturing and supply chain strategy",
+      "rationale": "For hardware companies, production scalability is critical. Document manufacturing approach, key supplier relationships, and capital requirements for production."
+    },
+    {
+      "item": "Corporate structure and cap table",
+      "rationale": "Clean corporate structure appropriate for aerospace (may affect government contracting eligibility). Current cap table and prior funding terms."
     }
   ]
 }

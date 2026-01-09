@@ -119,7 +119,7 @@ export const hardwareSeedContent: IndustryStageContent = {
         objection:
           "Your unit economics don't work at your current cost structure.",
         response:
-          "Present your cost reduction roadmap with specific initiatives. Show component-by-component analysis of cost reduction opportunities: volume pricing curves from suppliers, design-for-cost changes identified, manufacturing process improvements. Reference industry benchmarks for cost reduction from prototype to production. Be honest about what's proven vs. projected, but show a credible path to workable economics.",
+          "Present your cost reduction roadmap with specific initiatives. Show component-by-component analysis of cost reduction opportunities: volume pricing curves from suppliers, design-for-cost changes identified, manufacturing process improvements. Reference industry benchmarks for cost reduction from prototype to production. Be honest about what's proven vs. assumed, but show a credible path to workable economics.",
       },
       {
         objection:

@@ -1,0 +1,66 @@
+{
+  "industry": "fintech",
+  "stage": "seed",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/fintech/seed/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Fintech Seed diligence checklist",
+  "summary": "Fintech seed diligence emphasizes regulatory compliance, banking partnerships, unit economics, and risk management foundations. Investors verify your ability to operate a compliant financial services business and your understanding of the economic realities. Pitchchat keeps diligence docs organized and easy to review.",
+  "items": [
+    {
+      "item": "Regulatory compliance documentation",
+      "rationale": "Licenses held or applied for. BaaS/partner agreements with compliance responsibilities defined. Compliance policies and procedures. State-by-state operational status. Evidence of regulatory examination readiness."
+    },
+    {
+      "item": "Banking partnership agreements",
+      "rationale": "Sponsor bank agreement with terms summary. BaaS platform contract if applicable. Revenue share and fee structures. Term length and termination provisions. Backup partner relationships if any."
+    },
+    {
+      "item": "Unit economics analysis",
+      "rationale": "CAC by channel with methodology. LTV calculation with assumptions. Revenue per user breakdown. Contribution margin analysis. Path to profitability model."
+    },
+    {
+      "item": "Customer cohort analysis",
+      "rationale": "Cohort retention curves (weekly and monthly). Revenue retention by cohort. Customer quality metrics by acquisition channel. Engagement and usage patterns."
+    },
+    {
+      "item": "Risk management documentation",
+      "rationale": "Fraud prevention approach and current metrics. Credit policy (if lending). Transaction monitoring procedures. Dispute handling process. Vendor and operational risk management."
+    },
+    {
+      "item": "Security and compliance certifications",
+      "rationale": "SOC 2 report or audit timeline. PCI compliance status (if handling cards). Data security policies. Incident response procedures. GLBA compliance documentation."
+    },
+    {
+      "item": "Customer data with reference contacts",
+      "rationale": "Customer list with key metrics. Cohort information. Reference customers for diligence calls. Customer feedback and NPS data."
+    },
+    {
+      "item": "Competitive analysis",
+      "rationale": "Comprehensive competitive landscape. Differentiation evidence. Win/loss analysis. Pricing comparison. Competitive positioning rationale."
+    },
+    {
+      "item": "Team backgrounds with fintech credentials",
+      "rationale": "Detailed CVs emphasizing financial services experience. Compliance and risk team credentials. Advisory board with relevant expertise. Key hire plan."
+    },
+    {
+      "item": "Financial model with assumptions",
+      "rationale": "18-24 month projections with explicit assumptions. Unit economics build-up. Scenario analysis. Historical accuracy if applicable. Capital efficiency metrics."
+    },
+    {
+      "item": "Technology and infrastructure documentation",
+      "rationale": "Architecture overview. Third-party dependencies. Scaling approach. Security infrastructure. Data handling and privacy compliance."
+    },
+    {
+      "item": "Legal and corporate documentation",
+      "rationale": "Corporate structure. Cap table. Material contracts. Any regulatory correspondence or issues. IP ownership documentation."
+    }
+  ]
+}

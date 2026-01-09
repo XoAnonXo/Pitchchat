@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/ai/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "AI Series A diligence checklist",
-  "summary": "Projected diligence checklist for AI founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A due diligence for AI companies is comprehensive, covering technical depth, business fundamentals, and team capability. Investors will spend significant time on customer references, codebase review, and financial model validation. Prepare thoroughly across all dimensions. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Audited or reviewed financial statements with detailed revenue recognition",
+      "rationale": "Investors need confidence in reported metrics. Ensure revenue recognition follows proper SaaS standards—subscription vs. usage-based clarity, deferred revenue handling, and cohort reporting. Prepare monthly financial packages going back 12-18 months."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Customer cohort analysis showing retention and expansion by segment",
+      "rationale": "Cohort data reveals true business health. Prepare analysis by: signup date, customer segment, contract size, and use case. Show how retention and NRR evolve over time. Identify which segments have best economics for scaling focus."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Detailed pipeline and sales funnel data with stage definitions",
+      "rationale": "Investors validate growth trajectory through pipeline. Document your sales stages, conversion rates between stages, average time in stage, and historical accuracy of forecasts. Show pipeline coverage ratio (typically 3-4x quota)."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Technical architecture documentation and scalability assessment",
+      "rationale": "Technical diligence is thorough for AI companies. Prepare architecture diagrams, infrastructure costs breakdown, latency benchmarks under load, and disaster recovery plans. Be ready to explain model serving, data pipeline, and monitoring infrastructure."
     },
     {
-      "item": "Data provenance and model evaluation results (Series A)",
-      "rationale": "Supports model reliability and defensibility."
+      "item": "Model performance metrics, bias testing, and governance documentation",
+      "rationale": "AI-specific diligence includes model evaluation. Document accuracy metrics, edge case handling, bias testing methodology, model versioning practices, and incident response for model failures. Governance is increasingly important for enterprise sales."
     },
     {
-      "item": "Series A readiness summary for AI",
-      "rationale": "Signals you can close a Series A round in AI."
+      "item": "Competitive win/loss analysis with customer interview consent",
+      "rationale": "Investors will talk to customers and references. Prepare 8-10 customer contacts willing to take calls. Document win/loss patterns against specific competitors. Be transparent about losses and what you've learned."
+    },
+    {
+      "item": "IP documentation including patents, trade secrets, and data rights",
+      "rationale": "AI IP extends beyond patents. Document your proprietary training data sources and rights, model innovations, trade secret practices, and competitive moat documentation. Address any foundation model dependencies and terms."
+    },
+    {
+      "item": "Employment agreements with IP assignment and non-compete clauses",
+      "rationale": "Team IP ownership must be clean. Ensure all employees have signed proper agreements. Address any prior work conflicts, especially for team members from Big Tech AI labs. Document consulting arrangements."
+    },
+    {
+      "item": "Security certifications and compliance documentation",
+      "rationale": "Enterprise readiness requires certifications. Prepare SOC 2 reports (or Type 1 and roadmap to Type 2), penetration testing results, data security practices, and compliance framework for your target industries (HIPAA, GDPR, etc.)."
+    },
+    {
+      "item": "Cap table and prior investment terms",
+      "rationale": "Clean cap table is essential. Ensure 409A valuations are current, option pool is sufficient for Series A hiring plan, and prior investment terms don't create unusual provisions. Document any outstanding SAFEs or convertible notes."
+    },
+    {
+      "item": "Hiring plan and organization design for 18-24 month runway",
+      "rationale": "Show how team scales with capital. Prepare detailed hiring plan by function and quarter. Document key roles, compensation benchmarks, and recruiting pipeline. Show reporting structure evolution as company grows."
+    },
+    {
+      "item": "Unit economics model with sensitivity analysis",
+      "rationale": "Financial model must withstand scrutiny. Build bottoms-up model with clear assumptions. Include sensitivity analysis on key drivers: pricing, conversion rates, churn, inference costs. Show path to profitability and multiple scenarios."
     }
   ]
 }

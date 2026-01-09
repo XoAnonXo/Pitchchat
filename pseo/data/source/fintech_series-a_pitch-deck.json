@@ -1,0 +1,68 @@
+{
+  "industry": "fintech",
+  "stage": "series-a",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/fintech/series-a/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Pitch deck outline for Fintech Series A startups",
+  "summary": "Series A fintech decks must demonstrate proven unit economics, regulatory strength, and sustainable competitive position. Investors expect evidence of a durable business, not just growth. Lead with your commercial traction and economics, show regulatory competence, and present a credible path to profitability. Pitchchat turns your deck into an interactive pitch room for investors.",
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "goal": "Establish credibility with key metrics in 60 seconds",
+      "guidance": "Lead with your strongest metrics: ARR, growth rate, unit economics, risk performance. State regulatory status clearly. Present your differentiation in one sentence. Series A decks should immediately establish you're a real business, not just an idea. Don't bury achievements—lead with proof."
+    },
+    {
+      "title": "Problem & Opportunity",
+      "goal": "Frame a large, specific opportunity",
+      "guidance": "Deepen the problem definition with market sizing. Quantify the pain and the opportunity. Show market dynamics: regulatory changes, technology shifts, customer behavior evolution. Reference comparable company outcomes. Present your specific entry point and expansion path. Avoid abstract 'disrupting financial services' framing—be specific."
+    },
+    {
+      "title": "Solution & Differentiation",
+      "goal": "Demonstrate your product and competitive moat",
+      "guidance": "Show the product at scale with real customer use cases. Present your differentiation with evidence: feature comparison, customer preference data, win rates. Explain what's defensible: network effects, data advantages, regulatory moat, segment depth. Address why this differentiation is sustainable against well-funded competition."
+    },
+    {
+      "title": "Traction & Unit Economics",
+      "goal": "Prove business viability with metrics",
+      "guidance": "This is the most important section. Present revenue, growth rate, and efficiency metrics. Show unit economics: CAC, LTV, payback, contribution margin. Present customer metrics: retention, engagement, expansion. Include cohort analysis showing improving economics. Reference risk metrics. Make clear this is a real business with sustainable economics."
+    },
+    {
+      "title": "Regulatory & Infrastructure",
+      "goal": "Demonstrate compliance strength and partnership stability",
+      "guidance": "Present regulatory status: licenses, compliance infrastructure, examination history. Show banking partnership structure and stability. Address how you're positioned for regulatory evolution. Present compliance as competitive advantage. Include team credentials in regulatory and risk. This section can differentiate you from competitors who've underinvested."
+    },
+    {
+      "title": "Risk Management",
+      "goal": "Show risk management sophistication",
+      "guidance": "Present risk metrics: fraud, losses, disputes with trends. Show how risk management has evolved with scale. Explain your risk infrastructure: models, monitoring, team. Address any risk events and learnings. Reference comparable fintech risk benchmarks. Sophisticated risk management separates durable fintechs from failures."
+    },
+    {
+      "title": "Business Model",
+      "goal": "Demonstrate sustainable economics",
+      "guidance": "Present revenue model with diversification. Show unit economics trajectory. Explain contribution margin structure and path to improvement. Address variable costs at scale. Show path to profitability with key assumptions. Reference comparable company economics at similar and later stages."
+    },
+    {
+      "title": "Go-to-Market & Scale",
+      "goal": "Present scalable growth strategy",
+      "guidance": "Show customer acquisition strategy with efficiency metrics. Present growth channels with CAC by channel. Explain your expansion strategy: geographic, segment, or product. Show evidence of organic growth and referrals. Address team and infrastructure needed to scale. Present the plan to get from current traction to Series B milestones."
+    },
+    {
+      "title": "Competition",
+      "goal": "Position credibly in competitive landscape",
+      "guidance": "Present comprehensive competitive analysis. Show differentiation with evidence: win rates, customer feedback, capability comparison. Address competitive threats: incumbents, neobanks, vertical specialists, embedded finance. Explain sustainable competitive advantages. Be honest about where you win and lose."
+    },
+    {
+      "title": "Team & Financials",
+      "goal": "Show team capability and realistic plan",
+      "guidance": "Present leadership team with fintech credentials. Show organizational evolution and key hires. Present 24-36 month financial plan with assumptions. State raise amount and use of funds. Connect capital to milestones. Show path to Series B requirements: typically $15M+ ARR with profitability path."
+    }
+  ]
+}

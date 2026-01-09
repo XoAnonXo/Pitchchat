@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/blockchain/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Blockchain Series A investor update template",
-  "summary": "Projected update format for Blockchain founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A blockchain investor updates should demonstrate business fundamentals while maintaining crypto-native context. Focus on sustainable metrics—revenue, retention, competitive position—rather than token price. Transparency about challenges builds credibility for future fundraising. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with key business metrics: protocol revenue, active users, retention, treasury status. Summarize biggest wins and challenges. Include security status—any incidents or concerns. This should convey protocol health and business trajectory in 60 seconds."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Revenue & Economics",
+      "content": "Detail revenue performance: fee generation, revenue per user, growth trajectory. Show progress toward sustainable economics. Include treasury status and runway. Address any tokenomics adjustments or emission changes. Focus on business fundamentals."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "User Metrics & Retention",
+      "content": "Report on user metrics: active wallets, growth, retention by cohort. Distinguish organic from incentivized where possible. Show engagement depth and user value trends. Address any concerning patterns. Demonstrate organic product-market fit."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Product & Development",
+      "content": "Update on development progress: features shipped, technical improvements, integration additions. Include security improvements and audit progress. Show roadmap status with timeline adjustments if needed."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Competitive Position",
+      "content": "Report on competitive dynamics: market share trends, competitive moves, win/loss outcomes. Include integration and partnership progress. Address any competitive threats or opportunities. Show moat strengthening."
     },
     {
-      "section": "Security updates (Series A)",
-      "content": "Share audit results and protocol health metrics."
+      "section": "Security & Compliance",
+      "content": "Security status: incidents (hopefully none), audit progress, bug bounty activity, insurance updates. Compliance developments: regulatory changes, license progress, legal updates. These are institutional concerns—keep investors well-informed."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for Blockchain founders at Series A."
+      "section": "Governance & Community",
+      "content": "Update on governance: participation trends, major decisions, decentralization progress. Include community metrics and engagement quality. Report on any governance challenges or improvements."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next quarter priorities and milestones. Specific investor asks: introductions, strategic guidance, technical expertise. Flag any significant decisions requiring board input. Include fundraising timeline if approaching next round."
     }
   ]
 }

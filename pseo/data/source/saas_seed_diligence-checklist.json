@@ -1,0 +1,66 @@
+{
+  "industry": "saas",
+  "stage": "seed",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/saas/seed/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "SaaS Seed diligence checklist",
+  "summary": "SaaS seed due diligence focuses on validating product-market fit signals, team capability, and unit economics trajectory. Investors will dig into retention data, customer feedback, and competitive positioning. Comprehensive documentation demonstrates operational maturity. Pitchchat keeps diligence docs organized and easy to review.",
+  "items": [
+    {
+      "item": "Customer cohort analysis showing retention curves",
+      "rationale": "Cohort data is the clearest product-market fit signal. Provide monthly cohorts showing logo retention and revenue retention over at least 6 months. Include both visual charts and underlying data. If retention improves in recent cohorts, highlight the changes that drove improvement."
+    },
+    {
+      "item": "MRR bridge showing growth, churn, and expansion",
+      "rationale": "Monthly MRR waterfall breaking down new business, expansion, contraction, and churn. Shows health of growth and identifies concerning patterns. Include 6-12 months of history with commentary on significant changes."
+    },
+    {
+      "item": "Customer acquisition analysis by channel",
+      "rationale": "CAC breakdown by channel with trend over time. Include conversion rates at each funnel stage. Show which channels are scaling and which are experimental. Address any channel concentration risk."
+    },
+    {
+      "item": "Customer list with contact information for references",
+      "rationale": "Full customer list including company, contact, signup date, plan, and MRR. Be prepared for investors to call customers. Highlight your best references but expect random selection too."
+    },
+    {
+      "item": "Product roadmap and technical architecture",
+      "rationale": "Current roadmap with timeline and rationale. Technical architecture overview showing key systems and scalability approach. Address any technical debt or infrastructure concerns."
+    },
+    {
+      "item": "Competitive analysis with win/loss data",
+      "rationale": "Map of competitive landscape with positioning. Win/loss analysis by competitor including reasons. Evidence of sustainable differentiation. Deal-level data if available."
+    },
+    {
+      "item": "Financial model with assumptions",
+      "rationale": "18-24 month projection with explicit assumptions. Scenario analysis showing sensitivity to key variables. Historical accuracy if previous projections exist. Unit economics build-up."
+    },
+    {
+      "item": "Team backgrounds and org chart",
+      "rationale": "Detailed backgrounds for founders and key team members. Current org chart and planned structure. Key person dependencies and risk mitigation. Hiring plan and committed candidates."
+    },
+    {
+      "item": "Cap table and prior funding terms",
+      "rationale": "Complete cap table showing all ownership. Summary of prior funding terms including any unusual provisions. Option pool and refresh plan. Any outstanding convertible instruments."
+    },
+    {
+      "item": "Customer feedback and NPS data",
+      "rationale": "Aggregate NPS or CSAT scores with methodology. Qualitative feedback themes from customer conversations. Evidence of product-market fit beyond metrics. Feature request patterns."
+    },
+    {
+      "item": "Legal documentation (incorporation, IP, contracts)",
+      "rationale": "Certificate of incorporation and good standing. IP assignment agreements. Standard customer contract terms. Any pending legal issues or concerns."
+    },
+    {
+      "item": "Sales pipeline and forecasting data",
+      "rationale": "Current pipeline with stage, value, and probability. Historical conversion rates by stage. Forecasting methodology and accuracy. Sales cycle length analysis."
+    }
+  ]
+}

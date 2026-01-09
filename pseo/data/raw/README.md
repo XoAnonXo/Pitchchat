@@ -13,22 +13,25 @@ Optional fields:
 - `title`: override default title
 - `summary`: override generated summary
 - `ctaText`: override CTA label
+- `dataOrigin`: provenance label (default: `anonymized`)
 - `sourceId`: anonymized source identifier
 - `sourceNotes`: anonymized notes
 - `sourceTags`: array of strings
+
+Note: `sourceId` or `sourceTags` are required to pass the quality gate.
 
 ## Page type fields
 
 ### investor-questions
 - `questions`: [{ question, answer, category? }]
 - `objections`: [{ objection, response }]
-- `metrics`: [{ label, value, note? }]
+- `metrics`: [{ label, value, note?, source, unit? }]
 
 ### pitch-deck
 - `sections`: [{ title, goal?, guidance? }]
 
 ### metrics-benchmarks
-- `metrics`: [{ label, value, note? }]
+- `metrics`: [{ label, value, note?, source, unit? }]
 
 ### diligence-checklist
 - `items`: [{ item, rationale? }]

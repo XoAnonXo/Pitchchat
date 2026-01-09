@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/ai/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for AI Series A startups",
-  "summary": "Projected deck structure for AI founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A pitch decks for AI companies must balance vision with execution proof. Investors have seen countless AI pitches—differentiate through specific metrics, customer evidence, and deep market understanding. Lead with traction, support with technology, close with team and vision. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Traction Summary",
+      "goal": "Hook investors immediately with impressive metrics",
+      "guidance": "Open with your strongest numbers: ARR, growth rate, NRR, logo count. Series A investors want to see you've proven something meaningful. Include one customer quote that captures why you win. This slide should create urgency—FOMO is your friend. Show month-over-month trajectory chart if growth is consistent."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Problem & Market",
+      "goal": "Frame a large, urgent problem that your ICP desperately needs solved",
+      "guidance": "Move beyond generic AI hype. Show specific workflow pain points with quantified cost. Use customer quotes describing their situation before your solution. Present market size as bottom-up TAM based on your ICP and pricing. AI investors are skeptical of top-down 'AI market will be $X trillion' slides. Show why this problem is newly solvable or newly urgent."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Solution Demo",
+      "goal": "Demonstrate product in action solving the specific problem",
+      "guidance": "Show, don't tell. Include screenshots or short video of actual product. Highlight AI capabilities without black-box mysticism—investors want to understand what the AI actually does. Show before/after metrics from real customers. Demonstrate ease of use and time-to-value. Make it concrete enough that investors could explain your product to others."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Why Now & Moat",
+      "goal": "Explain market timing and sustainable competitive advantages",
+      "guidance": "Why is this the right moment for this AI solution? Reference specific catalysts: model capability improvements, cost decreases, workflow changes, regulatory shifts. Then layer your moat: proprietary data, workflow integration, technical innovation, customer relationships. Show how advantages compound over time. Address foundation model risk directly."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Business Model & Unit Economics",
+      "goal": "Prove you have a sustainable, scalable business model",
+      "guidance": "Present pricing model with average contract values. Show fully-loaded unit economics: CAC, LTV, payback period, gross margin. Be transparent about inference costs and your strategy for margin improvement. Show how economics improve with scale. This slide separates serious AI businesses from demos looking for acqui-hires."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Go-to-Market",
+      "goal": "Demonstrate repeatable customer acquisition motion",
+      "guidance": "Show your GTM flywheel: how customers discover, evaluate, and buy. Present pipeline data, conversion rates, sales cycle length. If PLG, show funnel metrics. If sales-led, show quota attainment and ramp time. Include customer acquisition breakdown by channel. Demonstrate you can hire sales reps and predict their performance."
+    },
+    {
+      "title": "Customer Evidence",
+      "goal": "Let customers tell your story through their results",
+      "guidance": "Dedicate a full slide to customer proof points. Include logos, specific outcomes (quantified), and direct quotes. Show case studies across different segments if applicable. Present NRR and expansion data. This slide should answer: are customers genuinely successful and would they recommend you?"
+    },
+    {
+      "title": "Competitive Landscape",
+      "goal": "Show deep market understanding and clear positioning",
+      "guidance": "Present honest competitive analysis—investors will know if you're dismissive. Show differentiation along axes that matter to customers. Include win/loss data against specific competitors. Acknowledge foundation model provider risk and your strategy. Position around sustainable advantages, not features that can be copied."
     },
     {
       "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "goal": "Demonstrate you have the team to execute this specific opportunity",
+      "guidance": "Highlight relevant AI/ML experience, domain expertise, and startup track record. Show key hires made and your talent pipeline for critical roles. Address any gaps and hiring plan. Include advisors if they add credibility. For AI companies, technical depth of founding team is particularly scrutinized."
     },
     {
-      "title": "Data and model strategy",
-      "goal": "Explain data advantage and model improvements.",
-      "guidance": "Show evaluation metrics and cost control plan."
-    },
-    {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for AI Series A."
-    },
-    {
-      "title": "AI go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for AI.",
-      "guidance": "Show a focused wedge that fits AI buyers at the Series A stage."
-    },
-    {
-      "title": "AI proof points",
-      "goal": "Show evidence tailored to AI.",
-      "guidance": "Use data or pilots specific to AI to prove momentum at Series A."
+      "title": "Financial Plan & Ask",
+      "goal": "Present clear use of funds and path to Series B milestones",
+      "guidance": "Show 18-24 month financial plan with revenue projections, hiring, and key investments. Present specific milestones this capital will achieve. Define Series B bar and your plan to exceed it. Show capital efficiency metrics—ARR per dollar raised. Be specific about raise amount and use of funds breakdown. End with clear conviction in why this is an exceptional opportunity."
     }
   ]
 }

@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/ai/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "AI Series A investor update template",
-  "summary": "Projected update format for AI founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A investor updates should demonstrate execution against plan, surface strategic challenges early, and maintain trust through transparency. These updates become the foundation of your investor relationship and future fundraising narrative. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with the headline: are you on track, ahead, or behind plan? Summarize 2-3 biggest wins and 1-2 key challenges. Include critical metrics dashboard: ARR, growth rate, burn, runway. This section should take 60 seconds to read and convey company health. End with specific asks if you need board/investor help."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Revenue & Growth Metrics",
+      "content": "Present detailed revenue performance: ARR/MRR with month-over-month and year-over-year growth, new logos added, expansion revenue, churn (logo and revenue), and NRR. Show performance against plan and explain variances. Include bookings and pipeline metrics for forward-looking insight. Break down by customer segment if relevant."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Product & Technical Progress",
+      "content": "Update on product roadmap execution. Highlight shipped features and customer impact. Share technical achievements: performance improvements, cost optimizations, new model capabilities. Address any technical debt or infrastructure investments. Include customer feedback themes and how they're influencing roadmap."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Go-to-Market Performance",
+      "content": "Detail sales and marketing performance: pipeline generated, conversion rates, average sales cycle, win rates by segment. Share notable customer wins with context on why you won. Update on channel development and partnerships. Report on marketing efficiency and lead generation programs."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Team & Organizational Development",
+      "content": "Report on hiring progress against plan. Highlight key hires and their expected impact. Acknowledge any departures and how you're addressing gaps. Share culture initiatives and team health indicators. Include any organizational changes and rationale."
     },
     {
-      "section": "Model performance (Series A)",
-      "content": "Share evaluation results and cost efficiency gains."
+      "section": "Financial Health & Runway",
+      "content": "Present cash position, monthly burn, and runway. Compare burn to plan and explain variances. Show path to key milestones with current burn rate. Update on any financing activities or strategic discussions. Include capital efficiency metrics and trends."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for AI founders at Series A."
+      "section": "Strategic Challenges & Asks",
+      "content": "Be transparent about obstacles you're facing. For each challenge, present your current hypothesis and mitigation plan. Explicitly request help where investors can add value: introductions, strategic advice, hiring assistance. Investors appreciate being asked for specific help rather than generic updates."
+    },
+    {
+      "section": "Next Quarter Priorities",
+      "content": "Share the 3-5 critical priorities for next quarter and how you'll measure success. Connect priorities to Series B milestones. Include any strategic decisions you're contemplating where investor input would be valuable. Set expectations for what you'll report on next update."
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
+import { PseoCountChart } from "@/components/pseo/PseoCountChart";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
@@ -30,6 +31,21 @@ export function DiligenceChecklistTemplate({
   const industryLabel = labelForIndustry(data.context.industry);
   const stageLabel = labelForStage(data.context.stage);
   const itemsCount = data.items.length;
+  const itemsWithRationale = data.items.filter((item) => item.rationale).length;
+  const coverageItems = [
+    {
+      label: "Checklist items",
+      value: itemsCount,
+      target: 5,
+      note: "Target: 5+ items",
+    },
+    {
+      label: "Items with rationale",
+      value: itemsWithRationale,
+      target: Math.max(itemsCount, 1),
+      note: "Investors expect a short rationale for each item",
+    },
+  ];
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Investor Questions", href: "/investor-questions/" },
     { label: industryLabel, href: `/investor-questions/industries/${data.context.industry}/` },
@@ -114,6 +130,12 @@ export function DiligenceChecklistTemplate({
           </div>
         </dl>
       </section>
+
+      <PseoCountChart
+        title="Coverage snapshot"
+        caption="Completeness improves quality signals and saves diligence cycles."
+        items={coverageItems}
+      />
 
       <AuthorAttribution
         stageLabel={stageLabel}

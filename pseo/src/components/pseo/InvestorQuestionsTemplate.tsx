@@ -1,9 +1,11 @@
 import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
+import { PseoCountChart } from "@/components/pseo/PseoCountChart";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
 import { PseoPageTracker } from "@/components/pseo/PseoPageTracker";
+import { PseoUgcForm } from "@/components/pseo/PseoUgcForm";
 import { QuestionCard } from "@/components/pseo/QuestionCard";
 import pilotConfig from "@/data/pilot-config.json";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
@@ -46,6 +48,26 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
   const questionsCount = data.questions.length;
   const objectionsCount = objections.length;
   const metricsCount = metrics.length;
+  const coverageItems = [
+    {
+      label: "Questions",
+      value: questionsCount,
+      target: 10,
+      note: "Target: 10+ questions",
+    },
+    {
+      label: "Metrics",
+      value: metricsCount,
+      target: 4,
+      note: "Target: 4+ metrics",
+    },
+    {
+      label: "Objections",
+      value: objectionsCount,
+      target: 2,
+      note: "Target: 2+ objections",
+    },
+  ];
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Investor Questions", href: "/investor-questions/" },
     { label: industryLabel, href: `/investor-questions/industries/${data.context.industry}/` },
@@ -120,6 +142,12 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
           </div>
         </dl>
       </section>
+
+      <PseoCountChart
+        title="Coverage snapshot"
+        caption="Use this checklist to confirm the page has enough depth to rank."
+        items={coverageItems}
+      />
 
       <AuthorAttribution
         stageLabel={stageLabel}
@@ -207,6 +235,21 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
           </p>
         </section>
       )}
+
+      <section className="mt-12 rounded-3xl border border-neutral-200 bg-neutral-50 p-8">
+        <h2 className="text-xl font-semibold text-neutral-900">
+          Share an anonymized investor question
+        </h2>
+        <p className="mt-3 text-sm text-neutral-700">
+          Contribute to the Pitchchat dataset. We review every submission before publishing.
+        </p>
+        <div className="mt-6">
+          <PseoUgcForm
+            industry={data.context.industry}
+            stage={data.context.stage}
+          />
+        </div>
+      </section>
 
       <section className="mt-12 rounded-3xl border border-neutral-200 bg-neutral-50 p-8 text-center">
         <h2 className="text-xl font-semibold text-neutral-900">Turn your deck into a pitch room</h2>

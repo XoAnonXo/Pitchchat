@@ -1,0 +1,66 @@
+{
+  "industry": "fintech",
+  "stage": "series-a",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/fintech/series-a/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Fintech Series A diligence checklist",
+  "summary": "Series A fintech diligence emphasizes unit economics validation, regulatory compliance, risk performance, and partnership stability. Investors verify the durability of your business model and your ability to scale in a complex environment. Pitchchat keeps diligence docs organized and easy to review.",
+  "items": [
+    {
+      "item": "Unit economics deep dive",
+      "rationale": "Detailed CAC by channel with methodology. LTV calculation with cohort data. Contribution margin breakdown. CAC payback analysis. Comparison to benchmarks. Path to improvement with supporting evidence."
+    },
+    {
+      "item": "Cohort analysis and retention data",
+      "rationale": "Customer cohorts by signup month. Logo and revenue retention curves. Engagement metrics by cohort. Customer quality indicators. Segment-level retention analysis."
+    },
+    {
+      "item": "Regulatory compliance audit",
+      "rationale": "All licenses with status. Compliance policies and procedures. Examination history and findings. State-by-state operational status. Compliance team qualifications. Recent regulatory correspondence."
+    },
+    {
+      "item": "Banking partnership documentation",
+      "rationale": "All partner agreements with key terms. Revenue share structures. Compliance responsibilities. Term and termination provisions. Relationship history. Backup arrangements."
+    },
+    {
+      "item": "Risk management analysis",
+      "rationale": "Fraud rates by time period with trends. Loss and dispute metrics. Risk models and their performance. Risk event history and responses. Credit performance (if lending). Risk team credentials."
+    },
+    {
+      "item": "Security and compliance certifications",
+      "rationale": "SOC 2 Type II report. PCI compliance (if applicable). Security infrastructure documentation. Penetration testing results. Incident history and responses."
+    },
+    {
+      "item": "Customer and revenue detail",
+      "rationale": "Customer list with revenue, tenure, and engagement. Revenue breakdown by product and segment. Reference customers for calls. Churn analysis with reasons. Expansion case studies."
+    },
+    {
+      "item": "Sales and growth analysis",
+      "rationale": "Sales funnel metrics by channel. Pipeline and forecasting. Win/loss analysis. Channel efficiency comparison. Growth experiments and results."
+    },
+    {
+      "item": "Financial model with scenarios",
+      "rationale": "Detailed model with assumptions. Historical accuracy analysis. Scenario modeling. Path to profitability. Capital efficiency projections."
+    },
+    {
+      "item": "Competitive intelligence",
+      "rationale": "Competitive landscape analysis. Win/loss data by competitor. Feature comparison. Pricing analysis. Competitive positioning rationale."
+    },
+    {
+      "item": "Team and organization assessment",
+      "rationale": "Org chart with all roles. Leadership team backgrounds. Key person dependencies. Retention data. Hiring plan with key roles. Compensation benchmarking."
+    },
+    {
+      "item": "Legal and corporate review",
+      "rationale": "Corporate structure and cap table. Material contracts. Regulatory correspondence. Litigation or disputes. IP documentation."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "industry": "healthcare",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/healthcare/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Healthcare Series A fundraising metrics benchmarks",
+  "summary": "Series A healthcare benchmarks focus on commercial traction, customer metrics, and operational readiness. Revenue expectations are adjusted for healthcare's longer sales cycles, but investors expect clear evidence of product-market fit and a repeatable go-to-market motion. Pitchchat keeps fundraising metrics investor-ready in one room.",
+  "metrics": [
+    {
+      "label": "Annual Recurring Revenue",
+      "value": "$1M - $5M",
+      "note": "ARR range for Series A healthcare. Higher end for digital health, lower for medical devices with implementation complexity.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Revenue Growth Rate",
+      "value": "100-200% YoY",
+      "note": "Year-over-year growth. Healthcare may have lumpy revenue due to long sales cycles—momentum and pipeline matter.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Net Revenue Retention",
+      "value": "110-140%",
+      "note": "Expansion through broader deployment, additional use cases, or pricing. Strong NRR indicates product-market fit.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Logo Retention",
+      "value": "90%+",
+      "note": "Annual customer retention. Healthcare customers are sticky when products work—retention below 90% signals issues.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Customer Count",
+      "value": "10-30 accounts",
+      "note": "Active paying health systems or enterprises. Mix of customer types demonstrates broad applicability.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Average Contract Value",
+      "value": "$50K - $250K",
+      "note": "Annual contract value. Varies significantly by product type and health system size.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Sales Cycle",
+      "value": "6-12 months",
+      "note": "Time from first meeting to signed contract. Shortening cycles indicate GTM maturity.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "65-80%",
+      "note": "Varies by delivery model. Software higher, services-intensive lower. Path to 70%+ expected.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "CAC Payback",
+      "value": "18-24 months",
+      "note": "Healthcare has higher CAC due to sales complexity. Path to under 18 months expected at scale.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Reimbursement Coverage",
+      "value": "2+ major payers",
+      "note": "Coverage with meaningful commercial payers. Medicare coverage often critical for scale.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    }
+  ]
+}

@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/blockchain/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Blockchain Series A startups",
-  "summary": "Projected deck structure for Blockchain founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A blockchain pitch decks must demonstrate sustainable business fundamentals alongside crypto-native advantages. Lead with revenue traction, organic retention, and competitive moat. Show you've built a business, not just a protocol. Post-crypto winter, the bar for Series A is significantly higher. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Traction & Metrics",
+      "goal": "Lead with proof of product-market fit",
+      "guidance": "Open with key metrics: protocol revenue, active users, TVL, retention. Show trajectory over time. Distinguish organic activity from incentivized. Include comparison to Series A round. This slide should demonstrate clear product-market fit with sustainable economics."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Problem & Market",
+      "goal": "Frame the market opportunity with evidence",
+      "guidance": "Size the market based on proven user segments. Show why blockchain solution wins: specific advantages that drive adoption. Include market timing evidence. Address total addressable market realistically—crypto markets are volatile but opportunities are real."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Protocol & Product",
+      "goal": "Demonstrate technical differentiation and user value",
+      "guidance": "Present protocol capabilities with user value focus. Show technical differentiation and why it matters to users. Include product roadmap and capability expansion. Address composability and ecosystem positioning. Technical depth should support, not replace, business value."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Business Model",
+      "goal": "Show sustainable revenue and unit economics",
+      "guidance": "Present revenue model in detail: fee structures, revenue per user, gross margin. Show unit economics working without token subsidies. Include revenue growth trajectory and path to profitability. Address token value accrual if applicable. This proves you've built a business."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Competitive Position",
+      "goal": "Demonstrate defensible moat and market position",
+      "guidance": "Show competitive landscape evolution and your strengthening position. Present moat components: network effects, liquidity, integrations, technical differentiation. Include win/loss data and competitive migrations. Address fork risk and how you maintain advantage."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Security & Track Record",
+      "goal": "Build confidence in protocol safety",
+      "guidance": "Present security track record: incidents (if any), response effectiveness, funds protected. Show security maturity: audit coverage, bug bounty results, security team. Include insurance coverage. This slide addresses existential risk directly."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Regulatory Status",
+      "goal": "Show compliance progress and risk mitigation",
+      "guidance": "Present regulatory achievements: licenses, registrations, favorable guidance. Show compliance infrastructure built. Address remaining regulatory risks and mitigation. Include legal structure and jurisdictional strategy. Regulatory de-risking is competitive advantage."
     },
     {
-      "title": "Protocol security",
-      "goal": "Show security and governance readiness.",
-      "guidance": "Detail audits, monitoring, and token economics."
+      "title": "Governance & Decentralization",
+      "goal": "Demonstrate meaningful decentralization progress",
+      "guidance": "Present governance evolution: participation rates, decision distribution, admin key status. Show decentralization roadmap and progress. Address any remaining centralization with timeline. Include community metrics and engagement quality."
     },
     {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for Blockchain Series A."
+      "title": "Team & Organization",
+      "goal": "Show scaled organization with crypto-native expertise",
+      "guidance": "Present team growth and current structure. Highlight key hires and their impact. Show crypto-native expertise across functions. Include advisory relationships and their involvement. Address organizational evolution for scale."
     },
     {
-      "title": "Blockchain go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for Blockchain.",
-      "guidance": "Show a focused wedge that fits Blockchain buyers at the Series A stage."
-    },
-    {
-      "title": "Blockchain proof points",
-      "goal": "Show evidence tailored to Blockchain.",
-      "guidance": "Use data or pilots specific to Blockchain to prove momentum at Series A."
+      "title": "Financials & Ask",
+      "goal": "Present clear path to sustainable scale",
+      "guidance": "Show financial model: revenue projections, cost structure, path to profitability. Present raise amount and use of funds. Include treasury management approach. Define milestones this capital achieves. Show capital efficiency and milestone-based deployment."
     }
   ]
 }

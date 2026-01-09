@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/ai/seed/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "AI Seed fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for AI Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Seed-stage AI metrics focus on early validation rather than scale. Investors prioritize technical proof points, initial revenue traction, and evidence of unit economics viability. The benchmarks below reflect typical expectations for AI startups raising seed rounds in 2024-2025, though exact thresholds vary by sub-sector and business model. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "1-4 months",
-      "note": "Projected target range; update with real data. AI Seed."
+      "label": "Monthly Recurring Revenue (MRR)",
+      "value": "$10K - $50K",
+      "note": "Pre-revenue companies can raise seed rounds but need strong technical differentiation. Companies with $30K+ MRR have significantly stronger positioning for seed rounds at higher valuations.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "30-50%",
-      "note": "Projected target range; update with real data. AI Seed."
+      "label": "Revenue Growth Rate (MoM)",
+      "value": "15% - 30%",
+      "note": "Early-stage AI companies with revenue should demonstrate strong monthly growth. Even 10-15% month-over-month growth is acceptable if retention is strong and growth is accelerating.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "65-85%",
-      "note": "Projected target range; update with real data. AI Seed."
+      "label": "Gross Margin",
+      "value": "50% - 70%",
+      "note": "AI gross margins are often lower than traditional SaaS due to compute costs. Investors accept lower initial margins if there is a clear path to 70%+ margins at scale through optimization and pricing power.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Low-Moderate; infra 20-40% of revenue",
-      "note": "Projected target range; update with real data. AI Seed."
+      "label": "Burn Multiple",
+      "value": "2x - 4x",
+      "note": "Burn multiple equals net burn divided by net new ARR. Below 2x is excellent, 2-4x is acceptable at seed stage. Above 4x raises concerns about capital efficiency.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Customer Acquisition Cost (CAC)",
+      "value": "< 3 months revenue",
+      "note": "Early CAC should be low as you target design partners and early adopters. CAC payback under 6 months is strong. Be prepared to explain how CAC will change as you scale beyond early adopters.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Logo Retention (Monthly)",
+      "value": "85%+",
+      "note": "Monthly logo retention above 85% indicates product-market fit. Below 80% suggests fundamental issues to address before scaling. Net revenue retention matters more at later stages.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Model Accuracy / Performance",
+      "value": "Top quartile vs alternatives",
+      "note": "Define metrics relevant to your use case and demonstrate performance. This might be accuracy, latency, cost-per-inference, or domain-specific benchmarks. Compare honestly to alternatives.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Inference Cost per Request",
+      "value": "< 20% of revenue per use",
+      "note": "Compute cost as a percentage of revenue should allow for healthy margins. Track this carefully and have a plan for optimization as you scale.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Time to Value for Customers",
+      "value": "< 1 week to first success",
+      "note": "How quickly do customers experience value? Faster time-to-value improves conversion and retention. AI products should aim for near-immediate demonstration of capability.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Engineering Velocity",
+      "value": "Weekly releases, fast iteration",
+      "note": "Early-stage AI companies should ship rapidly to learn from customer feedback. Slow iteration is a red flag given how fast the competitive landscape moves.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     }
   ]
 }

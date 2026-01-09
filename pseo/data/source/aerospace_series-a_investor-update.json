@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/aerospace/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Aerospace Series A investor update template",
-  "summary": "Projected update format for Aerospace founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A aerospace investor updates demonstrate execution against plan and progress toward production and revenue milestones. Given the capital intensity and long timelines, maintaining investor confidence through transparent, substantive updates is essential for future fundraising. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with overall status: on track, ahead, or behind plan with key highlights. Summarize biggest accomplishments and challenges. Include dashboard of critical metrics: TRL/MRL, contract value, cash position. This should be readable in 60 seconds and convey company trajectory."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Technical & Product Progress",
+      "content": "Detailed update on technical milestones: tests completed, TRL advancement, design progress. Include performance data and comparison to targets. Address technical challenges and mitigation. Show development timeline status with any adjustments and rationale."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Customer & Commercial Progress",
+      "content": "Update on customer pipeline: new contracts, pilot progress, proposal status. Include government program engagement and competitive outcomes. Report on customer feedback and product evolution. Show commercial momentum toward production revenue."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Manufacturing & Operations",
+      "content": "Progress on manufacturing readiness: MRL advancement, supplier qualification, facility development. Report on production cost trajectory and unit economics evolution. Include any operational challenges and solutions."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Regulatory Progress",
+      "content": "Update on certification and licensing progress: milestones achieved, applications advanced, agency feedback received. Include timeline status and any delays or accelerations. Address regulatory risks and mitigation."
     },
     {
-      "section": "Regulatory milestones (Series A)",
-      "content": "Share certification progress and upcoming approvals."
+      "section": "Team & Organization",
+      "content": "Report on team scaling: key hires, organizational changes, capability additions. Address any departures and mitigation. Share culture and engagement indicators. Include hiring priorities and recruiting pipeline."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for Aerospace founders at Series A."
+      "section": "Financial Status",
+      "content": "Cash position, burn rate, and runway. Performance against budget with variance analysis. Include non-dilutive funding status and any changes to capital plan. Address fundraising timeline and preparation if approaching next round."
+    },
+    {
+      "section": "Asks & Forward Look",
+      "content": "Specific areas where investor help is valuable: introductions, strategic advice, technical expertise. Preview next quarter priorities and key milestones. Flag any board decisions or strategic input needed."
     }
   ]
 }

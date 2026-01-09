@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/finance/seed/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Finance Seed fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Finance Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Seed-stage fintech metrics focus on early product-market fit and sustainable unit economics. Post-bubble, investors heavily weight efficiency metrics alongside growth. These benchmarks help demonstrate you're building a business, not just acquiring users. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "4-9 months",
-      "note": "Projected target range; update with real data. Finance Seed."
+      "label": "Monthly Active Users",
+      "value": "5,000 - 50,000",
+      "note": "Active users with meaningful engagement. Quality matters—active users who transact regularly are more valuable than sign-ups.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "25-40%",
-      "note": "Projected target range; update with real data. Finance Seed."
+      "label": "Monthly Transaction Volume",
+      "value": "$500K - $5M",
+      "note": "Total volume processed monthly. Shows financial activity scale and trust.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     },
     {
-      "label": "Gross margin trajectory",
+      "label": "Monthly Revenue",
+      "value": "$20K - $200K",
+      "note": "Revenue from all sources. Early revenue demonstrates willingness to pay and business model viability.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Customer Acquisition Cost",
+      "value": "$20 - $100",
+      "note": "Fully loaded CAC. Varies by segment and model. Should show improvement trajectory.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "LTV:CAC Ratio",
+      "value": "2:1 - 3:1",
+      "note": "Early stage ratio showing path to 4:1+. Based on actual customer behavior, not projections.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Net Promoter Score",
+      "value": "40+",
+      "note": "High NPS indicates product-market fit and supports organic growth critical in fintech.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Gross Margin",
       "value": "50-70%",
-      "note": "Projected target range; update with real data. Finance Seed."
+      "note": "Varies by model. Interchange-based lower, subscription higher. Should be clear path to target.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate; compliance 6-12 mo",
-      "note": "Projected target range; update with real data. Finance Seed."
+      "label": "Monthly User Growth",
+      "value": "15-30%",
+      "note": "Month-over-month user growth. Quality of growth matters—organic preferred over paid.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Regulatory Status",
+      "value": "Core licenses in progress",
+      "note": "Key licenses identified and application process underway. Banking partners secured or in discussion.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Team Size",
+      "value": "5-15 people",
+      "note": "Core team with product, engineering, and compliance capability. Lean but sufficient for regulatory requirements.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     }
   ]
 }

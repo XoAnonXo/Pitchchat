@@ -93,7 +93,7 @@ export function IntegrationPanel({ projectId, onClose }: IntegrationPanelProps) 
     },
     onSuccess: (data) => {
       if (data.authUrl) {
-        window.open(data.authUrl, '_blank', 'width=600,height=700');
+        window.open(data.authUrl, '_blank', 'width=600,height=700,noopener,noreferrer');
       }
       toast({
         title: "Connection initiated",

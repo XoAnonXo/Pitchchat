@@ -1,0 +1,78 @@
+{
+  "industry": "saas",
+  "stage": "seed",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/saas/seed/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "SaaS Seed fundraising metrics benchmarks",
+  "summary": "SaaS seed investors benchmark against these key metrics to evaluate product-market fit and capital efficiency. The bar has risen—investors expect more proof of retention and economics earlier. Focus on demonstrating sustainable growth, not just user acquisition. Pitchchat keeps fundraising metrics investor-ready in one room.",
+  "metrics": [
+    {
+      "label": "Monthly Recurring Revenue (MRR)",
+      "value": "$10K - $100K",
+      "note": "Range for seed-stage SaaS. Lower end acceptable with strong growth; higher end expected for larger rounds.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "MRR Growth Rate",
+      "value": "15-25% monthly",
+      "note": "Month-over-month growth. Consistency matters as much as peak rates. 20% monthly compounds to 9x annually.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Net Revenue Retention (NRR)",
+      "value": "100-110%",
+      "note": "NRR above 100% indicates expansion exceeds churn. Early evidence of NRR >100% is a strong PMF signal.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Logo Retention",
+      "value": "85%+ (SMB), 95%+ (Enterprise)",
+      "note": "Monthly customer retention. Below these thresholds indicates product-market fit issues requiring attention.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "CAC Payback Period",
+      "value": "12-18 months",
+      "note": "Months to recover acquisition cost. Under 12 is excellent, 18-24 acceptable with clear improvement path.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "LTV:CAC Ratio",
+      "value": "2:1 to 3:1 (early)",
+      "note": "Early stage ratio with clear path to 4:1+. Calculate using actual customer behavior, not projections.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "70-80%",
+      "note": "Software gross margin after COGS. Sub-70% requires explanation and clear path to target margins.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Net Promoter Score",
+      "value": "40+",
+      "note": "NPS indicates customer satisfaction and referral likelihood. Strong NPS supports organic growth.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Activation Rate",
+      "value": "40-60%",
+      "note": "Percentage of signups completing key activation milestones. Critical for product-led growth models.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Time to Value",
+      "value": "Under 7 days",
+      "note": "Days from signup to first value realization. Faster TTV correlates with better retention.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    }
+  ]
+}

@@ -176,6 +176,15 @@ export default function FileUpload({ projectId }: FileUploadProps) {
         onDragOver={handleDrag}
         onDrop={handleDrop}
         onClick={() => document.getElementById('file-input')?.click()}
+        role="button"
+        tabIndex={0}
+        aria-label="Upload documents"
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            document.getElementById('file-input')?.click();
+          }
+        }}
       >
         <div className="p-12 text-center relative z-10">
           <div className={`mx-auto h-20 w-20 rounded-2xl flex items-center justify-center mb-6 transition-all ${
@@ -207,6 +216,7 @@ export default function FileUpload({ projectId }: FileUploadProps) {
             onChange={handleFileSelect}
             accept="*"
             multiple
+            aria-label="Upload documents"
           />
         </div>
 

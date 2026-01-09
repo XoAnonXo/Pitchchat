@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/finance/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Finance Series A diligence checklist",
-  "summary": "Projected diligence checklist for Finance founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A fintech diligence is comprehensive, covering unit economics depth, regulatory maturity, risk management sophistication, and operational scalability. Prepare for thorough financial and compliance review. Documentation quality reflects operational maturity. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Detailed unit economics with cohort analysis",
+      "rationale": "Comprehensive unit economics: CAC by channel over time, LTV by cohort with retention curves, payback analysis. Include scenario modeling. Show data supporting improvement trajectory."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Regulatory compliance documentation and examination history",
+      "rationale": "Complete regulatory file: licenses held and applications pending, compliance program documentation, examination history and findings, regulatory correspondence. Third-party compliance assessments."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Risk management framework and loss data",
+      "rationale": "Risk framework documentation. Detailed loss data: fraud by type, credit losses (if applicable), operational losses. Trend analysis and benchmark comparison. Risk model documentation."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Banking partner documentation and relationship assessment",
+      "rationale": "Partner contracts and terms. Relationship history and stability assessment. Capacity for scale. Backup or diversification plans. Recent communications and relationship health."
     },
     {
-      "item": "Compliance audits and licensing status (Series A)",
-      "rationale": "Demonstrates regulatory readiness for launch."
+      "item": "Financial statements and detailed projections",
+      "rationale": "Audited or reviewed financials. Detailed projections with unit economics model. Revenue breakdown by product and segment. Path to profitability analysis with scenarios."
     },
     {
-      "item": "Series A readiness summary for Finance",
-      "rationale": "Signals you can close a Series A round in Finance."
+      "item": "Customer data and retention analysis",
+      "rationale": "Detailed customer metrics: acquisition by channel, retention by cohort, engagement patterns. Customer concentration analysis. NPS and satisfaction data. Customer references."
+    },
+    {
+      "item": "Technology and security documentation",
+      "rationale": "Architecture documentation. Security certifications (SOC 2, PCI if applicable). Penetration testing results. Data protection and privacy compliance. Vendor risk assessment."
+    },
+    {
+      "item": "Operational metrics and scalability analysis",
+      "rationale": "Operational efficiency metrics: support costs per user, onboarding time, automation rates. Scalability analysis for 10x growth. Process documentation for key workflows."
+    },
+    {
+      "item": "Competitive analysis with win/loss data",
+      "rationale": "Detailed competitive landscape. Win/loss analysis with customer feedback. Market share data if available. Technical and feature comparison."
+    },
+    {
+      "item": "Team and organizational assessment",
+      "rationale": "Organizational chart with role descriptions. Key person assessment. Compensation benchmarking. Retention data. Hiring plan and budget."
+    },
+    {
+      "item": "Legal documentation and litigation status",
+      "rationale": "Customer agreements and terms. Regulatory correspondence. Any litigation or disputes. IP documentation. Corporate structure optimization."
+    },
+    {
+      "item": "Cap table and governance documentation",
+      "rationale": "Complete cap table with all instruments. Prior funding terms. Board composition. Governance rights and procedures. Any unusual terms or provisions."
     }
   ]
 }

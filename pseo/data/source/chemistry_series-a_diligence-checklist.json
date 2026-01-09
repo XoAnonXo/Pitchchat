@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/chemistry/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Chemistry Series A diligence checklist",
-  "summary": "Projected diligence checklist for Chemistry founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A biotech diligence is comprehensive, covering clinical data depth, regulatory documentation, manufacturing readiness, and team capability. Expect expert scientific review and significant documentation requirements. Quality and transparency reflect operational maturity. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Complete clinical data package with statistical analysis",
+      "rationale": "All clinical trial data with full statistical analysis. Study reports, CRFs, and raw data access. Safety database if Phase 1 complete. Biomarker and translational data. Independent statistical review may be conducted."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "IND documentation or regulatory meeting minutes",
+      "rationale": "Complete IND package if filed. All FDA meeting minutes and correspondence. Type A/B/C meeting outcomes. Special designation applications and feedback. Regulatory counsel communications."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "CMC and manufacturing documentation",
+      "rationale": "Chemistry, manufacturing, and controls package. Process development reports. Analytical methods and validation. Stability data. CMO contracts and capacity commitments. Scale-up assessment and timeline."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Patent prosecution files and FTO opinions",
+      "rationale": "Complete patent prosecution history. Freedom-to-operate opinions from qualified counsel. Patent term analysis and extension strategy. Competitive IP landscape analysis. License agreements if applicable."
     },
     {
-      "item": "Pilot plant scale-up plan and yields (Series A)",
-      "rationale": "Validates the path from lab to production."
+      "item": "Clinical operations capability assessment",
+      "rationale": "Clinical trial plans with site identification. CRO relationships and contracts. Patient recruitment strategy validation. Clinical operations team capability. Trial budget and timeline with assumptions."
     },
     {
-      "item": "Series A readiness summary for Chemistry",
-      "rationale": "Signals you can close a Series A round in Chemistry."
+      "item": "Competitive intelligence documentation",
+      "rationale": "Detailed competitive landscape with clinical-stage programs. Head-to-head positioning analysis. Competitive program failures and implications. Market research and physician feedback. Competitive monitoring process."
+    },
+    {
+      "item": "Financial model with milestone scenarios",
+      "rationale": "Detailed financial projections through key milestones. Scenario analysis: base, upside, downside. Cash burn and runway analysis. Partnership scenario economics. Capital requirements through approval."
+    },
+    {
+      "item": "Partnership documentation and pharma interest",
+      "rationale": "CDA log with pharma companies. Diligence request and response documentation. Any term sheets or indications of interest. Partnership strategy and timing analysis. Comparable transaction analysis."
+    },
+    {
+      "item": "Team backgrounds with drug development track record",
+      "rationale": "Detailed CVs for all key personnel. Drug development contributions verified. Reference checks on key team members. Organizational structure and capability gaps. Hiring plan with budget."
+    },
+    {
+      "item": "Scientific advisory board documentation",
+      "rationale": "SAB member agreements and engagement evidence. KOL relationships for clinical trials. Scientific advisory meeting minutes. Publication strategy. Expert network access."
+    },
+    {
+      "item": "Risk register and mitigation plans",
+      "rationale": "Comprehensive risk assessment: clinical, regulatory, competitive, commercial. Risk mitigation strategies with owners. Pivot options if primary approach fails. Board risk discussions documented."
+    },
+    {
+      "item": "Legal and corporate documentation",
+      "rationale": "Cap table with all instruments. Material contracts: licenses, collaborations, CMOs. Corporate governance documentation. Employee agreements and IP assignment. Litigation or threatened claims."
     }
   ]
 }

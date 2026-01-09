@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/robotics/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Robotics Seed diligence checklist",
-  "summary": "Projected diligence checklist for Robotics founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Robotics seed diligence focuses on real-world performance validation and team capability. Investors will request pilot deployment data and customer references. Prepare comprehensive documentation on robot performance, safety, and deployment process. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Pilot deployment data with performance metrics",
+      "rationale": "Detailed data from customer pilots: task success rates, intervention frequency, runtime hours, failure analysis. Be prepared to show raw performance logs and demonstrate performance claims."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Robot demonstration in production-like conditions",
+      "rationale": "Live or video demonstration in realistic conditions—not a controlled lab setup. Investors may request to observe pilots at customer sites."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Safety documentation and risk assessment",
+      "rationale": "Safety framework documentation, testing results, and compliance with relevant standards. Include incident history and response protocols. Safety is critical for robotics diligence."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Customer references and testimonials",
+      "rationale": "Pilot customers willing to speak with investors about real-world performance. Prepare 3-5 references with different perspectives on the robot's value."
     },
     {
-      "item": "Field reliability results and support plan (Seed)",
-      "rationale": "Proves uptime targets and deployment readiness."
+      "item": "Technical architecture and differentiation documentation",
+      "rationale": "System architecture showing perception, planning, and control approaches. Technical differentiation explanation. IP documentation including patents and trade secrets."
     },
     {
-      "item": "Seed readiness summary for Robotics",
-      "rationale": "Signals you can close a Seed round in Robotics."
+      "item": "Deployment process and scalability plan",
+      "rationale": "Documented deployment process with timeline, requirements, and learnings. Show how process scales with more deployments."
+    },
+    {
+      "item": "Hardware strategy and BOM",
+      "rationale": "Hardware approach (build vs. integrate) with rationale. Bill of materials with cost trajectory to production volume."
+    },
+    {
+      "item": "Customer economics and ROI analysis",
+      "rationale": "Detailed customer ROI model with validated assumptions. Show total cost of ownership and payback calculation."
+    },
+    {
+      "item": "Team backgrounds and robotics experience",
+      "rationale": "Detailed resumes highlighting robotics experience. Prior robots shipped or deployed. Reference contacts for key team members."
+    },
+    {
+      "item": "Capital plan and financial model",
+      "rationale": "Use of funds breakdown, particularly hardware vs. software investment. Financial projections with unit economics at scale."
+    },
+    {
+      "item": "Competitive analysis",
+      "rationale": "Detailed landscape including other robotics companies, automation alternatives, and potential large company entrants."
+    },
+    {
+      "item": "Insurance and liability approach",
+      "rationale": "Insurance coverage for robot operation. Liability framework with customers. Risk management approach."
     }
   ]
 }

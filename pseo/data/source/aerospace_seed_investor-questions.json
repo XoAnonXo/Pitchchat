@@ -4,99 +4,121 @@
   "pageType": "investor-questions",
   "slug": "/investor-questions/aerospace/seed/investor-questions/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Investor questions for Aerospace Seed startups",
-  "summary": "Projected investor questions and preparation guidance for Aerospace founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+  "summary": "Seed-stage aerospace and space startups face unique investor scrutiny around technical risk, regulatory pathways, and capital intensity. Investors evaluate your Technology Readiness Level (TRL), government contracting experience, and realistic timelines. The space ecosystem has matured significantly—investors now expect clear differentiation from the dozens of funded competitors in each segment. Pitchchat turns investor questions into an interactive pitch room founders can share.",
   "questions": [
     {
-      "category": "Problem",
-      "question": "What is the wedge problem and why does it matter now?",
-      "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+      "category": "Technical Readiness",
+      "question": "What is your current Technology Readiness Level and what milestones will advance it?",
+      "answer": "NASA's TRL scale (1-9) is the standard framework investors use to assess aerospace technical maturity. At seed stage, most startups are TRL 3-5: analytical and experimental proof-of-concept in laboratory environment progressing toward relevant environment testing. Be specific about your current TRL with evidence. Define the next 2-3 milestones that advance your TRL with realistic timelines. Investors understand aerospace development takes time but want to see clear milestone-based progress."
     },
     {
-      "category": "Buyer",
-      "question": "Who is the buyer and how do you reach them efficiently?",
-      "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+      "category": "Manufacturing Readiness",
+      "question": "What's your Manufacturing Readiness Level and path to production scale?",
+      "answer": "MRL complements TRL for hardware companies. Seed-stage aerospace companies typically target MRL 4-5: capability to produce prototype components in production-relevant environment. Discuss your manufacturing approach: in-house vs. contract manufacturing, key supplier relationships, and capital requirements for scaling. Investors want to see you've thought through the production challenges, not just the technology. Reference any manufacturing partnerships or LOIs."
     },
     {
-      "category": "Moat",
-      "question": "What makes the business defensible beyond speed?",
-      "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+      "category": "Regulatory Pathway",
+      "question": "What's your regulatory pathway and timeline for key certifications?",
+      "answer": "Aerospace regulatory landscape includes FAA (launch licenses, airworthiness), FCC (spectrum), NOAA (remote sensing), and potentially ITAR/export controls. Map your specific regulatory requirements with realistic timelines. Show you understand the process—investors have been burned by founders who underestimate regulatory complexity. If you've had preliminary discussions with regulators, highlight this. First-mover advantage in certain approvals can be significant moat."
     },
     {
-      "category": "Traction",
-      "question": "What early signals prove pull from the market?",
-      "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+      "category": "Government vs Commercial",
+      "question": "What's your go-to-market strategy: government contracts, commercial, or both?",
+      "answer": "Aerospace markets split between government (DoD, NASA, civil agencies) and commercial (telecom, remote sensing, logistics). Each has different sales cycles, margins, and scaling dynamics. Government provides validation and patient capital but has long cycles and compliance burden. Commercial offers faster iteration but requires market creation. Most seed-stage companies focus on one initially—explain your choice and eventual expansion strategy."
     },
     {
-      "category": "Economics",
-      "question": "How will margins improve as you scale?",
-      "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+      "category": "Capital Intensity",
+      "question": "How much capital will you need to reach commercial operations and what's the funding strategy?",
+      "answer": "Aerospace is capital-intensive by nature. Investors want honesty about total capital requirements. Map your funding strategy: seed for core technology validation, Series A for prototype demonstration, later rounds for manufacturing scale. Include non-dilutive funding sources: SBIR/STTR, NASA contracts, DoD partnerships. Show you understand the fundraising landscape and have a realistic plan that doesn't assume smooth sailing."
     },
     {
-      "category": "Roadmap",
-      "question": "What milestones unlock the next round?",
-      "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+      "category": "Team Expertise",
+      "question": "What aerospace/space experience does your team have and what gaps exist?",
+      "answer": "Aerospace requires deep domain expertise. Highlight team members' backgrounds: prior aerospace companies, government agencies, relevant research. Be honest about gaps and your hiring plan. Investors look for: systems engineering experience, regulatory expertise, manufacturing knowledge, and government contracting familiarity. Advisory boards can fill gaps, but core team needs hands-on aerospace experience."
     },
     {
-      "category": "Validation",
-      "question": "What proof shows the market will pay for this?",
-      "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+      "category": "Launch & Dependencies",
+      "question": "What are your launch or critical infrastructure dependencies?",
+      "answer": "Space companies depend on launch access; aviation companies depend on airports and airspace. Identify your critical dependencies and mitigation strategies. For launch: relationships with providers, manifested slots, cost projections. Discuss backup options and how dependency risk affects your timeline. Investors have seen many space startups delayed by launch availability—show you've planned for this."
     },
     {
-      "category": "Risk",
-      "question": "What is the single biggest technical or regulatory risk?",
-      "answer": "Explain the plan to de-risk it within the seed runway."
+      "category": "Competitive Landscape",
+      "question": "How do you differentiate from well-funded competitors like SpaceX, Planet, Rocket Lab?",
+      "answer": "The aerospace startup landscape is crowded with well-funded competitors. Differentiation requires specificity: unique technology approach, underserved market segment, cost structure advantage, or specialized expertise. Avoid claiming you'll 'out-execute' larger players. Show deep understanding of competitive positioning and why your wedge is defensible. Investors want to see you've mapped the landscape and found genuine whitespace."
     },
     {
-      "category": "Capital",
-      "question": "How will the seed round extend runway to key proof points?",
-      "answer": "Tie the round to milestones that unlock Series A readiness."
+      "category": "Timeline Reality",
+      "question": "What's your realistic timeline to key technical and commercial milestones?",
+      "answer": "Aerospace timelines are notoriously optimistic. Investors discount founder projections heavily. Present a realistic timeline with built-in contingency. Reference industry benchmarks—how long similar systems took to develop. Show you understand what can go wrong and have buffer built in. Credibility comes from acknowledging aerospace complexity, not from aggressive promises."
     },
     {
-      "category": "Regulatory",
-      "question": "Which certifications or safety milestones unlock commercialization? (Aerospace Seed)",
-      "answer": "List the required certifications and the path to achieve them within the runway. Focus on Aerospace at the Seed stage."
-    },
-    {
-      "category": "Procurement",
-      "question": "How will you navigate long procurement cycles? (Aerospace Seed)",
-      "answer": "Describe pilots, integration strategy, and stakeholder alignment tactics. Focus on Aerospace at the Seed stage."
+      "category": "Exit Landscape",
+      "question": "What's the exit landscape for aerospace companies in your segment?",
+      "answer": "Aerospace exits include strategic acquisition (prime contractors, tech companies entering space), private equity, and potentially IPO for larger outcomes. Research recent transactions in your segment with valuation multiples. Discuss strategic interest you've received or could attract. Show you understand the M&A landscape and how your company fits. Investors need to see a path to liquidity given long development timelines."
     }
   ],
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "6-12 months",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Technology Readiness Level (TRL)",
+      "value": "TRL 4-6",
+      "note": "Seed-stage aerospace companies should demonstrate at least lab-validated technology (TRL 4) with path to relevant environment testing (TRL 5-6).",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "20-35%",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Non-Dilutive Funding",
+      "value": "$500K - $2M",
+      "note": "SBIR/STTR awards, NASA contracts, or DoD funding provide validation and extend runway. Investors view government funding as strong technical validation.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "40-60%",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Development Timeline",
+      "value": "18-36 months to prototype",
+      "note": "Realistic timeline to functional prototype or demonstration mission. Include hardware-software integration and testing phases.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Capital intensity",
-      "value": "High; 18-24 mo runway",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Regulatory Milestones",
+      "value": "Preliminary engagement",
+      "note": "Evidence of regulatory pathway clarity: preliminary FAA discussions, FCC spectrum applications filed, or ITAR classification confirmed.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Strategic Partnerships",
+      "value": "1-2 LOIs or partnerships",
+      "note": "Letters of intent from potential customers, technology partners, or prime contractors provide market validation for aerospace ventures.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Team Aerospace Experience",
+      "value": "10+ years combined",
+      "note": "Founding team should have meaningful aerospace industry experience across technical and business functions.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     }
   ],
   "objections": [
     {
-      "objection": "Adoption cycles are too long for this market.",
-      "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+      "objection": "Aerospace development takes too long—you'll need multiple rounds before generating revenue.",
+      "response": "Acknowledge the timeline reality and present your capital-efficient development approach. Show milestone-based funding strategy where each round de-risks specific technical or commercial milestones. Reference non-dilutive funding sources that extend runway. Present intermediate revenue opportunities: government R&D contracts, technology licensing, or service revenue during development phase. The goal is showing you've planned for the long journey."
     },
     {
-      "objection": "The product requires heavy upfront investment.",
-      "response": "Detail staged milestones and how capital de-risks the core thesis."
+      "objection": "The space/aerospace market is crowded with well-funded players—why will you win?",
+      "response": "Avoid generic differentiation claims. Present specific competitive analysis: where incumbents are weak, what market segments they're ignoring, or what technical approaches they've overlooked. Show customer evidence that your approach solves problems others don't. Reference your unique advantages: team expertise, technology IP, cost structure, or government relationships. Investors want specificity, not ambition."
     },
     {
-      "objection": "Regulatory approvals will delay revenue. (Aerospace Seed)",
-      "response": "Show a staged certification plan and interim revenue channels. Tie it to Aerospace Seed milestones."
+      "objection": "Your timeline seems aggressive compared to industry benchmarks.",
+      "response": "If your timeline differs from industry norms, explain specifically why. Reference your technical approach, team experience, or parallel development strategies that enable acceleration. Provide analogous examples where faster development was achieved. Be willing to extend timeline if investor feedback suggests skepticism—credibility matters more than optimistic projections. Show contingency planning for delays."
+    },
+    {
+      "objection": "What happens if you can't get launch access or face regulatory delays?",
+      "response": "Demonstrate you've mapped dependencies and have mitigation strategies. For launch: multiple provider relationships, rideshare options, backup manifest slots. For regulatory: early engagement strategy, parallel certification paths, contingency designs. Show you've modeled scenarios and have runway for delays. Investors appreciate founders who've thought through failure modes."
     }
   ]
 }

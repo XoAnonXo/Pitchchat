@@ -1,25 +1,22 @@
-import pilotConfig from "@/data/pilot-config.json";
-import { buildAbsoluteUrl, buildSitemapXml } from "@/lib/sitemap";
+import { getPublishedPagesForSitemap } from "@/db/queries";
+import { buildAbsoluteUrl, buildSitemapXml, type SitemapUrl } from "@/lib/sitemap";
 
-export function GET() {
-  const urls: string[] = [];
+export async function GET() {
+  // Only include published pages with actual DB timestamps
+  const publishedPages = await getPublishedPagesForSitemap();
 
-  for (const industry of pilotConfig.industries) {
-    for (const stage of pilotConfig.stages) {
-      for (const pageType of pilotConfig.pageTypes) {
-        urls.push(
-          buildAbsoluteUrl(
-            `/investor-questions/${industry.slug}/${stage.slug}/${pageType.slug}/`
-          )
-        );
-      }
-    }
-  }
+  const urls: SitemapUrl[] = publishedPages.map((page) => ({
+    url: buildAbsoluteUrl(page.slug),
+    lastModified: page.updatedAt,
+    changeFrequency: "weekly",
+    priority: 0.9,
+  }));
 
   const xml = buildSitemapXml(urls);
   return new Response(xml, {
     headers: {
       "Content-Type": "application/xml",
+      "Cache-Control": "public, max-age=3600, s-maxage=3600",
     },
   });
 }

@@ -1,0 +1,50 @@
+{
+  "industry": "saas",
+  "stage": "series-a",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/saas/series-a/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "SaaS Series A investor update template",
+  "summary": "Series A investor updates balance metrics rigor with strategic context. Investors at this stage expect sophisticated reporting and proactive communication about challenges. Maintain consistent format for trend visibility. Be transparent—investors can help more when they understand the full picture. Pitchchat helps founders share updates in a single room.",
+  "sections": [
+    {
+      "section": "Key Metrics Dashboard",
+      "content": "Comprehensive metrics summary: ARR/MRR with growth rate, NRR, gross retention, CAC payback, burn multiple. Show month-over-month and year-over-year comparisons. Include targets and variance. Traffic light indicators for quick assessment. This section should immediately convey business health."
+    },
+    {
+      "section": "Revenue Deep Dive",
+      "content": "Detailed revenue analysis: new business, expansion, contraction, churn. Pipeline and forecast. Notable deals won or lost with context. Sales team performance and productivity. Pricing or packaging developments. Revenue quality indicators."
+    },
+    {
+      "section": "Customer & Product",
+      "content": "Customer metrics: NPS trends, churn analysis, expansion patterns. Product updates: releases, adoption metrics, roadmap progress. Customer success highlights and concerns. Feature usage data. Strategic product decisions and rationale."
+    },
+    {
+      "section": "Go-to-Market Performance",
+      "content": "Channel performance and efficiency trends. Marketing metrics and campaign results. Sales motion evolution. Partnership developments. Competitive intelligence and market observations. Strategic GTM decisions."
+    },
+    {
+      "section": "Unit Economics Update",
+      "content": "CAC trends by channel. LTV evolution in cohorts. Payback period changes. Gross margin analysis. Efficiency improvements and initiatives. Path to target economics."
+    },
+    {
+      "section": "Team & Operations",
+      "content": "Headcount changes and hiring progress. Key departures and mitigation. Organizational developments. Culture and engagement indicators. Operational improvements. Board or governance updates."
+    },
+    {
+      "section": "Financial Position",
+      "content": "Cash position and runway. Burn rate trend and drivers. Budget variance analysis. Key financial decisions. Fundraising timeline if applicable."
+    },
+    {
+      "section": "Strategic Priorities & Asks",
+      "content": "Top priorities and progress against them. Strategic decisions pending. Specific asks: introductions, expertise, strategic input. Risks being monitored. Areas where board engagement would be valuable."
+    }
+  ]
+}

@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/finance/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Finance Series A startups",
-  "summary": "Projected deck structure for Finance founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A fintech pitch decks must demonstrate sustainable business fundamentals with a clear path to profitability. Lead with unit economics improvement and operational scalability. Show you've built a real business, not just acquired users. Regulatory maturity and risk management credibility are table stakes. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Business Traction",
+      "goal": "Open with proof of sustainable growth",
+      "guidance": "Lead with key metrics: revenue, users, unit economics, retention. Show trajectory over time with emphasis on improving efficiency. Include comparison to seed stage metrics. This slide should demonstrate product-market fit with sustainable economics."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Market Opportunity",
+      "goal": "Frame the market with customer evidence",
+      "guidance": "Size the market based on proven customer segments. Show market dynamics: why fintech is winning, where value is shifting. Include customer quotes on why they chose you. Address expansion opportunities within the market."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Product & Differentiation",
+      "goal": "Demonstrate product depth and competitive moat",
+      "guidance": "Present product with customer value focus. Show differentiation that creates sustainable advantage. Include product expansion roadmap. Address how product creates customer stickiness. Demonstrate you're building a platform, not a feature."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Unit Economics",
+      "goal": "Prove sustainable and improving economics",
+      "guidance": "Present detailed unit economics: CAC by channel, LTV by cohort, payback period, margins. Show improvement trajectory from seed stage. Address path to target economics at scale. This slide is critical for Series A fintech credibility."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Regulatory Position",
+      "goal": "Show regulatory maturity and advantage",
+      "guidance": "Present regulatory achievements: licenses obtained, compliance infrastructure built, examinations passed. Address remaining regulatory requirements and timeline. Show how regulatory position creates competitive advantage. Include banking partnership stability."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Risk Management",
+      "goal": "Demonstrate sophisticated risk infrastructure",
+      "guidance": "Present risk metrics: loss rates, fraud prevention effectiveness, credit performance (if applicable). Show risk infrastructure evolution. Address how risk scales with growth. Include industry benchmark comparisons. Demonstrate institutional-quality risk management."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Customer Acquisition",
+      "goal": "Show scalable acquisition model",
+      "guidance": "Present channel portfolio and performance. Show acquisition efficiency by channel. Address scalability of acquisition strategy. Include organic growth contribution. Demonstrate acquisition scales efficiently, not just current performance."
     },
     {
-      "title": "Compliance strategy",
-      "goal": "Show regulatory readiness.",
-      "guidance": "Outline licensing, audits, and risk controls."
+      "title": "Competitive Landscape",
+      "goal": "Position against evolved competitive field",
+      "guidance": "Updated competitive analysis showing strengthening position. Include win/loss data and customer feedback. Address big tech and large fintech competition. Show deepening moat with scale."
     },
     {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for Finance Series A."
+      "title": "Team & Operations",
+      "goal": "Show scaled organization ready for growth",
+      "guidance": "Present team growth and organizational structure. Highlight key hires and functional depth. Show operational efficiency improvements. Include hiring plan for this round. Demonstrate organizational readiness for scale."
     },
     {
-      "title": "Finance go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for Finance.",
-      "guidance": "Show a focused wedge that fits Finance buyers at the Series A stage."
-    },
-    {
-      "title": "Finance proof points",
-      "goal": "Show evidence tailored to Finance.",
-      "guidance": "Use data or pilots specific to Finance to prove momentum at Series A."
+      "title": "Financial Plan & Ask",
+      "goal": "Present clear path to profitability",
+      "guidance": "Show financial projections with path to profitability. Present this round's milestones and use of funds. Include scenario analysis for different growth rates. Define success metrics clearly. Close with ask and conviction."
     }
   ]
 }

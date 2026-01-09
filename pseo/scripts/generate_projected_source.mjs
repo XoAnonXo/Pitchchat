@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const configPath = path.join(__dirname, "../src/data/pilot-config.json");
-const outputDir = path.join(__dirname, "../data/source");
+const outputDir = path.join(__dirname, "../data/projected");
 
 const projectedNote = "Projected target range; update with real data.";
 const summarySuffix = {
@@ -608,6 +608,8 @@ async function run() {
           pageType: pageType.slug,
           slug,
           ctaText: "Create your PitchChat room",
+          dataOrigin: "projected",
+          sourceTags: ["projected"],
         };
 
         if (pageType.slug === "investor-questions") {

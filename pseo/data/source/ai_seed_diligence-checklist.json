@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/ai/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "AI Seed diligence checklist",
-  "summary": "Projected diligence checklist for AI founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "AI seed-stage diligence focuses on technical differentiation, data rights, and team capability. Investors will probe deeply on defensibility against foundation model providers and the sustainability of your technical approach. Prepare documentation and clear answers for each area below. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Model Architecture & Training Documentation",
+      "rationale": "Technical diligence will examine your approach. Prepare clear documentation of your model architecture, training methodology, and how it differs from fine-tuning commodity models. Be ready to explain trade-offs and technical decisions."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Data Rights & Provenance Audit",
+      "rationale": "With increasing litigation around training data, investors need confidence in your data rights. Document sources, licenses, consent mechanisms, and any potential copyright or privacy exposure. Clean data provenance is increasingly a dealbreaker."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Compute Cost Analysis & Projections",
+      "rationale": "Prepare detailed breakdowns of current inference and training costs, with projections at 10x and 100x scale. Include optimization roadmap showing how costs improve over time. Investors need to believe in a path to healthy margins."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Cap Table & Previous Financing",
+      "rationale": "Standard for all startups but especially important given AI company valuations. Document all equity grants, SAFEs, convertible notes, and option pool. Clean cap table with reasonable founder ownership is expected."
     },
     {
-      "item": "Data provenance and model evaluation results (Seed)",
-      "rationale": "Supports model reliability and defensibility."
+      "item": "Technical Team Assessment",
+      "rationale": "Be prepared for technical interviews or reference checks on key team members. Document relevant experience, publications, and track record. For teams without traditional ML backgrounds, prepare clear narrative on technical strategy."
     },
     {
-      "item": "Seed readiness summary for AI",
-      "rationale": "Signals you can close a Seed round in AI."
+      "item": "Competitive Analysis & Differentiation Memo",
+      "rationale": "Prepare a written analysis of your competitive landscape including other startups, incumbents, and potential big tech entry. Document your differentiation clearly. Investors will compare your assessment against their own research."
+    },
+    {
+      "item": "Customer Reference List",
+      "rationale": "Prepare three to five customers willing to speak with investors. Choose customers who can speak to the problem severity, your product value, and their willingness to pay and expand. Brief customers on likely questions."
+    },
+    {
+      "item": "Security & Compliance Documentation",
+      "rationale": "If targeting enterprise customers, document your security practices and any compliance certifications. SOC 2 Type II may not be complete at seed stage but have a clear roadmap. Address data handling and privacy practices."
+    },
+    {
+      "item": "IP & Patent Strategy",
+      "rationale": "Document any patents filed or in preparation. More importantly, be prepared to discuss your broader IP strategy and how you protect your technical advantages. In AI, trade secrets and data often matter more than patents."
+    },
+    {
+      "item": "Regulatory Risk Assessment",
+      "rationale": "Prepare analysis of relevant AI regulations in your target markets: EU AI Act, sector-specific requirements, and potential US regulation. Show you understand compliance requirements and have built them into your product roadmap."
+    },
+    {
+      "item": "Financial Model & Projections",
+      "rationale": "Prepare a financial model showing path to Series A milestones. Include revenue projections, cost structure, hiring plan, and key assumptions. Models should be grounded in realistic customer acquisition and expansion rates."
+    },
+    {
+      "item": "Product Roadmap & Technical Milestones",
+      "rationale": "Document your eighteen-month roadmap with clear milestones. Investors want to see how this funding advances both technical capabilities and commercial traction. Link milestones to Series A readiness."
     }
   ]
 }

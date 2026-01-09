@@ -51,7 +51,7 @@ export const fintechSeedContent: IndustryStageContent = {
         category: "Team",
         question: "What financial services experience does your team have?",
         answer:
-          "Fintech requires domain expertise. Present your team's financial services credentials: banking, payments, lending, or regulatory experience. Address the full stack: product, compliance, risk, operations, and technology. If gaps exist, explain your advisory board or hiring plans. Show you have access to regulatory and banking relationship expertise. Reference specific relevant experiences: 'Our CRO spent 8 years at [bank] building their risk infrastructure. Our compliance lead held senior roles at [fintech] through their licensing process.'",
+          "Fintech requires domain expertise. Present your team's financial services credentials: banking, payments, lending, or regulatory experience. Address the full stack: product, compliance, risk, operations, and technology. If gaps exist, explain your advisory board or hiring plans. Show you have access to regulatory and banking relationship expertise. Reference specific relevant experiences: 'Our CRO spent 8 years at a top-10 U.S. bank building risk infrastructure. Our compliance lead held senior roles at a licensed neobank through its multi-state licensing process.'",
       },
       {
         category: "Market",
@@ -102,7 +102,7 @@ export const fintechSeedContent: IndustryStageContent = {
       {
         objection: "Fintech is too competitive and unit economics never work.",
         response:
-          "Address the challenge directly: 'We agree unit economics are critical—that's why we've built our model differently. Our CAC is $45 versus industry average of $100+ because we focus on [specific channel]. Our ARPU is $25/month, higher than typical consumer fintechs, because we serve [specific use case with higher willingness to pay]. Our 18-month LTV:CAC is 3:1 with clear path to 5:1 through cross-sell. We're not trying to acquire every customer—we're focused on the segment where economics work.'",
+          "Address the challenge directly: 'We agree unit economics are critical—that's why we've built our model differently. Our CAC is $45 versus industry average of $100+ because we focus on partner-led distribution through payroll providers and vertical SaaS channels. Our ARPU is $25/month, higher than typical consumer fintechs, because we serve SMBs managing cash flow and payments. Our 18-month LTV:CAC is 3:1 with clear path to 5:1 through cross-sell. We're not trying to acquire every customer—we're focused on the segment where economics work.'",
       },
       {
         objection: "Banking partnerships are unstable and create existential risk.",
@@ -112,12 +112,12 @@ export const fintechSeedContent: IndustryStageContent = {
       {
         objection: "Regulatory risk is too high in the current environment.",
         response:
-          "Present your regulatory strategy: 'We've built compliance-first from day one. Our compliance team has experience from [established fintech/bank]. We maintain a multi-state license portfolio rather than relying on a single license. Our product design avoids regulatory gray areas—we know exactly which regulations apply and we comply fully. We've invested in compliance infrastructure that will be an asset, not a liability, as we scale. Recent regulatory actions have targeted companies with weak compliance—that's not us.'",
+          "Present your regulatory strategy: 'We've built compliance-first from day one. Our compliance team has experience from a top-20 bank and a licensed fintech. We maintain a multi-state license portfolio rather than relying on a single license. Our product design avoids regulatory gray areas—we know exactly which regulations apply and we comply fully. We've invested in compliance infrastructure that will be an asset, not a liability, as we scale. Recent regulatory actions have targeted companies with weak compliance—that's not us.'",
       },
       {
         objection: "Your target customer segment is too risky or unprofitable.",
         response:
-          "Address customer quality directly: 'Our underwriting approach is more sophisticated than it appears. We use [specific data sources] to identify customers who look risky on traditional metrics but actually perform well. Our loss rates are below industry benchmarks at X%. We've also built our product to generate revenue without requiring credit extension—interchange and subscription revenue provide base economics even before any lending. Our customer segment is underserved precisely because traditional providers don't understand the risk properly.'",
+          "Address customer quality directly: 'Our underwriting approach is more sophisticated than it appears. We use cash-flow data, payroll history, and transaction behavior signals to identify customers who look risky on traditional metrics but actually perform well. Our loss rates are below industry benchmarks at under 1%. We've also built our product to generate revenue without requiring credit extension—interchange and subscription revenue provide base economics even before any lending. Our customer segment is underserved precisely because traditional providers don't understand the risk properly.'",
       },
     ],
   },

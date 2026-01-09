@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/chemistry/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Chemistry Seed diligence checklist",
-  "summary": "Projected diligence checklist for Chemistry founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Biotech seed diligence focuses heavily on scientific validation, IP strength, and team capability. Expect thorough review by scientific experts. Data quality, reproducibility, and honest assessment of risks are valued over promotional positioning. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Complete data package with raw data access",
+      "rationale": "All preclinical data with experimental details. Raw data for key experiments. Statistical analysis methodology. Reproducibility information. Be prepared for scientific expert review."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "IP portfolio documentation and FTO analysis",
+      "rationale": "Patent applications and prosecution history. Freedom-to-operate analysis with counsel opinion. Patent term calculations. Trade secret inventory. Geographic coverage assessment."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Regulatory strategy documentation",
+      "rationale": "Regulatory pathway analysis with precedent products. FDA meeting minutes or planned interactions. Endpoint strategy with regulatory precedent. Designation strategy (breakthrough, orphan, etc.)."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Manufacturing assessment",
+      "rationale": "Process development status and scale-up considerations. CMO identification and capability assessment. Cost of goods projections. Supply chain for critical materials."
     },
     {
-      "item": "Pilot plant scale-up plan and yields (Seed)",
-      "rationale": "Validates the path from lab to production."
+      "item": "Competitive landscape analysis",
+      "rationale": "Comprehensive competitive mapping: approved, clinical, preclinical. Differentiation analysis with data support. Competitive intelligence sources and monitoring. Risk assessment from competitive programs."
     },
     {
-      "item": "Seed readiness summary for Chemistry",
-      "rationale": "Signals you can close a Seed round in Chemistry."
+      "item": "Team backgrounds with reference checks",
+      "rationale": "Detailed CVs for all key personnel. Drug development track record verification. Reference checks on key team members. Assessment of gaps and hiring plans."
+    },
+    {
+      "item": "Scientific advisor engagement documentation",
+      "rationale": "Advisor agreements and compensation. Evidence of active engagement (meeting minutes, contributions). KOL relationships and potential clinical trial support. Advisory board structure."
+    },
+    {
+      "item": "Development plan and budget",
+      "rationale": "Detailed milestone-based development plan. Budget allocation by activity. Assumptions and risk factors. Contingency planning. Comparison to comparable programs."
+    },
+    {
+      "item": "Market analysis and commercial assessment",
+      "rationale": "Market sizing with methodology. Pricing and reimbursement landscape. Payer and HTA considerations. Commercial model assumptions (partner vs. self)."
+    },
+    {
+      "item": "Corporate documentation",
+      "rationale": "Cap table and prior funding terms. Material contracts (licenses, collaboration). Corporate structure including any academic relationships. Employee agreements and IP assignment."
+    },
+    {
+      "item": "Risk analysis",
+      "rationale": "Comprehensive risk assessment: scientific, regulatory, commercial, competitive. Risk mitigation strategies. Honest assessment of program-killing risks. Pivot options if primary approach fails."
+    },
+    {
+      "item": "Non-dilutive funding documentation",
+      "rationale": "Grant applications and awards. Foundation support. Pharma collaboration terms if applicable. Future non-dilutive funding pipeline."
     }
   ]
 }

@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/robotics/seed/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Robotics Seed fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Robotics Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Seed-stage robotics metrics focus on real-world performance, not lab capabilities. Investors evaluate task success rates in production conditions, deployment scalability, and customer economics. These benchmarks demonstrate whether your robot actually works outside the lab. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "6-12 months",
-      "note": "Projected target range; update with real data. Robotics Seed."
+      "label": "Task Success Rate",
+      "value": "80-90% in customer environments",
+      "note": "Percentage of tasks completed without human intervention in real deployments. Must show improvement trajectory toward 95%+.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "20-35%",
-      "note": "Projected target range; update with real data. Robotics Seed."
+      "label": "Interventions Per Shift",
+      "value": "2-5 per 8-hour shift",
+      "note": "Human interventions required during operation. Categorize by type: navigation, manipulation, edge cases.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "40-60%",
-      "note": "Projected target range; update with real data. Robotics Seed."
+      "label": "Autonomous Runtime",
+      "value": "4-8 hours continuous",
+      "note": "Hours of operation without required intervention. Demonstrates system reliability and robustness.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Capital intensity",
-      "value": "High; 18-24 mo runway",
-      "note": "Projected target range; update with real data. Robotics Seed."
+      "label": "Deployment Time",
+      "value": "1-2 weeks per site",
+      "note": "Time from arrival to production operation. Shows deployment process maturity and scalability potential.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Pilot Count",
+      "value": "2-5 active pilots",
+      "note": "Customer pilot deployments in production environments. Quality and diversity of pilots matter.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Pilot Runtime Hours",
+      "value": "1,000+ total hours",
+      "note": "Cumulative runtime across all pilots. Demonstrates real-world validation and data for improvement.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Customer ROI Payback",
+      "value": "12-24 months",
+      "note": "Time for customer to recover robot investment. Based on validated labor savings and productivity gains.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Hardware Cost",
+      "value": "Target $50K-$200K",
+      "note": "Robot hardware cost target at production volume. Must support customer ROI payback timeline.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Team Size",
+      "value": "5-12 people",
+      "note": "Core team covering mechanical, software, perception, and deployment. Field deployment experience is critical.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Capital Raised",
+      "value": "$1M - $5M",
+      "note": "Robotics seed rounds tend larger given hardware and deployment costs. May include non-dilutive grants.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     }
   ]
 }

@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/hardware/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Hardware Seed investor update template",
-  "summary": "Projected update format for Hardware founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Seed-stage hardware investor updates focus on development progress and manufacturing readiness. Given the tangible nature of hardware, investors want to see physical progress—prototypes advancing, field testing expanding, and manufacturing challenges being solved. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Development Progress Summary",
+      "content": "Lead with the most significant product development achievement this period. Show tangible progress: prototype generations completed, testing milestones hit, design improvements made. Include photos or video of progress. Hardware investors want to see physical advancement."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Manufacturing Readiness",
+      "content": "Report on manufacturing progress: BOM cost trajectory, FPY improvements, supplier relationships. Include any DFM changes or manufacturing process developments. Show you're systematically preparing for production scale."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Customer & Market Validation",
+      "content": "Update on customer engagement: new pilots, pre-orders, feedback received. Include field deployment expansion and performance data. Report on pricing validation and market response. Show demand building alongside product development."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Technical Milestones",
+      "content": "Detail engineering progress: features completed, performance improvements, issues resolved. Report on certification progress if applicable. Include any technical pivots or learning with impact on timeline."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Quality & Reliability",
+      "content": "Report on quality metrics: FPY trends, field failure rates, MTBF data if available. Include root cause analysis on issues and corrective actions. Show quality improving as you approach production."
     },
     {
-      "section": "Manufacturing readiness (Seed)",
-      "content": "Summarize production milestones and cost improvements."
+      "section": "Team & Operations",
+      "content": "Update on team: key hires, capability additions, any departures. Include facility or equipment developments. Report on any operational challenges and solutions."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for Hardware founders at Seed."
+      "section": "Financial Status",
+      "content": "Cash position, burn rate, and runway. Performance against budget with variance explanation. Include any non-dilutive funding (grants, pre-orders). Show capital efficiency in hardware development."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next period priorities with specific milestones. Areas where investor help is valuable: manufacturing introductions, customer connections, technical advisors. Flag any decisions needing board input."
     }
   ]
 }

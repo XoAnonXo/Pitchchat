@@ -112,6 +112,36 @@ export const pseoObjections = pgTable("pseo_objections", {
 });
 
 /**
+ * UGC intake for anonymized investor questions (moderated before publishing).
+ */
+export const pseoUgcSubmissions = pgTable(
+  "pseo_ugc_submissions",
+  {
+    id: serial("id").primaryKey(),
+    industrySlug: varchar("industry_slug", { length: 64 }).notNull(),
+    stageSlug: varchar("stage_slug", { length: 64 }).notNull(),
+    category: varchar("category", { length: 120 }),
+    question: text("question").notNull(),
+    answer: text("answer").notNull(),
+    contactEmail: varchar("contact_email", { length: 200 }),
+    sourceUrl: varchar("source_url", { length: 256 }),
+    consent: boolean("consent").default(false).notNull(),
+    status: varchar("status", { length: 32 }).default("pending").notNull(),
+    ipHash: varchar("ip_hash", { length: 64 }),
+    userAgent: text("user_agent"),
+    submittedAt: timestamp("submitted_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("pseo_ugc_submissions_industry_stage_idx").on(
+      table.industrySlug,
+      table.stageSlug
+    ),
+    index("pseo_ugc_submissions_status_idx").on(table.status),
+    index("pseo_ugc_submissions_ip_hash_idx").on(table.ipHash),
+  ]
+);
+
+/**
  * Anonymized investor question analytics with k-anonymity (k >= 10).
  * Stores aggregated metrics only—no individual user data.
  * Used for proprietary data differentiation and content optimization.

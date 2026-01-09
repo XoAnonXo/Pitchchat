@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/robotics/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Robotics Seed investor update template",
-  "summary": "Projected update format for Robotics founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Seed-stage robotics investor updates focus on real-world performance improvement and pilot expansion. Show progress toward production-viable success rates and deployment scalability. Demonstrate you're systematically solving the hard problems of robotics deployment. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Performance Summary",
+      "content": "Lead with key production metrics: task success rate, interventions, runtime hours. Show trajectory over time—are you improving? Include data from newest pilots and how it compares to earlier deployments. This should demonstrate progress toward production viability."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Pilot Deployments",
+      "content": "Update on pilot status: new pilots started, pilots concluded, active deployments. Include deployment learnings and process improvements. Show diversity of environments and tasks covered. Present customer feedback and testimonials from recent pilots."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Technical Progress",
+      "content": "Detail technical improvements: success rate drivers, failure mode reductions, new capabilities. Show how you're addressing the issues you're seeing in deployment. Include hardware iterations if relevant. Connect technical progress to production readiness."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Deployment Process",
+      "content": "Report on deployment efficiency: time per deployment, customer requirements evolution, remote support capabilities. Show how you're systematizing deployment for scale. Include any tools or automation being developed."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Customer Development",
+      "content": "Update on customer pipeline: new prospects, conversion progress, expansion opportunities. Include customer economics validation from pilots. Report on market feedback and positioning learning."
     },
     {
-      "section": "Field reliability (Seed)",
-      "content": "Report uptime, deployment progress, and support insights."
+      "section": "Team & Operations",
+      "content": "Report on team: key hires, capability additions. Include any safety incidents (hopefully none) and learnings. Operational infrastructure development for scale."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for Robotics founders at Seed."
+      "section": "Financial Status",
+      "content": "Cash position, burn rate, runway. Performance against budget. Include any pilot revenue or customer deposits. Hardware costs and trajectory."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next period priorities with specific performance targets. Areas where investor help is valuable: customer introductions, technical advisors, hiring. Strategic decisions needing input."
     }
   ]
 }

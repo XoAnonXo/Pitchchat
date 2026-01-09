@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/robotics/seed/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Robotics Seed startups",
-  "summary": "Projected deck structure for Robotics founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Robotics seed pitch decks must bridge the gap between impressive technology and real-world viability. Investors are skeptical of demos—show production reality. Lead with customer deployment evidence, not lab capabilities. Demonstrate you understand the challenges of deploying robots at scale. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Robot in Action",
+      "goal": "Show the robot doing real work, not demo tasks",
+      "guidance": "Open with video or images of the robot in actual customer environments—not a lab demo. Show the real task being performed. Include customer context: what environment, what problem. Make it tangible and credible. Avoid over-edited demo videos that hide failures."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Problem & Market",
+      "goal": "Frame the problem and why robotics is the right solution",
+      "guidance": "Identify specific workflows where robotics creates clear value. Show the pain point: labor shortages, dangerous tasks, productivity constraints. Size the market based on specific customer segments. Explain why robotics is newly viable for this application—technology enablers, cost trajectory, or workflow changes."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Solution & Capabilities",
+      "goal": "Demonstrate technical capabilities with production evidence",
+      "guidance": "Present robot capabilities with specificity: task types, success rates, operational conditions. Show technical differentiation from other approaches. Include metrics from real deployments, not lab benchmarks. Address the gap between current capabilities and production requirements with clear development path."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Deployment Reality",
+      "goal": "Show you understand the deployment challenge",
+      "guidance": "Present your deployment process: timeline, customer requirements, training needs. Show deployment learnings and process improvements. Address scaling challenges and how you'll address them. This slide separates real robotics companies from research projects."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Customer Evidence",
+      "goal": "Let pilot customers validate your robot",
+      "guidance": "Present pilot deployment results: runtime, success rates, customer feedback. Include testimonials from customers who've deployed your robot. Show diversity of pilots if applicable. Address any pilot failures and learnings. Customer evidence is the most credible proof in robotics."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Customer Economics",
+      "goal": "Demonstrate clear customer ROI",
+      "guidance": "Present customer economic analysis: labor costs, productivity gains, total ROI. Show payback period on robot investment. Include total cost of ownership: purchase, deployment, support. Reference customer validation of ROI. Economics must be compelling to overcome adoption friction."
+    },
+    {
+      "title": "Business Model",
+      "goal": "Show how you'll make money",
+      "guidance": "Present pricing model: hardware sale, RaaS, hybrid approach. Show unit economics at scale. Include service revenue streams: deployment, support, upgrades. Address working capital implications of hardware business. Demonstrate you've thought through the business model challenges."
+    },
+    {
+      "title": "Competitive Landscape",
+      "goal": "Position against other approaches",
+      "guidance": "Map competitive landscape: other robotics companies, automation alternatives, status quo. Show differentiation on dimensions that matter to customers. Address large companies (Amazon, Google) potentially entering your space. Include technical comparisons where you have advantages."
     },
     {
       "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "goal": "Demonstrate robotics expertise and deployment experience",
+      "guidance": "Highlight robotics-specific experience: prior robots deployed, technical depth, field experience. Address key capabilities: mechanical, perception, controls, deployment. Show advisors who fill gaps. Robotics investors value teams who've seen robots fail in the field."
     },
     {
-      "title": "Reliability validation",
-      "goal": "Prove system reliability in the field.",
-      "guidance": "Share testing, uptime goals, and support strategy."
-    },
-    {
-      "title": "Seed milestones",
-      "goal": "Highlight proof points for Seed.",
-      "guidance": "Detail the specific milestones investors expect for Robotics Seed."
-    },
-    {
-      "title": "Robotics go-to-market wedge (Seed)",
-      "goal": "Explain your entry point for Robotics.",
-      "guidance": "Show a focused wedge that fits Robotics buyers at the Seed stage."
-    },
-    {
-      "title": "Robotics proof points",
-      "goal": "Show evidence tailored to Robotics.",
-      "guidance": "Use data or pilots specific to Robotics to prove momentum at Seed."
+      "title": "Funding & Milestones",
+      "goal": "Present capital needs and path to production scale",
+      "guidance": "Show raise amount and use of funds: development, pilots, hardware. Present milestones this capital achieves: success rate targets, deployment count, revenue. Include total capital path to production scale. Be realistic about robotics capital intensity and timeline."
     }
   ]
 }

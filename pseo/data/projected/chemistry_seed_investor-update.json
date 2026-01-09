@@ -1,0 +1,39 @@
+{
+  "industry": "chemistry",
+  "stage": "seed",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/chemistry/seed/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Chemistry Seed investor update template",
+  "summary": "Projected update format for Chemistry founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "sections": [
+    {
+      "section": "Highlights",
+      "content": "Summarize the most meaningful wins since the last update."
+    },
+    {
+      "section": "Key metrics",
+      "content": "Share the handful of metrics that show momentum and retention."
+    },
+    {
+      "section": "Product",
+      "content": "List major product milestones and what they unlock next."
+    },
+    {
+      "section": "Go-to-market",
+      "content": "Explain pipeline progress and conversion velocity."
+    },
+    {
+      "section": "Help needed",
+      "content": "Ask for specific customer intros or domain expertise."
+    },
+    {
+      "section": "Scale-up progress (Seed)",
+      "content": "Detail yield improvements and pilot plant milestones."
+    },
+    {
+      "section": "Seed milestones",
+      "content": "Summarize the milestone progress expected for Chemistry founders at Seed."
+    }
+  ]
+}

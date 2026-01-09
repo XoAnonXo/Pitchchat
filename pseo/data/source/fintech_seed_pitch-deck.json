@@ -1,0 +1,68 @@
+{
+  "industry": "fintech",
+  "stage": "seed",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/fintech/seed/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Pitch deck outline for Fintech Seed startups",
+  "summary": "Fintech seed decks must demonstrate regulatory viability, sustainable unit economics, and risk management sophistication. Investors expect domain expertise and evidence you can navigate financial services complexity. Lead with your differentiated approach to an underserved segment, show early traction, and present a credible regulatory and partnership strategy. Pitchchat turns your deck into an interactive pitch room for investors.",
+  "sections": [
+    {
+      "title": "Problem",
+      "goal": "Define a specific financial services pain point with clear customer and economic impact",
+      "guidance": "Fintech investors see many 'banking is broken' pitches. Differentiate by naming the exact customer, the specific pain, and the economic impact. Quantify: fees paid, time wasted, opportunities missed, or financial outcomes affected. Show you understand how this problem is currently addressed and why solutions fail your target customer. Reference your personal connection to or deep understanding of the problem."
+    },
+    {
+      "title": "Solution",
+      "goal": "Demonstrate your product and its differentiated value proposition",
+      "guidance": "Show the product, not just describe it. Explain what makes your approach different: better economics, underserved segment focus, technology advantage, or distribution innovation. Address the regulatory structure that enables your solution. Make clear how you make money and why that's sustainable. The best fintech solutions feel obvious in retrospect—show why this approach works now."
+    },
+    {
+      "title": "Market Opportunity",
+      "goal": "Size the opportunity with fintech-specific rigor",
+      "guidance": "Build bottom-up from your specific customer segment. Reference transaction volumes, account numbers, or addressable spending. Show current economics of the market: what do customers pay today? Present your entry point and expansion path. Avoid 'disrupting X trillion' claims—show you understand your specific wedge. Reference comparable fintech company market sizes."
+    },
+    {
+      "title": "Traction",
+      "goal": "Prove early product-market fit with quality metrics",
+      "guidance": "Lead with metrics that matter: active users, transaction volume, revenue, retention. Show customer quality, not just quantity. Include evidence of engagement: usage frequency, transaction patterns, NPS. Present customer testimonials that demonstrate real value delivered. If early, show waitlist, pilot results, or evidence of demand. Quality of customers matters as much as quantity in fintech."
+    },
+    {
+      "title": "Business Model & Unit Economics",
+      "goal": "Demonstrate sustainable economics and path to profitability",
+      "guidance": "Present your revenue model clearly: interchange, subscriptions, interest margin, transaction fees. Show current unit economics: CAC, LTV, revenue per user, contribution margin. Be honest about what's working and what isn't. Show the path to improved economics at scale. Address variable costs that scale with growth: processing, compliance, risk losses. Fintech investors are highly skeptical of economics—demonstrate mastery."
+    },
+    {
+      "title": "Regulatory & Partnerships",
+      "goal": "Show regulatory competence and partnership stability",
+      "guidance": "Present your regulatory structure: which licenses, which partnerships, how you operate compliantly. Show your banking or BaaS relationships. Address regulatory risk factors for your product type. Reference team expertise in navigating financial services regulation. Include compliance and risk management as competitive advantages, not just costs."
+    },
+    {
+      "title": "Risk Management",
+      "goal": "Demonstrate risk management sophistication",
+      "guidance": "Present your approach to fraud, credit risk (if applicable), and operational risk. Show early metrics: fraud rates, loss rates, dispute rates. Explain how risk management improves with scale and data. Reference team experience in financial services risk. This section differentiates sophisticated fintech founders from those who don't understand the business."
+    },
+    {
+      "title": "Competition",
+      "goal": "Position credibly in a crowded landscape",
+      "guidance": "Include all relevant competitors: neobanks, incumbents, other startups. Position honestly—you won't win on every dimension. Explain your specific advantage and which customers care about it. Show evidence: customer feedback, competitive wins. Address why incumbents won't copy your approach. Demonstrate deep competitive knowledge."
+    },
+    {
+      "title": "Team",
+      "goal": "Show domain expertise and ability to execute",
+      "guidance": "Highlight financial services experience: banking, payments, lending, compliance, risk. Show you have the expertise to navigate fintech complexity. Address gaps and hiring plans. Include advisors with relevant experience. Reference relevant prior company experience. Team is critical in fintech—domain expertise is expected."
+    },
+    {
+      "title": "Ask & Milestones",
+      "goal": "Clear ask with realistic fintech milestones",
+      "guidance": "State round size and use of funds. Present milestones that matter for fintech Series A: customer metrics, revenue targets, regulatory achievements, risk performance. Be realistic about timeline—fintech takes longer than pure software. Show the path to Series A requirements and what risks remain."
+    }
+  ]
+}

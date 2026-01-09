@@ -96,9 +96,27 @@ const statements = [
     response TEXT NOT NULL,
     sort_order INTEGER NOT NULL DEFAULT 0
   );`,
+  `CREATE TABLE IF NOT EXISTS pseo_ugc_submissions (
+    id SERIAL PRIMARY KEY,
+    industry_slug VARCHAR(64) NOT NULL,
+    stage_slug VARCHAR(64) NOT NULL,
+    category VARCHAR(120),
+    question TEXT NOT NULL,
+    answer TEXT NOT NULL,
+    contact_email VARCHAR(200),
+    source_url VARCHAR(256),
+    consent BOOLEAN NOT NULL DEFAULT FALSE,
+    status VARCHAR(32) NOT NULL DEFAULT 'pending',
+    ip_hash VARCHAR(64),
+    user_agent TEXT,
+    submitted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  );`,
   `CREATE INDEX IF NOT EXISTS pseo_pages_industry_idx ON pseo_pages (industry_id);`,
   `CREATE INDEX IF NOT EXISTS pseo_pages_stage_idx ON pseo_pages (stage_id);`,
   `CREATE INDEX IF NOT EXISTS pseo_pages_type_idx ON pseo_pages (page_type_id);`,
+  `CREATE INDEX IF NOT EXISTS pseo_ugc_submissions_industry_stage_idx ON pseo_ugc_submissions (industry_slug, stage_slug);`,
+  `CREATE INDEX IF NOT EXISTS pseo_ugc_submissions_status_idx ON pseo_ugc_submissions (status);`,
+  `CREATE INDEX IF NOT EXISTS pseo_ugc_submissions_ip_hash_idx ON pseo_ugc_submissions (ip_hash);`,
 ];
 
 async function run() {

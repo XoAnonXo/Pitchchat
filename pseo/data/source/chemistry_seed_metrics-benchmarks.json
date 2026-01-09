@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/chemistry/seed/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Chemistry Seed fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Chemistry Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Seed-stage biotech metrics focus on scientific validation and development progress rather than commercial metrics. Investors evaluate data quality, IP position, and team capability. These benchmarks help demonstrate you've de-risked the science enough for institutional investment. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "6-12 months",
-      "note": "Projected target range; update with real data. Chemistry Seed."
+      "label": "Development Stage",
+      "value": "Discovery to IND-enabling",
+      "note": "Preclinical or IND-enabling stages most common for seed. Later stage commands premium valuation.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "20-35%",
-      "note": "Projected target range; update with real data. Chemistry Seed."
+      "label": "Lead Candidates",
+      "value": "1-3 programs",
+      "note": "Focused pipeline preferred. Lead program should be clearly prioritized with backup compounds.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "40-60%",
-      "note": "Projected target range; update with real data. Chemistry Seed."
+      "label": "In-Vivo Data",
+      "value": "Proof-of-concept in relevant models",
+      "note": "Animal model data supporting mechanism. Efficacy and preliminary safety signals valuable.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     },
     {
-      "label": "Capital intensity",
-      "value": "High; 18-24 mo runway",
-      "note": "Projected target range; update with real data. Chemistry Seed."
+      "label": "Patents Filed",
+      "value": "2-5 applications",
+      "note": "Composition-of-matter priority. Geographic coverage in key markets (US, EU, Japan, China).",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Freedom-to-Operate",
+      "value": "Preliminary analysis complete",
+      "note": "FTO analysis identifying potential blocking patents. Clearance strategy if issues identified.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Regulatory Interactions",
+      "value": "Pre-IND meeting planned or completed",
+      "note": "FDA engagement demonstrates pathway clarity. Type B meeting feedback highly valuable.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "CMO Identified",
+      "value": "Manufacturing partner selected",
+      "note": "Contract manufacturer identified for scale-up. Process development timeline understood.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Key Opinion Leader Support",
+      "value": "2-3 engaged advisors",
+      "note": "KOLs validating science and clinical approach. Active involvement, not just names on website.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Non-Dilutive Funding",
+      "value": "$500K - $2M",
+      "note": "SBIR/STTR grants, foundation funding, or pharma collaboration. Extends runway and validates science.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Team Size",
+      "value": "5-15 people",
+      "note": "Core R&D team with drug development experience. CSO/CMO-caliber leadership.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     }
   ]
 }

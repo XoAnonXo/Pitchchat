@@ -1,0 +1,31 @@
+{
+  "industry": "blockchain",
+  "stage": "seed",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/blockchain/seed/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Blockchain Seed fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for Blockchain Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "2-6 months",
+      "note": "Projected target range; update with real data. Blockchain Seed."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "20-40%",
+      "note": "Projected target range; update with real data. Blockchain Seed."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "60-80%",
+      "note": "Projected target range; update with real data. Blockchain Seed."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Moderate; audits 3-6 mo",
+      "note": "Projected target range; update with real data. Blockchain Seed."
+    }
+  ]
+}

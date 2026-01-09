@@ -1,0 +1,31 @@
+{
+  "industry": "blockchain",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/blockchain/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Blockchain Series A fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for Blockchain Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "2-5 months",
+      "note": "Projected target range; update with real data. Blockchain Series A."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "30-50%",
+      "note": "Projected target range; update with real data. Blockchain Series A."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "65-85%",
+      "note": "Projected target range; update with real data. Blockchain Series A."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Moderate; audits 3-6 mo",
+      "note": "Projected target range; update with real data. Blockchain Series A."
+    }
+  ]
+}

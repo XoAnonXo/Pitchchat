@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/hardware/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Hardware Series A startups",
-  "summary": "Projected deck structure for Hardware founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A hardware pitch decks must demonstrate production capability, proven unit economics, and customer traction. Lead with evidence of manufacturing at scale and customers who love the product. Show you've solved the hard problems and have a clear path to growth. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Traction Summary",
+      "goal": "Open with production and revenue proof points",
+      "guidance": "Lead with shipped units, revenue, and customer metrics. Show production capability and quality. Include customer testimonials and NPS. This slide should demonstrate you've solved manufacturing and achieved product-market fit."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Product & Market",
+      "goal": "Present the product and market opportunity",
+      "guidance": "Show the product with customer context—not just engineering specs. Size the market based on proven customer segments. Include competitive positioning and why you win. Show product evolution and roadmap."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Unit Economics",
+      "goal": "Demonstrate viable and improving unit economics",
+      "guidance": "Present current BOM, gross margin, and fully-loaded product cost. Show improvement trajectory at scale with specific drivers. Include comparative analysis to hardware benchmarks. Address target margin at maturity."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Manufacturing & Quality",
+      "goal": "Prove production capability at scale",
+      "guidance": "Present current production capacity and quality metrics. Show FPY and quality trends. Include manufacturing strategy for scaling: expansion plans, CM relationships, investment requirements. This proves you've solved the hard part."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Customer Evidence",
+      "goal": "Let customers prove product-market fit",
+      "guidance": "Present customer testimonials, NPS, and retention data. Show customer segmentation and which segments work best. Include reorder rates and expansion metrics. Address any customer concentration with diversification plan."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Go-to-Market",
+      "goal": "Show scalable customer acquisition",
+      "guidance": "Present sales strategy and channel approach. Show CAC, payback period, and LTV metrics. Include distribution partnerships if relevant. Address inventory and fulfillment at scale. Demonstrate GTM is working and can scale."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Supply Chain & Operations",
+      "goal": "Demonstrate operational maturity",
+      "guidance": "Present supply chain structure and key relationships. Show working capital metrics and management approach. Include operational infrastructure for scale: systems, team, facilities. Address risks and mitigation."
     },
     {
-      "title": "Manufacturing plan",
-      "goal": "Describe production and supply chain readiness.",
-      "guidance": "Highlight partners, tooling, and cost targets."
+      "title": "Product Roadmap",
+      "goal": "Show platform value beyond single product",
+      "guidance": "Present product evolution: variants, generations, adjacencies. Show how you leverage existing capabilities. Include customer input on roadmap. Address margin improvement in future products. Demonstrate you're building a platform."
     },
     {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for Hardware Series A."
+      "title": "Team & Organization",
+      "goal": "Show operational and scaling capability",
+      "guidance": "Present team with manufacturing and operations emphasis. Show organizational evolution and key hires made. Include hiring plan for this round. Address any organizational gaps and plans to fill them."
     },
     {
-      "title": "Hardware go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for Hardware.",
-      "guidance": "Show a focused wedge that fits Hardware buyers at the Series A stage."
-    },
-    {
-      "title": "Hardware proof points",
-      "goal": "Show evidence tailored to Hardware.",
-      "guidance": "Use data or pilots specific to Hardware to prove momentum at Series A."
+      "title": "Financial Plan & Ask",
+      "goal": "Present clear path to profitability",
+      "guidance": "Show revenue projections and path to profitability. Present this round's milestones and use of funds. Include working capital requirements. Define Series B bar and your plan to exceed it. Close with clear ask and conviction."
     }
   ]
 }

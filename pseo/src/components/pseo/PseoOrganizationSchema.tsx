@@ -16,12 +16,14 @@ export function PseoOrganizationSchema() {
     "@id": `${siteUrl}/#organization`,
     name: "Pitchchat",
     url: siteUrl,
+    // TODO: Create a static 512x512 PNG logo for better structured data support.
+    // For now using SVG which works but PNG is preferred for Google rich results.
     logo: {
       "@type": "ImageObject",
       "@id": `${siteUrl}/#logo`,
-      url: `${siteUrl}/logo.png`,
-      width: 512,
-      height: 512,
+      url: `${siteUrl}/logo.svg`,
+      width: 100,
+      height: 100,
       caption: "Pitchchat Logo",
     },
     description:

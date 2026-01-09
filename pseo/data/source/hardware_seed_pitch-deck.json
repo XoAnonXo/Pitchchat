@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/hardware/seed/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Hardware Seed startups",
-  "summary": "Projected deck structure for Hardware founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Hardware seed pitch decks must demonstrate both technical capability and manufacturing awareness. Investors evaluate whether you can build a product AND build a business around it. Show prototype progress, unit economics potential, and a realistic path to production scale. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Product Vision",
+      "goal": "Open with the product opportunity and your unique approach",
+      "guidance": "Show the product: images, video, or live demo if possible. Explain what it does and why it matters. Hardware investors want to see and touch—make the product tangible. Open with the user benefit, not the technology. Show the form factor and industrial design direction."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Problem & Market",
+      "goal": "Frame the problem your hardware solves and the market opportunity",
+      "guidance": "Identify specific pain points your hardware addresses. Size the market bottom-up: target customers, their budgets, purchase frequency. Show why existing solutions are inadequate. For B2B, include ROI analysis. Hardware markets are often smaller than software—be realistic about TAM."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Product & Technology",
+      "goal": "Demonstrate technical differentiation and current prototype status",
+      "guidance": "Present the technology that enables your product: what's innovative, what's proven. Show current prototype with specifications. Include comparison to alternatives on key performance dimensions. Address technical risks and your approach to solving them. Hardware credibility comes from specific technical details."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Manufacturing Strategy",
+      "goal": "Show you understand the path from prototype to production",
+      "guidance": "Present your manufacturing approach: contract manufacturing vs. in-house, and why. Show BOM breakdown and cost trajectory to production. Include key supplier relationships and sourcing strategy. Address manufacturing risks and mitigation. This slide separates real hardware companies from projects."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Unit Economics",
+      "goal": "Demonstrate path to viable product margins",
+      "guidance": "Show current prototype cost and target production cost with the path between them. Present target pricing and resulting gross margin. Include volume assumptions for cost improvements. For B2B, show customer ROI that supports your pricing. Investors need confidence in eventual margin structure."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Traction & Validation",
+      "goal": "Prove customer interest and product-market fit potential",
+      "guidance": "Present evidence of demand: pre-orders, pilot deployments, customer feedback. Include any revenue or commitments. Show field testing results and customer testimonials. For crowdfunding products, show campaign performance. Hardware traction is harder than software—quality of evidence matters."
+    },
+    {
+      "title": "Go-to-Market",
+      "goal": "Show how you'll reach customers and scale distribution",
+      "guidance": "Hardware distribution has unique challenges: channel relationships, logistics, support. Present your GTM strategy: direct vs. channel, geographic priorities, partnership approach. Include customer acquisition cost benchmarks if available. Address inventory and fulfillment strategy."
+    },
+    {
+      "title": "Competitive Landscape",
+      "goal": "Position against existing solutions and potential competitors",
+      "guidance": "Map competitors: incumbent products, other startups, potential entrants. Show differentiation on axes that matter to customers. Include your moat: IP, manufacturing capability, customer relationships. Address why incumbents won't simply copy your approach."
     },
     {
       "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "goal": "Demonstrate hardware development and manufacturing capability",
+      "guidance": "Hardware teams need specific skills: mechanical/electrical engineering, manufacturing, supply chain. Highlight relevant experience on the team. Address gaps with hiring plan or advisors. Show you've shipped hardware before if applicable—this is highly valued."
     },
     {
-      "title": "Manufacturing plan",
-      "goal": "Describe production and supply chain readiness.",
-      "guidance": "Highlight partners, tooling, and cost targets."
-    },
-    {
-      "title": "Seed milestones",
-      "goal": "Highlight proof points for Seed.",
-      "guidance": "Detail the specific milestones investors expect for Hardware Seed."
-    },
-    {
-      "title": "Hardware go-to-market wedge (Seed)",
-      "goal": "Explain your entry point for Hardware.",
-      "guidance": "Show a focused wedge that fits Hardware buyers at the Seed stage."
-    },
-    {
-      "title": "Hardware proof points",
-      "goal": "Show evidence tailored to Hardware.",
-      "guidance": "Use data or pilots specific to Hardware to prove momentum at Seed."
+      "title": "Funding & Milestones",
+      "goal": "Present capital needs and what this round achieves",
+      "guidance": "Show your raise amount and use of funds: development, tooling, initial production. Present milestones this capital achieves: design freeze, certification, first production run. Be realistic about total capital to scale—hardware investors appreciate honesty about the journey ahead."
     }
   ]
 }

@@ -2,6 +2,7 @@
   "industry": "ai",
   "stage": "seed",
   "pageType": "investor-questions",
+  "dataOrigin": "anonymized",
   "sourceId": "anon-001",
   "summary": "Anonymized investor Q&A from multiple seed fundraising conversations.",
   "questions": [

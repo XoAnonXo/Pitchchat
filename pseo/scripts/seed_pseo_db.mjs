@@ -5,11 +5,12 @@ import { Client } from "pg";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const configPath = path.join(__dirname, "../src/data/pilot-config.json");
-const fallbackSeedPath = path.join(__dirname, "../data/pilot_seed.json");
-const normalizedSourcePath = path.join(
-  __dirname,
-  "../data/source_normalized.json"
-);
+const normalizedSourcePath = path.join(__dirname, "../data/source_normalized.json");
+const projectedSourcePath = path.join(__dirname, "../data/projected/source_normalized.json");
+const projectedSeedPath = path.join(__dirname, "../data/projected/pilot_seed.json");
+
+const allowSeedFallback = process.env.PSEO_ALLOW_SEED_FALLBACK === "true";
+const allowProjected = process.env.PSEO_ALLOW_PROJECTED === "true";
 
 const connectionString =
   process.env.PSEO_DATABASE_URL ?? process.env.DATABASE_URL ?? "";
@@ -24,9 +25,60 @@ async function loadSeedData() {
   try {
     const raw = await fs.readFile(normalizedSourcePath, "utf8");
     return JSON.parse(raw);
-  } catch {
-    const raw = await fs.readFile(fallbackSeedPath, "utf8");
-    return JSON.parse(raw);
+  } catch (error) {
+    if (!allowSeedFallback) {
+      throw new Error(
+        "source_normalized.json not found. Run pseo:ingest-source or set PSEO_ALLOW_SEED_FALLBACK=true to use projected data."
+      );
+    }
+    try {
+      const raw = await fs.readFile(projectedSourcePath, "utf8");
+      return JSON.parse(raw);
+    } catch {
+      const raw = await fs.readFile(projectedSeedPath, "utf8");
+      return JSON.parse(raw);
+    }
+  }
+}
+
+function hasProvenance(item) {
+  const tags = Array.isArray(item.sourceTags) ? item.sourceTags.filter(Boolean) : [];
+  return Boolean(item.sourceId) || tags.length > 0;
+}
+
+function hasProjectedSignals(item) {
+  const values = [
+    item.title,
+    item.summary,
+    item.sourceNotes,
+    ...(item.metrics ?? []).map((metric) => metric.note),
+  ];
+  return values.some((value) => /projected/i.test(value ?? ""));
+}
+
+function validateSeedItems(items) {
+  if (allowProjected) {
+    return;
+  }
+
+  const failures = [];
+  for (const item of items) {
+    if (item.dataOrigin === "projected" || hasProjectedSignals(item)) {
+      failures.push(`${item.slug ?? item.title ?? "unknown"}: projected content`);
+      continue;
+    }
+    if (!hasProvenance(item)) {
+      failures.push(`${item.slug ?? item.title ?? "unknown"}: missing sourceId or sourceTags`);
+    }
+  }
+
+  if (failures.length > 0) {
+    const error = [
+      "Seed validation failed:",
+      ...failures.map((failure) => `- ${failure}`),
+      "Set PSEO_ALLOW_PROJECTED=true to override.",
+    ].join("\n");
+    throw new Error(error);
   }
 }
 
@@ -104,9 +156,17 @@ async function insertBenchmarks(pageId, metrics) {
   for (const metric of metrics) {
     await client.query(
       `INSERT INTO pseo_benchmarks
-        (page_id, metric, value, notes, sort_order)
-       VALUES ($1, $2, $3, $4, $5)`,
-      [pageId, metric.label, metric.value, metric.note ?? null, sortOrder]
+        (page_id, metric, value, unit, source, notes, sort_order)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [
+        pageId,
+        metric.label,
+        metric.value,
+        metric.unit ?? null,
+        metric.source || null,
+        metric.note ?? null,
+        sortOrder,
+      ]
     );
     sortOrder += 1;
   }
@@ -168,6 +228,7 @@ async function run() {
   const configRaw = await fs.readFile(configPath, "utf8");
   const config = JSON.parse(configRaw);
   const seed = await loadSeedData();
+  validateSeedItems(seed.items ?? []);
 
   await client.connect();
   console.log(`Loaded ${seed.items.length} seed items.`);

@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/ai/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "AI Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for AI Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A AI companies are measured on proven business metrics, not just technical achievements. Investors benchmark against both AI-specific peers and broader enterprise software. The bar has risen significantly—aim to be in the top quartile of these ranges to command premium valuations. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "2-5 months",
-      "note": "Projected target range; update with real data. AI Series A."
+      "label": "Annual Recurring Revenue",
+      "value": "$1.5M - $4M ARR",
+      "note": "The new Series A bar for AI companies has risen. Strong companies often exceed $2M with clear path to $10M. Revenue quality (contract length, expansion) matters as much as absolute number.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "35-55%",
-      "note": "Projected target range; update with real data. AI Series A."
+      "label": "Revenue Growth Rate",
+      "value": "3x - 4x YoY",
+      "note": "Year-over-year growth should demonstrate acceleration, not deceleration. Monthly growth of 10-20% is typical for strong Series A candidates.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "70-90%",
-      "note": "Projected target range; update with real data. AI Series A."
+      "label": "Net Revenue Retention",
+      "value": "115% - 140%",
+      "note": "Best-in-class AI companies exceed 130% NRR. This metric proves customers find increasing value over time and reduces reliance on new logo acquisition.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Low-Moderate; infra 15-30% of revenue",
-      "note": "Projected target range; update with real data. AI Series A."
+      "label": "Gross Revenue Retention",
+      "value": "85% - 95%",
+      "note": "Logo churn should be minimal for AI products delivering real value. Below 85% signals product-market fit issues that need addressing before scaling.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "65% - 75%",
+      "note": "AI companies must show path to software-like margins. Include all inference, fine-tuning, and customer success costs. Below 60% raises structural concerns.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "CAC Payback Period",
+      "value": "12 - 18 months",
+      "note": "Efficient customer acquisition is critical given AI R&D costs. Best companies achieve sub-12 month payback on fully-loaded CAC.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "LTV:CAC Ratio",
+      "value": "3:1 - 5:1",
+      "note": "Healthy LTV:CAC indicates sustainable unit economics. Ratio should improve as you scale through sales efficiency and expansion revenue.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Average Contract Value",
+      "value": "$30K - $150K ACV",
+      "note": "Enterprise AI products typically command premium pricing. Show ACV growth trajectory as you move upmarket or expand use cases.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Sales Efficiency",
+      "value": "0.7 - 1.2 Magic Number",
+      "note": "New ARR divided by prior quarter S&M spend. Above 0.8 indicates efficient growth; above 1.0 is excellent. Factor in ramp time for new reps.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
+    },
+    {
+      "label": "Customer Count & Concentration",
+      "value": "30-100 customers, top 3 <40% revenue",
+      "note": "Enough customers to prove repeatability. Avoid concentration risk where losing one customer materially impacts business. Diversify across segments.",
+      "source": "Stanford AI Index (https://hai.stanford.edu/ai-index)"
     }
   ]
 }

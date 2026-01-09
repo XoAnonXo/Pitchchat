@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/chemistry/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Chemistry Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Chemistry Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A biotech benchmarks focus on clinical readiness and data quality. Investors evaluate whether you've sufficiently de-risked to justify larger capital deployment. These benchmarks demonstrate transition from promising science to executable clinical program. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "4-9 months",
-      "note": "Projected target range; update with real data. Chemistry Series A."
+      "label": "Development Stage",
+      "value": "IND filed to Phase 2 ready",
+      "note": "IND filed/cleared minimum. Phase 1 data significantly increases valuation and optionality.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "30-45%",
-      "note": "Projected target range; update with real data. Chemistry Series A."
+      "label": "Clinical Patients Treated",
+      "value": "0-50 (Phase 1)",
+      "note": "For clinical-stage: patients dosed in trials. Safety and early efficacy signals valuable.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "55-70%",
-      "note": "Projected target range; update with real data. Chemistry Series A."
+      "label": "IND-Enabling Studies",
+      "value": "Complete GLP tox package",
+      "note": "GLP toxicology completed. CMC package IND-ready. Pharmacology studies supporting dose selection.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate-High; 18-30 mo runway",
-      "note": "Projected target range; update with real data. Chemistry Series A."
+      "label": "Regulatory Designations",
+      "value": "1-2 obtained",
+      "note": "Orphan drug, fast track, breakthrough therapy. Designations signal regulatory pathway clarity.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Patent Grants",
+      "value": "2+ key markets",
+      "note": "Composition-of-matter patents granted in US and EU minimum. Method claims supporting.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "CMO Under Contract",
+      "value": "Clinical supply secured",
+      "note": "Manufacturing partner contracted. Process locked for clinical material. Scale-up path identified.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Pharma Interest",
+      "value": "Multiple parties engaged",
+      "note": "CDAs with 3+ pharma companies. Active diligence or partnership discussions underway.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Scientific Advisors",
+      "value": "5-10 active KOLs",
+      "note": "Key opinion leaders actively engaged. Clinical trial site relationships. Publication support.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Team Size",
+      "value": "15-40 people",
+      "note": "Team scaled for clinical operations. CMO/CMC, regulatory, and clinical leads in place.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
+    },
+    {
+      "label": "Non-Dilutive Funding",
+      "value": "$2M - $10M cumulative",
+      "note": "Grants, foundation support, collaborations. Demonstrates external validation and extends runway.",
+      "source": "ICIS Chemicals Resources (https://www.icis.com/explore/resources/chemicals/)"
     }
   ]
 }

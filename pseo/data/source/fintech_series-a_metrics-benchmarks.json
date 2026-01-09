@@ -1,0 +1,78 @@
+{
+  "industry": "fintech",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/fintech/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Fintech Series A fundraising metrics benchmarks",
+  "summary": "Series A fintech benchmarks emphasize proven unit economics and sustainable growth. Investors compare against public fintech metrics and expect trajectory toward industry-leading economics. Growth efficiency matters more than raw growth rate. Pitchchat keeps fundraising metrics investor-ready in one room.",
+  "metrics": [
+    {
+      "label": "Annual Recurring Revenue",
+      "value": "$2M - $10M",
+      "note": "ARR range for Series A fintech. Quality and sustainability matter as much as size.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Revenue Growth Rate",
+      "value": "100-200% YoY",
+      "note": "Year-over-year growth. Show alongside efficiency metrics—growth at reasonable burn.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "50-70%",
+      "note": "Revenue minus cost of revenue. Varies by model—payments lower, lending variable, subscriptions higher.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Contribution Margin",
+      "value": "30-50%",
+      "note": "After variable costs (processing, fraud, support). Path to 60%+ at scale.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "CAC Payback Period",
+      "value": "12-18 months",
+      "note": "Months to recover acquisition cost. Under 12 is excellent for fintech.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "LTV:CAC Ratio",
+      "value": "3:1 - 4:1",
+      "note": "Based on actual cohort behavior. Clear path to 5:1+ expected.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Net Revenue Retention",
+      "value": "100-120%",
+      "note": "Revenue retention including expansion. Above 100% indicates product stickiness.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Logo Retention",
+      "value": "85-95%",
+      "note": "Annual customer retention. Varies by segment—SMB lower, enterprise higher.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Fraud Rate",
+      "value": "< 0.5%",
+      "note": "Fraud losses as percentage of volume. Improving trend expected.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Burn Multiple",
+      "value": "< 2x",
+      "note": "Net burn divided by net new ARR. Measures capital efficiency of growth.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    }
+  ]
+}

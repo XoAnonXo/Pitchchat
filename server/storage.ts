@@ -81,6 +81,7 @@ export interface IStorage {
   getConversationById(id: string): Promise<Conversation | undefined>;
   createConversation(conversation: InsertConversation): Promise<Conversation>;
   updateConversation(id: string, updates: Partial<InsertConversation>): Promise<Conversation>;
+  incrementConversationTotals(conversationId: string, tokenDelta: number, costDelta: number): Promise<void>;
   updateConversationContactDetails(conversationId: string, contactData: {
     contactName: string | null;
     contactPhone: string | null;
@@ -425,6 +426,16 @@ export class DatabaseStorage implements IStorage {
       .where(eq(conversations.id, id))
       .returning();
     return updatedConversation;
+  }
+
+  async incrementConversationTotals(conversationId: string, tokenDelta: number, costDelta: number): Promise<void> {
+    await db
+      .update(conversations)
+      .set({
+        totalTokens: sql`${conversations.totalTokens} + ${tokenDelta}`,
+        costUsd: sql`${conversations.costUsd} + ${costDelta}`,
+      })
+      .where(eq(conversations.id, conversationId));
   }
 
   async getConversationById(id: string): Promise<Conversation | undefined> {

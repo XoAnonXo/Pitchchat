@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/aerospace/seed/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Aerospace Seed fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Aerospace Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Seed-stage aerospace metrics focus on technical progress, team strength, and early commercial validation. Unlike software startups, aerospace companies are measured on development milestones and risk reduction rather than revenue growth. These benchmarks help investors assess your technical and commercial maturity. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "6-12 months",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Technology Readiness Level",
+      "value": "TRL 4-6",
+      "note": "NASA's TRL scale is the standard measure. Seed companies should have lab-validated technology (TRL 4) progressing toward relevant environment testing (TRL 5-6).",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "20-35%",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Manufacturing Readiness Level",
+      "value": "MRL 3-5",
+      "note": "For hardware companies, MRL indicates production scalability. Seed stage typically shows prototype component capability in lab environment.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "40-60%",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Non-Dilutive Funding Secured",
+      "value": "$500K - $2M",
+      "note": "SBIR Phase I/II, NASA contracts, DoD funding provide technical validation and extend runway without dilution.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Capital intensity",
-      "value": "High; 18-24 mo runway",
-      "note": "Projected target range; update with real data. Aerospace Seed."
+      "label": "Letters of Intent",
+      "value": "1-3 LOIs",
+      "note": "Customer or partner LOIs demonstrate market interest. Government program interest or prime contractor engagement counts heavily.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Patent Applications",
+      "value": "1-3 filed",
+      "note": "IP protection is important in aerospace. Provisional or full utility patents on core technology show defensibility.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Team Size",
+      "value": "3-8 people",
+      "note": "Small but capable team with deep aerospace expertise. Key roles: technical lead, systems engineer, business development.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Prototype Status",
+      "value": "Component or subsystem level",
+      "note": "Seed-stage companies typically have validated key components or subsystems, not full systems.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Regulatory Engagement",
+      "value": "Initial discussions initiated",
+      "note": "Evidence of regulatory pathway planning: FAA pre-application meetings, FCC filings, ITAR classification.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Development Timeline",
+      "value": "24-48 months to demonstration",
+      "note": "Realistic timeline to major technical demonstration or prototype. Aerospace timelines are longer than software.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Capital Raised",
+      "value": "$1M - $5M pre-seed/seed",
+      "note": "Total capital raised to date including non-dilutive. Aerospace seed rounds tend to be larger than software given capital intensity.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     }
   ]
 }

@@ -43,6 +43,12 @@ function normalizeText(value) {
   return value.trim();
 }
 
+function normalizeOrigin(value) {
+  const normalized = normalizeText(value).toLowerCase();
+  if (!normalized) return "anonymized";
+  return normalized;
+}
+
 function ensureArray(value) {
   if (Array.isArray(value)) return value;
   return [];
@@ -111,6 +117,7 @@ function buildBase(raw, industryLabel, stageLabel, pageType) {
     sourceId: normalizeText(raw.sourceId),
     sourceNotes: normalizeText(raw.sourceNotes),
     sourceTags,
+    dataOrigin: normalizeOrigin(raw.dataOrigin),
   };
 }
 
@@ -130,6 +137,8 @@ function normalizeInvestorQuestions(raw, industryLabel, stageLabel) {
     label: normalizeText(item.label),
     value: normalizeText(item.value),
     note: normalizeText(item.note),
+    unit: normalizeText(item.unit),
+    source: normalizeText(item.source),
   }));
 
   const base = buildBase(raw, industryLabel, stageLabel, "investor-questions");
@@ -176,6 +185,8 @@ function normalizeBenchmarks(raw, industryLabel, stageLabel) {
     label: normalizeText(item.label),
     value: normalizeText(item.value),
     note: normalizeText(item.note),
+    unit: normalizeText(item.unit),
+    source: normalizeText(item.source),
   }));
 
   const base = buildBase(raw, industryLabel, stageLabel, "metrics-benchmarks");

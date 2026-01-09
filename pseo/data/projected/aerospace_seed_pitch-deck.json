@@ -1,0 +1,66 @@
+{
+  "industry": "aerospace",
+  "stage": "seed",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/aerospace/seed/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Pitch deck outline for Aerospace Seed startups",
+  "summary": "Projected deck structure for Aerospace founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "sections": [
+    {
+      "title": "Problem",
+      "goal": "Show the pain and why now matters.",
+      "guidance": "Quantify the problem with a clear market shift or constraint."
+    },
+    {
+      "title": "Solution",
+      "goal": "Explain the product in one sentence.",
+      "guidance": "Focus on the core workflow and the wedge you own."
+    },
+    {
+      "title": "Market",
+      "goal": "Define the reachable initial market.",
+      "guidance": "Start with the first buyer segment and a realistic wedge."
+    },
+    {
+      "title": "Traction",
+      "goal": "Prove early demand signals.",
+      "guidance": "Highlight pilots, LOIs, or early revenue."
+    },
+    {
+      "title": "Business model",
+      "goal": "Explain how money is made.",
+      "guidance": "Show pricing logic tied to value delivered."
+    },
+    {
+      "title": "Moat",
+      "goal": "Defensibility beyond execution speed.",
+      "guidance": "Data, IP, approvals, or operational scale."
+    },
+    {
+      "title": "Team",
+      "goal": "Why this team can win.",
+      "guidance": "Emphasize domain expertise and execution history."
+    },
+    {
+      "title": "Certification roadmap",
+      "goal": "Explain safety and certification milestones.",
+      "guidance": "Show the path to regulatory approval and commercialization."
+    },
+    {
+      "title": "Seed milestones",
+      "goal": "Highlight proof points for Seed.",
+      "guidance": "Detail the specific milestones investors expect for Aerospace Seed."
+    },
+    {
+      "title": "Aerospace go-to-market wedge (Seed)",
+      "goal": "Explain your entry point for Aerospace.",
+      "guidance": "Show a focused wedge that fits Aerospace buyers at the Seed stage."
+    },
+    {
+      "title": "Aerospace proof points",
+      "goal": "Show evidence tailored to Aerospace.",
+      "guidance": "Use data or pilots specific to Aerospace to prove momentum at Seed."
+    }
+  ]
+}

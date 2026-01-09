@@ -38,13 +38,16 @@ This folder summarizes what has been implemented for the Pitchchat pSEO effort s
   - `/investor-questions/stages/`
 - JSON-LD schema per template (FAQPage, HowTo, Dataset, Article).
 - GEO tuning: direct-answer lead copy plus at-a-glance <dl> blocks in each template.
+- Coverage charts: `PseoCountChart` shows data completeness per template.
 - Internal linking expansion: added related combinations and hub links in `PseoInternalLinks`.
 - Neighbor mesh: `pseo/src/data/industry-neighbors.json` powers related industry links.
 - CTA A/B: `PseoCtaButton` assigns variants A/B, appends utm + cta_variant params, and tracks view/click events.
 - CTA metrics: see `pseo_status/cta_metrics.md` for success criteria and reporting.
+- UGC intake: `PseoUgcForm` posts to `/api/ugc/investor-questions` and stores pending entries in `pseo_ugc_submissions`.
 - Raw ingestion: drop anonymized files into `pseo/data/raw/` and run `npm run pseo:enrich-raw`.
 - Conditional visibility: templates now render fallback copy when sections are empty.
 - Canonicals/metadata: added canonical alternates + OpenGraph/Twitter metadata for pSEO pages and hubs.
+- Projected placeholder data now lives under `pseo/data/projected/` (dev only).
 - PR templates: see `pseo_status/pr/press_release_template.md` and `pseo_status/pr/report_outline.md`.
 - Monitoring runbook: `pseo_status/monitoring/runbook.md` and `pseo_status/monitoring/checklist.md`.
 - Monitoring summary script: `npm run pseo:monitoring-summary` writes `pseo/data/monitoring_summary.json`.
@@ -67,7 +70,7 @@ This folder summarizes what has been implemented for the Pitchchat pSEO effort s
   - `pseo/scripts/prune_report.mjs`
 
 ## Data flow
-1) Projected data JSONs live in `pseo/data/source/`.
+1) Anonymized source JSONs live in `pseo/data/source/`.
 2) `pseo/scripts/ingest_source.mjs` creates `pseo/data/source_normalized.json`.
 3) `pseo/scripts/seed_pseo_db.mjs` upserts into Postgres (uses DATABASE_URL).
 4) Next.js pages read from DB via `pseo/src/db/queries.ts`.
@@ -76,16 +79,26 @@ This folder summarizes what has been implemented for the Pitchchat pSEO effort s
 Run in `pseo/`:
 ```
 npm run pseo:generate-projected
+npm run pseo:generate-editorial
 npm run pseo:ingest-source
 npm run pseo:quality-check
 set -a; source ../.env; set +a; npm run pseo:seed
 npm run pseo:validate-sitemaps
+npm run pseo:generate-report
 ```
+
+Notes:
+- `pseo:generate-projected` writes to `pseo/data/projected/` (dev only).
+- `pseo:generate-editorial` writes to `pseo/data/source/` using editorial content.
 
 Prune report (requires GSC export path):
 ```
 npm run pseo:prune-report -- --input /path/to/gsc.csv
 ```
+
+Report drafts:
+- `pseo_status/pr/press_release_draft.md`
+- `pseo_status/pr/report_draft.md`
 
 ## Quality gate thresholds (current defaults)
 - Summary length >= 80 chars.
@@ -101,8 +114,12 @@ npm run pseo:prune-report -- --input /path/to/gsc.csv
 - `NEXT_PUBLIC_SITE_URL` (optional; defaults to https://pitchchat.ai).
 - `NEXT_PUBLIC_SIGNUP_URL` (optional; used by CTA button).
 - `NEXT_PUBLIC_GA_ID` (optional; enables GA4).
+- `PSEO_ALLOW_SEED_FALLBACK=true` (optional; allow seed/projection content in non-prod).
+- `PSEO_ALLOW_PROJECTED=true` (optional; allow projected data to seed).
+- `PSEO_UGC_SALT` (required in production for UGC IP hashing).
 
 ## Where to resume
 - Plan doc: `docs/pseo_plan.md`.
 - Run prune report when GSC export is available (file path needed).
 - Swap projected data with anonymized real data in `pseo/data/source/`.
+  - Add `dataOrigin` + `sourceId` or `sourceTags` to pass quality gates.

@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/blockchain/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Blockchain Series A diligence checklist",
-  "summary": "Projected diligence checklist for Blockchain founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A blockchain diligence is comprehensive, covering business fundamentals, security depth, regulatory status, and tokenomics sustainability. Prepare for thorough technical review and institutional-grade documentation. Quality of preparation reflects operational maturity. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Comprehensive security audit history and remediation",
+      "rationale": "All audit reports with remediation evidence. Ongoing security program documentation. Bug bounty statistics and payouts. Incident history with response analysis. Insurance coverage and limits. Security is institutional table stakes."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Financial model with protocol economics analysis",
+      "rationale": "Detailed financial model: revenue drivers, cost structure, path to profitability. Protocol economics analysis: fee sustainability, token emission impact, treasury runway. Scenario analysis for different adoption levels."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Regulatory compliance documentation",
+      "rationale": "Comprehensive regulatory file: licenses obtained, registrations, legal opinions on token status, regulator correspondence. Compliance program documentation. Legal structure and jurisdictional analysis."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "On-chain analytics with organic/incentivized segmentation",
+      "rationale": "Detailed on-chain metrics with methodology. Organic vs. incentivized user segmentation. Retention cohort analysis. TVL composition and concentration. Transaction pattern analysis. Transparency in methodology."
     },
     {
-      "item": "Security audits and governance policies (Series A)",
-      "rationale": "Mitigates protocol risk and regulatory exposure."
+      "item": "Tokenomics documentation with sustainability modeling",
+      "rationale": "Complete tokenomics documentation: distribution, emissions, value accrual, governance. Economic modeling showing sustainability scenarios. Comparison to successful tokenomics models. Treasury management policies."
     },
     {
-      "item": "Series A readiness summary for Blockchain",
-      "rationale": "Signals you can close a Series A round in Blockchain."
+      "item": "Competitive analysis with market positioning evidence",
+      "rationale": "Detailed competitive landscape: market share analysis, technical benchmarking, win/loss data. Fork analysis and outcomes. Integration and partnership analysis. Moat documentation."
+    },
+    {
+      "item": "Governance documentation and decentralization metrics",
+      "rationale": "Governance process documentation. Participation metrics and trends. Decentralization roadmap with milestones achieved. Admin key status and removal timeline. Community decision documentation."
+    },
+    {
+      "item": "Technical architecture and upgrade documentation",
+      "rationale": "System architecture documentation. Smart contract design and upgrade mechanisms. Chain selection rationale. Multi-chain strategy documentation. Technical roadmap and capability evolution."
+    },
+    {
+      "item": "Enterprise and institutional user references",
+      "rationale": "References from significant users: enterprise customers, institutional TVL providers, major integrations. Case studies of institutional adoption. Requirements they imposed and how you met them."
+    },
+    {
+      "item": "Team evaluation with crypto experience verification",
+      "rationale": "Detailed team backgrounds with crypto experience verified. Key person risk analysis. Organizational structure and scaling plan. Compensation benchmarking. Reference checks on key personnel."
+    },
+    {
+      "item": "Treasury and token management documentation",
+      "rationale": "Treasury composition and management policies. Multi-sig setup and key management. Vesting schedules and unlock analysis. Market impact analysis for scheduled unlocks."
+    },
+    {
+      "item": "Cap table with token allocation reconciliation",
+      "rationale": "Complete cap table reconciling equity and token allocations. Prior funding terms for all rounds. SAFT/SAFE conversion mechanics. Any complex structures or unusual terms explained."
     }
   ]
 }

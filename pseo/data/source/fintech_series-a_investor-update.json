@@ -1,0 +1,50 @@
+{
+  "industry": "fintech",
+  "stage": "series-a",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/fintech/series-a/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Fintech Series A investor update template",
+  "summary": "Series A fintech updates should emphasize unit economics, growth efficiency, and risk performance. Investors need to see a path to sustainable profitability, not just growth. Be transparent about regulatory developments and partnership health. Pitchchat helps founders share updates in a single room.",
+  "sections": [
+    {
+      "section": "Key Metrics Dashboard",
+      "content": "Lead with core metrics: ARR, growth rate, unit economics (CAC, LTV, payback), contribution margin. Show efficiency metrics: burn multiple, gross margin trend. Include risk metrics: fraud rate, loss rate, NRR. Use consistent formatting for easy tracking. Fintech investors scrutinize economics—show them clearly."
+    },
+    {
+      "section": "Growth & Efficiency",
+      "content": "Revenue growth with channel breakdown. CAC trends and efficiency improvements. Customer acquisition and activation metrics. Pipeline and conversion rates. Marketing and sales productivity. Show growth is efficient, not just fast."
+    },
+    {
+      "section": "Unit Economics Progress",
+      "content": "CAC by channel with trends. LTV and retention metrics. Contribution margin evolution. Payback period improvement. Path to target economics. Be honest about what's working and what needs improvement."
+    },
+    {
+      "section": "Risk & Compliance",
+      "content": "Fraud and loss metrics with trends. Dispute rates. Regulatory developments and examination updates. Compliance team and infrastructure progress. Any risk events and learnings. This section is critical for fintech."
+    },
+    {
+      "section": "Partnership & Infrastructure",
+      "content": "Banking partner relationship health. BaaS platform developments. Contract renewals or changes. New capabilities or products enabled. Infrastructure improvements. Any partnership risks."
+    },
+    {
+      "section": "Product & Technology",
+      "content": "Product releases and their impact. Roadmap progress. Technology infrastructure scaling. Security improvements. Customer feedback themes."
+    },
+    {
+      "section": "Team & Operations",
+      "content": "Key hires and organizational changes. Sales and compliance capacity. Operational improvements. Culture and retention indicators. Any departures with context."
+    },
+    {
+      "section": "Financial Position & Path",
+      "content": "Cash position and runway. Burn rate and efficiency trends. Revenue vs. plan. Path to profitability milestones. Financing considerations. Specific asks for the board."
+    }
+  ]
+}

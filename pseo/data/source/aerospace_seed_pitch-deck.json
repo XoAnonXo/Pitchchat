@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/aerospace/seed/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Aerospace Seed startups",
-  "summary": "Projected deck structure for Aerospace founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Aerospace seed pitch decks must balance technical credibility with commercial vision. Investors evaluate both your technology depth and business acumen. Lead with your unique technical insight, demonstrate market understanding, and show a realistic path through the long development journey. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Technical Vision",
+      "goal": "Hook with your unique technical insight and its implications",
+      "guidance": "Open with the technical breakthrough or approach that enables your company. Make it accessible—investors may not be aerospace engineers. Show what's newly possible because of your innovation. This should feel like a genuine technical insight, not a business opportunity dressed in engineering language."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Market Opportunity",
+      "goal": "Frame the problem you're solving and market size",
+      "guidance": "Size your market bottom-up: specific customer segments, their budgets, your addressable portion. Avoid trillion-dollar space economy claims. Show the pain point: what's impossible, expensive, or difficult today that your solution addresses. Include evidence of market demand: RFIs, customer conversations, or government program priorities."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Solution & Technology",
+      "goal": "Explain your technical approach and current development status",
+      "guidance": "Present your technology with appropriate technical depth. Include your current TRL/MRL with evidence. Show development roadmap: what you've built, what's next, key risk reduction milestones. Use diagrams and specifications that demonstrate engineering rigor. Address technical risks and mitigation strategies."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Regulatory & Compliance",
+      "goal": "Demonstrate you understand and can navigate the regulatory landscape",
+      "guidance": "Map the regulatory requirements for your product: FAA, FCC, NOAA, export controls. Show your compliance strategy and timeline. If you've had regulatory engagement, highlight it. This slide demonstrates you understand aerospace complexity and have a realistic path to market."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Competitive Landscape",
+      "goal": "Position against incumbents and other startups",
+      "guidance": "Honest competitive analysis including well-funded competitors and primes. Show differentiation on axes that matter: cost, capability, timeline, or market segment. Acknowledge strong competitors while articulating your wedge. Include barriers to entry you're building."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Business Model",
+      "goal": "Explain how you'll make money",
+      "guidance": "Aerospace business models vary: hardware sales, services, government contracts, data/analytics. Present your model with realistic unit economics. Show pricing benchmarks from comparable products. Address margin trajectory as you scale. Include revenue timing—when does meaningful revenue begin?"
+    },
+    {
+      "title": "Go-to-Market Strategy",
+      "goal": "Show your path to first customers and scale",
+      "guidance": "Map your GTM approach: government vs. commercial focus, direct vs. channel sales, geographic priorities. For government: SBIR pathway, prime contractor relationships, specific programs you're targeting. For commercial: customer pipeline, pilot programs, partnership strategy. Show you understand aerospace sales cycles."
     },
     {
       "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "goal": "Demonstrate aerospace expertise and startup capability",
+      "guidance": "Aerospace teams need technical depth and industry experience. Highlight relevant backgrounds: prior aerospace companies, government agencies, academic research. Show advisors who fill gaps. Address key hires you need and recruiting strategy. This is critical for aerospace credibility."
     },
     {
-      "title": "Certification roadmap",
-      "goal": "Explain safety and certification milestones.",
-      "guidance": "Show the path to regulatory approval and commercialization."
+      "title": "Traction & Milestones",
+      "goal": "Show progress and define success metrics",
+      "guidance": "Present what you've accomplished: technical demonstrations, customer conversations, government funding, partnerships. Define next 12-18 month milestones with realistic timelines. Include non-dilutive funding applications and status. Show momentum despite early stage."
     },
     {
-      "title": "Seed milestones",
-      "goal": "Highlight proof points for Seed.",
-      "guidance": "Detail the specific milestones investors expect for Aerospace Seed."
-    },
-    {
-      "title": "Aerospace go-to-market wedge (Seed)",
-      "goal": "Explain your entry point for Aerospace.",
-      "guidance": "Show a focused wedge that fits Aerospace buyers at the Seed stage."
-    },
-    {
-      "title": "Aerospace proof points",
-      "goal": "Show evidence tailored to Aerospace.",
-      "guidance": "Use data or pilots specific to Aerospace to prove momentum at Seed."
+      "title": "Funding Plan",
+      "goal": "Lay out capital needs and use of funds",
+      "guidance": "Present your raise amount and specific use of funds. Show milestones this capital achieves. Include total capital path estimate to commercial operations. Reference non-dilutive funding strategy. Show capital efficiency thinking—aerospace investors appreciate teams who stretch dollars."
     }
   ]
 }

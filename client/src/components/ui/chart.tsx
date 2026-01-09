@@ -44,7 +44,8 @@ const ChartContainer = React.forwardRef<
   }
 >(({ id, className, children, config, ...props }, ref) => {
   const uniqueId = React.useId()
-  const chartId = `chart-${id || uniqueId.replace(/:/g, "")}`
+  const rawChartId = `chart-${id || uniqueId.replace(/:/g, "")}`
+  const chartId = rawChartId.replace(/[^a-zA-Z0-9_-]/g, "") || "chart"
 
   return (
     <ChartContext.Provider value={{ config }}>
@@ -68,6 +69,7 @@ const ChartContainer = React.forwardRef<
 ChartContainer.displayName = "Chart"
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
+  const safeId = id.replace(/[^a-zA-Z0-9_-]/g, "") || "chart"
   const colorConfig = Object.entries(config).filter(
     ([, config]) => config.theme || config.color
   )
@@ -76,20 +78,34 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
     return null
   }
 
+  const getSafeColor = (value?: string) => {
+    if (!value) return null
+    const trimmed = value.trim()
+    const safeColorPattern =
+      /^(#([0-9a-fA-F]{3}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})|rgba?\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}(\s*,\s*(0|1|0?\.\d+))?\s*\)|hsla?\(\s*\d{1,3}\s*,\s*\d{1,3}%\s*,\s*\d{1,3}%(\s*,\s*(0|1|0?\.\d+))?\s*\)|var\(--[a-zA-Z0-9-_]+\)|currentColor)$/
+    return safeColorPattern.test(trimmed) ? trimmed : null
+  }
+
+  const getSafeKey = (key: string) => key.replace(/[^a-zA-Z0-9_-]/g, "")
+
   return (
     <style
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(
             ([theme, prefix]) => `
-${prefix} [data-chart=${id}] {
+${prefix} [data-chart=${safeId}] {
 ${colorConfig
   .map(([key, itemConfig]) => {
-    const color =
+    const safeKey = getSafeKey(key)
+    if (!safeKey) return null
+    const color = getSafeColor(
       itemConfig.theme?.[theme as keyof typeof itemConfig.theme] ||
-      itemConfig.color
-    return color ? `  --color-${key}: ${color};` : null
+        itemConfig.color
+    )
+    return color ? `  --color-${safeKey}: ${color};` : null
   })
+  .filter(Boolean)
   .join("\n")}
 }
 `

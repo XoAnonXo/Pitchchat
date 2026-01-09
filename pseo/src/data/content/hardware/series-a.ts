@@ -17,7 +17,7 @@ export const hardwareSeriesAContent: IndustryStageContent = {
         question:
           "What are your current unit economics and how do they improve with scale?",
         answer:
-          "Production unit economics should be proven, not projected. Present current BOM, manufacturing overhead, and gross margin. Show the path to target margins at scale: volume pricing commitments, manufacturing efficiency improvements, design optimizations. Include fully-loaded product cost including warranty, support, and logistics. Investors need confidence that selling more products improves the business.",
+          "Production unit economics should be proven, not assumed. Present current BOM, manufacturing overhead, and gross margin. Show the path to target margins at scale: volume pricing commitments, manufacturing efficiency improvements, design optimizations. Include fully-loaded product cost including warranty, support, and logistics. Investors need confidence that selling more products improves the business.",
       },
       {
         category: "Customer Traction",

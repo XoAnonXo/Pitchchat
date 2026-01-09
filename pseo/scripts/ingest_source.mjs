@@ -3,13 +3,36 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const sourceDir = path.join(__dirname, "../data/source");
-const outputPath = path.join(__dirname, "../data/source_normalized.json");
+const defaultSourceDir = path.join(__dirname, "../data/source");
+const defaultOutputPath = path.join(__dirname, "../data/source_normalized.json");
 
-const requiredFields = ["industry", "stage", "pageType", "title"];
+const requiredFields = ["industry", "stage", "pageType", "title", "dataOrigin"];
+
+function parseArgs() {
+  const args = process.argv.slice(2);
+  const config = {
+    input: defaultSourceDir,
+    output: defaultOutputPath,
+  };
+
+  for (let i = 0; i < args.length; i += 1) {
+    const arg = args[i];
+    if (arg === "--input") {
+      config.input = args[i + 1];
+      i += 1;
+    }
+    if (arg === "--output") {
+      config.output = args[i + 1];
+      i += 1;
+    }
+  }
+
+  return config;
+}
 
 async function run() {
-  const entries = await fs.readdir(sourceDir, { withFileTypes: true });
+  const config = parseArgs();
+  const entries = await fs.readdir(config.input, { withFileTypes: true });
   const files = entries.filter(
     (entry) =>
       entry.isFile() &&
@@ -21,7 +44,7 @@ async function run() {
   const errors = [];
 
   for (const file of files) {
-    const fullPath = path.join(sourceDir, file.name);
+    const fullPath = path.join(config.input, file.name);
     const raw = await fs.readFile(fullPath, "utf8");
     const data = JSON.parse(raw);
 
@@ -46,6 +69,7 @@ async function run() {
       sourceId: data.sourceId ?? null,
       sourceNotes: data.sourceNotes ?? "",
       sourceTags: Array.isArray(data.sourceTags) ? data.sourceTags : [],
+      dataOrigin: data.dataOrigin ?? "unknown",
       questions: data.questions ?? [],
       metrics: data.metrics ?? [],
       objections: data.objections ?? [],
@@ -55,7 +79,7 @@ async function run() {
   }
 
   await fs.writeFile(
-    outputPath,
+    config.output,
     JSON.stringify(
       {
         generatedAt: new Date().toISOString(),

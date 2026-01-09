@@ -112,7 +112,7 @@ export const healthcareSeriesAContent: IndustryStageContent = {
       {
         objection: "The market is being consolidated by larger players.",
         response:
-          "Address market dynamics directly: 'Consolidation actually benefits us. Large players acquire capabilities rather than build—we're a logical acquisition target. In the meantime, we win because we're focused: our clinical outcomes and workflow integration exceed what consolidated players offer. Our recent competitive wins against [named competitor] demonstrate this. We're building a company that's valuable standalone but also strategically positioned for consolidation scenarios.'",
+          "Address market dynamics directly: 'Consolidation actually benefits us. Large players acquire capabilities rather than build—we're a logical acquisition target. In the meantime, we win because we're focused: our clinical outcomes and workflow integration exceed what consolidated players offer. Our recent competitive wins against a top-3 incumbent demonstrate this. We're building a company that's valuable standalone but also strategically positioned for consolidation scenarios.'",
       },
       {
         objection: "Your unit economics don't support the sales and implementation costs.",

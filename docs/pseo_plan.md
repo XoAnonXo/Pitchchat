@@ -67,11 +67,15 @@ the pSEO routes onto the primary domain when `PSEO_ORIGIN` is set.
 - Each page must have:
   - 5+ unique data points.
   - 30 to 50 percent unique visible text (non-template).
+- Require provenance fields:
+  - `dataOrigin` (e.g., anonymized, ugc, survey)
+  - `sourceId` or `sourceTags` for traceability
 
 ## Template requirements (all page types)
 - Direct answer within first 200 words.
 - Structured tables or definition lists for key metrics.
 - Conditional sections for missing data (hide empty blocks).
+- Include a compact data coverage chart per template.
 - Primary CTA: "Create your PitchChat room".
 - Schema markup aligned to page type (FAQPage, HowTo, Dataset, Article).
 
@@ -94,6 +98,8 @@ the pSEO routes onto the primary domain when `PSEO_ORIGIN` is set.
 - Build ingestion script to parse anonymized decks and Q&A.
 - Build AI enrichment scripts with deterministic prompts.
 - Add validators to block thin pages (run `npm run pseo:quality-check`).
+- Keep projected placeholders under `pseo/data/projected/` (dev only).
+- Use `npm run pseo:generate-editorial` to publish editorial baseline content pre-launch.
 - Deliverable: usable pilot dataset for 70 pages.
 
 ### Phase 3: Templates (Day 3 to 5)
@@ -113,7 +119,7 @@ the pSEO routes onto the primary domain when `PSEO_ORIGIN` is set.
 
 ### Phase 6: Scale and optimize (Week 2 to 4)
 - Scale to 500 to 1,500 pages after pilot health checks.
-- Launch UGC submission flow (anonymized Q&A).
+- Launch UGC submission flow (anonymized Q&A) and moderation workflow.
 - Publish quarterly PR report based on aggregated data.
 - Run pruning report from GSC exports (`npm run pseo:prune-report -- --input path/to/gsc.csv`).
 - Deliverable: stable scale pipeline and authority signals.
@@ -142,9 +148,11 @@ the pSEO routes onto the primary domain when `PSEO_ORIGIN` is set.
 - Run `npm run pseo:migrate` and `npm run pseo:seed` with DATABASE_URL set.
 - Add anonymized source JSONs under `pseo/data/source/` and run `npm run pseo:ingest-source`.
 - Or drop raw anonymized files under `pseo/data/raw/` and run `npm run pseo:enrich-raw` before ingesting.
-- Generate projected source JSONs with `npm run pseo:generate-projected` before ingesting.
+- Optional (dev only): generate projected JSONs with `npm run pseo:generate-projected` into `pseo/data/projected/`.
+- Pre-launch: generate editorial JSONs with `npm run pseo:generate-editorial` into `pseo/data/source/`.
 - Run `npm run pseo:quality-check` to enforce thin-content gates before seeding.
 - Replace seed data with live DB content as source data grows.
+- Set `PSEO_ALLOW_SEED_FALLBACK=true` only for local development when using projected data.
 - Set `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_SIGNUP_URL` for sitemap and CTA links.
 - Optional: set `NEXT_PUBLIC_GA_ID` to enable GA4 event tracking.
 - Submit sitemaps to GSC:

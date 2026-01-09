@@ -5,6 +5,7 @@ import {
   timestamp,
   jsonb,
   index,
+  uniqueIndex,
   serial,
   integer,
   boolean,
@@ -84,6 +85,7 @@ export const documents = pgTable(
   },
   (table) => ({
     projectIdIdx: index("documents_project_id_idx").on(table.projectId),
+    projectOriginalNameUnique: uniqueIndex("documents_project_original_name_uq").on(table.projectId, table.originalName),
   }),
 );
 
@@ -101,6 +103,7 @@ export const chunks = pgTable(
   },
   (table) => ({
     documentIdIdx: index("chunks_document_id_idx").on(table.documentId),
+    documentChunkIndexUnique: uniqueIndex("chunks_document_id_chunk_index_uq").on(table.documentId, table.chunkIndex),
   }),
 );
 
@@ -188,6 +191,7 @@ export const integrations = pgTable(
   (table) => ({
     projectIdIdx: index("integrations_project_id_idx").on(table.projectId),
     projectPlatformIdx: index("integrations_project_platform_idx").on(table.projectId, table.platform),
+    projectPlatformUnique: uniqueIndex("integrations_project_platform_uq").on(table.projectId, table.platform),
   }),
 );
 

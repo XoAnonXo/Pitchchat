@@ -1,0 +1,66 @@
+{
+  "industry": "chemistry",
+  "stage": "seed",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/chemistry/seed/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Pitch deck outline for Chemistry Seed startups",
+  "summary": "Projected deck structure for Chemistry founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "sections": [
+    {
+      "title": "Problem",
+      "goal": "Show the pain and why now matters.",
+      "guidance": "Quantify the problem with a clear market shift or constraint."
+    },
+    {
+      "title": "Solution",
+      "goal": "Explain the product in one sentence.",
+      "guidance": "Focus on the core workflow and the wedge you own."
+    },
+    {
+      "title": "Market",
+      "goal": "Define the reachable initial market.",
+      "guidance": "Start with the first buyer segment and a realistic wedge."
+    },
+    {
+      "title": "Traction",
+      "goal": "Prove early demand signals.",
+      "guidance": "Highlight pilots, LOIs, or early revenue."
+    },
+    {
+      "title": "Business model",
+      "goal": "Explain how money is made.",
+      "guidance": "Show pricing logic tied to value delivered."
+    },
+    {
+      "title": "Moat",
+      "goal": "Defensibility beyond execution speed.",
+      "guidance": "Data, IP, approvals, or operational scale."
+    },
+    {
+      "title": "Team",
+      "goal": "Why this team can win.",
+      "guidance": "Emphasize domain expertise and execution history."
+    },
+    {
+      "title": "Scale-up strategy",
+      "goal": "Demonstrate lab-to-production plan.",
+      "guidance": "Show yield targets and pilot plant milestones."
+    },
+    {
+      "title": "Seed milestones",
+      "goal": "Highlight proof points for Seed.",
+      "guidance": "Detail the specific milestones investors expect for Chemistry Seed."
+    },
+    {
+      "title": "Chemistry go-to-market wedge (Seed)",
+      "goal": "Explain your entry point for Chemistry.",
+      "guidance": "Show a focused wedge that fits Chemistry buyers at the Seed stage."
+    },
+    {
+      "title": "Chemistry proof points",
+      "goal": "Show evidence tailored to Chemistry.",
+      "guidance": "Use data or pilots specific to Chemistry to prove momentum at Seed."
+    }
+  ]
+}

@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/hardware/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Hardware Series A investor update template",
-  "summary": "Projected update format for Hardware founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A hardware investor updates focus on production scaling, unit economics improvement, and revenue growth. Demonstrate operational execution and progress toward profitability. Transparent communication builds confidence for future financing needs. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with key metrics: revenue, units shipped, gross margin. Summarize biggest wins and challenges. Include cash position and runway. This should convey company trajectory in 60 seconds."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Revenue & Customer Metrics",
+      "content": "Detailed revenue performance: shipped units, ASP, revenue by segment. Customer metrics: new customers, retention, NPS trends. Pipeline and bookings if B2B. Compare to plan with variance analysis."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Production & Operations",
+      "content": "Production volume and capacity utilization. Quality metrics: FPY, defect rates, returns. Manufacturing cost trends. Supply chain status and any issues. Show operational execution."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Unit Economics Progress",
+      "content": "Current BOM and gross margin with trends. Cost reduction initiatives and results. Fully-loaded product cost evolution. Path to target margins with specific drivers."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Product Development",
+      "content": "Roadmap progress: new products, variants, improvements. Customer feedback driving priorities. Margin improvement in new products. Certification or compliance updates if relevant."
     },
     {
-      "section": "Manufacturing readiness (Series A)",
-      "content": "Summarize production milestones and cost improvements."
+      "section": "Team & Organization",
+      "content": "Team changes and key hires. Organizational evolution for scale. Facility or capability investments. Any operational challenges and solutions."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for Hardware founders at Series A."
+      "section": "Financial Status",
+      "content": "Cash position, burn rate, runway. Working capital trends. Performance vs. budget. Fundraising timeline and preparation if approaching next round."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next quarter priorities and milestones. Specific asks for investor help: customer introductions, manufacturing expertise, hiring. Strategic decisions needing input."
     }
   ]
 }

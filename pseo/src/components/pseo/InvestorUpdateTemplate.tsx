@@ -1,5 +1,6 @@
 import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
+import { PseoCountChart } from "@/components/pseo/PseoCountChart";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
@@ -27,6 +28,21 @@ export function InvestorUpdateTemplate({ data }: { data: InvestorUpdatePageData 
   const industryLabel = labelForIndustry(data.context.industry);
   const stageLabel = labelForStage(data.context.stage);
   const sectionsCount = data.sections.length;
+  const sectionsWithContent = data.sections.filter((section) => section.content).length;
+  const coverageItems = [
+    {
+      label: "Sections",
+      value: sectionsCount,
+      target: 6,
+      note: "Target: 6+ sections",
+    },
+    {
+      label: "Sections with prompts",
+      value: sectionsWithContent,
+      target: Math.max(sectionsCount, 1),
+      note: "Each section should include a prompt or KPI",
+    },
+  ];
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Investor Questions", href: "/investor-questions/" },
     { label: industryLabel, href: `/investor-questions/industries/${data.context.industry}/` },
@@ -109,6 +125,12 @@ export function InvestorUpdateTemplate({ data }: { data: InvestorUpdatePageData 
           </div>
         </dl>
       </section>
+
+      <PseoCountChart
+        title="Coverage snapshot"
+        caption="Investors respond best to consistent, complete updates."
+        items={coverageItems}
+      />
 
       <AuthorAttribution
         stageLabel={stageLabel}

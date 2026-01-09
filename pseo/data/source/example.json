@@ -2,6 +2,9 @@
   "industry": "ai",
   "stage": "seed",
   "pageType": "investor-questions",
+  "dataOrigin": "anonymized",
+  "sourceId": "example-001",
+  "sourceTags": ["example"],
   "title": "Investor questions for AI Seed startups",
   "summary": "Questions AI founders should be ready to answer at seed stage.",
   "ctaText": "Create your PitchChat room",
@@ -16,7 +19,8 @@
     {
       "label": "Pilot conversion",
       "value": "Share pilot-to-contract conversion rate",
-      "note": "Signals early product pull."
+      "note": "Signals early product pull.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
     }
   ],
   "objections": [

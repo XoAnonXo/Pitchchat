@@ -1,0 +1,35 @@
+{
+  "industry": "finance",
+  "stage": "seed",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/finance/seed/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Finance Seed diligence checklist",
+  "summary": "Projected diligence checklist for Finance founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "items": [
+    {
+      "item": "Current cap table and option pool plan",
+      "rationale": "Investors validate ownership, dilution, and incentives."
+    },
+    {
+      "item": "Customer pipeline with next steps",
+      "rationale": "Proves commercial momentum and a clear path to revenue."
+    },
+    {
+      "item": "Product roadmap and milestone plan",
+      "rationale": "Shows the path to de-risk the core technical thesis."
+    },
+    {
+      "item": "Security or compliance posture",
+      "rationale": "Critical for regulated or enterprise-heavy markets."
+    },
+    {
+      "item": "Compliance audits and licensing status (Seed)",
+      "rationale": "Demonstrates regulatory readiness for launch."
+    },
+    {
+      "item": "Seed readiness summary for Finance",
+      "rationale": "Signals you can close a Seed round in Finance."
+    }
+  ]
+}

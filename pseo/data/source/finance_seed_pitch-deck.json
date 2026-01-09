@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/finance/seed/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Finance Seed startups",
-  "summary": "Projected deck structure for Finance founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Fintech seed pitch decks must balance growth opportunity with regulatory and operational credibility. Lead with the customer problem and your unique approach to solving it. Address regulatory and risk management early—these are existential concerns. Show unit economics that work, not just growth metrics. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Problem & Market",
+      "goal": "Frame the financial services gap you're filling",
+      "guidance": "Identify specific financial pain points your segment faces. Show why existing solutions fail: banks too slow, expensive, or exclusive; other fintechs missing the mark. Size the market bottom-up based on your target segment. Include regulatory and market timing that enables your solution."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Solution & Product",
+      "goal": "Demonstrate your product and differentiation",
+      "guidance": "Present your product with customer benefit focus. Show the experience vs. alternatives. Demonstrate key differentiators: speed, cost, access, experience. Include product screenshots or demo. Make it tangible how you improve customers' financial lives."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Customer Traction",
+      "goal": "Prove early product-market fit",
+      "guidance": "Show traction metrics: users, volume, revenue, retention. Include customer testimonials and NPS. Demonstrate organic growth and word-of-mouth. Show cohort behavior indicating product-market fit. Quality of traction matters—engaged customers who love the product."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Business Model",
+      "goal": "Explain how you make money sustainably",
+      "guidance": "Present revenue model clearly: interchange, interest, subscriptions, fees. Show current revenue or clear path to monetization. Present unit economics: CAC, LTV, payback period. Address margin structure and improvement trajectory. Demonstrate sustainable economics, not just growth."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Regulatory Strategy",
+      "goal": "Address the compliance elephant in the room",
+      "guidance": "Present your regulatory requirements and current status. Show licensing roadmap and timeline. Include compliance infrastructure: team, technology, counsel. Address banking partnership structure if applicable. This slide shows you understand the regulatory landscape—essential for fintech credibility."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Risk Management",
+      "goal": "Show you can manage financial services risk",
+      "guidance": "Present your risk framework: fraud prevention, identity verification, credit risk (if applicable). Show early loss rate data if available. Include your risk infrastructure and monitoring. Demonstrate you understand financial services risk—this differentiates serious fintechs from tech companies in finance."
+    },
+    {
+      "title": "Competitive Landscape",
+      "goal": "Position against banks and other fintechs",
+      "guidance": "Map competitive landscape: incumbent banks, other fintechs, emerging players. Show differentiation axes that matter to customers. Address why customers choose you over alternatives. Include barriers to entry in your segment. Show sustainable competitive advantage."
     },
     {
       "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "goal": "Demonstrate fintech expertise and execution capability",
+      "guidance": "Highlight team financial services experience: prior fintech, banking, or relevant domain. Show technical capability for fintech infrastructure. Include compliance expertise. Address gaps with hiring plan or advisors. Fintech requires domain expertise—demonstrate yours."
     },
     {
-      "title": "Compliance strategy",
-      "goal": "Show regulatory readiness.",
-      "guidance": "Outline licensing, audits, and risk controls."
+      "title": "Go-to-Market",
+      "goal": "Show scalable customer acquisition",
+      "guidance": "Present acquisition strategy: channels, partnerships, viral loops. Show early channel performance and CAC by channel. Address how acquisition scales efficiently. Include any unique distribution advantages. Demonstrate you can acquire customers profitably."
     },
     {
-      "title": "Seed milestones",
-      "goal": "Highlight proof points for Seed.",
-      "guidance": "Detail the specific milestones investors expect for Finance Seed."
-    },
-    {
-      "title": "Finance go-to-market wedge (Seed)",
-      "goal": "Explain your entry point for Finance.",
-      "guidance": "Show a focused wedge that fits Finance buyers at the Seed stage."
-    },
-    {
-      "title": "Finance proof points",
-      "goal": "Show evidence tailored to Finance.",
-      "guidance": "Use data or pilots specific to Finance to prove momentum at Seed."
+      "title": "Funding & Milestones",
+      "goal": "Present capital needs and path to Series A",
+      "guidance": "Show raise amount and use of funds: product, compliance, growth, team. Present milestones this capital achieves: user targets, regulatory progress, revenue goals. Include runway and path to next round. Be realistic about fintech capital requirements and timelines."
     }
   ]
 }

@@ -1,0 +1,31 @@
+{
+  "industry": "aerospace",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/aerospace/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Aerospace Series A fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for Aerospace Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "4-9 months",
+      "note": "Projected target range; update with real data. Aerospace Series A."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "30-45%",
+      "note": "Projected target range; update with real data. Aerospace Series A."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "55-70%",
+      "note": "Projected target range; update with real data. Aerospace Series A."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Moderate-High; 18-30 mo runway",
+      "note": "Projected target range; update with real data. Aerospace Series A."
+    }
+  ]
+}

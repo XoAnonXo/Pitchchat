@@ -13,6 +13,8 @@ export type Metric = {
   label: string;
   value: string;
   note: string;
+  source?: string;
+  unit?: string;
 };
 
 export type Objection = {

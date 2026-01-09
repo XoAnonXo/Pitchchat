@@ -1,0 +1,124 @@
+{
+  "industry": "fintech",
+  "stage": "series-a",
+  "pageType": "investor-questions",
+  "slug": "/investor-questions/fintech/series-a/investor-questions/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Investor questions for Fintech Series A startups",
+  "summary": "Series A fintech companies must demonstrate proven unit economics, regulatory compliance at scale, and sustainable growth. Investors evaluate your ability to build a durable financial services business—not just a growth story. The bar has risen: investors expect profitability path clarity, strong risk management, and evidence you can navigate an increasingly complex regulatory environment. Pitchchat turns investor questions into an interactive pitch room founders can share.",
+  "questions": [
+    {
+      "category": "Unit Economics",
+      "question": "What are your fully-loaded unit economics and path to profitability?",
+      "answer": "Series A requires proven unit economics. Present your current CAC by channel, fully-loaded (including attribution, creative, and overhead). Show LTV based on actual cohort behavior, not assumptions. Present contribution margin including all variable costs: processing, fraud, support, compliance. Show CAC payback period with actual data. Explain your path to profitability: what needs to improve and how. Reference how you compare to public fintech benchmarks. Be prepared for deep scrutiny—fintech economics have disappointed many investors."
+    },
+    {
+      "category": "Regulatory",
+      "question": "What's your regulatory position and expansion strategy?",
+      "answer": "Series A fintech must have regulatory foundation established. Present your current licensing status: which states, which products, any limitations. Explain your regulatory expansion strategy: state-by-state licensing, federal charter considerations, or international. Address recent regulatory developments affecting your category and how you're positioned. Show your compliance infrastructure: team, technology, policies. Reference any regulatory examinations or audits completed. Demonstrate that compliance is a competitive advantage, not just a cost center."
+    },
+    {
+      "category": "Risk Performance",
+      "question": "How have your risk metrics performed and evolved?",
+      "answer": "Risk management is proven by results, not policies. Present your fraud rates, loss rates, and dispute rates with trends over time. Show how metrics compare to industry benchmarks. Explain what you've learned and how risk models have improved. Address any risk events and how you handled them. For lending products, show credit performance across vintages. Reference team expertise in risk management. Show that risk is integrated into product and growth decisions, not just monitored after the fact."
+    },
+    {
+      "category": "Growth Efficiency",
+      "question": "How efficiently are you growing and what's your customer acquisition strategy?",
+      "answer": "Series A investors evaluate growth efficiency, not just growth rate. Present growth rate alongside CAC and payback. Show customer acquisition by channel with efficiency metrics. Explain your differentiated acquisition strategy: product-led growth, viral mechanics, partnerships, or segment focus. Address customer quality—not just volume—and how quality has evolved. Show evidence of organic growth and referrals. Reference your most efficient channels and plans to scale them."
+    },
+    {
+      "category": "Banking Partnerships",
+      "question": "How stable are your banking relationships and what's your infrastructure strategy?",
+      "answer": "Banking partnerships are under scrutiny post-2023. Present your current partner relationships: sponsor bank, BaaS provider, payment processors. Explain contract terms, concentration risk, and backup plans. Address how you've adapted to industry disruption: partner bank failures, regulatory pressure on BaaS. Show evidence of partnership stability: tenure, expansions, executive relationships. Discuss long-term infrastructure strategy: charter consideration, multi-partner approach, vertical integration."
+    },
+    {
+      "category": "Revenue Diversification",
+      "question": "How diversified is your revenue and what's the expansion strategy?",
+      "answer": "Revenue concentration creates risk. Present your revenue mix: interchange, subscriptions, interest income, fees, etc. Show how mix has evolved and expansion plans. Address cross-sell opportunities and evidence of success. Explain your product expansion roadmap and sequencing rationale. For single-product companies, show the depth of that product and stickiness metrics. Reference comparable companies' revenue evolution and your path to similar diversification."
+    },
+    {
+      "category": "Customer Retention",
+      "question": "What's your customer retention and how sticky is your product?",
+      "answer": "Fintech retention is hard-won. Present logo retention and revenue retention separately. Show engagement metrics: login frequency, transaction volume, feature usage. Explain what drives retention: switching costs, product depth, network effects. Address customer segments with different retention patterns. Show cohort behavior over time—are customers deepening usage? Reference your approach to reducing churn and evidence of improvement. Strong retention justifies higher CAC."
+    },
+    {
+      "category": "Competition",
+      "question": "How has the competitive landscape evolved and how are you positioned?",
+      "answer": "Fintech competition has intensified. Present the current competitive landscape: neobanks, incumbents, vertical fintechs, and embedded finance. Show how your positioning has evolved and evidence of differentiation: win rates, customer preference data, feature comparison. Address specific competitor moves and your response. Explain your sustainable differentiation: customer segment depth, product capability, distribution advantage, or economics. Be honest about where you win and lose."
+    },
+    {
+      "category": "Team",
+      "question": "How has your team evolved for Series A scale?",
+      "answer": "Series A requires leadership depth. Present key hires since seed: commercial, compliance, risk, product, engineering leadership. Show organizational structure and functional coverage. Address your ability to recruit senior fintech talent—reference specific hires and their backgrounds. Explain how you've evolved from founder-led to scalable operations. Show your advisory network and board composition. Address any team gaps and hiring plan."
+    },
+    {
+      "category": "Milestones",
+      "question": "What does this round achieve and what triggers Series B?",
+      "answer": "Present concrete milestones: revenue targets ($5-15M ARR typical for fintech A→B), profitability progress, product expansion, geographic growth. Show you understand Series B requirements: typically path to profitability, demonstrated unit economics at scale, and durable competitive position. Explain the 18-24 month plan. Be realistic about fintech's longer timeline to scale economics. Address key risks and how you'll mitigate them."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Annual Recurring Revenue",
+      "value": "$2M - $10M ARR",
+      "note": "Series A fintech typically shows $2-10M ARR with clear path to $20M+. Quality of revenue matters as much as size.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Revenue Growth Rate",
+      "value": "100-200% YoY",
+      "note": "Year-over-year growth. Efficiency matters more than pure growth rate—show burn multiple.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Net Revenue Retention",
+      "value": "100-120%",
+      "note": "Revenue retention including expansion, contraction, and churn. Above 100% indicates product stickiness.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "CAC Payback Period",
+      "value": "12-18 months",
+      "note": "Months to recover acquisition cost. Under 12 is excellent, over 24 requires strong justification.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Fraud/Loss Rate",
+      "value": "< 0.5%",
+      "note": "Fraud and credit losses as percentage of volume. Trending improvement expected at Series A scale.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Contribution Margin",
+      "value": "30-50%",
+      "note": "Revenue minus all variable costs. Path to 50%+ at scale expected.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    }
+  ],
+  "objections": [
+    {
+      "objection": "Your unit economics don't support venture returns.",
+      "response": "Address with data and trajectory: 'Our current CAC payback is 16 months with 30% contribution margin. Here's our path to 12-month payback: reducing CAC through channel mix shifts and conversion improvements, increasing ARPU through add-on modules and pricing tiers, and improving margin through automation and vendor pricing improvements. At scale, comparable fintechs achieve 60%+ contribution margins. Our cohort data shows improving economics with each vintage. We're building for sustainable unit economics, not growth at any cost.'"
+    },
+    {
+      "objection": "The regulatory environment creates too much uncertainty.",
+      "response": "Acknowledge and address: 'Regulatory scrutiny has increased, which favors compliant operators like us. We've invested in compliance from day one—our infrastructure passes the scrutiny that's catching under-invested competitors. We hold direct licenses in 12 states, giving us more control than pure BaaS-dependent companies. Recent regulatory actions have targeted specific practices we avoid. Our approach is to over-comply and treat regulatory requirements as product features, not obstacles.'"
+    },
+    {
+      "objection": "Banking partnership concentration is existential risk.",
+      "response": "Present your mitigation strategy: 'We recognize partner risk and have structured accordingly. We work with a top-20 sponsor bank plus a secondary BaaS provider. Our technology is designed for portability—we can migrate to a new partner in 90 days. Our contracts extend through 2027 with renewal rights. We've invested in direct relationships at our sponsor bank, not just through intermediaries. Longer-term, our scale creates optionality for deeper partnership structures or our own charter.'"
+    },
+    {
+      "objection": "Competition from embedded finance and big tech will compress your opportunity.",
+      "response": "Address competitive dynamics: 'Embedded finance actually expands our opportunity by bringing more financial services digital-native. We compete on depth, not breadth—our SMB payroll and treasury customers need specialized capabilities that horizontal players won't prioritize. Our evidence: we win against a top-5 neobank 70% of the time in our segment. Big tech faces regulatory and trust barriers that specialist fintechs avoid. Our path is category leadership in SMB payroll and treasury, not competing against infinite balance sheets.'"
+    }
+  ]
+}

@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/finance/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Finance Series A investor update template",
-  "summary": "Projected update format for Finance founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A fintech investor updates should emphasize sustainable growth metrics and operational scalability. Given the focus on profitability paths, unit economics trends are as important as growth. Maintain transparency on regulatory developments and risk metrics—these are material for future fundraising. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with key metrics: revenue, growth rate, unit economics, cash position. Summarize biggest wins and challenges. Include regulatory and risk status. This should convey business health and trajectory in 60 seconds."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Revenue & Growth",
+      "content": "Detailed revenue performance: growth rate, mix by product, expansion within customers. Show net revenue retention and customer health. Include pipeline and leading indicators. Address performance vs. plan."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Unit Economics",
+      "content": "Report on CAC trends by channel. Show LTV evolution and cohort performance. Present payback period progress. Include margin trends. This section demonstrates sustainable business building."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Customer Metrics",
+      "content": "User growth and engagement trends. Retention by cohort. NPS and satisfaction. Customer concentration and diversification. Quality of growth alongside quantity."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Regulatory & Compliance",
+      "content": "Licensing progress and status. Any regulatory examinations or feedback. Compliance infrastructure developments. Banking partner relationship health. Material regulatory developments in the space."
     },
     {
-      "section": "Compliance updates (Series A)",
-      "content": "Share regulatory audits and licensing status."
+      "section": "Risk & Operations",
+      "content": "Loss rates and risk metrics. Fraud trends and prevention effectiveness. Operational efficiency improvements. Any risk events and response. Scaling progress."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for Finance founders at Series A."
+      "section": "Product & Development",
+      "content": "Product launches and improvements. Roadmap progress. Customer-driven developments. Technical infrastructure improvements. Competitive feature assessment."
+    },
+    {
+      "section": "Priorities & Asks",
+      "content": "Next quarter priorities and milestones. Specific investor asks: introductions, expertise, strategic guidance. Fundraising timeline and preparation if relevant. Key decisions needing input."
     }
   ]
 }

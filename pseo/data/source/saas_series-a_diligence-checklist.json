@@ -1,0 +1,74 @@
+{
+  "industry": "saas",
+  "stage": "series-a",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/saas/series-a/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "SaaS Series A diligence checklist",
+  "summary": "Series A SaaS diligence is thorough and metrics-driven. Investors will validate every claim in your deck with underlying data. Prepare comprehensive documentation—quality and organization signal operational maturity. Expect detailed analysis of unit economics, retention, and competitive positioning. Pitchchat keeps diligence docs organized and easy to review.",
+  "items": [
+    {
+      "item": "Complete ARR and MRR history with monthly detail",
+      "rationale": "Full monthly revenue history broken down by new, expansion, contraction, and churn. Include by-customer detail enabling cohort and segment analysis. Should reconcile perfectly with financial statements."
+    },
+    {
+      "item": "Cohort analysis with retention and expansion data",
+      "rationale": "Monthly cohorts showing logo retention, revenue retention, and expansion by month. Both graphical and tabular format. Commentary on cohort performance variations and drivers."
+    },
+    {
+      "item": "Unit economics build-up with source data",
+      "rationale": "Detailed CAC calculation by channel including all costs. LTV calculation with churn rate, ARPU, and gross margin inputs. Historical trends and improvement drivers. Methodology documentation."
+    },
+    {
+      "item": "Sales pipeline and performance data",
+      "rationale": "Current pipeline by stage with probability weighting. Historical conversion rates by stage. Sales cycle analysis. Rep-level performance data. Forecasting methodology and historical accuracy."
+    },
+    {
+      "item": "Customer list with detailed attributes",
+      "rationale": "Complete customer list with: company, plan, MRR/ARR, start date, expansion history, contract terms, health indicators. Be prepared for reference calls—investors will contact customers."
+    },
+    {
+      "item": "Competitive win/loss analysis",
+      "rationale": "Deal-level win/loss data including competitor, outcome, and reason. Aggregate win rates by competitor. Trends over time. Source and methodology for tracking."
+    },
+    {
+      "item": "Financial model with bottoms-up build",
+      "rationale": "Detailed model including revenue build-up, cost structure, and headcount plan. Explicit assumptions with sensitivity analysis. Scenario modeling. Historical accuracy of previous projections."
+    },
+    {
+      "item": "Historical financial statements and projections",
+      "rationale": "P&L, balance sheet, and cash flow statements. Audited if available, reviewed at minimum. 18-24 month projections tied to operating plan. Variance analysis against previous forecasts."
+    },
+    {
+      "item": "Cap table and option pool analysis",
+      "rationale": "Fully diluted cap table including all instruments. Option pool status and refresh plan. Prior funding terms and any unusual provisions. Pro forma for this round."
+    },
+    {
+      "item": "Technical architecture and roadmap documentation",
+      "rationale": "System architecture overview with scalability assessment. Security framework and any certifications. Technical debt inventory. Product roadmap with prioritization rationale."
+    },
+    {
+      "item": "Team profiles and org chart",
+      "rationale": "Detailed backgrounds for leadership team. Current org chart and planned evolution. Key person dependencies. Retention data and culture indicators. Hiring plan with target profiles."
+    },
+    {
+      "item": "Legal and corporate documentation",
+      "rationale": "Corporate structure and governance documents. IP assignment and invention agreements. Material contracts including key customer and vendor agreements. Any litigation or legal issues."
+    },
+    {
+      "item": "Customer references and case studies",
+      "rationale": "Prepared references willing to speak with investors. Case studies demonstrating customer value. NPS data and customer feedback summaries. Churn exit interview insights."
+    },
+    {
+      "item": "Board materials and investor updates",
+      "rationale": "Recent board decks showing historical narrative. Investor update history demonstrating communication consistency. Strategic decisions and their outcomes."
+    }
+  ]
+}

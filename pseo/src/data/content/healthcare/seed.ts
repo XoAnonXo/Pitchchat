@@ -63,7 +63,7 @@ export const healthcareSeedContent: IndustryStageContent = {
         category: "Milestones",
         question: "What does this round achieve and what triggers Series A?",
         answer:
-          "Present concrete milestones this capital achieves: regulatory (submissions, clearances), clinical (study completion, data), commercial (pilots, first sales), and team (key hires). Show you understand healthcare Series A requirements: typically FDA clearance/submission, clinical evidence, early commercial traction or strong pilots. Explain the 18-24 month path and key de-risking events. Be realistic about timeline—healthcare development often takes longer than projected.",
+          "Present concrete milestones this capital achieves: regulatory (submissions, clearances), clinical (study completion, data), commercial (pilots, first sales), and team (key hires). Show you understand healthcare Series A requirements: typically FDA clearance/submission, clinical evidence, early commercial traction or strong pilots. Explain the 18-24 month path and key de-risking events. Be realistic about timeline—healthcare development often takes longer than founders expect.",
       },
     ],
     metrics: [

@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "node scripts/start.mjs",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:generate": "drizzle-kit generate --config drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config drizzle.config.ts",
     "pseo:matrix": "node scripts/generate_pilot_matrix.mjs",
@@ -16,11 +18,13 @@
     "pseo:seed": "node scripts/seed_pseo_db.mjs",
     "pseo:validate-sitemaps": "node scripts/validate_sitemaps.mjs",
     "pseo:generate-projected": "node scripts/generate_projected_source.mjs",
+    "pseo:generate-editorial": "node ../node_modules/.bin/tsx scripts/generate_editorial_source.ts",
     "pseo:quality-check": "node scripts/quality_check.mjs",
     "pseo:prune-report": "node scripts/prune_report.mjs",
     "pseo:cta-report": "node scripts/cta_report.mjs",
     "pseo:enrich-raw": "node scripts/enrich_raw_source.mjs",
-    "pseo:monitoring-summary": "node scripts/monitoring_summary.mjs"
+    "pseo:monitoring-summary": "node scripts/monitoring_summary.mjs",
+    "pseo:generate-report": "node scripts/generate_report.mjs"
   },
   "dependencies": {
     "@types/pg": "^8.16.0",
@@ -36,10 +40,12 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^4.0.16",
     "drizzle-kit": "^0.31.4",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.16"
   }
 }

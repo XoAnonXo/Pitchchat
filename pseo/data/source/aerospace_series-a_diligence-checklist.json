@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/aerospace/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Aerospace Series A diligence checklist",
-  "summary": "Projected diligence checklist for Aerospace founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A aerospace diligence is comprehensive, covering technical depth, commercial validation, manufacturing readiness, and team capability. Prepare for deep technical reviews and extensive customer references. Documentation quality reflects company quality. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Complete technical data package with test results and analysis",
+      "rationale": "Technical diligence will be thorough. Prepare system specifications, test reports, performance analysis, and failure mode documentation. Be ready for extended technical deep-dives with investor engineering advisors."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Customer contracts and commitment documentation",
+      "rationale": "Investors verify commercial traction carefully. Prepare contracts, LOIs, purchase orders, and pilot agreements. Include customer reference contacts willing to take diligence calls."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Manufacturing strategy and supplier documentation",
+      "rationale": "Detailed manufacturing plan including make-vs-buy analysis, supplier relationships, facility requirements, and capital equipment needs. Include supplier quotes for production quantities."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Financial model with detailed cost assumptions",
+      "rationale": "Bottom-up financial model with component-level cost builds, manufacturing learning curve assumptions, and sensitivity analysis. Include working capital model given aerospace payment cycles."
     },
     {
-      "item": "Certification evidence and safety documentation (Series A)",
-      "rationale": "Confirms regulatory progress and risk mitigation."
+      "item": "Regulatory compliance documentation and certification progress",
+      "rationale": "Comprehensive regulatory file: certifications obtained, applications in progress, agency correspondence, and compliance testing results. Include regulatory advisor relationships."
     },
     {
-      "item": "Series A readiness summary for Aerospace",
-      "rationale": "Signals you can close a Series A round in Aerospace."
+      "item": "IP portfolio with freedom-to-operate analysis",
+      "rationale": "Complete IP documentation: patents granted, applications pending, trade secrets, and comprehensive FTO analysis. Aerospace IP landscape is complex—show thorough analysis."
+    },
+    {
+      "item": "Team evaluation and organizational documentation",
+      "rationale": "Detailed organizational chart, key employee backgrounds, employment agreements, and hiring plan. Be prepared for extensive reference checks on key team members."
+    },
+    {
+      "item": "Competitive analysis with technical benchmarking",
+      "rationale": "Detailed competitive landscape including technical performance comparisons, pricing analysis, and market positioning. Include win/loss analysis against specific competitors."
+    },
+    {
+      "item": "Government contract documentation and compliance status",
+      "rationale": "For companies with government revenue: contract documentation, compliance certifications, and contracting officer references. Include ITAR/EAR compliance documentation if applicable."
+    },
+    {
+      "item": "Quality management system documentation",
+      "rationale": "AS9100 certification status or roadmap, quality procedures, and nonconformance tracking. Aerospace customers and investors expect rigorous quality systems."
+    },
+    {
+      "item": "Facility and equipment assessment",
+      "rationale": "Current facility capabilities, planned expansions, equipment inventory, and capital equipment needs for production. Include lease agreements and expansion options."
+    },
+    {
+      "item": "Cap table, prior investment terms, and corporate documentation",
+      "rationale": "Clean cap table, all prior investment documents, board composition, and corporate governance. Address any complex provisions or structure issues."
     }
   ]
 }

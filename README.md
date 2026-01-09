@@ -47,6 +47,10 @@ Ensure the following variables are set in your environment:
 | `REPLIT_DOMAINS` | (Optional) Allowed domains for Replit auth |
 | `PSEO_ORIGIN` | (Optional) Enables reverse proxy to the standalone `pseo/` Next.js app (e.g. `http://localhost:3000` in dev or your deployed pSEO origin in prod) |
 
+## 🔐 Security Note
+
+Never commit your `.env` file. If a secret leaks, rotate the key immediately and remove the exposed value from git history.
+
 ## 📦 Scripts
 
 - `npm run dev`: Start development server with Vite and tsx.

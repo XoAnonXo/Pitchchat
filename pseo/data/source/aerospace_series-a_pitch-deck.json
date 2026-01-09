@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/aerospace/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Aerospace Series A startups",
-  "summary": "Projected deck structure for Aerospace founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A aerospace pitch decks must demonstrate meaningful progress from seed while presenting a credible path to production and revenue. Lead with technical accomplishments and customer traction. Show you've de-risked the business and have a clear execution plan. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Accomplishments & Traction",
+      "goal": "Open with your strongest proof points",
+      "guidance": "Lead with what you've achieved since seed: TRL advancement, customer commitments, regulatory progress, team scaling. Show momentum and milestone achievement. Include key metrics: contract value, technical performance, cost improvements. This slide should demonstrate you execute."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Technology & Product",
+      "goal": "Demonstrate technical maturity and differentiation",
+      "guidance": "Present your technology with evidence of validation: test data, demonstration results, performance specifications. Show competitive advantage with technical specificity. Address remaining technical risks and mitigation plans. Include development roadmap to production readiness."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Market & Opportunity",
+      "goal": "Frame the market opportunity with customer evidence",
+      "guidance": "Size your market bottom-up based on specific customer segments and validated willingness to pay. Show market timing drivers: why customers need this now. Include customer quotes and evidence of demand. Address market evolution and your positioning as it develops."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Customer Traction",
+      "goal": "Prove commercial demand with concrete evidence",
+      "guidance": "Present your customer pipeline: contracts signed, orders committed, pilots in progress. Show customer logos and commitment values. Include testimonials on why customers chose you. Address sales cycle dynamics and pipeline conversion. This is critical for Series A credibility."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Business Model & Economics",
+      "goal": "Demonstrate path to profitable unit economics",
+      "guidance": "Present your pricing model and unit economics at scale. Show cost trajectory from prototype to production. Include gross margin evolution and break-even analysis. Address working capital dynamics given aerospace payment cycles. Show you understand the business, not just the technology."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Manufacturing & Operations",
+      "goal": "Show credible path from prototype to production",
+      "guidance": "Present manufacturing strategy: approach, facility plans, supplier relationships. Show MRL progression and key manufacturing milestones. Address production cost targets and capital requirements. Include operational readiness plan. This differentiates real companies from science projects."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Regulatory Status",
+      "goal": "Demonstrate regulatory progress and clear path forward",
+      "guidance": "Present regulatory achievements and timeline to completion. Show any certifications obtained or in progress. Address regulatory risks and mitigation. Include any government relationships that support regulatory progress. This is often gating to revenue—show you've made real progress."
     },
     {
-      "title": "Certification roadmap",
-      "goal": "Explain safety and certification milestones.",
-      "guidance": "Show the path to regulatory approval and commercialization."
+      "title": "Competitive Landscape",
+      "goal": "Position against a more developed competitive field",
+      "guidance": "Updated competitive analysis showing evolution since seed. Include win/loss data against specific competitors. Show technical benchmarking where you have advantages. Address new entrants or incumbent moves. Demonstrate deepening moat."
     },
     {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for Aerospace Series A."
+      "title": "Team & Organization",
+      "goal": "Show team scaling and organizational capability",
+      "guidance": "Present team growth since seed and current organizational structure. Highlight key hires and their impact. Show hiring plan for this round with specific roles. Address organizational challenges of scaling. Include advisors and board if relevant."
     },
     {
-      "title": "Aerospace go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for Aerospace.",
-      "guidance": "Show a focused wedge that fits Aerospace buyers at the Series A stage."
-    },
-    {
-      "title": "Aerospace proof points",
-      "goal": "Show evidence tailored to Aerospace.",
-      "guidance": "Use data or pilots specific to Aerospace to prove momentum at Series A."
+      "title": "Financial Plan & Ask",
+      "goal": "Present clear path to Series B milestones",
+      "guidance": "Show financial projections through production ramp. Present this round's milestones and use of funds. Define Series B bar and your plan to exceed it. Include total capital path estimate. Show capital efficiency compared to industry benchmarks. Close with clear ask and conviction."
     }
   ]
 }

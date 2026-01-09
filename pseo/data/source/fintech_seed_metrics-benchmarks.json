@@ -1,0 +1,78 @@
+{
+  "industry": "fintech",
+  "stage": "seed",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/fintech/seed/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Fintech Seed fundraising metrics benchmarks",
+  "summary": "Fintech seed metrics focus on customer quality, unit economics, and risk management. Growth matters less than sustainable economics and demonstrated ability to manage financial services complexity. Investors benchmark against typical fintech development patterns and unit economics targets. Pitchchat keeps fundraising metrics investor-ready in one room.",
+  "metrics": [
+    {
+      "label": "Monthly Active Users",
+      "value": "5,000 - 50,000",
+      "note": "Users engaging meaningfully with core features. Quality and engagement matter more than raw numbers.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Monthly Revenue",
+      "value": "$20K - $200K MRR",
+      "note": "Recurring revenue from interchange, subscriptions, or transaction fees. Path to $100K+ MRR for Series A.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Revenue Per User",
+      "value": "$5 - $30/month",
+      "note": "Monthly revenue per active user. Varies by product type—lending higher, payments lower.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Customer Acquisition Cost",
+      "value": "$20 - $100",
+      "note": "Blended CAC. Consumer typically $30-80, SMB can be higher. Channel mix significantly impacts.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "LTV:CAC Ratio",
+      "value": "2:1 - 3:1",
+      "note": "Early-stage ratio with clear path to 4:1+. Use actual customer data, not projections.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "30-Day Retention",
+      "value": "60-80%",
+      "note": "Percentage of users active 30 days after signup. Engagement quality matters.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Fraud Rate",
+      "value": "< 1%",
+      "note": "Fraud losses as percentage of volume. Below 0.5% is excellent, above 2% is concerning.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Dispute Rate",
+      "value": "< 1%",
+      "note": "Customer disputes and chargebacks. High rates indicate product or customer quality issues.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Net Promoter Score",
+      "value": "40+",
+      "note": "Customer satisfaction indicator. Fintech NPS varies widely—trust and reliability drive scores.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Regulatory Status",
+      "value": "Compliant operation established",
+      "note": "Licensed directly or operating compliantly through partner. Clear regulatory path defined.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    }
+  ]
+}

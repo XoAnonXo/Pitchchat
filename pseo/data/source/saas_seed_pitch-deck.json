@@ -1,0 +1,68 @@
+{
+  "industry": "saas",
+  "stage": "seed",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/saas/seed/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Pitch deck outline for SaaS Seed startups",
+  "summary": "SaaS seed decks must demonstrate product-market fit signals, unit economics trajectory, and a clear path from early traction to Series A. Lead with the customer problem and your unique insight. Show metrics that prove customers find value. Be realistic about competition and honest about what you don't yet know. Pitchchat turns your deck into an interactive pitch room for investors.",
+  "sections": [
+    {
+      "title": "Problem",
+      "goal": "Show a specific, quantifiable pain in your target segment's daily work",
+      "guidance": "SaaS investors see hundreds of 'productivity' pitches. Differentiate by naming the exact workflow, the persona (job title + company size), and the cost of the status quo. Quantify the pain: time wasted, money lost, opportunities missed. Example: 'Sales managers at 50-200 person companies spend 6 hours weekly reconciling CRM data with marketing automation—that's $15K/year in lost selling time per manager.' Make it concrete and verifiable."
+    },
+    {
+      "title": "Solution",
+      "goal": "Demonstrate your product and its core value proposition",
+      "guidance": "Show the product, not just describe it. Use screenshots or a quick demo video. Focus on the primary use case and how it solves the problem you identified. Avoid feature lists—show the experience and outcome. Make clear what makes your approach different from alternatives. The best solution slides make viewers think 'of course—why didn't this exist before?'"
+    },
+    {
+      "title": "Traction",
+      "goal": "Prove early product-market fit with metrics",
+      "guidance": "Lead with your strongest metrics: MRR, growth rate, retention, NPS. Show cohort charts if you have them—nothing demonstrates PMF like a flat retention curve. Include customer logos if recognizable. Share customer quotes that demonstrate genuine enthusiasm. Show both quantitative and qualitative signals. If metrics are early, show the trajectory and explain what changed to improve them."
+    },
+    {
+      "title": "Business Model",
+      "goal": "Explain how you make money and the unit economics",
+      "guidance": "Present pricing model clearly: per seat, usage-based, tiered plans. Show ARPU and explain expansion revenue potential. Present unit economics: CAC by channel, LTV, payback period. Be honest about where economics are today vs. target. Show the path to improving economics at scale. Investors want to see you understand your business model deeply."
+    },
+    {
+      "title": "Market",
+      "goal": "Size the opportunity credibly",
+      "guidance": "Bottom-up sizing that investors can verify. Start with your ICP: how many companies fit the profile, what's their willingness to pay. Present SAM before TAM. Show the expansion path from initial wedge to broader market. Reference comparable SaaS companies and their market sizes. Avoid obviously inflated TAM numbers—they undermine credibility."
+    },
+    {
+      "title": "Competition",
+      "goal": "Show you understand the landscape and have a defensible position",
+      "guidance": "Include all real alternatives: direct competitors, adjacent solutions, and status quo (spreadsheets, manual processes). Position yourself honestly—no one wins on every dimension. Explain your specific advantage and which customers care about it. Show win rates if available. Demonstrate deep competitive knowledge rather than dismissing competitors."
+    },
+    {
+      "title": "Go-to-Market",
+      "goal": "Explain how you acquire and expand customers",
+      "guidance": "Present your primary GTM motion: product-led, sales-led, or hybrid. Show early evidence it works: conversion rates, pipeline, CAC trends. Explain how it scales with capital. Address the path from early adopters to mainstream market. Include any unique distribution advantages: partnerships, communities, network effects."
+    },
+    {
+      "title": "Team",
+      "goal": "Show why this team will win",
+      "guidance": "Highlight relevant experience: domain expertise, prior startup success, functional excellence. Show complementary skills across founders. Address gaps honestly and plans to fill them. For SaaS, commercial experience alongside technical founders is valuable. Include key advisors or committed hires. Make clear why you specifically are positioned to solve this problem."
+    },
+    {
+      "title": "Financials",
+      "goal": "Present realistic projections and capital efficiency",
+      "guidance": "Show 18-24 month projections with key assumptions explicit. Present burn rate and runway. Show path to key milestones (ARR targets, team size). Be realistic—aggressive projections that miss undermine trust for future fundraising. Show you understand SaaS economics and what good looks like."
+    },
+    {
+      "title": "Ask",
+      "goal": "Clearly state what you need and how you'll use it",
+      "guidance": "State round size and structure. Break down use of funds: product, GTM, team. Connect capital to milestones: what this round achieves and how it positions you for Series A. Show timeline to next round. Be clear about what success looks like and what risks remain after this round."
+    }
+  ]
+}

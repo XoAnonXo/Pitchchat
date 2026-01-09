@@ -1,0 +1,66 @@
+{
+  "industry": "healthcare",
+  "stage": "series-a",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/healthcare/series-a/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Healthcare Series A diligence checklist",
+  "summary": "Series A healthcare diligence focuses on commercial traction, regulatory compliance, and operational scalability. Investors verify your ability to scale a healthcare business—expect deep dives on customer relationships, reimbursement economics, and quality systems. Pitchchat keeps diligence docs organized and easy to review.",
+  "items": [
+    {
+      "item": "Customer and revenue detail with cohort analysis",
+      "rationale": "Complete customer list with contract details: revenue, contract dates, expansion history. Cohort analysis showing retention and expansion patterns. Reference customer contacts for diligence calls."
+    },
+    {
+      "item": "Sales metrics and pipeline analysis",
+      "rationale": "Sales funnel with conversion rates by stage. Pipeline with probability weighting. Win/loss analysis with reasons. Sales cycle analysis by customer segment. Sales team performance data."
+    },
+    {
+      "item": "Regulatory filings and clearance documentation",
+      "rationale": "510(k) clearance letters, CE certificates, other regulatory approvals. Submission history and FDA correspondence. Post-market surveillance data. Quality system certifications."
+    },
+    {
+      "item": "Clinical evidence portfolio",
+      "rationale": "All clinical studies with protocols, results, and publications. Real-world evidence data. Evidence generation plan for expansion. KOL relationships and advisory agreements."
+    },
+    {
+      "item": "Reimbursement and payer documentation",
+      "rationale": "Coverage determinations and medical policies. Payer contracts or attestations. Health economics model with supporting data. Reimbursement expansion strategy and progress."
+    },
+    {
+      "item": "Quality management system audit",
+      "rationale": "QMS documentation: design controls, CAPA, complaint handling, supplier quality. Recent audit results (internal, customer, or regulatory). Quality metrics and trends."
+    },
+    {
+      "item": "Customer case studies and outcomes data",
+      "rationale": "Detailed case studies from key accounts. Outcomes data demonstrating value delivered. Customer ROI analyses. Testimonials and reference documentation."
+    },
+    {
+      "item": "Technology and integration documentation",
+      "rationale": "Technical architecture and security documentation. EHR integration status and certifications. Data handling and HIPAA compliance. Product roadmap and technical debt assessment."
+    },
+    {
+      "item": "Financial model with scenario analysis",
+      "rationale": "Detailed financial model with assumptions. Historical accuracy analysis. Scenario modeling for key variables. Unit economics build-up. Capital efficiency metrics."
+    },
+    {
+      "item": "Team and organizational assessment",
+      "rationale": "Org chart with all roles. Background on leadership team. Employee retention data. Hiring plan with key roles identified. Compensation benchmarking."
+    },
+    {
+      "item": "Legal and IP review",
+      "rationale": "Patent portfolio with prosecution status. Freedom to operate analysis. Material contracts. Litigation or regulatory issues. Corporate structure and cap table."
+    },
+    {
+      "item": "Competitive intelligence",
+      "rationale": "Competitive landscape analysis. Head-to-head clinical data if available. Win/loss analysis by competitor. Competitive positioning and differentiation evidence."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "industry": "healthcare",
+  "stage": "seed",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/healthcare/seed/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Pitch deck outline for Healthcare Seed startups",
+  "summary": "Healthcare seed decks must demonstrate regulatory competence, clinical validation pathway, and realistic go-to-market understanding. Investors expect domain expertise and evidence you can navigate healthcare complexity. Lead with the clinical problem and patient impact, show early validation, and present a credible path through regulatory and commercial hurdles. Pitchchat turns your deck into an interactive pitch room for investors.",
+  "sections": [
+    {
+      "title": "Problem",
+      "goal": "Define a specific clinical problem with quantifiable patient and economic impact",
+      "guidance": "Healthcare investors want to see clinical pain and economic opportunity. Quantify the problem: patient outcomes (mortality, morbidity, quality of life), provider burden (time, cost, burnout), system cost (per-patient, aggregate). Be specific about the population and setting. Show you understand how this problem is currently addressed and why existing solutions fall short. Reference clinical literature supporting the problem magnitude."
+    },
+    {
+      "title": "Solution",
+      "goal": "Demonstrate your product and its clinical value proposition",
+      "guidance": "Show the product in clinical context. Explain the mechanism of action or clinical approach. Present early efficacy signals if available. Make clear what's novel versus incremental improvement. Address clinical workflow fit—show exactly how and when the product is used. Include regulatory classification and why. Healthcare investors expect clinical sophistication in how you present the solution."
+    },
+    {
+      "title": "Clinical Evidence",
+      "goal": "Present your evidence and validation pathway",
+      "guidance": "Show current evidence: bench testing, feasibility data, pilot results. Present your evidence generation roadmap aligned with regulatory and commercial requirements. Explain study design for planned trials. Reference evidence standards in your category—what do you need to prove and to whom? Include clinical advisors or KOL relationships supporting your validation approach."
+    },
+    {
+      "title": "Regulatory Strategy",
+      "goal": "Demonstrate regulatory competence and realistic pathway",
+      "guidance": "Present your regulatory classification and pathway. Show predicate analysis for 510(k) or De Novo justification. Include FDA feedback if you've had interactions. Present realistic timeline with key milestones. Address international regulatory strategy if relevant (CE marking, etc.). Healthcare investors assess regulatory competence carefully—show you know what you don't know and have expertise or advisors to fill gaps."
+    },
+    {
+      "title": "Market Opportunity",
+      "goal": "Size the market with healthcare-specific rigor",
+      "guidance": "Build bottom-up from patient population and clinical utilization. Reference procedure volumes, disease prevalence, or utilization data. Show adoption assumptions grounded in healthcare reality (often 5-15% penetration, not 30%+). Present expansion path: adjacent indications, settings, or geographies. Address market dynamics: growing incidence, shifting care settings, policy changes."
+    },
+    {
+      "title": "Business Model",
+      "goal": "Explain healthcare economics and path to sustainable revenue",
+      "guidance": "Present pricing and payment model: who pays and why. Address reimbursement strategy if applicable. Show unit economics understanding: pricing vs. cost of goods, implementation costs, customer lifetime value. Explain how economics improve at scale. Reference comparable companies' business models. Healthcare often has complex revenue models—demonstrate you understand yours."
+    },
+    {
+      "title": "Go-to-Market",
+      "goal": "Present realistic commercial strategy for healthcare",
+      "guidance": "Show your GTM motion: who you sell to, how you reach them, the buying process. Present early commercial traction: LOIs, pilots, design partnerships. Address sales cycle reality and how you'll navigate it. Explain team or partnership approach to sales. Include channel strategy: direct, distribution, platform partnerships. Reference your commercial team's healthcare experience."
+    },
+    {
+      "title": "Team",
+      "goal": "Demonstrate healthcare domain expertise",
+      "guidance": "Healthcare requires specialized experience. Present clinical, regulatory, commercial, and technical expertise on your team. Address gaps and hiring plan. Include clinical and scientific advisors. Show healthcare network and relationships. Reference relevant prior healthcare company experience. Investors bet heavily on team in healthcare—domain expertise is expected."
+    },
+    {
+      "title": "Financials & Milestones",
+      "goal": "Present healthcare-realistic projections and capital plan",
+      "guidance": "Show 18-24 month plan tied to seed capital. Present major milestones: regulatory submissions, clinical data, commercial proof points. Be realistic about healthcare timelines—they often slip. Show burn rate and runway. Address capital needs through Series A. Healthcare development is capital intensive—show you understand the path."
+    },
+    {
+      "title": "Ask",
+      "goal": "Clear ask with healthcare-appropriate use of funds",
+      "guidance": "State round size and use of funds. Typical healthcare seed allocation: regulatory and clinical (40-50%), product development (20-30%), commercial validation (15-25%), team (10-20%). Connect funding to milestones and Series A readiness. Be clear about what this round de-risks and what remains for future rounds."
+    }
+  ]
+}

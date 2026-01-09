@@ -1,0 +1,50 @@
+{
+  "industry": "healthcare",
+  "stage": "seed",
+  "pageType": "investor-update",
+  "slug": "/investor-questions/healthcare/seed/investor-update/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Healthcare Seed investor update template",
+  "summary": "Healthcare investor updates should emphasize regulatory and clinical milestones, commercial proof points, and team development. Healthcare development is lumpy—focus on progress toward major milestones rather than linear metrics. Be transparent about timeline risks and regulatory feedback. Pitchchat helps founders share updates in a single room.",
+  "sections": [
+    {
+      "section": "Milestone Progress Dashboard",
+      "content": "Lead with status of key milestones: regulatory submissions/feedback, clinical studies, commercial pilots, key hires. Use clear status indicators (on track, at risk, completed). Healthcare is milestone-driven—investors want to see progress toward discrete events, not just activity."
+    },
+    {
+      "section": "Regulatory & Clinical Update",
+      "content": "Detailed progress on regulatory pathway: submissions, FDA feedback, study enrollment, data readouts. Include any timeline changes with explanation. Reference specific regulatory meetings or guidance received. This is often the most important section for healthcare companies."
+    },
+    {
+      "section": "Commercial Progress",
+      "content": "Pilot status and results. Pipeline development and key opportunities. Customer conversations and feedback. Any revenue or contracted commitments. Health system relationships and decision timelines. Show momentum even if revenue is early."
+    },
+    {
+      "section": "Product & Technical",
+      "content": "Product development against clinical requirements. Integration progress (EHR, data systems). Quality system development. Technical challenges and solutions. User feedback from clinical settings."
+    },
+    {
+      "section": "Team & Operations",
+      "content": "Key hires and recruiting pipeline. Clinical advisor engagement. Operational developments (manufacturing, quality systems, etc.). Healthcare requires specialized talent—show progress building the team."
+    },
+    {
+      "section": "Financial Position",
+      "content": "Cash position and burn rate. Spending versus plan. Runway and path to next milestone. Healthcare development is expensive—keep investors informed on capital position."
+    },
+    {
+      "section": "Risks & Asks",
+      "content": "Key risks you're monitoring: regulatory, clinical, commercial, competitive. Specific asks for investors: introductions to health systems, clinical advisors, regulatory experts. Healthcare investors often have valuable networks—use them."
+    },
+    {
+      "section": "Looking Ahead",
+      "content": "Next 30-60 day priorities. Upcoming milestones and expected timing. Any strategic decisions requiring input. Path to next financing and any timing considerations."
+    }
+  ]
+}

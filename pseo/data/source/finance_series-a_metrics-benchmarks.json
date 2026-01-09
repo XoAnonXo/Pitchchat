@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/finance/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-finance-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Finance Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Finance Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A fintech benchmarks emphasize sustainable economics and operational scalability alongside growth. Investors compare your efficiency metrics against both fintech peers and traditional financial services. These benchmarks demonstrate business maturity beyond user acquisition. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "3-6 months",
-      "note": "Projected target range; update with real data. Finance Series A."
+      "label": "Annual Revenue",
+      "value": "$2M - $10M ARR",
+      "note": "Annualized revenue from all sources. Quality matters—high retention, expanding customers preferred.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "35-50%",
-      "note": "Projected target range; update with real data. Finance Series A."
+      "label": "Revenue Growth Rate",
+      "value": "80-150% YoY",
+      "note": "Annual growth rate. Efficient growth valued over hyper-growth with poor economics.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "60-75%",
-      "note": "Projected target range; update with real data. Finance Series A."
+      "label": "Monthly Active Users",
+      "value": "100,000 - 500,000",
+      "note": "Active engaged users. Quality of engagement matters—transacting users more valuable than passive.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate; compliance 6-9 mo",
-      "note": "Projected target range; update with real data. Finance Series A."
+      "label": "LTV:CAC Ratio",
+      "value": "3:1 - 5:1",
+      "note": "Based on mature cohorts. Should show improvement and path to 5:1+.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "CAC Payback Period",
+      "value": "9-15 months",
+      "note": "Time to recover CAC. Trending toward sub-12 months at scale.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Net Revenue Retention",
+      "value": "110-130%",
+      "note": "Revenue retention including expansion. Shows deepening customer relationships.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "60-80%",
+      "note": "At scale gross margin. Should show improvement trajectory toward target.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Monthly Transaction Volume",
+      "value": "$10M - $100M",
+      "note": "Transaction volume showing financial services scale.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Loss Rate",
+      "value": "<1-2% of volume",
+      "note": "Combined fraud and credit losses. Should compare favorably to industry benchmarks.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
+    },
+    {
+      "label": "Team Size",
+      "value": "30-80 people",
+      "note": "Scaled team with depth in product, engineering, compliance, and operations.",
+      "source": "PwC Financial Services Industry (https://www.pwc.com/gx/en/industries/financial-services.html)"
     }
   ]
 }

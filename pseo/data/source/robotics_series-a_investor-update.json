@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/robotics/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Robotics Series A investor update template",
-  "summary": "Projected update format for Robotics founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A robotics investor updates focus on fleet growth, operational efficiency, and progress toward sustainable economics. Demonstrate you're scaling effectively while improving unit economics. Maintain transparency on challenges—robotics at scale surfaces new issues. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with key metrics: fleet size, ARR/revenue, success rate, runway. Summarize biggest wins and challenges. Include customer and team highlights. This should convey company trajectory in 60 seconds."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Fleet Performance",
+      "content": "Detailed fleet metrics: deployed robots, task success rate, uptime. Show trajectory and consistency across sites. Address any performance issues and remediation. Include new capabilities deployed."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Customer & Revenue",
+      "content": "Revenue performance with breakdown. New customers and deployments. Retention and expansion metrics. Pipeline and bookings if applicable. Customer feedback themes."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Operations Scaling",
+      "content": "Deployment velocity and efficiency. Support metrics and team productivity. Remote operations capability. Process improvements and tooling. Demonstrate operational leverage."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Unit Economics Progress",
+      "content": "Current unit economics with trends. Cost reduction initiatives and results. Margin improvement trajectory. Working capital management."
     },
     {
-      "section": "Field reliability (Series A)",
-      "content": "Report uptime, deployment progress, and support insights."
+      "section": "Product & Technology",
+      "content": "Technology roadmap progress. New capabilities shipped or in development. Fleet software updates and impact. Hardware evolution if relevant."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for Robotics founders at Series A."
+      "section": "Team & Organization",
+      "content": "Team growth and key hires. Organizational evolution. Any departures and mitigation. Culture and engagement indicators."
+    },
+    {
+      "section": "Financial Status & Forward Look",
+      "content": "Cash position and runway. Performance vs. budget. Fundraising timing if relevant. Next quarter priorities and milestones. Specific investor asks."
     }
   ]
 }

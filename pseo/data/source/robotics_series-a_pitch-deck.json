@@ -4,63 +4,70 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/robotics/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Robotics Series A startups",
-  "summary": "Projected deck structure for Robotics founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A robotics pitch decks must demonstrate production-scale operation and a scalable business model. Lead with fleet performance data and customer evidence. Show you've solved deployment scalability and have a path to attractive unit economics. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Fleet Performance",
+      "goal": "Open with production-scale proof points",
+      "guidance": "Lead with fleet metrics: deployed robots, task success rate, runtime hours. Show trajectory over time. Include geographic and customer diversity. This slide should demonstrate you're operating at scale, not running extended pilots."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Market & Problem",
+      "goal": "Frame the market opportunity with customer evidence",
+      "guidance": "Size the market based on deployed customer segments. Show why robotics is winning: labor dynamics, productivity demands, proven ROI. Include customer quotes on the problem. Address market timing and adoption trajectory."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Robot Capability",
+      "goal": "Demonstrate production-grade technical capability",
+      "guidance": "Present robot capabilities with fleet-wide data. Show task types, environment range, and performance consistency. Include technology differentiation and moat. Address capability roadmap and expansion plans."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Customer Evidence",
+      "goal": "Let customers prove value",
+      "guidance": "Present customer testimonials and case studies. Show retention and expansion patterns. Include customer ROI data—payback realized, not forecast. Address any customer churn with learnings."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Unit Economics",
+      "goal": "Demonstrate viable business economics",
+      "guidance": "Present complete unit economics: hardware margin, deployment cost, support cost. Show trajectory toward target economics at scale. Include customer LTV and CAC analysis. Address working capital for hardware business."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Fleet Operations",
+      "goal": "Show scalable operations capability",
+      "guidance": "Present operations infrastructure: monitoring, support, updates. Show support efficiency metrics and improvement. Include team structure and how it scales. Demonstrate you can operate a much larger fleet efficiently."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Go-to-Market",
+      "goal": "Show scalable customer acquisition",
+      "guidance": "Present sales strategy and team. Show pipeline and conversion metrics. Include channel strategy if relevant. Address sales efficiency and how it improves with scale."
     },
     {
-      "title": "Reliability validation",
-      "goal": "Prove system reliability in the field.",
-      "guidance": "Share testing, uptime goals, and support strategy."
+      "title": "Manufacturing & Hardware",
+      "goal": "Show production scalability",
+      "guidance": "Present hardware production strategy and current capability. Show cost trajectory with volume. Address supply chain maturity. Include quality metrics. Demonstrate you can build robots at growth rate."
     },
     {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for Robotics Series A."
+      "title": "Competition",
+      "goal": "Position against evolved competitive landscape",
+      "guidance": "Updated competitive analysis with win/loss data. Address large company threat. Show deepening moat with scale. Include technology comparisons where advantaged."
     },
     {
-      "title": "Robotics go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for Robotics.",
-      "guidance": "Show a focused wedge that fits Robotics buyers at the Series A stage."
+      "title": "Team & Organization",
+      "goal": "Show organizational capability for scale",
+      "guidance": "Present team growth and structure. Highlight key hires and their impact. Show hiring plan for this round. Address organizational evolution required for 10x scale."
     },
     {
-      "title": "Robotics proof points",
-      "goal": "Show evidence tailored to Robotics.",
-      "guidance": "Use data or pilots specific to Robotics to prove momentum at Series A."
+      "title": "Financial Plan & Ask",
+      "goal": "Present clear path to profitability",
+      "guidance": "Show revenue projections and path to break-even. Present this round's milestones and use of funds. Include scenario analysis for different growth rates. Close with clear ask and confidence in the opportunity."
     }
   ]
 }

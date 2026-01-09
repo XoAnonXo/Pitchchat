@@ -4,99 +4,121 @@
   "pageType": "investor-questions",
   "slug": "/investor-questions/hardware/seed/investor-questions/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Investor questions for Hardware Seed startups",
-  "summary": "Projected investor questions and preparation guidance for Hardware founders raising a Seed round. Includes metrics, objections, and preparation notes for the round.",
+  "summary": "Seed-stage hardware startups face unique investor scrutiny around manufacturing feasibility, unit economics at scale, and the capital intensity of physical product development. Investors evaluate your Bill of Materials trajectory, First Pass Yield on prototypes, and realistic timelines to production. Hardware is hard—demonstrating you understand the manufacturing challenges is as important as the technology itself. Pitchchat turns investor questions into an interactive pitch room founders can share.",
   "questions": [
     {
-      "category": "Problem",
-      "question": "What is the wedge problem and why does it matter now?",
-      "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+      "category": "Manufacturing Readiness",
+      "question": "What's your current BOM cost and path to target production cost?",
+      "answer": "Hardware economics live or die by Bill of Materials trajectory. At seed stage, prototype BOM is typically 2-5x eventual production cost. Investors want to see: current BOM breakdown by component, identified cost reduction opportunities (volume pricing, component redesign, supplier negotiations), and realistic timeline to target cost. Show you understand the cost drivers and have a specific plan, not just assumptions that 'volume will fix it.'"
     },
     {
-      "category": "Buyer",
-      "question": "Who is the buyer and how do you reach them efficiently?",
-      "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+      "category": "Production Quality",
+      "question": "What's your First Pass Yield and how do you plan to improve it?",
+      "answer": "First Pass Yield—the percentage of units that pass testing without rework—indicates manufacturing maturity. Seed-stage companies often see 60-70% FPY on early prototypes, targeting 90%+ for production. Present your current FPY with root cause analysis for failures. Show your quality improvement roadmap: design for manufacturability changes, process improvements, and testing refinements. Investors understand FPY improves but want evidence you're systematically addressing it."
     },
     {
-      "category": "Moat",
-      "question": "What makes the business defensible beyond speed?",
-      "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+      "category": "Supply Chain",
+      "question": "How resilient is your supply chain and what are the critical dependencies?",
+      "answer": "Hardware supply chains have proven fragile. Identify your critical components: single-source dependencies, long lead-time items, and components with supply risk. Show your mitigation strategy: dual-sourcing plans, inventory buffering, or design alternatives. Investors have been burned by supply chain surprises—demonstrate you've mapped risks and have contingency plans. Reference any supplier relationships or commitments."
     },
     {
-      "category": "Traction",
-      "question": "What early signals prove pull from the market?",
-      "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+      "category": "Design Maturity",
+      "question": "How many design iterations to production-ready and what's the timeline?",
+      "answer": "Hardware iteration cycles are long and expensive. Present your design maturity: current prototype generation, known issues, and planned iterations. Show your engineering change order (ECO) rate trending down as you approach production readiness. Include certification requirements (UL, FCC, CE) and their timeline. Investors want to see a realistic path to design freeze with contingency for discoveries."
     },
     {
-      "category": "Economics",
-      "question": "How will margins improve as you scale?",
-      "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+      "category": "Capital Intensity",
+      "question": "How much capital do you need to reach production scale and positive unit economics?",
+      "answer": "Hardware is capital-intensive by nature. Map your funding requirements through production scale: tooling investment, initial inventory, working capital for production ramp. Be honest about total capital needs—hardware founders often underestimate. Show your funding strategy including non-dilutive sources (Kickstarter, grants, strategic investment). Investors appreciate founders who've done the real math on hardware capital requirements."
     },
     {
-      "category": "Roadmap",
-      "question": "What milestones unlock the next round?",
-      "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+      "category": "Manufacturing Strategy",
+      "question": "Will you manufacture in-house or use contract manufacturing, and why?",
+      "answer": "Manufacturing strategy significantly impacts capital needs and control. Present your approach with clear rationale: contract manufacturing reduces capital but limits control; in-house provides quality control but requires facility investment. For CM approach, show your supplier evaluation and relationship development. For in-house, show facility plans and equipment requirements. Address how the strategy might evolve with scale."
     },
     {
-      "category": "Validation",
-      "question": "What proof shows the market will pay for this?",
-      "answer": "Use pilot commitments, LOIs, or usage signals tied to revenue potential."
+      "category": "Customer Validation",
+      "question": "What evidence do you have that customers will pay your target price?",
+      "answer": "Hardware pricing is constrained by BOM plus margin targets. Validate that your target price works in the market: customer interviews, pilot pricing tests, competitive positioning. Show willingness-to-pay research and how it maps to your cost structure. For B2B hardware, include ROI analysis customers have validated. Investors have seen too many hardware startups with great technology but unworkable economics."
     },
     {
-      "category": "Risk",
-      "question": "What is the single biggest technical or regulatory risk?",
-      "answer": "Explain the plan to de-risk it within the seed runway."
+      "category": "Certification & Compliance",
+      "question": "What certifications are required and what's your compliance timeline?",
+      "answer": "Hardware certifications (UL, FCC, CE, industry-specific) are often gating to sales. Map your certification requirements with realistic timelines and costs. Show any preliminary testing or pre-certification work completed. Include regulatory compliance requirements for your target markets. Certification delays are common—show you've planned appropriately and built buffer into your timeline."
     },
     {
-      "category": "Capital",
-      "question": "How will the seed round extend runway to key proof points?",
-      "answer": "Tie the round to milestones that unlock Series A readiness."
+      "category": "Field Performance",
+      "question": "How have prototypes performed in real-world conditions?",
+      "answer": "Field testing reveals issues that lab testing misses. Present your field deployment experience: number of units deployed, environments tested, runtime accumulated. Show failure mode data and how you've addressed issues discovered. Include customer feedback from pilot users. If limited field data, acknowledge it and present your validation plan. Investors want evidence the product works outside the lab."
     },
     {
-      "category": "Manufacturing",
-      "question": "How will you scale manufacturing and manage supply chain risk? (Hardware Seed)",
-      "answer": "Outline partners, tooling plans, and cost-down milestones. Focus on Hardware at the Seed stage."
-    },
-    {
-      "category": "Margins",
-      "question": "How do margins improve after initial production? (Hardware Seed)",
-      "answer": "Show unit cost curves and economies of scale targets. Focus on Hardware at the Seed stage."
+      "category": "Team Capability",
+      "question": "Does your team have the hardware development and manufacturing experience needed?",
+      "answer": "Hardware teams need different skills than software teams. Highlight relevant experience: prior hardware product development, manufacturing engineering, supply chain management, quality systems. Be honest about gaps and your hiring or advisory plan to fill them. Investors look for teams who've shipped physical products before—the challenges of hardware are learned through experience."
     }
   ],
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "6-12 months",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "Bill of Materials Cost",
+      "value": "Within 2-3x of target",
+      "note": "Seed-stage BOM is typically higher than production target but should be in reasonable range with clear path to target through volume and design optimization.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "20-35%",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "First Pass Yield",
+      "value": "60-75%",
+      "note": "Initial prototype FPY showing improvement trend. Demonstrates manufacturing process is stabilizing with root cause analysis on failures.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "40-60%",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "Prototype Units Deployed",
+      "value": "20-100 units",
+      "note": "Enough field deployment to validate real-world performance. Quality of deployment (diverse conditions, active monitoring) matters as much as quantity.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Capital intensity",
-      "value": "High; 18-24 mo runway",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "Design Iteration Status",
+      "value": "Gen 2-3 prototype",
+      "note": "Multiple prototype generations showing design convergence. ECO rate should be declining as you approach production readiness.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Customer Pre-orders or LOIs",
+      "value": "$100K - $1M",
+      "note": "Evidence of customer willingness to pay, even if conditional. Kickstarter success, pilot commitments, or B2B LOIs provide validation.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Certification Progress",
+      "value": "Planning complete, testing initiated",
+      "note": "Clear understanding of required certifications with preliminary testing or pre-certification work underway.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     }
   ],
   "objections": [
     {
-      "objection": "Adoption cycles are too long for this market.",
-      "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+      "objection": "Hardware is hard—how do we know you can actually ship a product?",
+      "response": "Acknowledge the challenge directly and show evidence of capability. Present team hardware experience: products shipped, manufacturing scaled, problems solved. Show your prototype progress and the systematic approach to development. Reference advisory relationships with hardware experts. Demonstrate you understand the specific challenges (supply chain, manufacturing, certification) and have realistic plans to address them."
     },
     {
-      "objection": "The product requires heavy upfront investment.",
-      "response": "Detail staged milestones and how capital de-risks the core thesis."
+      "objection": "Your unit economics don't work at your current cost structure.",
+      "response": "Present your cost reduction roadmap with specific initiatives. Show component-by-component analysis of cost reduction opportunities: volume pricing curves from suppliers, design-for-cost changes identified, manufacturing process improvements. Reference industry benchmarks for cost reduction from prototype to production. Be honest about what's proven vs. assumed, but show a credible path to workable economics."
     },
     {
-      "objection": "Hardware margins are too low to scale. (Hardware Seed)",
-      "response": "Show cost-down plans and service revenue expansion. Tie it to Hardware Seed milestones."
+      "objection": "What happens if a key component becomes unavailable or prices spike?",
+      "response": "Demonstrate supply chain risk awareness and mitigation. Show your critical component analysis: single-source items, long lead-time components, price-volatile materials. Present mitigation strategies: dual-source qualification in progress, design alternatives identified, safety stock plans. Reference any supply commitments or strategic supplier relationships. Show you've learned from industry supply chain disruptions."
+    },
+    {
+      "objection": "The timeline to production seems aggressive for hardware development.",
+      "response": "Present a detailed development timeline with realistic buffers. Reference comparable hardware products and their development timelines. Acknowledge common delay risks: certification surprises, supplier issues, design changes. Show your contingency planning and how you'd handle delays. If you have reasons for faster development (experienced team, simpler design, proven platform), explain them specifically."
     }
   ]
 }

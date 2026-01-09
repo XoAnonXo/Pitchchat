@@ -3,10 +3,13 @@ import path from "path";
 import XLSX from "xlsx";
 import { storage } from "./storage";
 import { assertOpenAIAvailable, generateEmbedding, summarizeDocument } from "./openai";
-import type { InsertDocument, InsertChunk } from "@shared/schema";
+import type { InsertChunk } from "@shared/schema";
 import { calculatePlatformCost } from "./pricing";
 import { sendDocumentProcessed } from "./brevo";
 import { deleteUploadedFile, UPLOAD_DIR } from "./utils/uploads";
+import { db } from "./db";
+import { chunks as chunksTable, documents } from "@shared/schema";
+import { eq } from "drizzle-orm";
 
 // Ensure upload directory exists
 async function ensureUploadDir() {
@@ -73,11 +76,13 @@ export async function processDocument(documentId: string): Promise<void> {
     
     // Process each chunk
     let totalTokens = 0;
+    const chunkInserts: InsertChunk[] = [];
     for (let i = 0; i < chunks.length; i++) {
       const chunk = chunks[i];
       const embedding = await generateEmbedding(chunk);
+      const tokenCount = estimateTokens(chunk);
       
-      const chunkData: InsertChunk = {
+      chunkInserts.push({
         documentId,
         content: chunk,
         embedding,
@@ -85,23 +90,35 @@ export async function processDocument(documentId: string): Promise<void> {
           filename: document.originalName,
           chunkIndex: i,
         },
-        tokenCount: estimateTokens(chunk),
+        tokenCount,
         chunkIndex: i,
-      };
-      
-      await storage.createChunk(chunkData);
-      totalTokens += chunkData.tokenCount;
+      });
+
+      totalTokens += tokenCount;
     }
 
     // Calculate platform cost for embeddings
     const platformCost = calculatePlatformCost(totalTokens, 'embedding');
-    
-    // Update document with completion status
-    await storage.updateDocument(documentId, {
-      status: "completed",
-      tokens: totalTokens,
-      pageCount: estimatePageCount(content),
-      // Store cost for tracking (optional, but useful for analytics)
+
+    await db.transaction(async (tx) => {
+      for (const chunkData of chunkInserts) {
+        await tx
+          .insert(chunksTable)
+          .values(chunkData)
+          .onConflictDoNothing({
+            target: [chunksTable.documentId, chunksTable.chunkIndex],
+          });
+      }
+
+      await tx
+        .update(documents)
+        .set({
+          status: "completed",
+          tokens: totalTokens,
+          pageCount: estimatePageCount(content),
+          updatedAt: new Date(),
+        })
+        .where(eq(documents.id, documentId));
     });
 
     // Send document processed notification email

@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/chemistry/series-a/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Chemistry Series A investor update template",
-  "summary": "Projected update format for Chemistry founders raising a Series A round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Series A biotech investor updates should demonstrate clinical progress and milestone execution. Given significant capital deployed, updates should be thorough with clear metrics. Maintain transparency on challenges—clinical development has inherent setbacks and honest communication builds trust. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with clinical/development milestones achieved. Include regulatory status updates. Summarize key data generated. Cash position and runway. Partnership activity if relevant. This should convey program trajectory immediately."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Clinical Development",
+      "content": "Detailed clinical trial progress: enrollment, sites, timeline. Safety observations and management. Any efficacy signals or biomarker data. Protocol amendments if applicable. Regulatory interactions related to clinical program."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Regulatory Update",
+      "content": "FDA interactions and outcomes. IND amendments or updates. Special designation progress. International regulatory filings. Any regulatory risks or challenges. Keep investors current on regulatory pathway."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Data Highlights",
+      "content": "New data generated with interpretation. Clinical data emerging from trials. Preclinical data supporting development decisions. Publication and presentation activity. Data quality and reproducibility confirmation."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Manufacturing Progress",
+      "content": "CMC and supply status. Process development milestones. CMO relationship management. Clinical supply availability. Scale-up progress toward commercial manufacturing."
     },
     {
-      "section": "Scale-up progress (Series A)",
-      "content": "Detail yield improvements and pilot plant milestones."
+      "section": "Competitive Landscape",
+      "content": "Competitive program updates: trial results, regulatory actions, failures. Implications for your program positioning. Market dynamics shifts. How differentiation has evolved."
     },
     {
-      "section": "Series A milestones",
-      "content": "Summarize the milestone progress expected for Chemistry founders at Series A."
+      "section": "Partnership Activity",
+      "content": "Pharma engagement status. Diligence processes active. Any partnership discussions or terms. Strategic interest in the space. Optionality created for exit or development."
+    },
+    {
+      "section": "Financial & Forward Look",
+      "content": "Cash position and burn rate. Runway and financing timeline. Budget vs. actual performance. Next quarter priorities and milestones. Specific investor asks: introductions, expertise, strategic guidance."
     }
   ]
 }

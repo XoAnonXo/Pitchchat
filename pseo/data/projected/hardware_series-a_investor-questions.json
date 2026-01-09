@@ -1,0 +1,102 @@
+{
+  "industry": "hardware",
+  "stage": "series-a",
+  "pageType": "investor-questions",
+  "slug": "/investor-questions/hardware/series-a/investor-questions/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Investor questions for Hardware Series A startups",
+  "summary": "Projected investor questions and preparation guidance for Hardware founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+  "questions": [
+    {
+      "category": "Problem",
+      "question": "What is the wedge problem and why does it matter now?",
+      "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+    },
+    {
+      "category": "Buyer",
+      "question": "Who is the buyer and how do you reach them efficiently?",
+      "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+    },
+    {
+      "category": "Moat",
+      "question": "What makes the business defensible beyond speed?",
+      "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+    },
+    {
+      "category": "Traction",
+      "question": "What early signals prove pull from the market?",
+      "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+    },
+    {
+      "category": "Economics",
+      "question": "How will margins improve as you scale?",
+      "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+    },
+    {
+      "category": "Roadmap",
+      "question": "What milestones unlock the next round?",
+      "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+    },
+    {
+      "category": "Scale",
+      "question": "What growth motion will scale after Series A?",
+      "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+    },
+    {
+      "category": "Retention",
+      "question": "What retention or expansion signals prove durability?",
+      "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+    },
+    {
+      "category": "Efficiency",
+      "question": "How will capital efficiency improve post-Series A?",
+      "answer": "Explain how margins and payback improve as operations scale."
+    },
+    {
+      "category": "Manufacturing",
+      "question": "How will you scale manufacturing and manage supply chain risk? (Hardware Series A)",
+      "answer": "Outline partners, tooling plans, and cost-down milestones. Focus on Hardware at the Series A stage."
+    },
+    {
+      "category": "Margins",
+      "question": "How do margins improve after initial production? (Hardware Series A)",
+      "answer": "Show unit cost curves and economies of scale targets. Focus on Hardware at the Series A stage."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "4-9 months",
+      "note": "Projected target range; update with real data. Hardware Series A."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "30-45%",
+      "note": "Projected target range; update with real data. Hardware Series A."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "55-70%",
+      "note": "Projected target range; update with real data. Hardware Series A."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "Moderate-High; 18-30 mo runway",
+      "note": "Projected target range; update with real data. Hardware Series A."
+    }
+  ],
+  "objections": [
+    {
+      "objection": "Adoption cycles are too long for this market.",
+      "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+    },
+    {
+      "objection": "The product requires heavy upfront investment.",
+      "response": "Detail staged milestones and how capital de-risks the core thesis."
+    },
+    {
+      "objection": "Hardware margins are too low to scale. (Hardware Series A)",
+      "response": "Show cost-down plans and service revenue expansion. Tie it to Hardware Series A milestones."
+    }
+  ]
+}

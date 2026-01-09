@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/aerospace/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Aerospace Seed investor update template",
-  "summary": "Projected update format for Aerospace founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Seed-stage aerospace investor updates focus on technical progress and risk reduction. Given long development timelines, investors want to see consistent milestone achievement and prudent resource management. Transparent communication builds trust for future funding rounds. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Technical Progress Summary",
+      "content": "Lead with your most significant technical accomplishment this period. Include TRL/MRL advancement if applicable. Share test results, design completions, or prototype progress. Be specific about what was achieved and what it proves. Include photos or data visualizations of progress."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Milestone Status",
+      "content": "Report against your committed milestones: on track, ahead, or behind with explanation. For delays, explain root cause and mitigation. For completed milestones, describe the evidence and what's unlocked. Update future milestone timeline based on learnings."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Risk Reduction",
+      "content": "Aerospace investing is about risk reduction. Identify key risks and how you've addressed them this period. Technical risks retired through testing, regulatory risks reduced through engagement, market risks addressed through customer conversations. Show you're systematically de-risking."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Regulatory & Compliance Updates",
+      "content": "Report on regulatory engagement: meetings held, applications filed, guidance received. Include any compliance activities or certifications progressed. For ITAR-controlled companies, report on compliance program status."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Customer & Partner Development",
+      "content": "Update on commercial progress: customer conversations, LOI advancement, pilot programs, partnership discussions. For government-focused companies, report on SBIR/STTR applications, program engagement, and prime contractor relationships."
     },
     {
-      "section": "Regulatory milestones (Seed)",
-      "content": "Share certification progress and upcoming approvals."
+      "section": "Team & Operations",
+      "content": "Report on team changes: key hires, departures, organizational updates. Include any facility or equipment acquisitions. Share team capacity and any hiring priorities."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for Aerospace founders at Seed."
+      "section": "Financial Status",
+      "content": "Cash position, burn rate, and runway. Report against budget with variance explanation. Include non-dilutive funding status: applications submitted, awards received, or pipeline. Show capital efficiency awareness."
+    },
+    {
+      "section": "Asks & Next Period Priorities",
+      "content": "Specific asks for investor help: introductions, technical advisors, regulatory guidance. Define next period priorities and success metrics. Preview any upcoming decisions where board input would be valuable."
     }
   ]
 }

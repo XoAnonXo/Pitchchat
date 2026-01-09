@@ -152,6 +152,7 @@ export default function ConversationsPage() {
             size="icon"
             className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
+            aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -217,6 +218,7 @@ export default function ConversationsPage() {
               size="icon"
               onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
+              aria-label="Log out"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -235,6 +237,7 @@ export default function ConversationsPage() {
                 size="icon"
                 className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open sidebar"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -313,6 +316,7 @@ export default function ConversationsPage() {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-11 h-12 bg-white border-black/10 rounded-2xl text-sm focus:border-black focus:ring-black/10 transition-all placeholder:text-black/30"
+                aria-label="Search conversations"
               />
             </div>
 
@@ -356,6 +360,15 @@ export default function ConversationsPage() {
                     <div
                       className="p-5 sm:p-6 cursor-pointer"
                       onClick={() => toggleConversation(conversation.id)}
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={expandedConversation === conversation.id}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter" || event.key === " ") {
+                          event.preventDefault();
+                          toggleConversation(conversation.id);
+                        }
+                      }}
                     >
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex-1 min-w-0">
@@ -394,6 +407,16 @@ export default function ConversationsPage() {
                           variant="ghost"
                           size="icon"
                           className={`h-9 w-9 rounded-xl transition-colors ${expandedConversation === conversation.id ? 'bg-black/[0.06] text-black' : 'text-black/30 hover:text-black'}`}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            toggleConversation(conversation.id);
+                          }}
+                          aria-label={
+                            expandedConversation === conversation.id
+                              ? "Collapse conversation details"
+                              : "Expand conversation details"
+                          }
+                          aria-expanded={expandedConversation === conversation.id}
                         >
                           {expandedConversation === conversation.id ? (
                             <ChevronUp className="h-4 w-4" />

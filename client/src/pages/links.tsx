@@ -108,6 +108,7 @@ export default function LinksPage({ projectId }: LinksPageProps) {
             size="icon"
             className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
+            aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -176,6 +177,7 @@ export default function LinksPage({ projectId }: LinksPageProps) {
               size="icon"
               onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
+              aria-label="Log out"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -192,6 +194,7 @@ export default function LinksPage({ projectId }: LinksPageProps) {
                 size="icon"
                 className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open sidebar"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -314,6 +317,7 @@ export default function LinksPage({ projectId }: LinksPageProps) {
                                   size="icon"
                                   className="h-10 w-10 rounded-xl hover:bg-white hover:shadow-sm hover:border-black/10 border border-transparent transition-all"
                                   onClick={() => copyLink(link.slug, link.id)}
+                                  aria-label="Copy share link"
                                 >
                                   {copiedId === link.id ? (
                                     <Check className="h-4 w-4 text-emerald-600" />
@@ -325,7 +329,8 @@ export default function LinksPage({ projectId }: LinksPageProps) {
                                   variant="ghost"
                                   size="icon"
                                   className="h-10 w-10 rounded-xl hover:bg-white hover:shadow-sm hover:border-black/10 border border-transparent transition-all"
-                                  onClick={() => window.open(`/chat/${link.slug}`, '_blank')}
+                                  onClick={() => window.open(`/chat/${link.slug}`, '_blank', 'noopener,noreferrer')}
+                                  aria-label="Open share link in new tab"
                                 >
                                   <ExternalLink className="h-4 w-4 text-black/40" />
                                 </Button>

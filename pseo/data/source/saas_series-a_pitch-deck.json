@@ -1,0 +1,68 @@
+{
+  "industry": "saas",
+  "stage": "series-a",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/saas/series-a/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Pitch deck outline for SaaS Series A startups",
+  "summary": "Series A SaaS decks focus on proven traction, scalable unit economics, and the path to market leadership. You're no longer proving the concept works—you're demonstrating it scales. Lead with metrics that prove PMF, show the growth engine works, and present a credible path to a large outcome. Pitchchat turns your deck into an interactive pitch room for investors.",
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "goal": "Set the stage with your core thesis and traction",
+      "guidance": "Open with your strongest proof points: ARR, growth rate, NRR, key customer logos. State your market position clearly. Make investors immediately understand the opportunity and why you're positioned to win. This slide should convey that you've built something valuable with strong momentum."
+    },
+    {
+      "title": "Problem & Market",
+      "goal": "Frame the market opportunity you're capturing",
+      "guidance": "Present the problem in market context—what's broken, why now is the time. Size the market credibly with bottom-up methodology. Show your addressable segment today and expansion path. Reference market dynamics that support your growth: digital transformation, regulatory changes, demographic shifts. Make clear this is a large market with room for a category-defining company."
+    },
+    {
+      "title": "Solution & Product",
+      "goal": "Demonstrate your product and differentiation",
+      "guidance": "Show the product solving real customer problems. Focus on core differentiators, not feature lists. Include customer outcomes: time saved, revenue generated, costs reduced. Show product evolution based on customer feedback. Make clear why customers choose you over alternatives and why they stay."
+    },
+    {
+      "title": "Traction & Metrics",
+      "goal": "Prove product-market fit with data",
+      "guidance": "Present the metrics that matter: ARR, growth rate, NRR, unit economics. Show cohort data demonstrating retention. Include customer quality: logos, references, expansion stories. This is your strongest slide—let the numbers speak. Use charts that make trends clear. Address any metrics that require explanation."
+    },
+    {
+      "title": "Unit Economics",
+      "goal": "Show the business model works",
+      "guidance": "Deep dive on economics: CAC by channel, LTV calculation, payback period, LTV:CAC ratio. Show improvement trajectory in cohorts. Explain what drives efficiency at scale. Address gross margin and path to target. Demonstrate you understand the levers and have a plan to optimize them."
+    },
+    {
+      "title": "Go-to-Market",
+      "goal": "Show your growth engine is repeatable",
+      "guidance": "Present your GTM motion with evidence it scales. Sales productivity metrics if sales-led; conversion funnels if product-led. Show pipeline and forecasting. Address customer acquisition by channel and efficiency trends. Explain how capital accelerates growth—hiring plan, channel expansion, market expansion. Show the playbook works beyond founder-led sales."
+    },
+    {
+      "title": "Competition",
+      "goal": "Demonstrate defensible positioning",
+      "guidance": "Map the competitive landscape honestly. Show your positioning and why it wins. Include win/loss data against competitors. Address competitive threats and your response. Show sustainable differentiation that compounds: network effects, data advantages, ecosystem, brand. Demonstrate deep competitive understanding."
+    },
+    {
+      "title": "Team",
+      "goal": "Show you can execute at scale",
+      "guidance": "Present leadership team with relevant experience. Highlight Series A stage readiness: sales leadership, marketing leadership, operational capability. Address gaps and hiring plan. Show team depth beyond founders. Include advisors and committed hires. Demonstrate you've built an organization, not just a product."
+    },
+    {
+      "title": "Financial Plan",
+      "goal": "Present credible projections and capital efficiency",
+      "guidance": "18-24 month projections with explicit assumptions. Break down use of funds: headcount, GTM, product. Show path to Series B metrics. Present burn multiple and efficiency targets. Scenario analysis showing sensitivity. Be realistic—missing projections damages future fundraising."
+    },
+    {
+      "title": "Ask & Use of Funds",
+      "goal": "Close with clear ask and milestone path",
+      "guidance": "State round size and structure. Detail use of funds tied to specific outcomes. Present milestones this capital achieves—typically 3-4x ARR growth. Show the logical path from here to Series B. Make clear what success looks like and how you'll measure it."
+    }
+  ]
+}

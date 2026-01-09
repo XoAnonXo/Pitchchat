@@ -4,99 +4,121 @@
   "pageType": "investor-questions",
   "slug": "/investor-questions/robotics/series-a/investor-questions/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Investor questions for Robotics Series A startups",
-  "summary": "Projected investor questions and preparation guidance for Robotics founders raising a Series A round. Includes metrics, objections, and preparation notes for the round.",
+  "summary": "Series A robotics companies must demonstrate production-grade reliability and a scalable deployment model. Investors evaluate whether you've solved the demo-to-production challenge and can scale customer deployments efficiently. The bar has risen—Series A now requires proven performance metrics from significant deployment hours and a clear path to positive unit economics. Pitchchat turns investor questions into an interactive pitch room founders can share.",
   "questions": [
     {
-      "category": "Problem",
-      "question": "What is the wedge problem and why does it matter now?",
-      "answer": "Anchor the answer in a clear pain point and a timing advantage tied to market shifts or regulation."
+      "category": "Production Performance",
+      "question": "What's your task success rate across your deployed fleet?",
+      "answer": "Series A robotics companies should achieve 95%+ task success rates in production. Present fleet-wide performance data: aggregate success rate, distribution across sites, improvement trajectory. Show how success rate varies by task type, environment complexity, or site maturity. Address outlier sites with lower performance and your approach to improvement. Fleet-wide data is more credible than cherry-picked sites."
     },
     {
-      "category": "Buyer",
-      "question": "Who is the buyer and how do you reach them efficiently?",
-      "answer": "Name the buyer role, the first channel you win, and the path from pilot to paid."
+      "category": "Fleet Operations",
+      "question": "How do you manage and support your deployed fleet?",
+      "answer": "Scaling robotics requires fleet management capability. Present your operations infrastructure: remote monitoring, diagnostic capabilities, intervention support, software updates. Show metrics: support tickets per robot, remote resolution rate, average downtime. Include your team structure for supporting the fleet. Demonstrate you can support 10x more robots without proportional team scaling."
     },
     {
-      "category": "Moat",
-      "question": "What makes the business defensible beyond speed?",
-      "answer": "Highlight proprietary data, approvals, workflow lock-in, or hard-to-replicate operations."
+      "category": "Deployment Scalability",
+      "question": "How have you systematized deployment and what's the timeline now?",
+      "answer": "Series A should show deployment process maturity. Present current deployment timeline vs. early pilots—should be significantly improved. Show the systematization: playbooks, tooling, customer onboarding process. Include deployment success rate and common issues. Address how deployment scales with team size. Your deployment model is as important as your robot capability."
     },
     {
-      "category": "Traction",
-      "question": "What early signals prove pull from the market?",
-      "answer": "Share the strongest signal of demand and how it translates into repeatable pipeline."
+      "category": "Unit Economics",
+      "question": "What are your unit economics and how do they improve with scale?",
+      "answer": "Robotics unit economics include hardware margin, deployment costs, and ongoing support costs. Present current economics with trajectory: hardware gross margin, fully-loaded cost per deployment, support cost per robot. Show how economics improve with fleet scale. For RaaS models, show customer unit economics including churn. Investors need confidence that scaling improves—not just grows—the business."
     },
     {
-      "category": "Economics",
-      "question": "How will margins improve as you scale?",
-      "answer": "Explain how unit economics improve with learning curves, automation, or procurement."
+      "category": "Customer Retention",
+      "question": "What's your customer retention and expansion pattern?",
+      "answer": "Customer retention proves the robot delivers lasting value. Present retention metrics: customer churn, robot utilization over time, expansion within accounts. Show why customers retain: ROI realization, integration depth, switching costs. For expansion, show pattern of customers adding robots or sites. Long-term customer relationships indicate product-market fit in robotics."
     },
     {
-      "category": "Roadmap",
-      "question": "What milestones unlock the next round?",
-      "answer": "Define technical, revenue, and compliance milestones tied to Series A readiness."
+      "category": "Market Penetration",
+      "question": "How are you penetrating your target market and what's the growth trajectory?",
+      "answer": "Series A should show market traction beyond early adopters. Present your customer base: number of customers, fleet size, market segment distribution. Show growth trajectory and pipeline. Address how you're reaching customers: direct sales, partners, word-of-mouth. Include win/loss analysis against alternatives. Demonstrate you're building a sales motion that can scale."
     },
     {
-      "category": "Scale",
-      "question": "What growth motion will scale after Series A?",
-      "answer": "Show the conversion path and how pipeline scales with repeatable channels."
+      "category": "Manufacturing & Hardware",
+      "question": "How will you scale hardware production to meet demand?",
+      "answer": "Growing robot fleet requires production capability. Present your hardware strategy: in-house vs. CM, current capacity, scaling plan. Show hardware cost trajectory with volume. Address supply chain maturity and risks. Include quality metrics from production. Demonstrate you can build robots at the rate you need to sell them."
     },
     {
-      "category": "Retention",
-      "question": "What retention or expansion signals prove durability?",
-      "answer": "Share usage, renewal, or expansion metrics that signal long-term value."
+      "category": "Technology Roadmap",
+      "question": "How does your technology evolve to expand capabilities and markets?",
+      "answer": "Robotics platforms should expand over time. Present your technology roadmap: new capabilities, expanded task types, new environments. Show how you leverage deployed fleet data for improvement. Include next-generation hardware plans if relevant. Address how roadmap enables market expansion while maintaining focus. Show you're building a platform, not a point solution."
     },
     {
-      "category": "Efficiency",
-      "question": "How will capital efficiency improve post-Series A?",
-      "answer": "Explain how margins and payback improve as operations scale."
+      "category": "Competition",
+      "question": "How do you win against competitors and potential large company entrants?",
+      "answer": "Robotics markets attract attention from large companies. Present competitive positioning: where you win, why customers choose you, competitive moat. Show win/loss data against specific competitors. Address the threat of Amazon, Google, or major automation players entering your space. Your answer should demonstrate durable differentiation, not just current features."
     },
     {
-      "category": "Reliability",
-      "question": "How will you prove reliability at scale? (Robotics Series A)",
-      "answer": "Share field test data, uptime goals, and support strategy. Focus on Robotics at the Series A stage."
-    },
-    {
-      "category": "Deployment",
-      "question": "What is the deployment playbook for new environments? (Robotics Series A)",
-      "answer": "Explain integration steps and time-to-value benchmarks. Focus on Robotics at the Series A stage."
+      "category": "Path to Profitability",
+      "question": "What's the path to profitability and how much capital is required?",
+      "answer": "Robotics is capital-intensive—investors need to see the path to self-sustaining economics. Present your profitability model: scale required, margin improvement trajectory, operating leverage. Show capital required to reach profitability. Include scenario analysis: faster growth requiring more capital vs. capital-efficient path. Demonstrate you understand the journey and have a realistic plan."
     }
   ],
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "4-9 months",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Fleet Size",
+      "value": "50-200+ deployed robots",
+      "note": "Total robots deployed in production operation. Fleet size indicates deployment scalability and market traction.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "30-45%",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Task Success Rate",
+      "value": "95%+",
+      "note": "Fleet-wide task success rate in production. Consistency across sites is as important as average.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "55-70%",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Customer Count",
+      "value": "15-50+ customers",
+      "note": "Active customers with deployed robots. Diversity across segments reduces concentration risk.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate-High; 18-30 mo runway",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Annual Recurring Revenue",
+      "value": "$2M - $10M ARR",
+      "note": "For RaaS models. Includes hardware lease and software/support components. Growth trajectory critical.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Net Revenue Retention",
+      "value": "110-130%",
+      "note": "Revenue retention including expansion. Shows customers finding increasing value over time.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Deployment Time",
+      "value": "3-7 days per site",
+      "note": "Time from arrival to production operation. Should show significant improvement from early pilots.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     }
   ],
   "objections": [
     {
-      "objection": "Adoption cycles are too long for this market.",
-      "response": "Show short-cycle pilots and a land-and-expand plan with reference customers."
+      "objection": "Your customer acquisition cost seems high for the contract values you're showing.",
+      "response": "Robotics sales often have higher CAC due to complexity of sale. Present your CAC breakdown and improvement trajectory. Show how CAC decreases with deployment systematization and market maturity. Include LTV analysis showing attractive LTV:CAC ratio. Reference expansion revenue that improves customer economics. Address sales efficiency improvements as you scale."
     },
     {
-      "objection": "The product requires heavy upfront investment.",
-      "response": "Detail staged milestones and how capital de-risks the core thesis."
+      "objection": "Your gross margins are lower than software—can this ever be a high-margin business?",
+      "response": "Robotics margins are lower than pure software but can be attractive. Present your margin structure: hardware, software/services split. Show trajectory toward target margins with scale. Include operating leverage that improves as fleet grows. Reference comparable robotics companies with mature margins. Demonstrate you understand the margin profile and are optimizing appropriately."
     },
     {
-      "objection": "Reliability in real-world environments is unproven. (Robotics Series A)",
-      "response": "Highlight field trials and uptime targets with supporting data. Tie it to Robotics Series A milestones."
+      "objection": "Large companies like Amazon are building similar robotics capabilities.",
+      "response": "Address the large company threat directly. Show why your focus gives you advantages: speed of iteration, customer intimacy, specialized capability. Present evidence that large company efforts aren't succeeding in your segment. Reference your customer relationships as moat. Demonstrate you're positioned where large companies are disadvantaged. Show how you'd partner vs. compete if appropriate."
+    },
+    {
+      "objection": "Your deployment still seems to require too much customization per site.",
+      "response": "Present your deployment standardization progress. Show how customization requirements have decreased over time. Include tooling and process improvements that reduce site-specific work. Address remaining customization drivers and your plan to address them. Demonstrate that deployment is systemized and becoming more efficient with scale."
     }
   ]
 }

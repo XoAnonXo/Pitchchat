@@ -1,5 +1,6 @@
 import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
+import { PseoCountChart } from "@/components/pseo/PseoCountChart";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
@@ -33,6 +34,21 @@ export function MetricsBenchmarksTemplate({
   const industryLabel = labelForIndustry(data.context.industry);
   const stageLabel = labelForStage(data.context.stage);
   const metricsCount = data.metrics.length;
+  const metricsWithNotes = data.metrics.filter((metric) => metric.note).length;
+  const coverageItems = [
+    {
+      label: "Metrics",
+      value: metricsCount,
+      target: 4,
+      note: "Target: 4+ metrics",
+    },
+    {
+      label: "Metrics with context",
+      value: metricsWithNotes,
+      target: Math.max(metricsCount, 1),
+      note: "Add notes to explain investor expectations",
+    },
+  ];
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Investor Questions", href: "/investor-questions/" },
     { label: industryLabel, href: `/investor-questions/industries/${data.context.industry}/` },
@@ -115,6 +131,12 @@ export function MetricsBenchmarksTemplate({
           </div>
         </dl>
       </section>
+
+      <PseoCountChart
+        title="Coverage snapshot"
+        caption="Benchmarks convert better when each metric includes context."
+        items={coverageItems}
+      />
 
       <AuthorAttribution
         stageLabel={stageLabel}

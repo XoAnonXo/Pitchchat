@@ -234,6 +234,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
             size="icon"
             className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
+            aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -297,6 +298,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
               size="icon"
               onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
+              aria-label="Log out"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -313,6 +315,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                 size="icon"
                 className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open sidebar"
               >
                 <Menu className="h-5 w-5" />
               </Button>
@@ -399,6 +402,7 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-11 h-12 bg-white border-black/10 rounded-2xl text-sm focus:border-black focus:ring-black/10 transition-all placeholder:text-black/30"
+                aria-label="Search documents"
               />
             </div>
 
@@ -463,7 +467,12 @@ export default function DocumentsPage({ projectId }: DocumentsPageProps) {
                           <td className="px-6 py-4 whitespace-nowrap text-right">
                             <DropdownMenu>
                               <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" size="icon" className="h-8 w-8 text-black/30 hover:text-black rounded-xl">
+                                <Button
+                                  variant="ghost"
+                                  size="icon"
+                                  className="h-8 w-8 text-black/30 hover:text-black rounded-xl"
+                                  aria-label="Open document actions"
+                                >
                                   <MoreHorizontal className="h-4 w-4" />
                                 </Button>
                               </DropdownMenuTrigger>

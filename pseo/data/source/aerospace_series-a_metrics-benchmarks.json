@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/aerospace/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-aerospace-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Aerospace Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Aerospace Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A aerospace benchmarks focus on technical and commercial de-risking. Investors compare your progress against industry timelines and capital efficiency standards. These metrics help demonstrate you're on track for production and revenue. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "4-9 months",
-      "note": "Projected target range; update with real data. Aerospace Series A."
+      "label": "Technology Readiness Level",
+      "value": "TRL 6-8",
+      "note": "System prototype demonstrated in relevant environment (TRL 6) progressing toward full system qualification (TRL 8).",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "30-45%",
-      "note": "Projected target range; update with real data. Aerospace Series A."
+      "label": "Manufacturing Readiness Level",
+      "value": "MRL 5-7",
+      "note": "Capability to produce prototype in production-representative environment with clear path to low-rate production.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "55-70%",
-      "note": "Projected target range; update with real data. Aerospace Series A."
+      "label": "Contract Backlog",
+      "value": "$5M - $50M",
+      "note": "Binding customer commitments: government contracts, firm orders, or committed pilots. Higher is better for aerospace Series A.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate-High; 18-30 mo runway",
-      "note": "Projected target range; update with real data. Aerospace Series A."
+      "label": "Government Funding",
+      "value": "$3M - $15M total awarded",
+      "note": "Cumulative non-dilutive government funding provides validation and extends runway. Major SBIR/STTR or prime contracts.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Customer Count",
+      "value": "3-10 committed customers",
+      "note": "Enough customers to prove market interest without over-diversification. Quality and commitment level matter more than count.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Team Size",
+      "value": "15-40 people",
+      "note": "Scaled team with engineering depth, manufacturing capability building, and business development presence.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Monthly Burn Rate",
+      "value": "$200K - $800K",
+      "note": "Burn varies significantly by aerospace segment. Hardware-intensive development requires higher burn than software-centric.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Time to Production Revenue",
+      "value": "18-36 months",
+      "note": "Realistic timeline from Series A to production-level revenue. Aerospace timelines are longer than software—plan accordingly.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Capital Efficiency",
+      "value": "$3M - $8M per TRL level",
+      "note": "Rough benchmark for capital required per TRL advancement. Varies by system complexity and test requirements.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
+    },
+    {
+      "label": "Regulatory Completion",
+      "value": "50-75% of path completed",
+      "note": "Significant progress toward required certifications and licenses. Major regulatory risks should be reduced.",
+      "source": "Space Capital Space IQ (https://www.spacecapital.com/space-iq)"
     }
   ]
 }

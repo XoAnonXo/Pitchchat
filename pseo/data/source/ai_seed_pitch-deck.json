@@ -4,63 +4,60 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/ai/seed/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for AI Seed startups",
-  "summary": "Projected deck structure for AI founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "A seed-stage AI pitch deck must address the elephant in the room: why your company will not be commoditized by foundation model providers. Structure your narrative around a specific, painful problem, your unique approach to solving it, and early evidence of traction. Keep technical depth accessible while demonstrating genuine innovation. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
       "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "goal": "Establish a specific, expensive, and urgent problem in your target market",
+      "guidance": "Avoid generic statements about AI opportunity. Instead, identify a concrete pain point: perhaps manual processes that cost enterprises millions annually, decisions made with inadequate data, or expert bottlenecks that limit scale. Quantify the problem with real numbers. Show you have talked to customers and understand their pain deeply. The problem should be specific enough that your solution makes sense, but large enough to support a venture-scale outcome."
     },
     {
       "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "goal": "Show how AI uniquely enables your approach to the problem",
+      "guidance": "Explain your solution clearly without jargon. Focus on customer outcomes rather than technical details. Why does AI make this solution newly possible or dramatically better? Demonstrate with a concrete example or demo. Avoid showing architecture diagrams unless investors specifically ask. The goal is showing you solve the problem effectively, not impressing with technical complexity."
+    },
+    {
+      "title": "Why Now",
+      "goal": "Explain the timing that makes this opportunity ripe today",
+      "guidance": "AI timing is critical given rapid technology evolution. What has changed in the last one to two years that makes your approach viable? This might be new model capabilities, cost reductions, data availability, regulatory clarity, or customer readiness to adopt AI. Show you understand the technology wave and are positioned to ride it rather than fight against premature market conditions."
     },
     {
       "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "goal": "Size the opportunity credibly from bottom-up, not just top-down",
+      "guidance": "Start with your specific beachhead market and size it with a bottom-up analysis: number of potential customers, realistic price point, and achievable penetration. Then show how success in the beachhead unlocks larger markets. Investors are skeptical of AI TAM slides showing trillions of dollars. Ground your numbers in reality while still painting a venture-scale opportunity."
+    },
+    {
+      "title": "Product & Differentiation",
+      "goal": "Demonstrate why customers choose you over alternatives",
+      "guidance": "Show your product and explain what makes it defensible. This is where you address the wrapper objection head-on. What do you have that others cannot easily replicate? Proprietary data, unique workflows, deep integrations, specialized model training, or exceptional user experience? Be specific about your moat and honest about what is and is not defensible."
     },
     {
       "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "goal": "Prove early market validation with concrete evidence",
+      "guidance": "Show whatever evidence you have that the market wants this: revenue, pilots, users, waitlist signups, or at minimum strong customer interview data. For AI companies, also include technical validation: benchmark results, accuracy improvements, or successful POCs. Quality matters more than quantity at seed stage. A few deeply engaged customers beat thousands of casual signups."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
-    },
-    {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Business Model",
+      "goal": "Explain how you make money and path to profitability",
+      "guidance": "Detail your pricing model and unit economics. Address compute costs explicitly since investors worry about AI margins. Show you have thought through the path from current economics to sustainable margins. Include assumptions about cost improvements and pricing power. The best seed decks show thoughtfulness about economics even if current numbers are early."
     },
     {
       "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "goal": "Show why this team is uniquely positioned to win",
+      "guidance": "Highlight relevant experience: AI/ML expertise, domain knowledge in your target vertical, startup experience, or relevant company backgrounds. If you lack traditional ML credentials, explain your compensating strengths. Show the team covers key functions: technical, product, and commercial. Include notable advisors if they add meaningful credibility."
     },
     {
-      "title": "Data and model strategy",
-      "goal": "Explain data advantage and model improvements.",
-      "guidance": "Show evaluation metrics and cost control plan."
-    },
-    {
-      "title": "Seed milestones",
-      "goal": "Highlight proof points for Seed.",
-      "guidance": "Detail the specific milestones investors expect for AI Seed."
-    },
-    {
-      "title": "AI go-to-market wedge (Seed)",
-      "goal": "Explain your entry point for AI.",
-      "guidance": "Show a focused wedge that fits AI buyers at the Seed stage."
-    },
-    {
-      "title": "AI proof points",
-      "goal": "Show evidence tailored to AI.",
-      "guidance": "Use data or pilots specific to AI to prove momentum at Seed."
+      "title": "Ask",
+      "goal": "Clear funding request with planned use of capital",
+      "guidance": "State your raise amount and how you will deploy capital. For AI companies, investors want to see thoughtful allocation between compute and model development, product engineering, and go-to-market. Define milestones this funding will achieve: technical goals, revenue targets, and metrics that set up Series A. Be specific about what success looks like in eighteen months."
     }
   ]
 }

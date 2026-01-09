@@ -8,6 +8,9 @@ const DEFAULTS = {
   input: path.join(__dirname, "../data/source_normalized.json"),
   minSummaryLength: 80,
   minUniqueRatio: 0.3,
+  allowProjected: false,
+  allowMissingSource: false,
+  allowMissingMetricSource: false,
   investorQuestions: {
     minQuestions: 10,
     minMetrics: 4,
@@ -45,6 +48,15 @@ function parseArgs() {
       config.minUniqueRatio = Number(args[i + 1]);
       i += 1;
     }
+    if (arg === "--allow-projected") {
+      config.allowProjected = true;
+    }
+    if (arg === "--allow-missing-source") {
+      config.allowMissingSource = true;
+    }
+    if (arg === "--allow-missing-metric-source") {
+      config.allowMissingMetricSource = true;
+    }
   }
 
   return config;
@@ -60,6 +72,31 @@ function normalizeChunk(text) {
     .replace(/[^a-z0-9\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function hasProvenance(item) {
+  const tags = Array.isArray(item.sourceTags) ? item.sourceTags.filter(Boolean) : [];
+  return Boolean(item.sourceId) || tags.length > 0;
+}
+
+function countMissingMetricSources(metrics) {
+  if (!Array.isArray(metrics)) {
+    return 0;
+  }
+  return metrics.filter((metric) => !(metric?.source ?? "").trim()).length;
+}
+
+function containsProjectedText(values) {
+  return values.some((value) => /projected/i.test(value ?? ""));
+}
+
+function hasProjectedSignals(item) {
+  return containsProjectedText([
+    item.title,
+    item.summary,
+    item.sourceNotes,
+    ...(item.metrics ?? []).map((metric) => metric.note),
+  ]);
 }
 
 function flattenText(parts) {
@@ -128,6 +165,22 @@ function validateItem(item, config) {
     errors.push("missing title");
   }
 
+  if (!item.dataOrigin || item.dataOrigin === "unknown") {
+    errors.push("missing dataOrigin");
+  }
+
+  if (!config.allowMissingSource && !hasProvenance(item)) {
+    errors.push("missing sourceId or sourceTags");
+  }
+
+  if (!config.allowProjected && item.dataOrigin === "projected") {
+    errors.push("dataOrigin is projected");
+  }
+
+  if (!config.allowProjected && hasProjectedSignals(item)) {
+    errors.push("contains projected language");
+  }
+
   if (summaryLength < config.minSummaryLength) {
     errors.push(
       `summary too short (${summaryLength} < ${config.minSummaryLength})`
@@ -135,6 +188,10 @@ function validateItem(item, config) {
   }
 
   if (item.pageType === "investor-questions") {
+    const missingSources = countMissingMetricSources(item.metrics ?? []);
+    if (!config.allowMissingMetricSource && missingSources > 0) {
+      errors.push(`metrics missing source (${missingSources})`);
+    }
     if ((item.questions?.length ?? 0) < config.investorQuestions.minQuestions) {
       errors.push(
         `questions ${item.questions?.length ?? 0} < ${
@@ -169,6 +226,10 @@ function validateItem(item, config) {
   }
 
   if (item.pageType === "metrics-benchmarks") {
+    const missingSources = countMissingMetricSources(item.metrics ?? []);
+    if (!config.allowMissingMetricSource && missingSources > 0) {
+      errors.push(`metrics missing source (${missingSources})`);
+    }
     if ((item.metrics?.length ?? 0) < config.metricsBenchmarks.minMetrics) {
       errors.push(
         `metrics ${item.metrics?.length ?? 0} < ${

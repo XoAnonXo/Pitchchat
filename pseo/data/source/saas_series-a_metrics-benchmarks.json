@@ -1,0 +1,78 @@
+{
+  "industry": "saas",
+  "stage": "series-a",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/saas/series-a/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-saas-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "SaaS Series A fundraising metrics benchmarks",
+  "summary": "Series A SaaS benchmarks reflect expectations for proven product-market fit and scalable economics. Investors at this stage have clear thresholds—meeting or exceeding these benchmarks significantly improves fundraising outcomes. Focus on NRR and growth efficiency as primary indicators. Pitchchat keeps fundraising metrics investor-ready in one room.",
+  "metrics": [
+    {
+      "label": "Annual Recurring Revenue (ARR)",
+      "value": "$1M - $5M",
+      "note": "Typical Series A range. Quality matters: customer concentration, segment mix, and durability of revenue.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "ARR Growth Rate",
+      "value": "2-3x annual",
+      "note": "Year-over-year growth rate. Should show consistent trajectory with path to sustain through Series A period.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Net Revenue Retention (NRR)",
+      "value": "110-130%",
+      "note": "The defining Series A SaaS metric. Best-in-class above 120%. Below 100% is a significant hurdle.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Gross Revenue Retention",
+      "value": "85%+ (SMB), 95%+ (Enterprise)",
+      "note": "Annual customer retention before expansion. Foundation of sustainable growth.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "LTV:CAC Ratio",
+      "value": "3:1 to 5:1",
+      "note": "Based on actual customer data. Series A threshold typically 3:1 with improvement trajectory.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "CAC Payback Period",
+      "value": "12-18 months",
+      "note": "Months to recover acquisition cost. Efficient companies under 12 months; over 24 months concerning.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Burn Multiple",
+      "value": "1.5x - 2.5x",
+      "note": "Net Burn / Net New ARR. Under 1.5x is efficient; above 3x raises efficiency concerns.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "70-85%",
+      "note": "Software gross margin. Should be at or approaching target by Series A. Sub-70% requires explanation.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Magic Number",
+      "value": "0.5 - 1.0+",
+      "note": "Net New ARR / S&M Spend. Indicates sales efficiency. Above 0.75 indicates efficient growth.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    },
+    {
+      "label": "Sales Productivity",
+      "value": "$500K - $1M ARR/rep/year",
+      "note": "Annual quota attainment per sales rep. Varies by ACV and sales motion.",
+      "source": "SaaStr Metrics Masterclass (https://www.saastr.com/saas-metrics-masterclass-key-business-metrics/)"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
+import { PseoCountChart } from "@/components/pseo/PseoCountChart";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
@@ -27,6 +28,28 @@ export function PitchDeckTemplate({ data }: { data: PitchDeckPageData }) {
   const industryLabel = labelForIndustry(data.context.industry);
   const stageLabel = labelForStage(data.context.stage);
   const sectionsCount = data.sections.length;
+  const sectionsWithGoals = data.sections.filter((section) => section.goal).length;
+  const sectionsWithGuidance = data.sections.filter((section) => section.guidance).length;
+  const coverageItems = [
+    {
+      label: "Sections",
+      value: sectionsCount,
+      target: 9,
+      note: "Target: 9+ sections",
+    },
+    {
+      label: "Sections with goals",
+      value: sectionsWithGoals,
+      target: Math.max(sectionsCount, 1),
+      note: "Each slide should have a clear goal",
+    },
+    {
+      label: "Sections with guidance",
+      value: sectionsWithGuidance,
+      target: Math.max(sectionsCount, 1),
+      note: "Add investor-facing guidance per slide",
+    },
+  ];
   const breadcrumbItems: BreadcrumbItem[] = [
     { label: "Investor Questions", href: "/investor-questions/" },
     { label: industryLabel, href: `/investor-questions/industries/${data.context.industry}/` },
@@ -115,6 +138,12 @@ export function PitchDeckTemplate({ data }: { data: PitchDeckPageData }) {
           </div>
         </dl>
       </section>
+
+      <PseoCountChart
+        title="Coverage snapshot"
+        caption="Deck outlines convert better when every slide includes a goal and guidance."
+        items={coverageItems}
+      />
 
       <AuthorAttribution
         stageLabel={stageLabel}

@@ -1,0 +1,66 @@
+{
+  "industry": "healthcare",
+  "stage": "seed",
+  "pageType": "diligence-checklist",
+  "slug": "/investor-questions/healthcare/seed/diligence-checklist/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Healthcare Seed diligence checklist",
+  "summary": "Healthcare seed diligence emphasizes regulatory pathway, clinical evidence, team expertise, and market access strategy. Investors verify your understanding of healthcare complexity and ability to navigate it. Documentation demonstrates operational readiness for a regulated industry. Pitchchat keeps diligence docs organized and easy to review.",
+  "items": [
+    {
+      "item": "Regulatory strategy document with pathway analysis",
+      "rationale": "Detailed regulatory plan including classification, pathway selection rationale, predicate analysis (if 510(k)), timeline, and budget. Include any FDA feedback or meeting minutes. Shows regulatory competence."
+    },
+    {
+      "item": "Clinical evidence summary and validation roadmap",
+      "rationale": "Current evidence (bench, feasibility, pilot data) and planned studies. Include protocol synopses, endpoint definitions, and evidence requirements by stakeholder (FDA, payers, providers). Demonstrates clinical rigor."
+    },
+    {
+      "item": "Reimbursement and health economics analysis",
+      "rationale": "Payment pathway analysis: CPT codes, coverage landscape, pricing rationale. Health economics model showing ROI to payers/providers. Early payer feedback if available. Critical for commercial viability."
+    },
+    {
+      "item": "Clinical partner agreements or LOIs",
+      "rationale": "Documentation of health system relationships: design partnerships, pilot agreements, LOIs. Include scope, timeline, and any commercial terms. Validates market access."
+    },
+    {
+      "item": "Quality management system documentation",
+      "rationale": "QMS framework appropriate to regulatory pathway. Design controls, risk management (ISO 14971), document control procedures. Even early stage should show quality foundations."
+    },
+    {
+      "item": "HIPAA compliance documentation",
+      "rationale": "Privacy and security framework for handling PHI. Business associate agreements template, security risk assessment, compliance policies. Required for any health data handling."
+    },
+    {
+      "item": "Competitive analysis with clinical differentiation",
+      "rationale": "Comprehensive competitive landscape including clinical evidence comparison. Win/loss analysis from pilot or sales conversations. Positioning rationale. Shows market understanding."
+    },
+    {
+      "item": "Team backgrounds with healthcare credentials",
+      "rationale": "Detailed CVs for founders and key team. Emphasize healthcare experience: clinical, regulatory, commercial. Include advisory board with clinical and industry advisors."
+    },
+    {
+      "item": "IP portfolio and freedom to operate analysis",
+      "rationale": "Patent applications, prosecution status, and claims. FTO analysis for key markets. IP assignment documentation. Important for defensibility and exit potential."
+    },
+    {
+      "item": "Product architecture and EHR integration approach",
+      "rationale": "Technical architecture with security controls. EHR integration strategy (FHIR, proprietary APIs, etc.). Interoperability roadmap. Shows technical healthcare readiness."
+    },
+    {
+      "item": "Financial model with healthcare-specific assumptions",
+      "rationale": "18-24 month projections with explicit healthcare assumptions: sales cycles, implementation timelines, reimbursement ramp. Scenario analysis. Capital efficiency metrics."
+    },
+    {
+      "item": "Customer reference list for diligence calls",
+      "rationale": "Clinical partners and pilot customers willing to speak with investors. Include clinical champions and administrative buyers. Reference calls are standard in healthcare diligence."
+    }
+  ]
+}

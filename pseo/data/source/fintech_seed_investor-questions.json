@@ -1,0 +1,124 @@
+{
+  "industry": "fintech",
+  "stage": "seed",
+  "pageType": "investor-questions",
+  "slug": "/investor-questions/fintech/seed/investor-questions/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-fintech-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Investor questions for Fintech Seed startups",
+  "summary": "Fintech seed-stage startups face intense scrutiny on regulatory positioning, unit economics, and risk management fundamentals. Investors evaluate your understanding of financial services complexity, banking partnerships, and the ability to build trust with customers. The bar has risen—investors expect evidence of regulatory viability and sustainable economics, not just growth at any cost. Pitchchat turns investor questions into an interactive pitch room founders can share.",
+  "questions": [
+    {
+      "category": "Regulatory",
+      "question": "What's your regulatory strategy and current licensing status?",
+      "answer": "Present your regulatory approach with specificity. Explain which licenses you need (state MTLs, federal banking charter, broker-dealer, etc.) and your path to obtaining them. If using a bank partnership or BaaS provider, explain the relationship structure and your compliance responsibilities. Address how regulations differ by state/market and your expansion strategy. Show you understand the regulatory landscape: 'We're pursuing money transmission licenses in 10 states covering 80% of our target market. We've secured licenses in NY, CA, and TX. Our compliance infrastructure is built for multi-state operation with automated state-specific reporting.'"
+    },
+    {
+      "category": "Banking Partnerships",
+      "question": "Who is your banking partner and how stable is that relationship?",
+      "answer": "Banking partnerships are critical infrastructure for most fintechs. Present your partner bank and BaaS provider (if applicable). Explain the relationship structure: program management, compliance responsibilities, economic terms. Address concentration risk and backup plans. Show evidence of partnership stability: contract duration, relationship tenure, expansion into new products. Reference any regulatory examinations the partner has passed. Acknowledge recent industry turbulence and how you've mitigated partner risk."
+    },
+    {
+      "category": "Unit Economics",
+      "question": "What are your unit economics and path to profitability?",
+      "answer": "Fintech economics are under intense scrutiny. Present your unit economics clearly: customer acquisition cost by channel, revenue per user, lifetime value, payback period. Show the revenue model: interchange, subscription, interest margin, transaction fees. Address loss rates, fraud costs, and operational expenses that often surprise new fintech founders. Be honest about current economics and the path to improvement. Show you understand that growth without sustainable economics destroyed value in prior fintech cohorts."
+    },
+    {
+      "category": "Risk Management",
+      "question": "How do you manage fraud, credit, and operational risk?",
+      "answer": "Risk management separates successful fintechs from failures. Present your risk framework: fraud prevention (identity verification, transaction monitoring), credit risk (if lending), operational risk (system reliability, vendor management). Show early metrics: fraud rates, dispute rates, loss rates. Explain your approach to risk modeling and how it improves with scale. Address specific risk vectors for your product type. Reference team experience in risk management from prior financial services roles."
+    },
+    {
+      "category": "Customer Acquisition",
+      "question": "How do you acquire customers cost-effectively in a crowded market?",
+      "answer": "Fintech customer acquisition is expensive and competitive. Present your CAC by channel with realistic assumptions. Explain your differentiated acquisition strategy: product-led growth, viral mechanics, community, partnerships, or underserved segment focus. Show early evidence of what's working and what isn't. Address customer quality—not just volume—since bad customers create losses. Reference your target customer and why they choose you over alternatives."
+    },
+    {
+      "category": "Competition",
+      "question": "How do you differentiate from neobanks, incumbents, and well-funded competitors?",
+      "answer": "Fintech is crowded. Present your competitive positioning honestly. Explain your specific differentiation: underserved segment, product capability, distribution advantage, or economics. Show evidence from customer conversations and competitive wins. Address the 'why now' question—what's changed that enables you to compete? Reference specific competitors and how you position against them. Acknowledge you can't compete on every dimension and explain where you win."
+    },
+    {
+      "category": "Trust & Security",
+      "question": "How do you build trust and ensure security?",
+      "answer": "Trust is foundational for financial services. Present your security infrastructure: data encryption, access controls, SOC 2 compliance (or path to it), PCI compliance if handling cards. Explain your approach to earning customer trust: transparent communication, responsive support, FDIC/SIPC insurance messaging. Address how you handle security incidents and customer disputes. Show you understand that trust takes years to build and seconds to destroy."
+    },
+    {
+      "category": "Team",
+      "question": "What financial services experience does your team have?",
+      "answer": "Fintech requires domain expertise. Present your team's financial services credentials: banking, payments, lending, or regulatory experience. Address the full stack: product, compliance, risk, operations, and technology. If gaps exist, explain your advisory board or hiring plans. Show you have access to regulatory and banking relationship expertise. Reference specific relevant experiences: 'Our CRO spent 8 years at a top-10 U.S. bank building risk infrastructure. Our compliance lead held senior roles at a licensed neobank through its multi-state licensing process.'"
+    },
+    {
+      "category": "Market",
+      "question": "How large is your addressable market?",
+      "answer": "Present bottom-up fintech market sizing. Start with your specific customer segment and use case. Show current spending on existing solutions and your value proposition. Reference industry data on transaction volumes, account numbers, or lending originations. Address expansion paths from your initial wedge. Avoid top-down 'disrupting $X trillion in financial services' claims—fintech investors see through them. Show you understand your specific entry point."
+    },
+    {
+      "category": "Milestones",
+      "question": "What does this round achieve and what triggers Series A?",
+      "answer": "Present concrete milestones: customer targets, revenue metrics, regulatory achievements, and product development. Show you understand Series A requirements for fintech: typically $500K-$2M ARR, proven unit economics, regulatory foundation, and evidence of retention. Explain the path from current state to those milestones. Be realistic about timeline—fintech development often takes longer than founders expect due to regulatory and partnership complexity."
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Monthly Active Users",
+      "value": "5,000 - 50,000",
+      "note": "Active users engaging with core product features. Quality matters more than quantity—focus on users generating revenue.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Monthly Recurring Revenue",
+      "value": "$20K - $200K MRR",
+      "note": "Revenue run rate from subscriptions, interchange, or transaction fees. Path to $1M+ ARR for Series A.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Customer Acquisition Cost",
+      "value": "$20 - $100",
+      "note": "Blended CAC across channels. Varies significantly by customer type (consumer vs. SMB).",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Revenue Per User",
+      "value": "$5 - $30/month",
+      "note": "Monthly revenue per active user. Depends heavily on product type and monetization model.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Fraud/Loss Rate",
+      "value": "< 1%",
+      "note": "Fraud losses and disputes as percentage of transaction volume. Critical to demonstrate risk management.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    },
+    {
+      "label": "Regulatory Status",
+      "value": "Licensed or partner-enabled",
+      "note": "Either direct licenses in key states or established BaaS/partner bank relationship enabling compliant operation.",
+      "source": "World Bank Global Findex (https://www.worldbank.org/en/publication/globalfindex)"
+    }
+  ],
+  "objections": [
+    {
+      "objection": "Fintech is too competitive and unit economics never work.",
+      "response": "Address the challenge directly: 'We agree unit economics are critical—that's why we've built our model differently. Our CAC is $45 versus industry average of $100+ because we focus on partner-led distribution through payroll providers and vertical SaaS channels. Our ARPU is $25/month, higher than typical consumer fintechs, because we serve SMBs managing cash flow and payments. Our 18-month LTV:CAC is 3:1 with clear path to 5:1 through cross-sell. We're not trying to acquire every customer—we're focused on the segment where economics work.'"
+    },
+    {
+      "objection": "Banking partnerships are unstable and create existential risk.",
+      "response": "Acknowledge and address: 'Partner risk is real, which is why we've structured our business to mitigate it. We have relationships with two BaaS providers and direct relationships with our sponsor bank leadership. Our contract runs through 2026 with renewal rights. We've also designed our technology to be portable—we can migrate to a new partner in 90 days if needed. Longer-term, our growth creates optionality for our own charter or deeper partnership structures.'"
+    },
+    {
+      "objection": "Regulatory risk is too high in the current environment.",
+      "response": "Present your regulatory strategy: 'We've built compliance-first from day one. Our compliance team has experience from a top-20 bank and a licensed fintech. We maintain a multi-state license portfolio rather than relying on a single license. Our product design avoids regulatory gray areas—we know exactly which regulations apply and we comply fully. We've invested in compliance infrastructure that will be an asset, not a liability, as we scale. Recent regulatory actions have targeted companies with weak compliance—that's not us.'"
+    },
+    {
+      "objection": "Your target customer segment is too risky or unprofitable.",
+      "response": "Address customer quality directly: 'Our underwriting approach is more sophisticated than it appears. We use cash-flow data, payroll history, and transaction behavior signals to identify customers who look risky on traditional metrics but actually perform well. Our loss rates are below industry benchmarks at under 1%. We've also built our product to generate revenue without requiring credit extension—interchange and subscription revenue provide base economics even before any lending. Our customer segment is underserved precisely because traditional providers don't understand the risk properly.'"
+    }
+  ]
+}

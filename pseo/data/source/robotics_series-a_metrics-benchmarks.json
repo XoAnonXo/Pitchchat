@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/robotics/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Robotics Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Robotics Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A robotics benchmarks focus on fleet-scale performance, deployment efficiency, and business metrics. Investors evaluate whether you've proven the model works at scale and can achieve sustainable unit economics. These benchmarks demonstrate production maturity. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "4-9 months",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Fleet Size",
+      "value": "50-200+ deployed robots",
+      "note": "Total robots in production operation. Indicates deployment scalability and market acceptance.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "30-45%",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Task Success Rate",
+      "value": "95%+",
+      "note": "Fleet-wide success rate with consistency across sites. Production-grade reliability is required.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "55-70%",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Runtime Hours",
+      "value": "100,000+ total fleet hours",
+      "note": "Cumulative operation hours demonstrating reliability and real-world validation.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate-High; 18-30 mo runway",
-      "note": "Projected target range; update with real data. Robotics Series A."
+      "label": "Customer Count",
+      "value": "15-50+",
+      "note": "Active customers with deployed robots. Segment diversity reduces concentration risk.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Annual Revenue",
+      "value": "$2M - $10M",
+      "note": "Revenue from robot deployments including hardware, software, and services.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Net Revenue Retention",
+      "value": "110-130%",
+      "note": "Revenue retention including expansion. Proves customers finding increasing value.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Gross Margin",
+      "value": "40-60%",
+      "note": "Blended margin across hardware and services. Should show improvement trajectory.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Deployment Time",
+      "value": "3-7 days",
+      "note": "Time to production operation at new site. Should show systematic improvement.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Support Ratio",
+      "value": "50-100 robots per support person",
+      "note": "Fleet coverage efficiency. Should improve with better tooling and processes.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
+    },
+    {
+      "label": "Customer Churn",
+      "value": "<10% annual",
+      "note": "Customer retention rate. Low churn validates lasting value delivery.",
+      "source": "IFR World Robotics Report (https://ifr.org/worldrobotics/)"
     }
   ]
 }

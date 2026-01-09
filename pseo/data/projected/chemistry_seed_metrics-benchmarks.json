@@ -1,0 +1,31 @@
+{
+  "industry": "chemistry",
+  "stage": "seed",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/chemistry/seed/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "title": "Chemistry Seed fundraising metrics benchmarks",
+  "summary": "Projected fundraising benchmarks for Chemistry Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "metrics": [
+    {
+      "label": "Sales cycle length",
+      "value": "6-12 months",
+      "note": "Projected target range; update with real data. Chemistry Seed."
+    },
+    {
+      "label": "Pilot conversion rate",
+      "value": "20-35%",
+      "note": "Projected target range; update with real data. Chemistry Seed."
+    },
+    {
+      "label": "Gross margin trajectory",
+      "value": "40-60%",
+      "note": "Projected target range; update with real data. Chemistry Seed."
+    },
+    {
+      "label": "Capital intensity",
+      "value": "High; 18-24 mo runway",
+      "note": "Projected target range; update with real data. Chemistry Seed."
+    }
+  ]
+}

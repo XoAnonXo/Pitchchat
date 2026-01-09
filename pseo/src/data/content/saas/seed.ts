@@ -102,7 +102,7 @@ export const saasSeedContent: IndustryStageContent = {
       {
         objection: "Your churn rate is too high to build a sustainable business.",
         response:
-          "Acknowledge churn concerns directly with data: 'Our monthly churn is currently 6%, which is above the 4% benchmark for seed-stage SMB SaaS. Here's our analysis of why customers leave and our three-part retention strategy: [1] Onboarding improvements that increased 30-day activation from 40% to 65% in our last cohort, [2] Feature additions addressing the top churn driver (lack of integrations), shipping in Q2, [3] Customer success outreach for accounts showing declining usage patterns. We expect these to reduce churn to 4% within two quarters based on early cohort data.'",
+          "Acknowledge churn concerns directly with data: 'Our monthly churn is currently 6%, which is above the 4% benchmark for seed-stage SMB SaaS. Here's our analysis of why customers leave and our three-part retention strategy: 1) Onboarding improvements that increased 30-day activation from 40% to 65% in our last cohort, 2) Feature additions addressing the top churn driver (lack of integrations), shipping in Q2, 3) Customer success outreach for accounts showing declining usage patterns. We expect these to reduce churn to 4% within two quarters based on early cohort data.'",
       },
       {
         objection: "This looks like a feature, not a company.",

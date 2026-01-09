@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/chemistry/series-a/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Chemistry Series A startups",
-  "summary": "Projected deck structure for Chemistry founders raising a Series A round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Series A biotech pitch decks must demonstrate clinical readiness with robust data and clear execution plans. Lead with your strongest data and regulatory progress. Show you've matured from promising science to executable development program. Address competitive dynamics and partnership strategy as key value drivers. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Clinical/Preclinical Data",
+      "goal": "Lead with your strongest evidence",
+      "guidance": "Open with key data: efficacy signals, safety profile, translational markers. Present data clearly with statistical rigor. Show what this data means for development decisions. Include comparison to competitive programs where favorable. This is the foundation of Series A valuation."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Market & Competitive Landscape",
+      "goal": "Frame the opportunity with competitive context",
+      "guidance": "Size the market based on addressable patient segments. Show competitive landscape: approved therapies, clinical programs, unmet need gaps. Position your differentiation clearly. Include market timing—why now for your approach. Address standard of care evolution."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Clinical Development Plan",
+      "goal": "Demonstrate execution readiness",
+      "guidance": "Present clinical strategy: trial designs, patient populations, endpoints. Show regulatory alignment and feedback incorporated. Include timeline with key decision points. Address execution risks and mitigation. Clinical plan should be specific and achievable."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Regulatory Status",
+      "goal": "Show regulatory pathway de-risking",
+      "guidance": "Present regulatory achievements: IND status, FDA feedback, special designations. Show how regulatory guidance shaped development. Include any remaining regulatory risks and strategy. Address international regulatory plans. Regulatory progress is major Series A value driver."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Manufacturing & CMC",
+      "goal": "Demonstrate clinical and commercial supply readiness",
+      "guidance": "Present CMC status: process development, analytical validation, stability. Show CMO relationships and capacity. Address scale-up timeline and risks. Include cost trajectory. For biologics, manufacturing readiness is critical path."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Intellectual Property",
+      "goal": "Show IP maturation and competitive protection",
+      "guidance": "Present patent portfolio evolution: grants, prosecution progress, new filings. Show freedom-to-operate status. Include patent term analysis relative to product lifecycle. Address any IP risks or competitive challenges. IP should be clearly protective."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Partnership Strategy",
+      "goal": "Show strategic optionality and pharma interest",
+      "guidance": "Present partnership strategy: timing, deal structure, target partners. Show pharma interest generated: discussions, diligence, interest level. Include optionality this creates for investors. Address competitive dynamics for partnership."
     },
     {
-      "title": "Scale-up strategy",
-      "goal": "Demonstrate lab-to-production plan.",
-      "guidance": "Show yield targets and pilot plant milestones."
+      "title": "Competitive Positioning",
+      "goal": "Demonstrate sustainable differentiation",
+      "guidance": "Present detailed competitive analysis with clinical-stage programs. Show differentiation with data support. Include head-to-head expectations. Address competitive risks and your response. Positioning should be evidence-based."
     },
     {
-      "title": "Series A milestones",
-      "goal": "Highlight proof points for Series A.",
-      "guidance": "Detail the specific milestones investors expect for Chemistry Series A."
+      "title": "Team & Execution Track Record",
+      "goal": "Show capability and results",
+      "guidance": "Present team with clinical development experience emphasized. Show execution track record: milestones achieved, data delivered, timelines met. Include organizational capability for clinical execution. Address any key hires needed."
     },
     {
-      "title": "Chemistry go-to-market wedge (Series A)",
-      "goal": "Explain your entry point for Chemistry.",
-      "guidance": "Show a focused wedge that fits Chemistry buyers at the Series A stage."
-    },
-    {
-      "title": "Chemistry proof points",
-      "goal": "Show evidence tailored to Chemistry.",
-      "guidance": "Use data or pilots specific to Chemistry to prove momentum at Series A."
+      "title": "Financials & Ask",
+      "goal": "Present clear milestone-based plan",
+      "guidance": "Show use of funds tied to specific milestones. Present what data this capital generates. Include scenario analysis and capital efficiency. Address path to next financing or exit. Close with clear ask and conviction."
     }
   ]
 }

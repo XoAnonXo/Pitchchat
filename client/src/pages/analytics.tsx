@@ -59,7 +59,8 @@ import {
   Download,
   Bell,
   ArrowRight,
-  Database
+  Database,
+  AlertCircle
 } from "lucide-react";
 import { format } from "date-fns";
 import { Logo } from "@/components/Logo";
@@ -130,8 +131,14 @@ export default function AnalyticsPage() {
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [timeRange, setTimeRange] = useState("30");
 
-  const { data: analytics, isLoading } = useQuery<AnalyticsData>({
+  const {
+    data: analytics,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery<AnalyticsData>({
     queryKey: ["/api/analytics/detailed"],
+    enabled: !!user,
   });
 
   // Fetch conversations to check for contact notifications
@@ -151,6 +158,18 @@ export default function AnalyticsPage() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
+  const sanitizeCsvValue = (value: string | number | null | undefined) => {
+    const stringValue = value == null ? "" : String(value);
+    const needsPrefix = /^[=+\-@]/.test(stringValue.trimStart());
+    const safeValue = needsPrefix ? `'${stringValue}` : stringValue;
+    const normalized = safeValue.replace(/[\r\n]+/g, " ");
+    const escaped = normalized.replace(/"/g, '""');
+    return `"${escaped}"`;
+  };
+
+  const csvRow = (...values: Array<string | number | null | undefined>) =>
+    values.map(sanitizeCsvValue).join(",");
+
   const handleExport = () => {
     if (!analytics) return;
 
@@ -160,17 +179,17 @@ export default function AnalyticsPage() {
 
     // Overview section
     lines.push('=== PITCHCHAT ANALYTICS EXPORT ===');
-    lines.push(`Export Date: ${today}`);
+    lines.push(csvRow("Export Date", today));
     lines.push('');
     lines.push('=== OVERVIEW ===');
-    lines.push(`Total Projects,${analytics.overview.totalProjects}`);
-    lines.push(`Total Documents,${analytics.overview.totalDocuments}`);
-    lines.push(`Total Conversations,${analytics.overview.totalConversations}`);
-    lines.push(`Total Links,${analytics.overview.totalLinks}`);
-    lines.push(`Active Links,${analytics.overview.activeLinks}`);
-    lines.push(`Total Visitors,${analytics.overview.totalVisitors}`);
-    lines.push(`Total Tokens Used,${analytics.overview.totalTokensUsed}`);
-    lines.push(`Total Cost,$${analytics.overview.totalCost.toFixed(2)}`);
+    lines.push(csvRow("Total Projects", analytics.overview.totalProjects));
+    lines.push(csvRow("Total Documents", analytics.overview.totalDocuments));
+    lines.push(csvRow("Total Conversations", analytics.overview.totalConversations));
+    lines.push(csvRow("Total Links", analytics.overview.totalLinks));
+    lines.push(csvRow("Active Links", analytics.overview.activeLinks));
+    lines.push(csvRow("Total Visitors", analytics.overview.totalVisitors));
+    lines.push(csvRow("Total Tokens Used", analytics.overview.totalTokensUsed));
+    lines.push(csvRow("Total Cost", `$${analytics.overview.totalCost.toFixed(2)}`));
     lines.push('');
 
     // Project breakdown
@@ -178,7 +197,16 @@ export default function AnalyticsPage() {
       lines.push('=== PROJECT BREAKDOWN ===');
       lines.push('Project Name,Documents,Links,Conversations,Tokens,Cost');
       analytics.projectBreakdown.forEach(project => {
-        lines.push(`${project.projectName},${project.documents},${project.links},${project.conversations},${project.totalTokens},$${project.totalCost.toFixed(2)}`);
+        lines.push(
+          csvRow(
+            project.projectName,
+            project.documents,
+            project.links,
+            project.conversations,
+            project.totalTokens,
+            `$${project.totalCost.toFixed(2)}`
+          )
+        );
       });
       lines.push('');
     }
@@ -189,7 +217,17 @@ export default function AnalyticsPage() {
       lines.push('Link Name,Status,Conversations,Unique Visitors,Tokens,Cost,Created');
       analytics.linkPerformance.forEach(link => {
         const createdDate = link.createdAt ? format(new Date(link.createdAt), 'yyyy-MM-dd') : 'N/A';
-        lines.push(`${link.linkName},${link.status},${link.conversations},${link.uniqueVisitors},${link.totalTokens},$${link.totalCost.toFixed(2)},${createdDate}`);
+        lines.push(
+          csvRow(
+            link.linkName,
+            link.status,
+            link.conversations,
+            link.uniqueVisitors,
+            link.totalTokens,
+            `$${link.totalCost.toFixed(2)}`,
+            createdDate
+          )
+        );
       });
       lines.push('');
     }
@@ -199,15 +237,33 @@ export default function AnalyticsPage() {
       lines.push('=== DAILY ACTIVITY ===');
       lines.push('Date,Conversations,Messages,Tokens,Cost');
       analytics.timeSeriesData.forEach(day => {
-        lines.push(`${day.date},${day.conversations},${day.messages},${day.tokens},$${day.cost.toFixed(2)}`);
+        lines.push(
+          csvRow(
+            day.date,
+            day.conversations,
+            day.messages,
+            day.tokens,
+            `$${day.cost.toFixed(2)}`
+          )
+        );
       });
       lines.push('');
     }
 
     // Visitor engagement
     lines.push('=== ENGAGEMENT METRICS ===');
-    lines.push(`Average Messages per Conversation,${analytics.visitorEngagement.averageMessagesPerConversation.toFixed(2)}`);
-    lines.push(`Average Tokens per Conversation,${analytics.visitorEngagement.averageTokensPerConversation.toFixed(0)}`);
+    lines.push(
+      csvRow(
+        "Average Messages per Conversation",
+        analytics.visitorEngagement.averageMessagesPerConversation.toFixed(2)
+      )
+    );
+    lines.push(
+      csvRow(
+        "Average Tokens per Conversation",
+        analytics.visitorEngagement.averageTokensPerConversation.toFixed(0)
+      )
+    );
     lines.push('');
 
     // Top visitors
@@ -215,7 +271,14 @@ export default function AnalyticsPage() {
       lines.push('=== TOP VISITORS ===');
       lines.push('Email,Conversations,Tokens,Cost');
       analytics.visitorEngagement.topVisitors.forEach(visitor => {
-        lines.push(`${visitor.email || 'Anonymous'},${visitor.conversations},${visitor.totalTokens},$${visitor.totalCost.toFixed(2)}`);
+        lines.push(
+          csvRow(
+            visitor.email || 'Anonymous',
+            visitor.conversations,
+            visitor.totalTokens,
+            `$${visitor.totalCost.toFixed(2)}`
+          )
+        );
       });
     }
 
@@ -232,7 +295,37 @@ export default function AnalyticsPage() {
     document.body.removeChild(a);
   };
 
-  if (isLoading || !analytics) {
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center">
+        <StartupLoadingSkeleton type="dashboard" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center p-6">
+        <div className="bg-white border border-black/10 rounded-3xl p-8 text-center shadow-lg shadow-black/5 max-w-md w-full">
+          <div className="w-12 h-12 rounded-2xl bg-black/[0.04] flex items-center justify-center mx-auto mb-4">
+            <AlertCircle className="w-5 h-5 text-black/50" />
+          </div>
+          <h2 className="text-lg font-bold text-black mb-2">Unable to load analytics</h2>
+          <p className="text-sm text-black/50 mb-6">
+            Please check your connection and try again.
+          </p>
+          <Button
+            onClick={() => void refetch()}
+            className="bg-black hover:bg-black/90 text-white rounded-xl px-6 h-10 text-xs font-semibold"
+          >
+            Retry
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!analytics) {
     return (
       <div className="min-h-screen bg-[#FAFAFA] flex items-center justify-center">
         <StartupLoadingSkeleton type="dashboard" />
@@ -266,6 +359,7 @@ export default function AnalyticsPage() {
             size="icon"
             className="lg:hidden h-8 w-8 text-black/60 hover:text-black"
             onClick={() => setMobileSidebarOpen(false)}
+            aria-label="Close sidebar"
           >
             <X className="h-4 w-4" />
           </Button>
@@ -331,6 +425,7 @@ export default function AnalyticsPage() {
               size="icon"
               onClick={() => void logout()}
               className="h-8 w-8 text-black/45 hover:text-black"
+              aria-label="Log out"
             >
               <LogOut className="h-4 w-4" />
             </Button>
@@ -343,6 +438,15 @@ export default function AnalyticsPage() {
         <div 
           className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={() => setMobileSidebarOpen(false)}
+          role="button"
+          tabIndex={0}
+          aria-label="Close sidebar"
+          onKeyDown={(event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              setMobileSidebarOpen(false);
+            }
+          }}
         />
       )}
 
@@ -357,6 +461,7 @@ export default function AnalyticsPage() {
                 size="icon"
                 className="lg:hidden h-9 w-9 text-black/60 hover:text-black"
                 onClick={() => setMobileSidebarOpen(true)}
+                aria-label="Open sidebar"
               >
                 <Menu className="h-5 w-5" />
               </Button>

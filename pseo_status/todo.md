@@ -12,11 +12,11 @@ priority: "Critical -> Low"
 
 # High
 - Add LLM enrichment step (optional) to generate unique summaries/insights from raw data.
-- Ship first data report/press release using `pseo_status/pr/press_release_template.md`.
-- Implement a basic chart block (per template) for visual signals.
+- Ship first data report/press release using `pseo_status/pr/press_release_template.md` (draft generator added).
+- Implement a basic chart block (per template) for visual signals. (done)
 
 # Medium
-- Add UGC intake flow to collect anonymized Q&A (simple form + moderation).
+- Add UGC intake flow to collect anonymized Q&A (simple form + moderation). (done)
 - Add batch publishing throttle for scale (e.g., 200-500 pages/week).
 
 # Low

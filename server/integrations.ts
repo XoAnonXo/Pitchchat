@@ -7,6 +7,7 @@ import { Version3Client } from "jira.js";
 import { WebClient } from "@slack/web-api";
 import { storage } from "./storage";
 import { generateEmbedding } from "./aiModels";
+import { sanitizeFilename } from "./utils/uploads";
 
 export interface IntegrationConfig {
   type: 'github' | 'notion' | 'google-drive' | 'dropbox' | 'asana' | 'jira' | 'slack' | 'figma';
@@ -720,11 +721,13 @@ export class IntegrationManager {
   async processImportedDocuments(documents: ImportedDocument[], projectId: string): Promise<void> {
     for (const doc of documents) {
       try {
+        const safeTitle = sanitizeFilename(doc.title || "Untitled");
+
         // Create document record
         const document = await storage.createDocument({
           projectId,
-          filename: doc.title,
-          originalName: doc.title,
+          filename: safeTitle,
+          originalName: safeTitle,
           fileSize: doc.content.length,
           mimeType: doc.type,
           status: 'processing'
@@ -742,7 +745,8 @@ export class IntegrationManager {
             content: chunk,
             embedding: embedding,
             metadata: {
-              filename: doc.title,
+              filename: safeTitle,
+              originalName: safeTitle,
               source: doc.source,
               url: doc.url,
               ...doc.metadata

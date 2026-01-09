@@ -1,0 +1,68 @@
+{
+  "industry": "healthcare",
+  "stage": "series-a",
+  "pageType": "pitch-deck",
+  "slug": "/investor-questions/healthcare/series-a/pitch-deck/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Pitch deck outline for Healthcare Series A startups",
+  "summary": "Series A healthcare decks must demonstrate regulatory achievement, clinical validation, commercial traction, and operational readiness to scale. Investors expect proof of product-market fit through revenue and customer engagement, not just clinical potential. Lead with your commercial momentum and evidence of repeatability. Pitchchat turns your deck into an interactive pitch room for investors.",
+  "sections": [
+    {
+      "title": "Executive Summary",
+      "goal": "Capture the opportunity and your position in 60 seconds",
+      "guidance": "Lead with your commercial traction and clinical differentiation. State your regulatory status (cleared, CE marked). Present the market opportunity size. Show the key metrics that prove product-market fit. Series A decks should immediately establish credibility—don't bury your achievements."
+    },
+    {
+      "title": "Problem & Market",
+      "goal": "Frame the clinical problem and economic opportunity",
+      "guidance": "Deepen the problem definition with market data. Quantify the clinical burden and economic cost. Show market size with bottom-up rigor. Present market dynamics: growing incidence, shifting care settings, policy tailwinds. Reference comparable company valuations or exits. Healthcare investors want to see venture-scale opportunity."
+    },
+    {
+      "title": "Solution & Clinical Value",
+      "goal": "Demonstrate your product and clinical differentiation",
+      "guidance": "Show the product at scale—not just prototype. Present clinical evidence supporting your value proposition. Include real customer deployments and outcomes. Address how you're differentiated: clinical superiority, workflow advantage, or economic value. Show evidence from the field, not just controlled studies."
+    },
+    {
+      "title": "Commercial Traction",
+      "goal": "Prove product-market fit through revenue and customers",
+      "guidance": "This is the most important section for Series A. Present revenue and growth trajectory. Show customer logos and deployment scale. Include retention and expansion metrics. Present pipeline and conversion rates. Reference customer testimonials and case studies. Make clear you've found a repeatable go-to-market motion."
+    },
+    {
+      "title": "Regulatory & Clinical Evidence",
+      "goal": "Show regulatory achievement and evidence portfolio",
+      "guidance": "Present regulatory status: clearances achieved, submissions pending, international progress. Show clinical evidence portfolio: pivotal data, real-world evidence, publications. Address any ongoing evidence generation. Reference KOL relationships. Show regulatory operations capability for ongoing compliance."
+    },
+    {
+      "title": "Business Model & Unit Economics",
+      "goal": "Demonstrate sustainable economics at scale",
+      "guidance": "Present your business model with healthcare-specific clarity. Show reimbursement status and coverage expansion plan. Present unit economics: customer acquisition cost, lifetime value, payback period. Explain gross margin structure. Show path to improved economics at scale. Healthcare often has complex revenue models—demonstrate mastery."
+    },
+    {
+      "title": "Go-to-Market & Scale Plan",
+      "goal": "Show repeatable sales motion and expansion strategy",
+      "guidance": "Present your sales model with evidence it works: conversion rates, cycle times, win rates. Explain your expansion strategy: geographic, segment, or product line. Show channel strategy if applicable. Address operational requirements for scale: sales team, implementation, customer success. Present the path from current traction to Series B milestones."
+    },
+    {
+      "title": "Competition & Moat",
+      "goal": "Demonstrate defensible position in market",
+      "guidance": "Present comprehensive competitive landscape. Show your differentiation with evidence: clinical outcomes, customer preference, win rates. Address how you sustain advantage: evidence moat, integration depth, network effects. Be honest about competitive threats and your response. Show you've thought deeply about long-term positioning."
+    },
+    {
+      "title": "Team & Organization",
+      "goal": "Show team capability to execute at scale",
+      "guidance": "Present full leadership team with healthcare credentials. Show organizational evolution since seed. Address key hires planned with this round. Reference advisors and board. Healthcare requires specialized talent—demonstrate you can recruit and retain it. Show the team can scale beyond founder-led operations."
+    },
+    {
+      "title": "Financials & Ask",
+      "goal": "Present clear plan and capital needs",
+      "guidance": "Show 24-36 month financial plan with explicit assumptions. Present key milestones and timeline. State raise amount and use of funds. Connect capital to Series B readiness: typical requirements are $10M+ ARR, strong retention, clear path to profitability or market leadership. Be clear about what this round achieves."
+    }
+  ]
+}

@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/ai/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-ai-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "AI Seed investor update template",
-  "summary": "Projected update format for AI founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Monthly investor updates for seed-stage AI companies should focus on technical progress, early customer traction, and key learnings. Keep updates concise but substantive. Transparency about challenges builds trust and often surfaces helpful investor support. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
       "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "content": "Lead with three to five key wins from the month. For AI companies, this should balance technical milestones with commercial progress. Examples: launched new model version with 20% accuracy improvement, closed first paying customer at $X MRR, completed successful POC with Fortune 500 company. Be specific with numbers and outcomes."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Key Metrics",
+      "content": "Report core metrics consistently each month: MRR, customer count, key product metrics (accuracy, latency, usage), and runway. For AI specifically, include compute costs and any efficiency improvements. Consistent reporting builds credibility and helps investors track progress."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Product & Technical",
+      "content": "Summarize technical progress and product development. What shipped? What did you learn? For AI companies, highlight model improvements, infrastructure wins, and any research breakthroughs. Be honest about technical challenges and how you are addressing them."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Customers & Pipeline",
+      "content": "Update on customer acquisition, expansion, and pipeline. Share wins, losses, and learnings. What are customers saying? What patterns are emerging in sales conversations? This helps investors understand product-market fit trajectory and may surface introductions they can make."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "Team",
+      "content": "Note any hiring wins, departures, or planned hires. AI talent competition is fierce, so celebrate recruiting wins. If you are struggling to hire, mention it as investors may have relevant networks. Include any advisory board additions."
     },
     {
-      "section": "Model performance (Seed)",
-      "content": "Share evaluation results and cost efficiency gains."
+      "section": "Challenges & Asks",
+      "content": "Be transparent about obstacles and specific requests for help. Investors appreciate candor and often can assist with introductions, advice, or resources. Common asks: customer introductions, hiring referrals, technical advisor suggestions, or strategic advice on specific decisions."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for AI founders at Seed."
+      "section": "Cash & Runway",
+      "content": "Report current cash position and runway in months. Note any changes to burn rate and reasons. If runway is getting short, signal early so investors can help with bridge financing or accelerated fundraising. No investor likes surprises about cash."
+    },
+    {
+      "section": "Next Month Focus",
+      "content": "Preview priorities for the coming month. What milestones are you targeting? This creates accountability and helps investors understand your execution cadence. It also signals where they might be able to provide timely support."
     }
   ]
 }

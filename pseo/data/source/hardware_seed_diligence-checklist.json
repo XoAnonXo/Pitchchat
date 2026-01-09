@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/hardware/seed/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Hardware Seed diligence checklist",
-  "summary": "Projected diligence checklist for Hardware founders raising a Seed round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Hardware seed diligence focuses on manufacturing feasibility, cost structure, and team capability. Investors will evaluate your physical prototypes and manufacturing plan in detail. Prepare comprehensive documentation on your product development and supply chain strategy. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Detailed Bill of Materials with supplier quotes",
+      "rationale": "Component-level BOM with current costs and volume pricing from suppliers. Show cost reduction path from prototype to production quantities. Include critical component analysis."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Prototype demonstration and technical specifications",
+      "rationale": "Working prototype for investor evaluation. Complete technical specifications showing performance against requirements. Be prepared for hands-on demonstration."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Manufacturing strategy and supplier documentation",
+      "rationale": "Detailed manufacturing plan: approach, supplier relationships, facility requirements. Include CM quotes or partnership discussions. Show DFM analysis if completed."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Quality data including First Pass Yield analysis",
+      "rationale": "FPY data with failure mode analysis and improvement plan. Show testing procedures and quality metrics. Document any field failures and corrective actions."
     },
     {
-      "item": "Manufacturing partners and BOM cost model (Seed)",
-      "rationale": "Shows readiness to scale production margins."
+      "item": "Certification requirements and compliance roadmap",
+      "rationale": "Complete list of required certifications for target markets. Timeline and cost estimates for certification process. Any pre-certification testing completed."
     },
     {
-      "item": "Seed readiness summary for Hardware",
-      "rationale": "Signals you can close a Seed round in Hardware."
+      "item": "Field deployment data and customer feedback",
+      "rationale": "Documentation of field deployments: units, environments, runtime. Customer feedback compilation. Issue log and resolution status."
+    },
+    {
+      "item": "IP documentation including patents and trade secrets",
+      "rationale": "Patent applications filed, trade secrets documented, freedom-to-operate analysis. Hardware IP extends beyond patents to manufacturing know-how."
+    },
+    {
+      "item": "Team backgrounds with hardware experience",
+      "rationale": "Detailed resumes highlighting hardware development experience. Prior products shipped, manufacturing scaled. Be prepared for technical reference calls."
+    },
+    {
+      "item": "Customer pipeline and pre-order documentation",
+      "rationale": "Evidence of customer interest: LOIs, pre-orders, pilot agreements. Include customer contacts for reference calls. Show pricing validation."
+    },
+    {
+      "item": "Capital plan and financial model",
+      "rationale": "Detailed use of funds including tooling, inventory, and production ramp costs. Financial model with unit economics at scale. Show total capital path to profitability."
+    },
+    {
+      "item": "Supply chain risk assessment",
+      "rationale": "Critical component analysis with risk assessment. Single-source items, long lead-time components, supply constraints. Mitigation strategies documented."
+    },
+    {
+      "item": "Competitive analysis with technical benchmarking",
+      "rationale": "Detailed competitive landscape with performance comparisons. Pricing analysis and market positioning. Include potential competitive responses."
     }
   ]
 }

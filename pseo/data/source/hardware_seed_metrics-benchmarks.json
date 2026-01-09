@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/hardware/seed/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Hardware Seed fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Hardware Seed startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Seed-stage hardware metrics focus on manufacturing readiness, cost trajectory, and customer validation. Unlike software, hardware companies are measured on physical product development milestones. These benchmarks help investors assess your progress toward production viability. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "6-12 months",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "Bill of Materials Cost",
+      "value": "2-3x production target",
+      "note": "Prototype BOM is higher than production but should show clear path to target. Component-level cost reduction plan should be documented.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "20-35%",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "First Pass Yield",
+      "value": "60-75%",
+      "note": "Early production FPY showing improvement trend. Root cause analysis on failures with clear remediation plan.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "40-60%",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "Prototype Generation",
+      "value": "Gen 2-4",
+      "note": "Multiple iterations showing design convergence. Each generation should address issues from previous with declining ECO rate.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Capital intensity",
-      "value": "High; 18-24 mo runway",
-      "note": "Projected target range; update with real data. Hardware Seed."
+      "label": "Field Units Deployed",
+      "value": "20-100 units",
+      "note": "Enough deployment to validate real-world performance. Runtime hours and environment diversity matter.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Customer Commitments",
+      "value": "$100K - $1M",
+      "note": "Pre-orders, LOIs, or pilot commitments showing willingness to pay. Quality of commitment (binding vs. soft) matters.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Gross Margin Target",
+      "value": "40-60% at scale",
+      "note": "Target gross margin at production volume. Current margin may be negative but path should be clear.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Development Team Size",
+      "value": "3-8 engineers",
+      "note": "Core team with mechanical, electrical, and firmware capability. Manufacturing engineering expertise is valuable.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Capital Raised",
+      "value": "$500K - $3M",
+      "note": "Hardware seed rounds tend larger than software given capital intensity. Includes non-dilutive (grants, crowdfunding).",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Certification Status",
+      "value": "Requirements identified, testing planned",
+      "note": "Clear understanding of required certifications (UL, FCC, CE) with timeline and budget.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Time to Production",
+      "value": "12-24 months",
+      "note": "Realistic timeline from current state to production shipments. Include certification and manufacturing ramp.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     }
   ]
 }

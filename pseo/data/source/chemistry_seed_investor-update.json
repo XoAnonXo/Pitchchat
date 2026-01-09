@@ -4,36 +4,47 @@
   "pageType": "investor-update",
   "slug": "/investor-questions/chemistry/seed/investor-update/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-chemistry-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Chemistry Seed investor update template",
-  "summary": "Projected update format for Chemistry founders raising a Seed round. Includes structured sections, KPIs, and asks to keep investors aligned.",
+  "summary": "Seed-stage biotech investor updates focus on scientific progress and milestone achievement. Given long development timelines, emphasize risk reduction and value creation at each update. Maintain transparency about challenges—biotech investors expect setbacks and value honest communication. Pitchchat helps founders share updates in a single room.",
   "sections": [
     {
-      "section": "Highlights",
-      "content": "Summarize the most meaningful wins since the last update."
+      "section": "Executive Summary",
+      "content": "Lead with key developments: data milestones, regulatory progress, IP achievements. Summarize program status across pipeline. Include cash position and runway. This should convey progress and trajectory quickly."
     },
     {
-      "section": "Key metrics",
-      "content": "Share the handful of metrics that show momentum and retention."
+      "section": "Program Progress",
+      "content": "Detailed update on lead program: experiments completed, data generated, decisions made. Show milestone progress against plan. Address any timeline changes with explanation. Include supporting programs as relevant."
     },
     {
-      "section": "Product",
-      "content": "List major product milestones and what they unlock next."
+      "section": "Data Highlights",
+      "content": "Present new data generated with implications. Include both positive results and any setbacks. Show how data informs development decisions. Address data quality and reproducibility. Scientific progress is the primary update."
     },
     {
-      "section": "Go-to-market",
-      "content": "Explain pipeline progress and conversion velocity."
+      "section": "Regulatory Update",
+      "content": "Progress on regulatory interactions and strategy. FDA meeting preparations or outcomes. IND progress if applicable. Designation applications. Regulatory pathway remains on track or adjustments needed."
     },
     {
-      "section": "Help needed",
-      "content": "Ask for specific customer intros or domain expertise."
+      "section": "IP Progress",
+      "content": "Patent prosecution updates: filings, office actions, grants. FTO developments. Trade secret protection progress. Any IP risks or competitive filings identified."
     },
     {
-      "section": "Scale-up progress (Seed)",
-      "content": "Detail yield improvements and pilot plant milestones."
+      "section": "Team & Organization",
+      "content": "Key hires and their contributions. Advisory engagement highlights. Organizational development. Any departures with transition plans."
     },
     {
-      "section": "Seed milestones",
-      "content": "Summarize the milestone progress expected for Chemistry founders at Seed."
+      "section": "Financial Status",
+      "content": "Cash position and burn rate. Runway remaining. Non-dilutive funding progress. Any changes to budget or timeline. Upcoming financing needs and timing."
+    },
+    {
+      "section": "Forward Look",
+      "content": "Key milestones for next quarter. Critical decision points approaching. Specific investor asks: introductions, expertise, strategic input. Any support needed."
     }
   ]
 }

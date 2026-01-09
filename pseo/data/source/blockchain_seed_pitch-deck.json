@@ -4,63 +4,65 @@
   "pageType": "pitch-deck",
   "slug": "/investor-questions/blockchain/seed/pitch-deck/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-blockchain-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Pitch deck outline for Blockchain Seed startups",
-  "summary": "Projected deck structure for Blockchain founders raising a Seed round. Includes section goals, proof points, and investor expectations for this stage.",
+  "summary": "Blockchain seed pitch decks must overcome significant investor skepticism post-crypto winter. Lead with real utility and sustainable economics, not token price potential. Show you understand why most crypto projects failed and why yours is different. Credibility comes from substance, not hype. Pitchchat turns your deck into an interactive pitch room for investors.",
   "sections": [
     {
-      "title": "Problem",
-      "goal": "Show the pain and why now matters.",
-      "guidance": "Quantify the problem with a clear market shift or constraint."
+      "title": "Problem & Opportunity",
+      "goal": "Frame a real problem that blockchain uniquely solves",
+      "guidance": "Identify a specific problem where blockchain properties (trustlessness, permissionlessness, programmable ownership) provide genuine advantages. Show why centralized solutions are inadequate. Avoid generic 'disintermediation' claims—be specific about the value blockchain creates. Size the opportunity realistically."
     },
     {
-      "title": "Solution",
-      "goal": "Explain the product in one sentence.",
-      "guidance": "Focus on the core workflow and the wedge you own."
+      "title": "Solution & Why Blockchain",
+      "goal": "Demonstrate blockchain necessity and your specific approach",
+      "guidance": "Present your solution with clear explanation of why it requires blockchain. Show the specific properties you leverage: censorship resistance, composability, trustless coordination. Demonstrate your technical approach and architecture decisions. This is the most important slide—weak blockchain justification kills deals."
     },
     {
-      "title": "Market",
-      "goal": "Define the reachable initial market.",
-      "guidance": "Start with the first buyer segment and a realistic wedge."
+      "title": "Product & Traction",
+      "goal": "Show real usage and product-market fit signals",
+      "guidance": "Present your product with user metrics. Show active wallets, transaction volume, and retention without artificial incentives if possible. Include user testimonials and use cases. Demonstrate organic demand beyond speculation. For pre-launch, show waitlist and community engagement quality."
     },
     {
-      "title": "Traction",
-      "goal": "Prove early demand signals.",
-      "guidance": "Highlight pilots, LOIs, or early revenue."
+      "title": "Token Model (if applicable)",
+      "goal": "Explain tokenomics clearly and justify token necessity",
+      "guidance": "If you have a token, present its utility and necessity for the system. Show tokenomics: supply, distribution, emission schedule, value accrual. Address sustainability without continuous new capital. Show regulatory positioning. If no token yet, explain if/when you might add one and why."
     },
     {
-      "title": "Business model",
-      "goal": "Explain how money is made.",
-      "guidance": "Show pricing logic tied to value delivered."
+      "title": "Business Model & Revenue",
+      "goal": "Show sustainable economics beyond token appreciation",
+      "guidance": "Present actual revenue model: protocol fees, enterprise services, SaaS components. Show revenue generated or clear path to revenue. Address how revenue relates to token value if applicable. Demonstrate you're building a business, not just a token."
     },
     {
-      "title": "Moat",
-      "goal": "Defensibility beyond execution speed.",
-      "guidance": "Data, IP, approvals, or operational scale."
+      "title": "Security & Compliance",
+      "goal": "Address the two existential risks directly",
+      "guidance": "Present security approach: audits completed, ongoing processes, bug bounties. Show regulatory strategy: legal positioning, compliance infrastructure, jurisdictional approach. These are existential risks—dedicate a slide to addressing them directly. Reference legal counsel and security partners."
     },
     {
-      "title": "Team",
-      "goal": "Why this team can win.",
-      "guidance": "Emphasize domain expertise and execution history."
+      "title": "Competitive Landscape",
+      "goal": "Position against existing protocols and alternatives",
+      "guidance": "Map the competitive landscape: other protocols, centralized alternatives, potential new entrants. Show your differentiation and why users choose you. Address network effects and moats. Include win/loss data if available. Demonstrate deep understanding of the space."
     },
     {
-      "title": "Protocol security",
-      "goal": "Show security and governance readiness.",
-      "guidance": "Detail audits, monitoring, and token economics."
+      "title": "Team & Advisors",
+      "goal": "Show crypto-native expertise and relevant experience",
+      "guidance": "Highlight team crypto experience: prior protocols, DeFi background, security expertise. Include relevant advisors and their involvement. Show community building capability. Address any gaps in the team. Crypto expertise is essential—demonstrate yours clearly."
     },
     {
-      "title": "Seed milestones",
-      "goal": "Highlight proof points for Seed.",
-      "guidance": "Detail the specific milestones investors expect for Blockchain Seed."
+      "title": "Roadmap & Milestones",
+      "goal": "Present clear development and growth path",
+      "guidance": "Show development roadmap: technical milestones, product launches, ecosystem expansion. Include go-to-market milestones: user growth, partnership targets, revenue goals. Present decentralization roadmap if relevant. Be realistic about crypto development timelines."
     },
     {
-      "title": "Blockchain go-to-market wedge (Seed)",
-      "goal": "Explain your entry point for Blockchain.",
-      "guidance": "Show a focused wedge that fits Blockchain buyers at the Seed stage."
-    },
-    {
-      "title": "Blockchain proof points",
-      "goal": "Show evidence tailored to Blockchain.",
-      "guidance": "Use data or pilots specific to Blockchain to prove momentum at Seed."
+      "title": "Funding & Use of Funds",
+      "goal": "Present capital needs and allocation",
+      "guidance": "Show raise amount and detailed use of funds: development, security, growth, operations. Present runway and path to next milestones. Address token fundraising vs. equity if relevant. Show capital efficiency and milestone-based deployment. Include treasury management approach if holding crypto."
     }
   ]
 }

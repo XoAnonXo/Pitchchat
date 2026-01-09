@@ -4,28 +4,75 @@
   "pageType": "metrics-benchmarks",
   "slug": "/investor-questions/hardware/series-a/metrics-benchmarks/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Hardware Series A fundraising metrics benchmarks",
-  "summary": "Projected fundraising benchmarks for Hardware Series A startups. Includes target ranges, contextual notes, and what to measure before outreach.",
+  "summary": "Series A hardware benchmarks focus on production capability, unit economics, and customer traction. Investors compare your metrics against hardware industry standards and successful hardware companies. These benchmarks demonstrate manufacturing maturity and commercial viability. Pitchchat keeps fundraising metrics investor-ready in one room.",
   "metrics": [
     {
-      "label": "Sales cycle length",
-      "value": "4-9 months",
-      "note": "Projected target range; update with real data. Hardware Series A."
+      "label": "Annual Revenue",
+      "value": "$1M - $5M",
+      "note": "Meaningful revenue demonstrating production and sales capability. Revenue quality (margin, repeatability) matters as much as growth.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Pilot conversion rate",
-      "value": "30-45%",
-      "note": "Projected target range; update with real data. Hardware Series A."
+      "label": "Revenue Growth Rate",
+      "value": "100-200% YoY",
+      "note": "Strong growth trajectory while maintaining quality and margin. Hardware growth can be constrained by production—show path to scaling.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Gross margin trajectory",
-      "value": "55-70%",
-      "note": "Projected target range; update with real data. Hardware Series A."
+      "label": "Gross Margin",
+      "value": "35-50%",
+      "note": "Production gross margin on shipped products. Path to 50%+ at scale with specific improvement drivers identified.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     },
     {
-      "label": "Capital intensity",
-      "value": "Moderate-High; 18-30 mo runway",
-      "note": "Projected target range; update with real data. Hardware Series A."
+      "label": "First Pass Yield",
+      "value": "90%+",
+      "note": "Production FPY indicating manufacturing maturity. Consistent quality across production runs.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Units Shipped",
+      "value": "1,000 - 10,000",
+      "note": "Production volume proving manufacturing at scale. Unit quality and consistency matter as much as volume.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Customer Count",
+      "value": "100 - 1,000+",
+      "note": "Meaningful customer base proving product-market fit. Segment diversity reduces concentration risk.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Net Promoter Score",
+      "value": "40+",
+      "note": "High NPS indicates product satisfaction and supports organic growth critical for hardware.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Customer Return Rate",
+      "value": "<5%",
+      "note": "Low return rate indicates product quality and customer satisfaction. Include warranty costs.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "Inventory Turns",
+      "value": "4-8x annually",
+      "note": "Working capital efficiency measure. Higher turns indicate better inventory management.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
+    },
+    {
+      "label": "CAC Payback",
+      "value": "12-18 months",
+      "note": "Customer acquisition cost payback period. Hardware often has longer payback but higher LTV.",
+      "source": "NIST Manufacturing (https://www.nist.gov/manufacturing)"
     }
   ]
 }

@@ -1,0 +1,78 @@
+{
+  "industry": "healthcare",
+  "stage": "seed",
+  "pageType": "metrics-benchmarks",
+  "slug": "/investor-questions/healthcare/seed/metrics-benchmarks/",
+  "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-healthcare-seed",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
+  "title": "Healthcare Seed fundraising metrics benchmarks",
+  "summary": "Healthcare seed metrics focus on regulatory progress, clinical validation, and commercial traction signals. Revenue is less important than evidence of product-market fit in a complex sale environment. Investors benchmark against typical healthcare development timelines and commercial proof points. Pitchchat keeps fundraising metrics investor-ready in one room.",
+  "metrics": [
+    {
+      "label": "Regulatory Status",
+      "value": "Strategy → Submission",
+      "note": "Progress from regulatory strategy defined through pre-submission feedback to submission. Clearance often post-seed.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Clinical Partners",
+      "value": "3-5 active partners",
+      "note": "Health systems engaged for design input, feasibility testing, or pilots. Mix of academic and community systems valuable.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Pilot Results",
+      "value": "1-3 completed pilots",
+      "note": "Completed pilots with clinical and operational outcomes data. Conversion to paid contracts is strong signal.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "LOIs / Pipeline",
+      "value": "$500K-$2M",
+      "note": "Letters of intent or contracted pilots. Indicates commercial interest beyond research relationships.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Clinical Outcome Data",
+      "value": "Feasibility demonstrated",
+      "note": "Early clinical evidence supporting efficacy. Bench testing, feasibility studies, or pilot clinical data.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Reimbursement Pathway",
+      "value": "Defined with validation",
+      "note": "Clear payment pathway identified. Early payer conversations or health economics analysis completed.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "EHR Integration",
+      "value": "Technical pathway validated",
+      "note": "Integration approach defined. Early integration with 1-2 EHR systems or FHIR-based approach proven.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "Team Domain Experience",
+      "value": "20+ years collective",
+      "note": "Combined healthcare experience across clinical, regulatory, and commercial functions.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "KOL Network",
+      "value": "3-5 clinical advisors",
+      "note": "Key opinion leader relationships for clinical validation, market access, and credibility.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    },
+    {
+      "label": "IP Position",
+      "value": "Provisional or utility filed",
+      "note": "Patent protection for core technology. Freedom to operate analysis completed or underway.",
+      "source": "WHO Digital Health (https://www.who.int/health-topics/digital-health)"
+    }
+  ]
+}

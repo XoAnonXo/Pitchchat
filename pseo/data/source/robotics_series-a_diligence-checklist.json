@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/robotics/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-robotics-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Robotics Series A diligence checklist",
-  "summary": "Projected diligence checklist for Robotics founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A robotics diligence is comprehensive, covering fleet performance, operations scalability, unit economics, and team capability. Prepare for deep operational review including customer site visits and fleet data analysis. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Fleet performance data with detailed analytics",
+      "rationale": "Comprehensive fleet metrics: success rates by site, task, and time period. Intervention data with categorization. Uptime and reliability statistics. Be prepared for detailed data analysis."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Customer references across deployment types",
+      "rationale": "References from diverse customers: different sizes, environments, deployment maturity. Prepare 8-10 references willing to take diligence calls. Investors may request site visits."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Unit economics model with supporting data",
+      "rationale": "Complete unit economics: hardware costs, deployment costs by type, support costs per robot. Customer LTV analysis. Working capital model. All with supporting data."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Operations documentation and metrics",
+      "rationale": "Fleet operations infrastructure documentation. Support efficiency metrics. Remote monitoring capabilities. Software update process. Team structure and capacity."
     },
     {
-      "item": "Field reliability results and support plan (Series A)",
-      "rationale": "Proves uptime targets and deployment readiness."
+      "item": "Deployment process documentation",
+      "rationale": "Systematized deployment process with playbooks. Time and cost data by deployment type. Success rate and issue categorization. Scaling plan."
     },
     {
-      "item": "Series A readiness summary for Robotics",
-      "rationale": "Signals you can close a Series A round in Robotics."
+      "item": "Sales and pipeline data",
+      "rationale": "Sales process documentation. Pipeline data with stage analysis. Win/loss analysis. Customer acquisition cost breakdown. Sales efficiency metrics."
+    },
+    {
+      "item": "Manufacturing and supply chain documentation",
+      "rationale": "Hardware production process and capacity. Supply chain structure and risks. Quality metrics from production. Cost trajectory with volume."
+    },
+    {
+      "item": "Financial statements and projections",
+      "rationale": "Audited or reviewed financials. Detailed projections with unit economics model. Cash flow analysis with working capital requirements. Scenario analysis."
+    },
+    {
+      "item": "Technology and IP documentation",
+      "rationale": "System architecture and differentiation documentation. Patent portfolio. Freedom-to-operate analysis. Technology roadmap."
+    },
+    {
+      "item": "Safety documentation and compliance",
+      "rationale": "Safety framework and testing results. Compliance status for relevant standards. Incident history and response. Insurance coverage."
+    },
+    {
+      "item": "Competitive analysis",
+      "rationale": "Detailed competitive landscape with win/loss data. Technical comparisons. Large company threat assessment. Market positioning analysis."
+    },
+    {
+      "item": "Team and organization documentation",
+      "rationale": "Organizational chart covering all functions. Key employee backgrounds. Hiring plan and budget. Culture and retention metrics."
     }
   ]
 }

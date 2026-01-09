@@ -4,32 +4,63 @@
   "pageType": "diligence-checklist",
   "slug": "/investor-questions/hardware/series-a/diligence-checklist/",
   "ctaText": "Create your PitchChat room",
+  "dataOrigin": "editorial",
+  "sourceId": "editorial-hardware-series-a",
+  "sourceNotes": "Editorial guidance prepared by Pitchchat; not sourced from user submissions.",
+  "sourceTags": [
+    "editorial",
+    "pitchchat-guidance"
+  ],
   "title": "Hardware Series A diligence checklist",
-  "summary": "Projected diligence checklist for Hardware founders raising a Series A round. Includes a checklist and rationale aligned to investor diligence.",
+  "summary": "Series A hardware diligence is comprehensive, covering manufacturing capability, unit economics, supply chain, and customer validation. Prepare for deep operational review and customer references. Quality of documentation reflects operational maturity. Pitchchat keeps diligence docs organized and easy to review.",
   "items": [
     {
-      "item": "Current cap table and option pool plan",
-      "rationale": "Investors validate ownership, dilution, and incentives."
+      "item": "Production data including yield, capacity, and quality metrics",
+      "rationale": "Detailed production records: FPY by period, capacity utilization, cycle times, defect analysis. Show manufacturing control charts and improvement trends. Be prepared for factory visit or detailed operational review."
     },
     {
-      "item": "Customer pipeline with next steps",
-      "rationale": "Proves commercial momentum and a clear path to revenue."
+      "item": "Complete unit economics with BOM and overhead breakdown",
+      "rationale": "Component-level BOM with current and target costs. Manufacturing overhead allocation. Fully-loaded product cost including warranty, support, logistics. Volume pricing commitments from suppliers."
     },
     {
-      "item": "Product roadmap and milestone plan",
-      "rationale": "Shows the path to de-risk the core technical thesis."
+      "item": "Customer data including revenue, retention, and NPS",
+      "rationale": "Customer list with revenue by account. Retention and expansion metrics. NPS and satisfaction data. Customer references willing to take diligence calls."
     },
     {
-      "item": "Security or compliance posture",
-      "rationale": "Critical for regulated or enterprise-heavy markets."
+      "item": "Supply chain documentation and risk assessment",
+      "rationale": "Supplier list with qualification status and relationship assessment. Single-source component analysis. Lead time data and inventory strategy. Contingency plans for supply disruption."
     },
     {
-      "item": "Manufacturing partners and BOM cost model (Series A)",
-      "rationale": "Shows readiness to scale production margins."
+      "item": "Quality system documentation and certifications",
+      "rationale": "Quality management system documentation. Relevant certifications (ISO, industry-specific). Test protocols and coverage. Warranty data and failure analysis."
     },
     {
-      "item": "Series A readiness summary for Hardware",
-      "rationale": "Signals you can close a Series A round in Hardware."
+      "item": "Financial statements and detailed projections",
+      "rationale": "Audited or reviewed financials. Detailed projections with unit economics model. Working capital analysis. Sensitivity scenarios."
+    },
+    {
+      "item": "Inventory and working capital analysis",
+      "rationale": "Current inventory position and aging. Working capital components and trends. Cash conversion cycle analysis. Inventory management strategy."
+    },
+    {
+      "item": "Manufacturing agreements and facility documentation",
+      "rationale": "CM contracts or facility lease agreements. Equipment list and capacity analysis. Expansion plans and capital requirements. Manufacturing partner references."
+    },
+    {
+      "item": "Sales and distribution documentation",
+      "rationale": "Sales process and pipeline data. Channel partner agreements if applicable. Customer acquisition cost analysis. Geographic and segment breakdown."
+    },
+    {
+      "item": "IP portfolio and competitive analysis",
+      "rationale": "Patent portfolio and application status. Freedom-to-operate analysis. Trade secret documentation. Competitive landscape analysis."
+    },
+    {
+      "item": "Team and organizational documentation",
+      "rationale": "Organizational chart with manufacturing and operations coverage. Key employee backgrounds and compensation. Hiring plan and budget."
+    },
+    {
+      "item": "Cap table and corporate documentation",
+      "rationale": "Clean cap table with all prior rounds. Board composition and governance. Any unusual terms or structure issues."
     }
   ]
 }
