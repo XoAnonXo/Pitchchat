@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { PseoBreadcrumbSchema } from "@/components/pseo/PseoBreadcrumbSchema";
 import pilotConfig from "@/data/pilot-config.json";
-import { labelForStage } from "@/data/labelUtils";
+import { labelForStage, descriptionForStage } from "@/data/labelUtils";
 
 type PageParams = {
   stage: string;
@@ -33,11 +33,13 @@ export function generateMetadata({
       description: `Investor questions, deck outlines, and benchmarks for ${stageLabel} startups.`,
       url: canonical,
       type: "website",
+      images: [{ url: "/logo.svg", alt: "Pitchchat logo" }],
     },
     twitter: {
       card: "summary",
       title: `${stageLabel} Investor Resources - Pitchchat`,
       description: `Investor questions, deck outlines, and benchmarks for ${stageLabel} startups.`,
+      images: ["/logo.svg"],
     },
   };
 }
@@ -48,6 +50,7 @@ export default function InvestorQuestionsStagePage({
   params: PageParams;
 }) {
   const stageLabel = labelForStage(params.stage);
+  const stageDesc = descriptionForStage(params.stage);
 
   const breadcrumbItems = [
     { name: "Investor Questions", path: "/investor-questions" },
@@ -64,11 +67,52 @@ export default function InvestorQuestionsStagePage({
       <h1 className="mt-3 text-3xl font-semibold text-neutral-900">
         {stageLabel} investor resources
       </h1>
-      <p className="mt-4 text-base text-neutral-700">
-        Choose an industry and page type to get focused investor guidance.
-      </p>
 
-      <div className="mt-10 grid gap-6 md:grid-cols-2">
+      {stageDesc && (
+        <>
+          <p className="mt-4 text-base text-neutral-700">{stageDesc.intro}</p>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-2">
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-500">
+                Typical round characteristics
+              </h2>
+              <ul className="mt-4 space-y-2 text-sm text-neutral-700">
+                {stageDesc.typical.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+              <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-500">
+                Investor expectations
+              </h2>
+              <ul className="mt-4 space-y-2 text-sm text-neutral-700">
+                {stageDesc.expectations.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-400" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </>
+      )}
+
+      <section className="mt-10">
+        <h2 className="text-xl font-semibold text-neutral-900">
+          Resources by industry
+        </h2>
+        <p className="mt-2 text-sm text-neutral-600">
+          Select an industry to access targeted investor questions, deck outlines, and benchmarks.
+        </p>
+
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
         {pilotConfig.industries.map((industry) => (
           <div
             key={industry.slug}
@@ -89,7 +133,8 @@ export default function InvestorQuestionsStagePage({
             </ul>
           </div>
         ))}
-      </div>
+        </div>
+      </section>
       </main>
     </>
   );

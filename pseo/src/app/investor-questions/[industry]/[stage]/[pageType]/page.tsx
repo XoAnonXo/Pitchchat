@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { PseoBreadcrumbSchema } from "@/components/pseo/PseoBreadcrumbSchema";
 import { DiligenceChecklistTemplate } from "@/components/pseo/DiligenceChecklistTemplate";
@@ -8,6 +9,7 @@ import { MetricsBenchmarksTemplate } from "@/components/pseo/MetricsBenchmarksTe
 import { PitchDeckTemplate } from "@/components/pseo/PitchDeckTemplate";
 import pilotConfig from "@/data/pilot-config.json";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
+import { getIndustryStageContent } from "@/data/content/contentMatrix";
 import { getDiligenceChecklistSeed } from "@/data/diligenceChecklistSeed";
 import { getInvestorQuestionsSeed } from "@/data/investorQuestionsSeed";
 import { getInvestorUpdateSeed } from "@/data/investorUpdateSeed";
@@ -15,6 +17,7 @@ import { getMetricsBenchmarksSeed } from "@/data/metricsBenchmarksSeed";
 import { getPitchDeckSeed } from "@/data/pitchDeckSeed";
 import { getPseoPageBySlug } from "@/db/queries";
 import { buildPseoPagePath } from "@/lib/pseoRoutes";
+import { meetsQualityThreshold } from "@/lib/qualityScore";
 
 type PageParams = {
   industry: string;
@@ -28,6 +31,25 @@ function formatSlug(value?: string) {
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
+}
+
+/**
+ * Generate page-type-specific meta descriptions to differentiate keyword intent
+ * and reduce cannibalization between page types targeting similar industries/stages.
+ */
+function getDefaultDescription(industry: string, stage: string, pageType: string): string {
+  const industryLabel = labelForIndustry(industry);
+  const stageLabel = labelForStage(stage);
+
+  const descriptions: Record<string, string> = {
+    "investor-questions": `Top questions ${stageLabel} investors ask ${industryLabel} founders, with proven answers. Prepare for your pitch meetings and due diligence calls.`,
+    "pitch-deck": `${stageLabel} pitch deck structure for ${industryLabel} startups. Slide-by-slide guidance covering problem, solution, traction, team, and ask.`,
+    "metrics-benchmarks": `Key metrics and benchmarks ${stageLabel} investors expect from ${industryLabel} companies. Know your target numbers before fundraising.`,
+    "diligence-checklist": `Due diligence checklist for ${industryLabel} ${stageLabel} rounds. Documents, financials, and materials investors request before term sheets.`,
+    "investor-update": `Investor update template for ${industryLabel} ${stageLabel} founders. Structure and cadence guidance to keep your investors engaged.`,
+  };
+
+  return descriptions[pageType] ?? `Investor-ready guidance for ${industryLabel} startups at the ${stageLabel} stage.`;
 }
 
 function getBreadcrumbItems(
@@ -55,11 +77,24 @@ function getBreadcrumbItems(
   ];
 }
 
+/**
+ * Build-time validation: Fail the build if any content files are missing.
+ * This prevents the fallback from ever being reached in production.
+ */
 export function generateStaticParams() {
-  const params = [];
+  const params: Array<{ industry: string; stage: string; pageType: string }> = [];
+  const missingContent: string[] = [];
 
   for (const industry of pilotConfig.industries) {
     for (const stage of pilotConfig.stages) {
+      // Validate content exists at build time
+      const content = getIndustryStageContent(industry.slug, stage.slug);
+
+      if (!content) {
+        missingContent.push(`${industry.slug}/${stage.slug}`);
+        continue;
+      }
+
       for (const pageType of pilotConfig.pageTypes) {
         params.push({
           industry: industry.slug,
@@ -70,8 +105,20 @@ export function generateStaticParams() {
     }
   }
 
+  // FAIL BUILD if content is missing - fallback should never be reached in production
+  if (missingContent.length > 0) {
+    throw new Error(
+      `[BUILD FAILED] Missing content files for:\n${missingContent.join("\n")}\n` +
+        `Create files in pseo/src/data/content/{industry}/{stage}.ts and register in contentMatrix.ts`
+    );
+  }
+
+  console.log(`[generateStaticParams] Validated ${params.length} pages with content`);
   return params;
 }
+
+// Prevent runtime generation of pages without validated content
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -91,14 +138,23 @@ export async function generateMetadata({
   });
 
   const dbPage = await getPseoPageBySlug(slugPath);
+
+  // Don't index unpublished or low-quality pages
+  if (dbPage && (!dbPage.isPublished || !meetsQualityThreshold(dbPage.dataQualityScore))) {
+    return {
+      robots: { index: false, follow: false },
+    };
+  }
+
   const baseTitle =
     dbPage?.title ?? `${pageTypeLabel} for ${industryLabel} ${stageLabel}`;
   const title = baseTitle.includes("Pitchchat")
     ? baseTitle
     : `${baseTitle} - Pitchchat`;
+  // Use page-type-specific descriptions to differentiate keyword intent
   const description =
     dbPage?.summary?.trim() ||
-    `Investor-ready guidance for ${industryLabel} startups at the ${stageLabel} stage.`;
+    getDefaultDescription(industry, stage, pageType);
 
   return {
     title,
@@ -111,11 +167,13 @@ export async function generateMetadata({
       description,
       url: slugPath,
       type: "website",
+      images: [{ url: "/logo.svg", alt: "Pitchchat logo" }],
     },
     twitter: {
       card: "summary",
       title,
       description,
+      images: ["/logo.svg"],
     },
   };
 }
@@ -133,6 +191,12 @@ export default async function InvestorQuestionsPage({
   };
   const slugPath = `/investor-questions/${industry}/${stage}/${pageType}/`;
   const dbPage = await getPseoPageBySlug(slugPath);
+
+  // Gate unpublished or low-quality pages - return 404 if page exists in DB but not ready
+  if (dbPage && (!dbPage.isPublished || !meetsQualityThreshold(dbPage.dataQualityScore))) {
+    notFound();
+  }
+
   const breadcrumbItems = getBreadcrumbItems(industry, stage, pageType);
 
   if (pageType === "investor-questions") {
