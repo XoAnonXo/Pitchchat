@@ -78,6 +78,11 @@ const upload = multer({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint for Railway/load balancers
+  app.get("/api/health", (_req, res) => {
+    res.status(200).json({ status: "ok", timestamp: new Date().toISOString() });
+  });
+
   // Helper function to sync subscription status with Stripe
   async function syncUserSubscription(user: any) {
     try {
