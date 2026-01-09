@@ -33,13 +33,13 @@ export function generateMetadata({
       description: `Investor questions, deck outlines, and benchmarks for ${industryLabel} startups.`,
       url: canonical,
       type: "website",
-      images: [{ url: "/logo.svg", alt: "Pitchchat logo" }],
+      // OG image inherited from root opengraph-image.tsx
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image",
       title: `${industryLabel} Investor Resources - Pitchchat`,
       description: `Investor questions, deck outlines, and benchmarks for ${industryLabel} startups.`,
-      images: ["/logo.svg"],
+      // Twitter image inherited from root opengraph-image.tsx
     },
   };
 }

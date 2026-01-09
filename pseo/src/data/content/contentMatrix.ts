@@ -33,6 +33,18 @@ import { financeSeriesAContent } from "./finance/series-a";
 import { chemistrySeedContent } from "./chemistry/seed";
 import { chemistrySeriesAContent } from "./chemistry/series-a";
 
+// SaaS content
+import { saasSeedContent } from "./saas/seed";
+import { saasSeriesAContent } from "./saas/series-a";
+
+// Healthcare content
+import { healthcareSeedContent } from "./healthcare/seed";
+import { healthcareSeriesAContent } from "./healthcare/series-a";
+
+// Fintech content
+import { fintechSeedContent } from "./fintech/seed";
+import { fintechSeriesAContent } from "./fintech/series-a";
+
 type ContentMatrix = {
   [industry: string]: {
     [stage: string]: IndustryStageContent;
@@ -67,6 +79,18 @@ const contentMatrix: ContentMatrix = {
   chemistry: {
     seed: chemistrySeedContent,
     "series-a": chemistrySeriesAContent,
+  },
+  saas: {
+    seed: saasSeedContent,
+    "series-a": saasSeriesAContent,
+  },
+  healthcare: {
+    seed: healthcareSeedContent,
+    "series-a": healthcareSeriesAContent,
+  },
+  fintech: {
+    seed: fintechSeedContent,
+    "series-a": fintechSeriesAContent,
   },
 };
 

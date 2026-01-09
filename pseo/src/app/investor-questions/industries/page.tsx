@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     description: "Explore investor question playbooks and fundraising guidance by industry.",
     url: "/investor-questions/industries/",
     type: "website",
-    images: [{ url: "/logo.svg", alt: "Pitchchat logo" }],
+    // OG image inherited from root opengraph-image.tsx
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Industries - Pitchchat Investor Questions",
     description: "Explore investor question playbooks and fundraising guidance by industry.",
-    images: ["/logo.svg"],
+    // Twitter image inherited from root opengraph-image.tsx
   },
 };
 

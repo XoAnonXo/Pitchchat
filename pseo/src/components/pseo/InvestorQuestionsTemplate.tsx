@@ -1,8 +1,10 @@
+import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
 import { PseoPageTracker } from "@/components/pseo/PseoPageTracker";
+import { QuestionCard } from "@/components/pseo/QuestionCard";
 import pilotConfig from "@/data/pilot-config.json";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
 import type { PseoAnalyticsContext } from "@/lib/analytics";
@@ -119,20 +121,25 @@ export function InvestorQuestionsTemplate({ data }: { data: InvestorQuestionsPag
         </dl>
       </section>
 
+      <AuthorAttribution
+        stageLabel={stageLabel}
+        industryLabel={industryLabel}
+        {...getAuthorAttributionProps("questions", stageLabel, industryLabel)}
+      />
+
       {questionsCount > 0 ? (
         <section className="mt-10">
           <h2 className="text-xl font-semibold text-neutral-900">Top investor questions</h2>
           <div className="mt-6 space-y-6">
             {data.questions.map((item, index) => (
-              <div key={`${item.question}-${index}`} className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
-                  {item.category}
-                </p>
-                <h3 className="mt-2 text-lg font-semibold text-neutral-900">
-                  {item.question}
-                </h3>
-                <p className="mt-3 text-sm text-neutral-700">{item.answer}</p>
-              </div>
+              <QuestionCard
+                key={`${item.question}-${index}`}
+                category={item.category}
+                question={item.question}
+                answer={item.answer}
+                industrySlug={data.context.industry}
+                stageSlug={data.context.stage}
+              />
             ))}
           </div>
         </section>

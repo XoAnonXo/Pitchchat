@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     description: "Browse investor questions, deck outlines, benchmarks, and diligence checklists.",
     url: "/investor-questions/",
     type: "website",
-    images: [{ url: "/logo.svg", alt: "Pitchchat logo" }],
+    // OG image inherited from root opengraph-image.tsx
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Investor Questions Hub - Pitchchat",
     description: "Browse investor questions, deck outlines, benchmarks, and diligence checklists.",
-    images: ["/logo.svg"],
+    // Twitter image inherited from root opengraph-image.tsx
   },
 };
 

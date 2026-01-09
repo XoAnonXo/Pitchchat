@@ -1,8 +1,10 @@
+import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
 import { PseoJsonLd } from "@/components/pseo/PseoJsonLd";
 import { PseoPageTracker } from "@/components/pseo/PseoPageTracker";
+import { MetricHighlightGrid, FeaturedMetric, TrendUpIcon } from "@/components/pseo/MetricHighlight";
 import { labelForIndustry, labelForStage } from "@/data/labelUtils";
 import type { PseoAnalyticsContext } from "@/lib/analytics";
 import { getSiteUrl } from "@/lib/site";
@@ -113,6 +115,43 @@ export function MetricsBenchmarksTemplate({
           </div>
         </dl>
       </section>
+
+      <AuthorAttribution
+        stageLabel={stageLabel}
+        industryLabel={industryLabel}
+        {...getAuthorAttributionProps("metrics", stageLabel, industryLabel)}
+      />
+
+      {/* Featured Metrics Highlight Cards */}
+      {metricsCount > 0 && (
+        <section className="mt-10">
+          <h2 className="text-sm font-semibold uppercase tracking-wide text-neutral-500">
+            Key benchmarks at a glance
+          </h2>
+
+          {/* Featured metric - first metric gets special treatment */}
+          {data.metrics[0] && (
+            <div className="mt-4">
+              <FeaturedMetric
+                label={data.metrics[0].label}
+                value={data.metrics[0].value}
+                note={data.metrics[0].note}
+                icon={<TrendUpIcon className="h-6 w-6" />}
+              />
+            </div>
+          )}
+
+          {/* Grid of remaining top metrics (next 3-5 metrics) */}
+          {data.metrics.length > 1 && (
+            <div className="mt-4">
+              <MetricHighlightGrid
+                metrics={data.metrics.slice(1, 4)}
+                columns={3}
+              />
+            </div>
+          )}
+        </section>
+      )}
 
       {metricsCount > 0 ? (
         <section className="mt-10">

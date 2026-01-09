@@ -6,7 +6,10 @@
     { "slug": "chemistry", "label": "Chemistry" },
     { "slug": "finance", "label": "Finance" },
     { "slug": "blockchain", "label": "Blockchain" },
-    { "slug": "ai", "label": "AI" }
+    { "slug": "ai", "label": "AI" },
+    { "slug": "saas", "label": "SaaS" },
+    { "slug": "healthcare", "label": "Healthcare" },
+    { "slug": "fintech", "label": "Fintech" }
   ],
   "stages": [
     { "slug": "seed", "label": "Seed" },

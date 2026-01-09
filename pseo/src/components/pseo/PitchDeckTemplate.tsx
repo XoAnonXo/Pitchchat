@@ -1,3 +1,4 @@
+import { AuthorAttribution, getAuthorAttributionProps } from "@/components/pseo/AuthorAttribution";
 import { PseoBreadcrumbs, type BreadcrumbItem } from "@/components/pseo/PseoBreadcrumbs";
 import { PseoCtaButton } from "@/components/pseo/PseoCtaButton";
 import { PseoInternalLinks } from "@/components/pseo/PseoInternalLinks";
@@ -114,6 +115,12 @@ export function PitchDeckTemplate({ data }: { data: PitchDeckPageData }) {
           </div>
         </dl>
       </section>
+
+      <AuthorAttribution
+        stageLabel={stageLabel}
+        industryLabel={industryLabel}
+        {...getAuthorAttributionProps("deck", stageLabel, industryLabel)}
+      />
 
       {sectionsCount > 0 ? (
         <section className="mt-10">
