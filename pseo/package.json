@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run db:migrate && npm run pseo:seed && next build",
     "start": "node scripts/start.mjs",
     "lint": "eslint",
     "test": "vitest run",
