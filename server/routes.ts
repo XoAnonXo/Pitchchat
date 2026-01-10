@@ -317,7 +317,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/projects/:projectId/chat", isAuthenticated, async (req: any, res) => {
     try {
       const userId = req.user.id;
-      const { message, model = 'gpt-4o' } = req.body;
+      const { message, model = 'gemini-3-flash' } = req.body;
       
       if (!message || typeof message !== "string") {
         return res.status(400).json({ message: "Message is required" });
@@ -634,10 +634,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
         page: (chunk.metadata as any)?.page,
       }));
 
-      // Get AI response  
+      // Get AI response
       const aiResponse = await chatWithAI([
         { role: "user", content: message }
-      ], context, 'gpt-4o');
+      ], context, 'gemini-3-flash');
 
       // Save AI message
       const assistantMessage = await storage.createMessage({

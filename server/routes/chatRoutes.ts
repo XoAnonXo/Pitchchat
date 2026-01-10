@@ -272,7 +272,7 @@ router.post('/:slug/messages', messageLimiter, async (req, res) => {
     }));
 
     // Get AI response
-    const aiResponse = await chatWithAI([{ role: 'user', content: message }], context, 'gpt-4o');
+    const aiResponse = await chatWithAI([{ role: 'user', content: message }], context, 'gemini-3-flash');
 
     // Save AI message
     const assistantMessage = await storage.createMessage({

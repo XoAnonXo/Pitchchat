@@ -46,7 +46,7 @@ export default function ChatInterface({ projectId, model }: ChatInterfaceProps) 
       ? "loading"
       : "ready"
     : "unavailable";
-  const resolvedModel = modelStatus === "ready" ? model : "gpt-4o";
+  const resolvedModel = modelStatus === "ready" ? model : "gpt-5.2";
   const modelNotice =
     modelStatus === "loading"
       ? "Loading models. Using the default model until the list is ready."

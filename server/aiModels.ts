@@ -33,6 +33,8 @@ export interface ChatResponse {
 }
 
 export const AI_MODEL_ALLOWLIST = [
+  'gemini-3-flash',
+  'gpt-5.2',
   'gpt-4o',
   'gpt-4',
   'gpt-3.5-turbo',
@@ -48,6 +50,8 @@ export const AI_MODEL_ALLOWLIST = [
 export type AIModel = (typeof AI_MODEL_ALLOWLIST)[number];
 
 const AI_MODEL_DETAILS: Record<AIModel, { name: string; provider: string }> = {
+  "gemini-3-flash": { name: "Gemini 3 Flash", provider: "Google" },
+  "gpt-5.2": { name: "GPT-5.2", provider: "OpenAI" },
   "gpt-4o": { name: "GPT-4o", provider: "OpenAI" },
   "gpt-4": { name: "GPT-4", provider: "OpenAI" },
   "gpt-3.5-turbo": { name: "GPT-3.5 Turbo", provider: "OpenAI" },
@@ -85,7 +89,7 @@ export async function chatWithAI(
     source: string;
     page?: number;
   }> = [],
-  model: AIModel = 'gpt-4o'
+  model: AIModel = 'gemini-3-flash'
 ): Promise<ChatResponse> {
   try {
     const contextText = context.map(c => 
@@ -170,7 +174,8 @@ async function chatWithClaude(messages: ChatMessage[], model: AIModel): Promise<
 }
 
 async function chatWithGemini(messages: ChatMessage[], model: AIModel): Promise<ChatResponse> {
-  const geminiModel = model === 'gemini-pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
+  const geminiModel = model === 'gemini-3-flash' ? 'gemini-3-flash-preview' :
+                      model === 'gemini-pro' ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
 
   const systemMessage = messages.find(m => m.role === 'system');
   const userMessages = messages.filter(m => m.role !== 'system');
@@ -199,7 +204,7 @@ export async function* streamChatWithAI(
     source: string;
     page?: number;
   }> = [],
-  model: AIModel = 'gpt-4o'
+  model: AIModel = 'gemini-3-flash'
 ): AsyncGenerator<{ type: 'text' | 'done'; content: string; tokenCount?: number }> {
   const contextText = context.map(c =>
     `Source: ${c.source}${c.page ? `, page ${c.page}` : ""}\nContent: ${c.content}`
@@ -224,9 +229,9 @@ Communication style:
 
   const allMessages = [systemMessage, ...messages];
 
-  // Use OpenAI streaming for now (most reliable)
+  // Use OpenAI streaming for fallback (Gemini streaming not yet implemented)
   const stream = await openai.chat.completions.create({
-    model: model.startsWith('gpt-') ? model : 'gpt-4o',
+    model: model.startsWith('gpt-') ? model : 'gpt-5.2',
     messages: allMessages,
     temperature: 0.3,
     max_tokens: 1000,
