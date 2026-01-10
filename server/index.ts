@@ -3,7 +3,8 @@ import express, { type Request, Response, NextFunction } from "express";
 import compression from "compression";
 import rateLimit from "express-rate-limit";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log, runWithRequestContext } from "./vite";
+import { log, runWithRequestContext } from "./utils";
+import { serveStatic } from "./static";
 import { registerPseoProxy } from "./pseoProxy";
 import { randomUUID } from "crypto";
 
@@ -145,6 +146,7 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
+    const { setupVite } = await import("./vite");
     await setupVite(app, server);
   } else {
     serveStatic(app);
